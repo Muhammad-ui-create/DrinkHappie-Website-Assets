@@ -1,0 +1,250 @@
+{%- liquid
+  assign blog = section.settings.blog
+  assign post_limit = section.settings.post_limit
+-%}
+
+<section
+  class="blog-posts-wide relative overflow-hidden bg-scheme-background text-scheme-text {% if section.settings.use_gradient_background %}bg-scheme-gradient{% endif %}"
+  data-color-scheme="{{ section.settings.color_scheme }}"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="section-content mx-auto w-full max-w-site px-section">
+    {% if section.settings.logo %}
+      <div class="mb-4 text-center flex justify-center">
+        <img
+          src="{{ section.settings.logo | image_url: width: 250 }}"
+          width="250"
+          height="49"
+          loading="lazy"
+          alt=""
+        >
+      </div>
+    {% endif %}
+
+    {% if section.settings.title != blank %}
+      <h2 class="inline-heading-rte font-heading heading-standard heading-style break-words text-center {{ settings.heading_drop_shadow_style }}">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+
+    {%- if blog != blank and blog.articles_count > 0 -%}
+      <div class="{% if section.settings.title != blank %}section-content-top-margin{% endif %} flex flex-col gap-4">
+        {% for article in blog.articles limit: post_limit %}
+          <a href="{{ article.url }}" class="blog-wide-card group block" style="text-decoration: none; color: inherit;">
+            <div class="flex flex-row items-center gap-0 overflow-hidden" style="background: {{ section.settings.card_bg_color }}; border-radius: {{ section.settings.card_radius }}px; height: {{ section.settings.card_height }}px;">
+              {%- if article.image -%}
+                <div class="flex-shrink-0 hidden sm:block" style="width: {{ section.settings.image_width }}px; height: 100%; overflow: hidden; border-radius: {{ section.settings.card_radius }}px 0 0 {{ section.settings.card_radius }}px;">
+                  <img
+                    src="{{ article.image | image_url: width: 600 }}"
+                    alt="{{ article.image.alt | escape }}"
+                    loading="lazy"
+                    style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                  >
+                </div>
+              {%- endif -%}
+
+              <div class="flex-1 flex flex-col justify-center px-5 py-4 lg:px-6" style="color: {{ section.settings.card_text_color }};">
+                <h3 class="font-heading text-sm lg:text-base font-bold leading-snug mb-1 group-hover:opacity-80 transition-opacity" style="color: {{ section.settings.card_heading_color }};">
+                  {{ article.title }}
+                </h3>
+
+                {%- if section.settings.blog_show_date -%}
+                  <time
+                    class="text-xs mb-1 block opacity-50"
+                    datetime="{{ article.published_at | date: '%Y-%m-%d' }}"
+                  >
+                    {{ article.published_at | date: format: 'month_day_year' }}
+                  </time>
+                {%- endif -%}
+
+                {% if section.settings.show_post_excerpt %}
+                  <p class="text-xs lg:text-sm leading-relaxed opacity-75 mb-0 hidden sm:block">
+                    {% if article.excerpt.size > 0 %}
+                      {{ article.excerpt | strip_html | truncatewords: 20 }}
+                    {% else %}
+                      {{ article.content | strip_html | truncatewords: 20 }}
+                    {% endif %}
+                  </p>
+                {% endif %}
+
+                <div class="mt-2">
+                  <span class="inline-flex items-center gap-1 text-xs font-semibold group-hover:gap-2 transition-all" style="color: {{ section.settings.card_link_color }};">
+                    Read More
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+
+      {%- if section.settings.show_view_all and post_limit < blog.articles_count -%}
+        <div class="mt-10 text-center">
+          <a href="{{ blog.url }}" class="push-btn inline-block">
+            <span class="push-btn__surface">
+              {{ 'blogs.article.read_more' | t }}
+            </span>
+          </a>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog Posts (Wide)",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "Blog posts"
+    },
+    {
+      "id": "blog",
+      "type": "blog",
+      "label": "Blog"
+    },
+    {
+      "type": "range",
+      "id": "post_limit",
+      "label": "Posts to show",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_date",
+      "label": "Show date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_post_excerpt",
+      "label": "Show excerpt",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "default": true,
+      "label": "Show 'Read More' button"
+    },
+    {
+      "type": "header",
+      "content": "Card Style"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 120,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Image width (desktop)",
+      "default": 200
+    },
+    {
+      "type": "range",
+      "id": "card_height",
+      "min": 80,
+      "max": 250,
+      "step": 10,
+      "unit": "px",
+      "label": "Card height",
+      "default": 130
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Card corner radius",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card background",
+      "default": "#eeece7"
+    },
+    {
+      "type": "color",
+      "id": "card_heading_color",
+      "label": "Card heading color",
+      "default": "#50463e"
+    },
+    {
+      "type": "color",
+      "id": "card_text_color",
+      "label": "Card text color",
+      "default": "#50463e"
+    },
+    {
+      "type": "color",
+      "id": "card_link_color",
+      "label": "Read more link color",
+      "default": "#6B2D8B"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_gradient_background",
+      "label": "Use gradient background",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog Posts (Wide)"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  }
+}
+{% endschema %}

@@ -1,0 +1,127 @@
+{%- comment -%}
+  Happie Standardized Product Card
+  Consistent design across homepage, collection pages, and PDP carousels
+  
+  Accepts:
+  - product: Product object (required)
+  - show_quick_buy: Boolean - show variant selector and add to cart (default: false)
+  - card_style: 'standard' or 'minimal' (default: 'standard')
+  - lazy_load: Boolean - lazy load images (default: true)
+{%- endcomment -%}
+
+{%- liquid
+  # Defaults
+  assign show_quick_buy = show_quick_buy | default: false
+  assign card_style = card_style | default: 'standard'
+  assign lazy_load = lazy_load | default: true
+  
+  # Find the lowest price across all variants
+  assign lowest_price = product.price_min
+  
+  # Check if product is sold out
+  assign is_sold_out = true
+  for variant in product.variants
+    if variant.available
+      assign is_sold_out = false
+      break
+    endif
+  endfor
+  
+  # Get primary and secondary images
+  assign primary_image = product.featured_image
+  assign secondary_image = product.images[1]
+  assign has_secondary_image = false
+  if secondary_image != blank and secondary_image != primary_image
+    assign has_secondary_image = true
+  endif
+  
+  # Get custom tagline metafield - use the dedicated product card tagline field
+  # This is the same field used on the homepage Best Sellers cards
+  assign tagline_metafield = product.metafields.custom.product_card_custom_tagline
+  assign custom_tagline = ''
+  assign tagline_is_richtext = false
+  
+  if tagline_metafield != blank
+    # Check the metafield type
+    if tagline_metafield.type == 'rich_text_field'
+      # Richtext metafields need to be output directly (Shopify handles the rendering)
+      assign tagline_is_richtext = true
+    elsif tagline_metafield.type == 'single_line_text_field' or tagline_metafield.type == 'multi_line_text_field'
+      assign custom_tagline = tagline_metafield.value
+    else
+      # For string values, just use as-is
+      assign custom_tagline = tagline_metafield | strip_html | truncate: 150
+    endif
+  endif
+  
+  # Loading attribute
+  if lazy_load
+    assign loading_attr = 'lazy'
+  else
+    assign loading_attr = 'eager'
+  endif
+-%}
+
+<div class="happie-product-card{% if has_secondary_image %} happie-product-card--has-hover{% endif %}{% if is_sold_out %} happie-product-card--sold-out{% endif %}" data-product-id="{{ product.id }}">
+  <a href="{{ product.url }}" class="happie-product-card__link">
+    <!-- Image Container -->
+    <div class="happie-product-card__image-wrapper">
+      {%- if is_sold_out -%}
+        <span class="happie-product-card__badge happie-product-card__badge--soldout">Sold out</span>
+      {%- endif -%}
+      
+      {%- if primary_image != blank -%}
+        <img
+          src="{{ primary_image | image_url: width: 800, height: 800, crop: 'center' }}"
+          srcset="{{ primary_image | image_url: width: 400, height: 400, crop: 'center' }} 400w, {{ primary_image | image_url: width: 600, height: 600, crop: 'center' }} 600w, {{ primary_image | image_url: width: 800, height: 800, crop: 'center' }} 800w"
+          sizes="(max-width: 640px) 400px, (max-width: 1024px) 600px, 800px"
+          alt="{{ primary_image.alt | escape | default: product.title }}"
+          width="800"
+          height="800"
+          loading="{{ loading_attr }}"
+          class="happie-product-card__image happie-product-card__image--primary"
+        >
+
+        {%- if has_secondary_image -%}
+          <img
+            src="{{ secondary_image | image_url: width: 800, height: 800, crop: 'center' }}"
+            srcset="{{ secondary_image | image_url: width: 400, height: 400, crop: 'center' }} 400w, {{ secondary_image | image_url: width: 600, height: 600, crop: 'center' }} 600w, {{ secondary_image | image_url: width: 800, height: 800, crop: 'center' }} 800w"
+            sizes="(max-width: 640px) 400px, (max-width: 1024px) 600px, 800px"
+            alt="{{ secondary_image.alt | escape | default: product.title }}"
+            width="800"
+            height="800"
+            loading="lazy"
+            class="happie-product-card__image happie-product-card__image--secondary"
+          >
+        {%- endif -%}
+      {%- else -%}
+        <div class="happie-product-card__placeholder">
+          <span>{{ product.title | truncate: 20 }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+    
+    <!-- Content -->
+    <div class="happie-product-card__content">
+      <h3 class="happie-product-card__title">{{ product.title }}</h3>
+      
+      {%- if tagline_is_richtext -%}
+        <div class="happie-product-card__tagline">{{ tagline_metafield | metafield_tag }}</div>
+      {%- elsif custom_tagline != blank -%}
+        <p class="happie-product-card__tagline">{{ custom_tagline }}</p>
+      {%- endif -%}
+      
+      <div class="happie-product-card__price-row">
+        <span class="happie-product-card__price-label">STARTING AT</span>
+        <span class="happie-product-card__price">{{ lowest_price | money }}</span>
+      </div>
+    </div>
+  </a>
+  
+  <!-- Shop Now Button -->
+  <div class="happie-product-card__actions">
+    <a href="{{ product.url }}" class="happie-product-card__btn">
+      SHOP NOW
+    </a>
+  </div>
+</div>

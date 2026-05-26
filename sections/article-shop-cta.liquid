@@ -1,0 +1,191 @@
+{%- comment -%}
+  Article Shop CTA — drops a contextual product grid into every blog
+  article between the article body and the related-posts section.
+
+  Picks the right collection based on the article handle so mushroom
+  posts surface Fungi Fusion and THC posts surface THC seltzers.
+  Falls back to the THC collection when the handle isn't decisive.
+{%- endcomment -%}
+
+{%- liquid
+  assign handle = article.handle | downcase
+  assign target_collection = section.settings.thc_collection
+
+  if handle contains 'mushroom' or handle contains 'fungi' or handle contains 'lion' or handle contains 'cordyceps' or handle contains 'reishi' or handle contains 'adaptogen'
+    assign target_collection = section.settings.fungi_collection
+  endif
+
+  assign coll = collections[target_collection]
+  assign products_to_show = section.settings.products_per_row_desktop | default: 4
+  assign view_all_text = 'Shop the Collection'
+  if target_collection == 'fungi-fusion'
+    assign view_all_text = 'Shop Fungi Fusion'
+  elsif target_collection == 'thc'
+    assign view_all_text = 'Shop THC Seltzers'
+  endif
+-%}
+
+{%- if coll != blank and coll.products.size > 0 -%}
+  <section
+    class="article-shop-cta bg-scheme-background text-scheme-text {% if section.settings.use_gradient_background %}bg-scheme-gradient{% endif %}"
+    data-color-scheme="{{ section.settings.color_scheme }}"
+  >
+    <div class="px-section py-section-vertical-spacing max-w-site mx-auto">
+      <div class="text-center mb-8">
+        {%- if section.settings.title != blank -%}
+          <h2 class="font-heading heading-feature heading-style" style="margin-bottom: 0.75rem;">
+            {{ section.settings.title }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="article-shop-cta__subheading max-w-2xl mx-auto" style="margin-top: 0;">
+            {{ section.settings.subheading }}
+          </p>
+        {%- endif -%}
+      </div>
+
+      {%- render 'happie-product-card-styles' -%}
+
+      <div
+        class="article-shop-cta__grid"
+      >
+        {%- for product in coll.products limit: products_to_show -%}
+          <div class="article-shop-cta__item">
+            {%- render 'happie-product-card', product: product, lazy_load: true -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.show_view_all -%}
+        <div class="text-center mt-8">
+          <a
+            href="{{ coll.url }}"
+            class="article-shop-cta__btn inline-block font-heading uppercase tracking-wider"
+            style="background-color: var(--cta-bg, #f7cd46); color: var(--cta-text, #1a1a1a); border-radius: 9999px; padding: 16px 40px; font-size: 16px; font-weight: 600;"
+          >
+            {{ view_all_text }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <style>
+      .article-shop-cta__btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); transition: all 0.2s ease; }
+      .article-shop-cta__subheading { font-size: 1rem; opacity: 0.7; line-height: 1.5; display: block; }
+      .article-shop-cta__grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+      .article-shop-cta__item {
+        width: calc(50% - 0.75rem);
+        text-align: center;
+      }
+      .article-shop-cta__item .happie-product-card__content {
+        text-align: center;
+      }
+      .article-shop-cta__item .happie-product-card__tagline,
+      .article-shop-cta__item .happie-product-card__tagline p {
+        text-align: center;
+      }
+      @media (min-width: 768px) {
+        .article-shop-cta__item {
+          width: calc({{ 100.0 | divided_by: section.settings.products_per_row_desktop }}% - 1.5rem);
+          max-width: 320px;
+        }
+      }
+    </style>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Article Shop CTA",
+  "tag": "section",
+  "class": "article-shop-cta-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop the Lineup"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Pair what you just read with the drinks made for it."
+    },
+    {
+      "type": "header",
+      "content": "Collection routing"
+    },
+    {
+      "type": "paragraph",
+      "content": "Article handles containing 'mushroom', 'fungi', 'lion', 'cordyceps', 'reishi', or 'adaptogen' will surface the Fungi collection. Everything else falls through to the THC collection."
+    },
+    {
+      "type": "collection",
+      "id": "thc_collection",
+      "label": "THC collection (default)"
+    },
+    {
+      "type": "collection",
+      "id": "fungi_collection",
+      "label": "Fungi Fusion collection"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "products_per_row_desktop",
+      "label": "Products per row (desktop)",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "products_per_row_mobile",
+      "label": "Products per row (mobile)",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'Shop the Collection' button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Color scheme"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "scheme1", "label": "Scheme 1" },
+        { "value": "scheme2", "label": "Scheme 2" },
+        { "value": "scheme3", "label": "Scheme 3" },
+        { "value": "scheme4", "label": "Scheme 4" },
+        { "value": "scheme5", "label": "Scheme 5" }
+      ],
+      "default": "scheme1"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_gradient_background",
+      "label": "Use gradient background",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,107 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "blog_posts_we8JiU": {
+      "type": "blog-posts",
+      "settings": {
+        "display_on_card": false,
+        "posts_per_row_desktop": 3,
+        "title": "Blog posts",
+        "blog": "news",
+        "post_limit": 3,
+        "crop": "aspect-w-4 aspect-h-3",
+        "image_shape": "default",
+        "blog_show_author": false,
+        "blog_show_date": true,
+        "show_post_excerpt": true,
+        "show_view_all": true,
+        "color_scheme": "",
+        "use_gradient_background": false
+      }
+    },
+    "featured-image": {
+      "type": "main-article-featured-image",
+      "blocks": {
+        "shape-divider-featured-image-0": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "above",
+            "target_section_color_scheme": "scheme1",
+            "style": "waves-1-patterned_1200x20",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        }
+      },
+      "block_order": [
+        "shape-divider-featured-image-0"
+      ],
+      "settings": {
+        "style": "inset",
+        "height": "pt-two-thirds-screen-height",
+        "color_scheme": "scheme4",
+        "use_gradient_background": false
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "shape-divider-main-0": {
+          "type": "shape_divider",
+          "settings": {
+            "target_section": "below",
+            "target_section_color_scheme": "scheme1",
+            "style": "waves-1-patterned_1200x20",
+            "flip_horizontal": false,
+            "enable_animation": false,
+            "animation_direction": ""
+          }
+        }
+      },
+      "block_order": [
+        "shape-divider-main-0"
+      ],
+      "settings": {
+        "display_on_card": true,
+        "show_image": false,
+        "show_author": false,
+        "show_date": false,
+        "show_share_links": true,
+        "show_tags": true,
+        "show_next_previous_links": true,
+        "max_width": "medium",
+        "color_scheme": "scheme4",
+        "use_gradient_background": false
+      }
+    },
+    "article_shop_cta": {
+      "type": "article-shop-cta",
+      "settings": {
+        "title": "Shop the Lineup",
+        "subheading": "Pair what you just read with the drinks made for it.",
+        "thc_collection": "thc",
+        "fungi_collection": "fungi-fusion",
+        "products_per_row_desktop": 3,
+        "products_per_row_mobile": 2,
+        "show_view_all": true,
+        "color_scheme": "scheme1"
+      }
+    }
+  },
+  "order": [
+    "featured-image",
+    "main",
+    "article_shop_cta",
+    "blog_posts_we8JiU"
+  ]
+}
+

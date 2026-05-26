@@ -1,0 +1,385 @@
+{%- comment -%}
+  Happie Standardized Product Card Styles
+  Include once per page where cards are used
+{%- endcomment -%}
+
+<style>
+  /* ==========================================
+     HAPPIE PRODUCT CARD - STANDARDIZED DESIGN
+     ========================================== */
+  
+  .happie-product-card {
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  
+  .happie-product-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .happie-product-card__link {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Image Container */
+  .happie-product-card__image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #f5f5f5;
+  }
+  
+  .happie-product-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  
+  .happie-product-card__image--primary {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .happie-product-card__image--secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    opacity: 0;
+  }
+  
+  /* Hover image swap */
+  .happie-product-card--has-hover:hover .happie-product-card__image--primary {
+    opacity: 0;
+  }
+  
+  .happie-product-card--has-hover:hover .happie-product-card__image--secondary {
+    opacity: 1;
+  }
+  
+  /* Subtle zoom on hover */
+  .happie-product-card:hover .happie-product-card__image {
+    transform: scale(1.03);
+  }
+  
+  /* Placeholder */
+  .happie-product-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ffe6cb 0%, #f5dfc5 100%);
+    color: #1a1a1a;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Badge */
+  .happie-product-card__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 20px;
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+  
+  .happie-product-card__badge--soldout {
+    background: #888888;
+  }
+  
+  /* Content */
+  .happie-product-card__content {
+    padding: 20px 20px 16px;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .happie-product-card__title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+  
+  .happie-product-card__tagline {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #666666;
+    margin: 0 0 12px;
+    line-height: 1.4;
+    flex: 1;
+  }
+  
+  /* Handle richtext metafield content */
+  .happie-product-card__tagline p {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    line-height: inherit;
+  }
+  
+  .happie-product-card__tagline p + p {
+    margin-top: 4px;
+  }
+  
+  .happie-product-card__price-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-top: auto;
+  }
+  
+  .happie-product-card__price-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    color: #999999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .happie-product-card__price {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+  
+  /* Actions */
+  .happie-product-card__actions {
+    padding: 0 20px 20px;
+  }
+  
+  .happie-product-card__btn {
+    display: block;
+    width: 100%;
+    padding: 14px 20px;
+    background: #50b2bd;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 50px;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .happie-product-card__btn:hover {
+    background: #3d9aa5;
+    transform: scale(1.02);
+  }
+  
+  .happie-product-card--sold-out .happie-product-card__btn {
+    background: #cccccc;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  /* ==========================================
+     RESPONSIVE ADJUSTMENTS
+     ========================================== */
+  
+  @media (max-width: 768px) {
+    .happie-product-card {
+      border-radius: 16px;
+    }
+    
+    .happie-product-card__content {
+      padding: 16px 16px 12px;
+    }
+    
+    .happie-product-card__title {
+      font-size: 15px;
+    }
+    
+    .happie-product-card__tagline {
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    
+    .happie-product-card__price-label {
+      font-size: 9px;
+    }
+    
+    .happie-product-card__price {
+      font-size: 18px;
+    }
+    
+    .happie-product-card__actions {
+      padding: 0 16px 16px;
+    }
+    
+    .happie-product-card__btn {
+      padding: 12px 16px;
+      font-size: 12px;
+    }
+    
+    .happie-product-card__badge {
+      top: 8px;
+      left: 8px;
+      padding: 4px 10px;
+      font-size: 10px;
+    }
+  }
+  
+  /* ==========================================
+     GRID LAYOUTS FOR COLLECTION PAGES
+     ========================================== */
+  
+  .happie-product-grid {
+    display: grid;
+    gap: 24px;
+  }
+  
+  /* Desktop: 4 columns */
+  @media (min-width: 1024px) {
+    .happie-product-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+    
+    .happie-product-grid--3-col {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* Tablet: 3 columns */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .happie-product-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+  
+  /* Mobile: 2 columns */
+  @media (max-width: 767px) {
+    .happie-product-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+  
+  /* ==========================================
+     CAROUSEL STYLES FOR PDP PRODUCT COLLECTION
+     ========================================== */
+  
+  .happie-product-carousel {
+    position: relative;
+    overflow: visible;
+  }
+  
+  .happie-product-carousel__track {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 10px 0 20px;
+  }
+  
+  .happie-product-carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .happie-product-carousel__slide {
+    flex: 0 0 calc(25% - 18px);
+    scroll-snap-align: start;
+    min-width: 260px;
+  }
+  
+  @media (max-width: 1200px) {
+    .happie-product-carousel__slide {
+      flex: 0 0 calc(33.333% - 16px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .happie-product-carousel__track {
+      gap: 16px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    
+    .happie-product-carousel__slide {
+      flex: 0 0 calc(75% - 8px);
+      min-width: 240px;
+    }
+  }
+  
+  /* Carousel Navigation */
+  .happie-product-carousel__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: none;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .happie-product-carousel__nav:hover {
+    background: #50b2bd;
+    color: #ffffff;
+  }
+  
+  .happie-product-carousel__nav--prev {
+    left: -22px;
+  }
+  
+  .happie-product-carousel__nav--next {
+    right: -22px;
+  }
+  
+  .happie-product-carousel__nav svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .happie-product-carousel__nav {
+      display: none;
+    }
+  }
+</style>

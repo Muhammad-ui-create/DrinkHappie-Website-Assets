@@ -1,0 +1,718 @@
+{%- liquid
+  assign product = section.settings.product
+  assign heading = section.settings.heading
+  assign description = section.settings.description
+  assign button_text = section.settings.button_text
+  assign image = section.settings.image
+  
+  if product != blank
+    assign product_price = product.price | money
+    assign product_url = product.url
+  else
+    assign product_price = "$24.99"
+    assign product_url = "#"
+  endif
+-%}
+
+<section
+  id="variety-pack-{{ section.id }}"
+  class="variety-pack-promo"
+>
+  <!-- Top Wave Divider - Points OUTWARD (up into section above) -->
+  {%- if section.settings.show_top_wave -%}
+    <div class="variety-pack-promo__wave variety-pack-promo__wave--top{% if section.settings.top_wave_animate %} variety-pack-promo__wave--animated{% endif %}">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        {%- case section.settings.top_wave_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'wave-smooth' -%}
+            <path d="M0,120 L0,120 Q720,0 1440,120 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q720,0 1440,120 L1440,120 Z;M0,120 L0,120 Q720,40 1440,120 L1440,120 Z;M0,120 L0,120 Q720,20 1440,120 L1440,120 Z;M0,120 L0,120 Q720,60 1440,120 L1440,120 Z;M0,120 L0,120 Q720,0 1440,120 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'arc' -%}
+            <path d="M0,120 L0,120 Q720,0 1440,120 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q720,0 1440,120 L1440,120 Z;M0,120 L0,120 Q720,30 1440,120 L1440,120 Z;M0,120 L0,120 Q720,10 1440,120 L1440,120 Z;M0,120 L0,120 Q720,50 1440,120 L1440,120 Z;M0,120 L0,120 Q720,0 1440,120 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'double-ripple' -%}
+            <!-- Primary wave - pointing outward -->
+            <path d="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,40 720,70 T1440,35 L1440,120 Z;M0,120 L0,120 Q360,10 720,40 T1440,70 L1440,120 Z;M0,120 L0,120 Q360,50 720,30 T1440,55 L1440,120 Z;M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+            <!-- Secondary wave (smaller, offset) -->
+            <path d="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z" fill="{{ section.settings.top_wave_color }}" opacity="0.6">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z;M0,120 L0,120 Q540,45 1080,50 T1440,25 L1440,120 Z;M0,120 L0,120 Q540,20 1080,25 T1440,45 L1440,120 Z;M0,120 L0,120 Q540,40 1080,30 T1440,35 L1440,120 Z;M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'slope-left' -%}
+            <path d="M0,120 L0,120 L1440,0 L1440,120 Z" fill="{{ section.settings.top_wave_color }}"/>
+          {%- when 'slope-right' -%}
+            <path d="M0,120 L0,0 L1440,120 L1440,120 Z" fill="{{ section.settings.top_wave_color }}"/>
+          {%- else -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
+
+  <div class="variety-pack-promo__container">
+    <!-- Single Unified Card -->
+    <div class="variety-pack-promo__card">
+      <div class="variety-pack-promo__grid">
+        <!-- Text Content Side -->
+        <div class="variety-pack-promo__content">
+          <h2 class="variety-pack-promo__heading">{{ heading }}</h2>
+          
+          {%- if description != blank -%}
+            <p class="variety-pack-promo__description">{{ description }}</p>
+          {%- endif -%}
+          
+          <div class="variety-pack-promo__price-wrapper">
+            <span class="variety-pack-promo__price-label">Starting at</span>
+            <span class="variety-pack-promo__price">{{ product_price }}</span>
+          </div>
+          
+          <a href="{{ product_url }}" class="variety-pack-promo__button">
+            {{ button_text }}
+          </a>
+        </div>
+        
+        <!-- Image Side -->
+        <div class="variety-pack-promo__image-wrapper">
+          {%- if image != blank -%}
+            <img
+              src="{{ image | image_url: width: 800 }}"
+              alt="{{ image.alt | escape | default: heading }}"
+              loading="lazy"
+              class="variety-pack-promo__image"
+              width="{{ image.width }}"
+              height="{{ image.height }}"
+            >
+          {%- else -%}
+            <div class="variety-pack-promo__placeholder">
+              <span class="variety-pack-promo__placeholder-title">Variety Pack Image</span>
+              <span class="variety-pack-promo__placeholder-subtitle">12-pack product shot</span>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Wave Divider - Points OUTWARD (down into section below) -->
+  {%- if section.settings.show_bottom_wave -%}
+    <div class="variety-pack-promo__wave variety-pack-promo__wave--bottom{% if section.settings.bottom_wave_animate %} variety-pack-promo__wave--animated{% endif %}">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        {%- case section.settings.bottom_wave_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'wave-smooth' -%}
+            <path d="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z;M0,0 L0,0 Q720,80 1440,0 L1440,0 Z;M0,0 L0,0 Q720,100 1440,0 L1440,0 Z;M0,0 L0,0 Q720,60 1440,0 L1440,0 Z;M0,0 L0,0 Q720,120 1440,0 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'arc' -%}
+            <path d="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z;M0,0 L0,0 Q720,90 1440,0 L1440,0 Z;M0,0 L0,0 Q720,110 1440,0 L1440,0 Z;M0,0 L0,0 Q720,70 1440,0 L1440,0 Z;M0,0 L0,0 Q720,120 1440,0 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'double-ripple' -%}
+            <!-- Primary wave - pointing outward (down) -->
+            <path d="M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,80 720,50 T1440,85 L1440,0 Z;M0,0 L0,0 Q360,110 720,80 T1440,50 L1440,0 Z;M0,0 L0,0 Q360,70 720,90 T1440,65 L1440,0 Z;M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+            <!-- Secondary wave (smaller, offset) -->
+            <path d="M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}" opacity="0.6">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z;M0,0 L0,0 Q540,75 1080,70 T1440,95 L1440,0 Z;M0,0 L0,0 Q540,100 1080,95 T1440,80 L1440,0 Z;M0,0 L0,0 Q540,80 1080,90 T1440,85 L1440,0 Z;M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'slope-left' -%}
+            <path d="M0,0 L0,0 L1440,100 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}"/>
+          {%- when 'slope-right' -%}
+            <path d="M0,0 L0,100 L1440,0 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}"/>
+          {%- else -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
+</section>
+
+<style>
+  #variety-pack-{{ section.id }} {
+    --vp-bg: {{ section.settings.background_color }};
+    --vp-card-bg: {{ section.settings.card_bg_color }};
+    --vp-image-bg: {{ section.settings.image_card_bg_color }};
+    --vp-heading-color: {{ section.settings.heading_color }};
+    --vp-text-color: {{ section.settings.text_color }};
+    --vp-price-color: {{ section.settings.price_color }};
+    --vp-button-bg: {{ section.settings.button_bg_color }};
+    --vp-button-text: {{ section.settings.button_text_color }};
+  }
+
+  #variety-pack-{{ section.id }}.variety-pack-promo {
+    background: var(--vp-bg);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    position: relative;
+  }
+
+  /* Wave Dividers */
+  #variety-pack-{{ section.id }} .variety-pack-promo__wave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    line-height: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  #variety-pack-{{ section.id }} .variety-pack-promo__wave svg {
+    display: block;
+    width: 100%;
+    height: {{ section.settings.wave_height }}px;
+  }
+
+  #variety-pack-{{ section.id }} .variety-pack-promo__wave--top {
+    top: 0;
+    transform: translateY(-100%);
+  }
+
+  #variety-pack-{{ section.id }} .variety-pack-promo__wave--bottom {
+    bottom: 0;
+    transform: translateY(100%);
+  }
+
+  /* Container */
+  #variety-pack-{{ section.id }} .variety-pack-promo__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Unified Card */
+  #variety-pack-{{ section.id }} .variety-pack-promo__card {
+    background: var(--vp-card-bg);
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  #variety-pack-{{ section.id }} .variety-pack-promo__card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Grid Layout */
+  #variety-pack-{{ section.id }} .variety-pack-promo__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+
+  /* Content Side */
+  #variety-pack-{{ section.id }} .variety-pack-promo__content {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Heading */
+  #variety-pack-{{ section.id }} .variety-pack-promo__heading {
+    font-family: var(--font-heading-family, inherit);
+    font-size: {{ section.settings.heading_size }}px;
+    font-weight: 700;
+    color: var(--vp-heading-color);
+    margin: 0 0 20px;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+
+  /* Description */
+  #variety-pack-{{ section.id }} .variety-pack-promo__description {
+    font-size: {{ section.settings.text_size }}px;
+    color: var(--vp-text-color);
+    line-height: 1.6;
+    margin: 0 0 28px;
+  }
+
+  /* Price Wrapper */
+  #variety-pack-{{ section.id }} .variety-pack-promo__price-wrapper {
+    margin-bottom: 28px;
+  }
+
+  #variety-pack-{{ section.id }} .variety-pack-promo__price-label {
+    display: block;
+    font-size: 14px;
+    color: var(--vp-text-color);
+    margin-bottom: 4px;
+  }
+
+  #variety-pack-{{ section.id }} .variety-pack-promo__price {
+    font-family: var(--font-heading-family, inherit);
+    font-size: {{ section.settings.price_size }}px;
+    font-weight: 700;
+    color: var(--vp-price-color);
+    line-height: 1;
+  }
+
+  /* Button */
+  #variety-pack-{{ section.id }} .variety-pack-promo__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--vp-button-bg);
+    color: var(--vp-button-text);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 16px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: fit-content;
+  }
+
+  #variety-pack-{{ section.id }} .variety-pack-promo__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  #variety-pack-{{ section.id }} .variety-pack-promo__button::after {
+    content: "→";
+    font-size: 16px;
+  }
+
+  /* Image Side */
+  #variety-pack-{{ section.id }} .variety-pack-promo__image-wrapper {
+    background: var(--vp-image-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    position: relative;
+  }
+
+  #variety-pack-{{ section.id }} .variety-pack-promo__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Placeholder */
+  #variety-pack-{{ section.id }} .variety-pack-promo__placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-height: 350px;
+    padding: 40px;
+    position: relative;
+  }
+
+  #variety-pack-{{ section.id }} .variety-pack-promo__placeholder-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.4);
+    margin-bottom: 8px;
+  }
+
+  #variety-pack-{{ section.id }} .variety-pack-promo__placeholder-subtitle {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+  /* Inner placeholder box with dashed border */
+  #variety-pack-{{ section.id }} .variety-pack-promo__placeholder::before {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    border: 2px dashed rgba(0, 0, 0, 0.15);
+    border-radius: 24px;
+    pointer-events: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    #variety-pack-{{ section.id }} .variety-pack-promo__grid {
+      grid-template-columns: 1fr;
+    }
+
+    #variety-pack-{{ section.id }} .variety-pack-promo__image-wrapper {
+      order: -1;
+    }
+
+    #variety-pack-{{ section.id }} .variety-pack-promo__content {
+      text-align: center;
+      align-items: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #variety-pack-{{ section.id }}.variety-pack-promo {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    #variety-pack-{{ section.id }} .variety-pack-promo__wave svg {
+      height: {{ section.settings.wave_height | times: 65 | divided_by: 100 }}px;
+    }
+
+    #variety-pack-{{ section.id }} .variety-pack-promo__card {
+      border-radius: 24px;
+    }
+
+    #variety-pack-{{ section.id }} .variety-pack-promo__content {
+      padding: 32px 24px;
+    }
+
+    #variety-pack-{{ section.id }} .variety-pack-promo__image-wrapper {
+      min-height: 300px;
+    }
+
+    #variety-pack-{{ section.id }} .variety-pack-promo__heading {
+      font-size: {{ section.settings.heading_size | times: 75 | divided_by: 100 }}px;
+    }
+
+    #variety-pack-{{ section.id }} .variety-pack-promo__price {
+      font-size: {{ section.settings.price_size | times: 80 | divided_by: 100 }}px;
+    }
+
+    #variety-pack-{{ section.id }} .variety-pack-promo__placeholder::before {
+      top: 24px;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Variety Pack Promo",
+  "tag": "section",
+  "class": "variety-pack-promo-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "Select the product to link to and pull the price from"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find Your Flavor with the Variety Pack"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Not sure where to start? Our variety pack lets you try all our most popular flavors and find your perfect vibe."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Variety Pack"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Product Image",
+      "info": "Image for the right column"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "min": 28,
+      "max": 64,
+      "step": 2,
+      "default": 42,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Description Size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "price_size",
+      "label": "Price Size",
+      "min": 32,
+      "max": 72,
+      "step": 2,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (Desktop)",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (Desktop)",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding Top (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding Bottom (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background",
+      "default": "#F5E6D3"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Content Card Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "image_card_bg_color",
+      "label": "Image Card Background",
+      "default": "#FAE8A4"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#5B3A7A"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Description Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price Color",
+      "default": "#5B3A7A"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Background",
+      "default": "#5B3A7A"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "range",
+      "id": "wave_height",
+      "label": "Wave Height",
+      "min": 30,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "wave_animation_speed",
+      "label": "Animation Speed",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "default": 8,
+      "unit": "s",
+      "info": "Duration of one wave cycle"
+    },
+    {
+      "type": "header",
+      "content": "Top Wave"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_wave",
+      "label": "Show Top Wave",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "top_wave_style",
+      "label": "Top Wave Style",
+      "options": [
+        { "value": "wave", "label": "Wave One" },
+        { "value": "double-ripple", "label": "Double Ripple" },
+        { "value": "wave-smooth", "label": "Wave (Smooth)" },
+        { "value": "arc", "label": "Arc" },
+        { "value": "slope-left", "label": "Slope (Left to Right)" },
+        { "value": "slope-right", "label": "Slope (Right to Left)" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "top_wave_color",
+      "label": "Top Wave Color",
+      "default": "#FFE6CB",
+      "info": "Use this section's background color - wave extends UP into section above"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_wave_animate",
+      "label": "Animate Top Wave",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Bottom Wave"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_wave",
+      "label": "Show Bottom Wave",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "bottom_wave_style",
+      "label": "Bottom Wave Style",
+      "options": [
+        { "value": "wave", "label": "Wave One" },
+        { "value": "double-ripple", "label": "Double Ripple" },
+        { "value": "wave-smooth", "label": "Wave (Smooth)" },
+        { "value": "arc", "label": "Arc" },
+        { "value": "slope-left", "label": "Slope (Left to Right)" },
+        { "value": "slope-right", "label": "Slope (Right to Left)" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "bottom_wave_color",
+      "label": "Bottom Wave Color",
+      "default": "#FFE6CB",
+      "info": "Use this section's background color - wave extends DOWN into section below"
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_wave_animate",
+      "label": "Animate Bottom Wave",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Variety Pack Promo",
+      "settings": {
+        "heading": "Find Your Flavor with the Variety Pack",
+        "description": "Not sure where to start? Our variety pack lets you try all our most popular flavors and find your perfect vibe.",
+        "button_text": "Shop Variety Pack",
+        "show_top_wave": true,
+        "show_bottom_wave": true
+      }
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  }
+}
+{% endschema %}

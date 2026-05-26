@@ -1,0 +1,366 @@
+{%- liquid
+  assign reviews = section.blocks | where: 'type', 'review'
+-%}
+
+<section
+  class="amazon-reviews-section relative overflow-hidden bg-scheme-background text-scheme-text {% if section.settings.use_gradient_background %}bg-scheme-gradient{% endif %}"
+  data-color-scheme="{{ section.settings.color_scheme }}"
+  style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <!-- Top Wave Divider -->
+  {%- if section.settings.show_top_wave -%}
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(-100%);">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+          {%- if section.settings.top_wave_animate -%}
+            <animate attributeName="d" dur="8s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+          {%- endif -%}
+        </path>
+      </svg>
+    </div>
+  {%- endif -%}
+
+  <div class="section-content pb-section-vertical-spacing">
+    <!-- Section Header -->
+    <div class="text-center mb-8">
+      {% if section.settings.title != blank %}
+        <h2 class="inline-heading-rte font-heading heading-standard heading-style break-words {{ settings.heading_drop_shadow_style }}">
+          {{ section.settings.title }}
+        </h2>
+      {% endif %}
+      {% if section.settings.subtitle != blank %}
+        <p class="mt-2 text-base opacity-80">{{ section.settings.subtitle }}</p>
+      {% endif %}
+      <!-- Amazon Rating Summary -->
+      <div class="mt-4 flex items-center justify-center gap-2 flex-wrap">
+        <span class="amazon-reviews__stars text-lg tracking-wider" style="color: #FF9900;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="text-sm font-semibold">{{ section.settings.rating_text }}</span>
+        <span class="amazon-reviews__badge inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold" style="background: #232F3E; color: #FF9900;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z" fill="#FF9900"/>
+          </svg>
+          Verified on Amazon
+        </span>
+      </div>
+    </div>
+
+    <!-- Reviews Carousel -->
+    {%- if reviews.size > 0 -%}
+      <div
+        id="amazon-reviews-{{ section.id }}"
+        class="splide section-content-top-margin"
+      >
+        <div class="splide__track">
+          <ul class="splide__list w-full">
+            {%- for block in reviews -%}
+              <li
+                class="splide__slide"
+                style="width: 320px;"
+                {{ block.shopify_attributes }}
+              >
+                <div class="h-full">
+                  <div class="p-5 h-full flex flex-col" style="min-height: 220px; background: #eeece7; border-radius: 1rem; color: #50463e;">
+                    <!-- Stars -->
+                    {%- assign stars = block.settings.rating | plus: 0 -%}
+                    <div class="flex items-center gap-2 mb-2">
+                      <span class="tracking-wider" style="color: #FF9900; font-size: 16px;">
+                        {%- for i in (1..5) -%}
+                          {%- if i <= stars -%}&#9733;{%- else -%}&#9734;{%- endif -%}
+                        {%- endfor -%}
+                      </span>
+                    </div>
+
+                    <!-- Title -->
+                    {% if block.settings.review_title != blank %}
+                      <p class="font-heading text-sm font-bold mb-2 leading-snug">{{ block.settings.review_title }}</p>
+                    {% endif %}
+
+                    <!-- Review Body -->
+                    {% if block.settings.review_body != blank %}
+                      <p class="text-sm opacity-85 mb-3 flex-1 leading-relaxed">&#8220;{{ block.settings.review_body }}&#8221;</p>
+                    {% endif %}
+
+                    <!-- Footer -->
+                    <div class="mt-auto pt-3" style="border-top: 1px solid #d5d3ce;">
+                      <div class="flex items-center justify-between flex-wrap gap-2">
+                        <span class="font-heading text-xs font-semibold">{{ block.settings.reviewer_name }}</span>
+                        {% if block.settings.product_flavor != blank %}
+                          <span class="text-xs px-2 py-0.5 rounded-full font-semibold"
+                            style="
+                              {%- case block.settings.product_flavor -%}
+                                {%- when 'Blue Raspberry' -%}background: #E3F2FD; color: #1565C0;
+                                {%- when 'Mango' -%}background: #FFF3E0; color: #E65100;
+                                {%- when 'Watermelon' -%}background: #FFEBEE; color: #C62828;
+                                {%- else -%}background: #F3E5F5; color: #6B2D8B;
+                              {%- endcase -%}
+                            ">
+                            {{ block.settings.product_flavor }}
+                          </span>
+                        {% endif %}
+                      </div>
+                      {% if block.settings.verified %}
+                        <div class="flex items-center gap-1 mt-1.5">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z" fill="#FF9900"/>
+                          </svg>
+                          <span class="text-xs opacity-60">Verified Purchase</span>
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+
+        <div class="splide__arrows mt-5 flex items-center justify-between px-section">
+          {%- render 'splide-navigation' %}
+        </div>
+
+        <script class="slideshow-options" type="application/json">
+          {
+            "mediaQuery": "min",
+            "arrows": true,
+            "pagination": false,
+            "rewind": true,
+            "autoWidth": true,
+            "gap": "1.25rem",
+            "focus": "left",
+            "type": "loop",
+            "autoScroll": {
+              "autoStart": true,
+              "speed": 0.8
+            },
+            "padding": {
+              "left": "1.25rem",
+              "right": "1.25rem"
+            },
+            "clones": {{ reviews.size | times: 2 }},
+            "breakpoints": {
+              "768": {
+                "gap": "0.75rem"
+              }
+            }
+          }
+        </script>
+
+        <style>
+          #amazon-reviews-{{ section.id }} .splide__slide {
+            width: {{ section.settings.card_width }}px;
+          }
+          @media (max-width: 768px) {
+            #amazon-reviews-{{ section.id }} .splide__slide {
+              width: {{ section.settings.card_width_mobile }}px;
+            }
+          }
+        </style>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Bottom Wave Divider -->
+  {%- if section.settings.show_bottom_wave -%}
+    <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(100%);">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+          {%- if section.settings.bottom_wave_animate -%}
+            <animate attributeName="d" dur="8s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+          {%- endif -%}
+        </path>
+      </svg>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Amazon Reviews",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "What Amazon Customers Are Saying"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Real reviews from verified Amazon purchases"
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating text",
+      "default": "4.7 out of 5 | 1200+ Reviews"
+    },
+    {
+      "type": "range",
+      "id": "card_width",
+      "min": 250,
+      "max": 450,
+      "step": 10,
+      "unit": "px",
+      "label": "Card width (desktop)",
+      "default": 320
+    },
+    {
+      "type": "range",
+      "id": "card_width_mobile",
+      "min": 220,
+      "max": 350,
+      "step": 10,
+      "unit": "px",
+      "label": "Card width (mobile)",
+      "default": 270
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_gradient_background",
+      "label": "Use gradient background",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "range",
+      "id": "wave_height",
+      "label": "Wave Height",
+      "min": 40,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_wave",
+      "label": "Show top wave",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "top_wave_color",
+      "label": "Top wave color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_wave_animate",
+      "label": "Animate top wave",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_wave",
+      "label": "Show bottom wave",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "bottom_wave_color",
+      "label": "Bottom wave color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_wave_animate",
+      "label": "Animate bottom wave",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "limit": 40,
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star rating",
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "review_title",
+          "label": "Review title"
+        },
+        {
+          "type": "textarea",
+          "id": "review_body",
+          "label": "Review text"
+        },
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Reviewer name",
+          "default": "Amazon Customer"
+        },
+        {
+          "type": "select",
+          "id": "product_flavor",
+          "label": "Product / Flavor",
+          "options": [
+            { "value": "Blue Raspberry", "label": "Blue Raspberry" },
+            { "value": "Mango", "label": "Mango" },
+            { "value": "Watermelon", "label": "Watermelon" }
+          ],
+          "default": "Blue Raspberry"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified purchase",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Amazon Reviews"
+    }
+  ]
+}
+{% endschema %}
