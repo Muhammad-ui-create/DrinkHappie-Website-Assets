@@ -307,7 +307,7 @@
             "slide_type": "cards",
             "product_cards": "none",
             "autoplay_mode": "all",
-            "autoscroll_duration": 0,
+            "autoscroll_duration": 3,
             "slide_size": "250",
             "aspect_ratio": "vertical",
             "border": 0,
