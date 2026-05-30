@@ -237,12 +237,21 @@
   <!-- Auto-scroll Moast carousel -->
   <script>
     (function() {
+      var attempts = 0;
+      var maxAttempts = 40;
+      var alreadyApplied = false;
+
       function initMoastAutoScroll() {
+        if (alreadyApplied) return;
+        attempts++;
+        if (attempts > maxAttempts) return;
+
         var moastEl = document.querySelector('#moast-app-{{ section.id }} moast-carousel');
         if (!moastEl || !moastEl.shadowRoot) {
           setTimeout(initMoastAutoScroll, 500);
           return;
         }
+
         var shadow = moastEl.shadowRoot;
         var slidesContainer = shadow.querySelector('.slides');
         if (!slidesContainer || slidesContainer.children.length === 0) {
@@ -250,10 +259,21 @@
           return;
         }
 
+        /* Wait until slides have actual dimensions */
+        var firstSlide = slidesContainer.children[0];
+        if (!firstSlide || firstSlide.offsetHeight === 0) {
+          setTimeout(initMoastAutoScroll, 500);
+          return;
+        }
+
+        alreadyApplied = true;
+
         var carousel = shadow.querySelector('.carousel');
         if (!carousel) return;
 
-        /* Make the carousel overflow hidden for marquee effect */
+        /* Lock the carousel height before applying overflow hidden */
+        var slideHeight = firstSlide.offsetHeight;
+        carousel.style.height = slideHeight + 'px';
         carousel.style.overflow = 'hidden';
         carousel.style.webkitMaskImage = 'linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%)';
         carousel.style.maskImage = 'linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%)';
@@ -263,7 +283,6 @@
         origSlides.forEach(function(slide) {
           var clone = slide.cloneNode(true);
           clone.setAttribute('aria-hidden', 'true');
-          /* Re-trigger autoplay on cloned videos */
           var videos = clone.querySelectorAll('video');
           videos.forEach(function(v) {
             v.setAttribute('autoplay', '');
@@ -283,6 +302,10 @@
           '.slides {' +
           '  animation: moast-marquee ' + speed + 's linear infinite !important;' +
           '  width: max-content !important;' +
+          '  flex-wrap: nowrap !important;' +
+          '}' +
+          '.slide {' +
+          '  flex-shrink: 0 !important;' +
           '}' +
           '.carousel:hover .slides {' +
           '  animation-play-state: paused !important;' +
@@ -293,7 +316,7 @@
           '}';
         shadow.appendChild(styleEl);
 
-        /* Autoplay all videos including originals */
+        /* Autoplay all videos */
         shadow.querySelectorAll('video').forEach(function(v) {
           v.muted = true;
           v.play().catch(function(){});
@@ -301,10 +324,10 @@
       }
 
       if (document.readyState === 'complete') {
-        setTimeout(initMoastAutoScroll, 1000);
+        setTimeout(initMoastAutoScroll, 2000);
       } else {
         window.addEventListener('load', function() {
-          setTimeout(initMoastAutoScroll, 1000);
+          setTimeout(initMoastAutoScroll, 2000);
         });
       }
     })();
