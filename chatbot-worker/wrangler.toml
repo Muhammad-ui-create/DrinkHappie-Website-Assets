@@ -1,0 +1,17 @@
+name = "happie-chatbot"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+
+# Environment variables — set ANTHROPIC_API_KEY via:
+#   wrangler secret put ANTHROPIC_API_KEY
+# Or in the Cloudflare dashboard under Settings > Variables.
+
+[vars]
+ALLOWED_ORIGIN = "https://drinkhappie.com"
+
+# Optional: rate limiter binding (uncomment after enabling Rate Limiting in dashboard)
+# [[unsafe.bindings]]
+# name = "RATE_LIMITER"
+# type = "ratelimit"
+# namespace_id = "1001"
+# simple = { limit = 60, period = 3600 }
