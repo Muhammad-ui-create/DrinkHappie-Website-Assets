@@ -1,0 +1,26 @@
+{%- comment -%}
+  Happie Custom: Fix unreadable white RTE links on blog articles.
+
+  Root cause: css-bridge.liquid sets `--rte-link-color: var(--color-scheme-text)`.
+  On the blog article template the scheme's text color is white, so every
+  `.rte a` / `.inline-rte a` link inside the article body renders white-on-light
+  and is unreadable. (Body paragraph text uses a different fixed dark color,
+  which is why only links broke.)
+
+  Fix: scope a readable brand color to article-page RTE links only — no
+  effect on links anywhere else on the site.
+
+  This lives in a standalone snippet (not in css-bridge.liquid) so it survives
+  future Shopify theme exports that regenerate the bridge file.
+{%- endcomment -%}
+
+<style>
+  .template-article .rte a,
+  .template-article .inline-rte a {
+    color: #962F80 !important;
+  }
+  .template-article .rte a:hover,
+  .template-article .inline-rte a:hover {
+    color: #6E2460 !important;
+  }
+</style>
