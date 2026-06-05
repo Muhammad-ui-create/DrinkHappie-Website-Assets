@@ -7,7 +7,7 @@
 {%- if section.settings.enabled -%}
 <div
   id="happie-chatbot"
-  data-worker-url="{{ section.settings.worker_url }}"
+  data-worker-url="{{ section.settings.worker_url | default: 'https://happie-chatbot-production.up.railway.app/chat' }}"
   data-support-email="{{ section.settings.support_email }}"
   data-bot-name="{{ section.settings.bot_name | escape }}"
   data-greeting="{{ section.settings.greeting | escape }}"
@@ -62,8 +62,11 @@
     <!-- Suggested Replies -->
     <div class="happie-chat__suggestions" id="happie-chat-suggestions">
       <button type="button" class="happie-chat__suggestion" data-suggest="What's the difference between THC Seltzers and Fungi Fusion?">Compare products</button>
-      <button type="button" class="happie-chat__suggestion" data-suggest="How fast does shipping take?">Shipping info</button>
-      <button type="button" class="happie-chat__suggestion" data-suggest="What's your return policy?">Returns</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="What are the benefits of Lion's Mane, Cordyceps, and Reishi mushrooms?">Mushroom science</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="Which states do you ship THC seltzers to?">Shipping &amp; states</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="How do I check out and use a discount code?">Checkout help</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="What's your return and refund policy?">Returns</button>
+      <button type="button" class="happie-chat__suggestion" data-suggest="I'm new to THC — which product should I start with?">New customer</button>
       <button type="button" class="happie-chat__suggestion" data-suggest="I need help with my order">Talk to human</button>
     </div>
 
