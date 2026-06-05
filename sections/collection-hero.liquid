@@ -1,0 +1,438 @@
+<style>
+  .collection-hero {
+    position: relative;
+    overflow: visible;
+    margin-top: -160px;
+    padding-top: 160px;
+  }
+  
+  .collection-hero__background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  
+  .collection-hero__background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .collection-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  
+  .collection-hero__content {
+    position: relative;
+    z-index: 10;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 20px 40px;
+    text-align: center;
+  }
+  
+  /* Ensure section wrapper doesn't clip */
+  #shopify-section-collection_hero,
+  .shopify-section:has(.collection-hero) {
+    overflow: visible !important;
+    margin-top: 0 !important;
+  }
+  
+  .collection-hero__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin: 0 0 16px;
+    line-height: 1.1;
+  }
+  
+  /* Collection Filter Pills */
+  .collection-filters {
+    position: relative;
+    margin-top: 24px;
+  }
+  
+  .collection-filters__bar {
+    padding: 16px 0;
+  }
+  
+  .collection-filters__scroll-container {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .collection-filters__pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  
+  .collection-filters__pill--inactive {
+    background-color: var(--pill-bg, #ffffff);
+    color: var(--pill-text, #1a1a1a);
+    border-color: var(--pill-border, #e5e5e5);
+  }
+  
+  .collection-filters__pill--inactive:hover {
+    background-color: var(--pill-hover-bg, #f5f5f5);
+    border-color: var(--pill-hover-border, #50B2BD);
+    transform: translateY(-1px);
+  }
+  
+  .collection-filters__pill--active {
+    background-color: var(--pill-active-bg, #50B2BD);
+    color: var(--pill-active-text, #ffffff);
+    border-color: var(--pill-active-bg, #50B2BD);
+  }
+  
+  /* Mobile: Horizontal scroll */
+  @media (max-width: 767px) {
+    .collection-hero {
+      margin-top: -120px;
+      padding-top: 120px;
+    }
+    
+    .collection-hero__content {
+      padding: 40px 16px 24px;
+    }
+    
+    .collection-filters__bar {
+      padding: 12px 0;
+      margin: 0 -16px;
+    }
+    
+    .collection-filters__scroll-container {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 4px 16px;
+      gap: 10px;
+    }
+    
+    .collection-filters__scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .collection-filters__pill {
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }
+  
+  /* Tablet adjustments */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .collection-hero {
+      margin-top: -140px;
+      padding-top: 140px;
+    }
+
+    .collection-hero__content {
+      padding: 50px 24px 32px;
+    }
+  }
+
+  /* Happie custom: enforce minimum height so background image shows fully */
+  .collection-hero {
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .collection-hero {
+      min-height: 500px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .collection-hero {
+      min-height: 380px;
+    }
+  }
+</style>
+
+<section 
+  id="collection-hero-{{ section.id }}" 
+  class="collection-hero"
+  style="
+    --pill-bg: {{ section.settings.pill_background_color }};
+    --pill-text: {{ section.settings.pill_text_color }};
+    --pill-border: {{ section.settings.pill_border_color }};
+    --pill-hover-bg: {{ section.settings.pill_hover_background }};
+    --pill-hover-border: {{ section.settings.pill_hover_border }};
+    --pill-active-bg: {{ section.settings.pill_active_background }};
+    --pill-active-text: {{ section.settings.pill_active_text }};
+    background-color: {{ section.settings.background_color }};
+  "
+>
+  {%- if section.settings.background_image != blank -%}
+    <div class="collection-hero__background">
+      {{ section.settings.background_image | image_url: width: 2000 | image_tag: loading: 'eager', class: 'collection-hero__bg-img', alt: section.settings.background_image.alt | default: collection.title | default: shop.name }}
+    </div>
+    {%- if section.settings.overlay_opacity > 0 -%}
+      <div class="collection-hero__overlay" style="background-color: {{ section.settings.overlay_color }}; opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+    {%- endif -%}
+  {%- endif -%}
+
+  <div class="collection-hero__content">
+    {%- if section.settings.show_title -%}
+      <h1 class="collection-hero__title" style="color: {{ section.settings.title_color }};">
+        {{ collection.title }}
+      </h1>
+    {%- endif -%}
+    
+    {%- if section.settings.show_filters -%}
+      <div class="collection-filters">
+        <div class="collection-filters__bar" style="background-color: {{ section.settings.filter_bar_background }};">
+          <nav class="collection-filters__scroll-container" aria-label="Collection filters">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'filter_link' -%}
+                {%- liquid
+                  assign is_active = false
+                  assign current_url = request.path
+                  assign link_url = block.settings.link
+                  
+                  if link_url == current_url or current_url contains link_url
+                    assign is_active = true
+                  endif
+                  
+                  if block.settings.link == '/collections/all' and current_url == '/collections/all'
+                    assign is_active = true
+                  elsif block.settings.link == '/collections/all' and current_url == '/collections'
+                    assign is_active = true
+                  endif
+                -%}
+                <a 
+                  href="{{ block.settings.link }}" 
+                  class="collection-filters__pill {% if is_active %}collection-filters__pill--active{% else %}collection-filters__pill--inactive{% endif %}"
+                  {{ block.shopify_attributes }}
+                  {% if is_active %}aria-current="page"{% endif %}
+                >
+                  {{ block.settings.label }}
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </nav>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Hero",
+  "tag": "section",
+  "class": "collection-hero-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show Collection Title",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Collection descriptions are not shown on the hero. They appear below the product grid inside the main collection section (readable band). Edit that block under Product grid → Collection description (below products)."
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFF2E4"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 0,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Typography Colors"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Collection Filters"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_filters",
+      "label": "Show Collection Filters",
+      "default": true,
+      "info": "Display collection filter pills. Add filter links as blocks below."
+    },
+    {
+      "type": "color",
+      "id": "filter_bar_background",
+      "label": "Filter Bar Background",
+      "default": "transparent"
+    },
+    {
+      "type": "header",
+      "content": "Filter Pill Colors - Inactive"
+    },
+    {
+      "type": "color",
+      "id": "pill_background_color",
+      "label": "Pill Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "pill_text_color",
+      "label": "Pill Text",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "pill_border_color",
+      "label": "Pill Border",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "header",
+      "content": "Filter Pill Colors - Hover"
+    },
+    {
+      "type": "color",
+      "id": "pill_hover_background",
+      "label": "Hover Background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "pill_hover_border",
+      "label": "Hover Border",
+      "default": "#50B2BD"
+    },
+    {
+      "type": "header",
+      "content": "Filter Pill Colors - Active"
+    },
+    {
+      "type": "color",
+      "id": "pill_active_background",
+      "label": "Active Background",
+      "default": "#50B2BD"
+    },
+    {
+      "type": "color",
+      "id": "pill_active_text",
+      "label": "Active Text",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "filter_link",
+      "name": "Filter Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Shop All"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Hero",
+      "blocks": [
+        {
+          "type": "filter_link",
+          "settings": {
+            "label": "Shop All",
+            "link": "/collections/all"
+          }
+        },
+        {
+          "type": "filter_link",
+          "settings": {
+            "label": "THC Beverages",
+            "link": "/collections/thc-beverages"
+          }
+        },
+        {
+          "type": "filter_link",
+          "settings": {
+            "label": "Fungi Fusion",
+            "link": "/collections/fungi-fusion"
+          }
+        },
+        {
+          "type": "filter_link",
+          "settings": {
+            "label": "Variety Packs",
+            "link": "/collections/variety-packs"
+          }
+        },
+        {
+          "type": "filter_link",
+          "settings": {
+            "label": "Merch",
+            "link": "/collections/merch"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
