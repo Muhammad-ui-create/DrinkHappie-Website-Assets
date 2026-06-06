@@ -1,0 +1,262 @@
+{%- comment -%}
+  GEO / JSON-LD Product schema with NutritionInformation + additionalProperty.
+  Requires product metafields (Settings → Metafields → Products):
+  custom.serving_size, custom.calories, custom.active_ingredient, custom.active_amount
+  Optional: custom.carbs, custom.protein, custom.fat, custom.caffeine_free (boolean)
+
+  aggregateRating: uses Shopify standard reviews.* metafields (rating object) and Judge.me judgeme.* fallbacks
+  so THC vs mushroom lines both pick up ratings when the app writes either namespace. No fabricated ratings.
+{%- endcomment -%}
+{%- liquid
+  assign v = product.selected_or_first_available_variant
+  assign serving = product.metafields.custom.serving_size.value | default: product.metafields.custom.serving_size | default: '12 fl oz / 355 mL'
+  assign cal = product.metafields.custom.calories.value | default: product.metafields.custom.calories | default: '5'
+  assign carbs = product.metafields.custom.carbs.value | default: product.metafields.custom.carbs | default: '0g'
+  assign protein = product.metafields.custom.protein.value | default: product.metafields.custom.protein | default: '0g'
+  assign fat = product.metafields.custom.fat.value | default: product.metafields.custom.fat | default: '0g'
+  assign active_ing = product.metafields.custom.active_ingredient.value | default: product.metafields.custom.active_ingredient | default: 'Mushroom Extract'
+  assign active_amt = product.metafields.custom.active_amount.value | default: product.metafields.custom.active_amount | default: 'See label'
+  assign brand_name = product.vendor | default: 'Happie'
+  if brand_name == blank
+    assign brand_name = 'Happie'
+  endif
+  assign is_caffeine_free = false
+  assign _cf_mf = product.metafields.custom.caffeine_content.value
+  if _cf_mf == blank
+    assign _cf_mf = product.metafields.custom.caffeine_content
+  endif
+  assign _cf_lc = _cf_mf | downcase
+  if product.metafields.custom.caffeine_free.value == true or product.metafields.custom.caffeine_free == true
+    assign is_caffeine_free = true
+  elsif _cf_lc contains 'caffeine-free' or _cf_lc contains 'caffeine free'
+    assign is_caffeine_free = true
+  elsif product.title contains 'Fungi Fusion' or product.title contains 'fungi fusion'
+    assign is_caffeine_free = true
+  endif
+  if is_caffeine_free
+    assign caffeine_label = 'Caffeine-Free'
+  else
+    assign caffeine_label = 'Contains Caffeine'
+  endif
+  assign is_fungi_fusion = false
+  assign _ai_lc = active_ing | downcase
+  if _ai_lc contains "lion" or _ai_lc contains 'hericium' or _ai_lc contains 'cordyceps' or _ai_lc contains 'reishi'
+    assign is_fungi_fusion = true
+  endif
+
+  assign schema_rating_val = nil
+  assign schema_review_count = nil
+  assign schema_best_rating = 5
+  assign schema_worst_rating = 1
+  assign rev_obj = product.metafields.reviews.rating.value
+  if rev_obj != blank
+    if rev_obj.rating != blank
+      assign schema_rating_val = rev_obj.rating
+      if rev_obj.scale_max != blank
+        assign schema_best_rating = rev_obj.scale_max
+      endif
+    else
+      assign schema_rating_val = rev_obj
+    endif
+  endif
+  assign rev_count_raw = product.metafields.reviews.rating_count.value | default: product.metafields.reviews.rating_count
+  if rev_count_raw != blank
+    assign schema_review_count = rev_count_raw | plus: 0
+  endif
+  if schema_rating_val == blank or schema_review_count == blank or schema_review_count < 1
+    assign jm_r = product.metafields.judgeme.all_reviews_rating.value | default: product.metafields.judgeme.all_reviews_rating
+    assign jm_c = product.metafields.judgeme.all_reviews_count.value | default: product.metafields.judgeme.all_reviews_count
+    if jm_c != blank
+      assign jm_c_num = jm_c | plus: 0
+    else
+      assign jm_c_num = 0
+    endif
+    if jm_r != blank and jm_c_num > 0
+      assign schema_rating_val = jm_r
+      assign schema_review_count = jm_c_num
+    endif
+  endif
+  assign schema_has_aggregate = false
+  {%- comment -%} 2026-06-05: raised min reviews from 1 to 5 to suppress fake "5.0 / 1 review" defaults from polluted metafields. Google flags <5-review aggregateRating as low-quality. {%- endcomment -%}
+  if schema_rating_val != blank and schema_review_count != blank and schema_review_count >= 5
+    assign schema_has_aggregate = true
+  endif
+-%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "description": {{ product.description | strip_html | truncate: 5000 | json }},
+  "url": {{ shop.url | append: product.url | json }},
+  "image": [
+    {%- for image in product.images limit: 5 -%}
+    {%- assign img_u = image | image_url: width: 1200 -%}
+    {%- if img_u contains 'http' -%}
+    {{ img_u | json }}
+    {%- else -%}
+    {{ 'https:' | append: img_u | json }}
+    {%- endif -%}
+    {% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ],
+  "sku": {{ v.sku | default: v.id | json }},
+  "mpn": {{ v.sku | default: v.id | json }},
+  "brand": {
+    "@type": "Brand",
+    "name": {{ brand_name | json }}
+  },
+  "category": "Functional Beverages",
+  "keywords": {%- if is_fungi_fusion -%}"functional mushroom drink, adaptogenic beverage, Lion's Mane drink, Cordyceps drink, Reishi drink, nootropic beverage, mushroom seltzer, caffeine-free energy drink, focus drink, mushroom coffee alternative, natural energy drink, adaptogen soda"{%- else -%}"THC seltzer, Delta-9 THC drink, hemp-derived THC beverage, cannabis seltzer, THC sparkling water, weed drink, hemp seltzer, alcohol alternative, zero-proof cocktail, sober curious drink, THC infused drink, low calorie THC drink, nano-emulsified THC, CBD drink, social tonic, microdose THC"{%- endif -%},
+  {%- if schema_has_aggregate -%}
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": {{ schema_rating_val | json }},
+    "reviewCount": {{ schema_review_count | json }},
+    "bestRating": {{ schema_best_rating | json }},
+    "worstRating": {{ schema_worst_rating | json }}
+  },
+  {%- endif -%}
+  "nutrition": {
+    "@type": "NutritionInformation",
+    "servingSize": {{ serving | json }},
+    "calories": {{ cal | json }},
+    "carbohydrateContent": {{ carbs | json }},
+    "proteinContent": {{ protein | json }},
+    "fatContent": {{ fat | json }}
+  },
+  "additionalProperty": [
+    {%- if is_fungi_fusion -%}
+    {
+      "@type": "PropertyValue",
+      "name": "Lion's Mane (Hericium erinaceus)",
+      "value": "900mg per can"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Cordyceps (Cordyceps militaris)",
+      "value": "700mg per can"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Reishi (Ganoderma lucidum)",
+      "value": "400mg per can"
+    },
+    {%- else -%}
+    {
+      "@type": "PropertyValue",
+      "name": "Active Ingredient",
+      "value": {{ active_ing | json }}
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Active Amount",
+      "value": {{ active_amt | json }}
+    },
+    {%- endif -%}
+    {
+      "@type": "PropertyValue",
+      "name": "Caffeine Content",
+      "value": {{ caffeine_label | json }}
+    }
+  ],
+  "offers": {%- if product.variants.size > 1 -%}[
+    {%- for variant in product.variants -%}
+    {
+      "@type": "Offer",
+      "name": {{ variant.title | json }},
+      "sku": {{ variant.sku | default: variant.id | json }},
+      "url": {{ shop.url | append: product.url | append: '?variant=' | append: variant.id | json }},
+      "priceCurrency": {{ shop.currency | json }},
+      "price": "{{ variant.price | money_without_currency | remove: ',' }}",
+      "availability": "https://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+      "seller": {
+        "@type": "Organization",
+        "name": {{ shop.name | json }}
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "US"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 1,
+            "maxValue": 1,
+            "unitCode": "d"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 3,
+            "maxValue": 7,
+            "unitCode": "d"
+          }
+        },
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": "USD"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "US",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 30,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
+      }
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]{%- else -%}{
+    "@type": "Offer",
+    "url": {{ shop.url | append: product.url | json }},
+    "priceCurrency": {{ shop.currency | json }},
+    "price": "{{ v.price | money_without_currency | remove: ',' }}",
+    "availability": "https://schema.org/{% if v.available %}InStock{% else %}OutOfStock{% endif %}",
+    "seller": {
+      "@type": "Organization",
+      "name": {{ shop.name | json }}
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "US"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 1,
+          "unitCode": "d"
+        },
+        "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 3,
+          "maxValue": 7,
+          "unitCode": "d"
+        }
+      },
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0",
+        "currency": "USD"
+      }
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "US",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/FreeReturn"
+    }
+  }{%- endif -%}
+}
+</script>
+
