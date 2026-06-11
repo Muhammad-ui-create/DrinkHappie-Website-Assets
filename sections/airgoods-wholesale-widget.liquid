@@ -1,0 +1,204 @@
+{%- comment -%}
+  Happie x Airgoods Wholesale Widget
+  Embeds the Airgoods iframe widget that lets specialty retail buyers order
+  wholesale from Happie with buy-now-pay-60-days terms, free shipping for 3 months,
+  and $50 credit on first order.
+
+  The widget itself is configured in the Airgoods dashboard (colors, size, content);
+  this section just provides a branded wrapper with optional heading + framing.
+{%- endcomment -%}
+
+<section
+  id="airgoods-widget-{{ section.id }}"
+  class="airgoods-widget"
+  style="
+    --awg-bg: {{ section.settings.background_color }};
+    --awg-text: {{ section.settings.text_color }};
+    --awg-heading: {{ section.settings.heading_color }};
+    background: var(--awg-bg);
+    color: var(--awg-text);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="airgoods-widget__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="airgoods-widget__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <div class="airgoods-widget__subheading">{{ section.settings.subheading }}</div>
+    {%- endif -%}
+
+    <div class="airgoods-widget__embed" style="max-width: {{ section.settings.max_width }}px;">
+      <iframe
+        scrolling="no"
+        width="100%"
+        height="{{ section.settings.iframe_height }}"
+        style="border: none; display: block; width: 100%;"
+        src="{{ section.settings.widget_url }}"
+        loading="lazy"
+        title="Happie wholesale via Airgoods"
+      ></iframe>
+    </div>
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="airgoods-widget__disclaimer">{{ section.settings.disclaimer }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .airgoods-widget {
+    width: 100%;
+  }
+  .airgoods-widget__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+  .airgoods-widget__heading {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    color: var(--awg-heading);
+    margin: 0 0 12px;
+  }
+  .airgoods-widget__subheading {
+    font-size: 17px;
+    opacity: 0.85;
+    max-width: 680px;
+    margin: 0 auto 32px;
+    line-height: 1.5;
+  }
+  .airgoods-widget__embed {
+    margin: 0 auto;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.08);
+  }
+  .airgoods-widget__disclaimer {
+    font-size: 13px;
+    opacity: 0.65;
+    margin: 20px auto 0;
+    max-width: 560px;
+    line-height: 1.5;
+  }
+  @media (max-width: 600px) {
+    .airgoods-widget__inner { padding: 0 16px; }
+    .airgoods-widget__embed { border-radius: 12px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Airgoods Wholesale Widget",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Widget"
+    },
+    {
+      "type": "url",
+      "id": "widget_url",
+      "label": "Airgoods widget embed URL",
+      "info": "Paste the src URL from the iframe code in your Airgoods dashboard.",
+      "default": "https://stack-backend.onrender.com/widget/embed/e6ecc601-5849-4b86-a845-8432d4e84251"
+    },
+    {
+      "type": "range",
+      "id": "iframe_height",
+      "label": "Widget height",
+      "min": 400,
+      "max": 1000,
+      "step": 50,
+      "default": 600,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Max width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "default": 1100,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Are You a Retailer?"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Stock Happie THC seltzers and Fungi Fusion mushroom drinks in your store. We've partnered with Airgoods to make wholesale buying easy: buy now, pay later, free shipping on your first 3 months, and $50 credit toward your first order.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "disclaimer",
+      "label": "Disclaimer (optional)",
+      "default": "<p>Promotional offers apply to new Airgoods buyers only.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FFF2E4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body text",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#962F80"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 250,
+      "step": 5,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 250,
+      "step": 5,
+      "default": 80,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Airgoods Wholesale Widget"
+    }
+  ]
+}
+{% endschema %}
