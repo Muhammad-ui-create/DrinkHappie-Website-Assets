@@ -1,6 +1,6 @@
 {%- comment -%}
   Happie SEO Store Locator
-  Server-side renders all 137 retail locations as crawlable HTML + LocalBusiness
+  Server-side renders all 142 retail locations as crawlable HTML + LocalBusiness
   ItemList JSON-LD schema. Works ALONGSIDE the TA Mappy widget which renders the
   visual map client-side. Without this section, Google sees an empty map page;
   with it, Google sees every store name, address, city, state, and phone -- so
@@ -35,11 +35,11 @@
       <p class="store-locator-seo__subheading">{{ section.settings.subheading }}</p>
     {%- endif -%}
 
-    {%- comment -%} === SSR STORE LIST (auto-generated 2026-06-05 from TA Mappy CSV; 137 active retail locations) === {%- endcomment -%}
+    {%- comment -%} === SSR STORE LIST (auto-generated 2026-06-16 from TA Mappy CSV; 142 active retail locations) === {%- endcomment -%}
     <div class="store-locator-seo__stats">
-      <div class="store-locator-seo__stat"><span class="store-locator-seo__stat-num">137+</span><span class="store-locator-seo__stat-label">Retailers</span></div>
-      <div class="store-locator-seo__stat"><span class="store-locator-seo__stat-num">18</span><span class="store-locator-seo__stat-label">States</span></div>
-      <div class="store-locator-seo__stat"><span class="store-locator-seo__stat-num">73</span><span class="store-locator-seo__stat-label">Cities</span></div>
+      <div class="store-locator-seo__stat"><span class="store-locator-seo__stat-num">142+</span><span class="store-locator-seo__stat-label">Retailers</span></div>
+      <div class="store-locator-seo__stat"><span class="store-locator-seo__stat-num">20</span><span class="store-locator-seo__stat-label">States</span></div>
+      <div class="store-locator-seo__stat"><span class="store-locator-seo__stat-num">77</span><span class="store-locator-seo__stat-label">Cities</span></div>
     </div>
     <div class="store-locator-seo__states">
     <details class="store-locator-seo__state" id="state-ca">
@@ -74,8 +74,28 @@
         </div>
       </div>
     </details>
+    <details class="store-locator-seo__state" id="state-ct">
+      <summary class="store-locator-seo__state-summary"><span>Happie in Connecticut</span><span class="store-locator-seo__state-count">1 location &middot; 1 city</span></summary>
+      <div class="store-locator-seo__city">
+        <h3 class="store-locator-seo__city-name">Buy Happie THC Seltzer &amp; Fungi Fusion in Old Saybrook, CT</h3>
+        <div class="store-locator-seo__stores">
+          <article class="store-locator-seo__store" itemscope itemtype="https://schema.org/Store">
+            <h4 class="store-locator-seo__store-name" itemprop="name">Northeast Vapor (Natural Paths - Alternative Solutions)</h4>
+            <p class="store-locator-seo__store-address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+              <span itemprop="streetAddress">1610 Boston Post Rd</span><br>
+              <span itemprop="addressLocality">Old Saybrook</span>, <span itemprop="addressRegion">CT</span> <span itemprop="postalCode">06475</span>
+            </p>
+            <div class="store-locator-seo__store-meta">
+              <span class="store-locator-seo__store-tag">Smoke/Vape/CBD</span>
+              <a href="tel:8608778273" itemprop="telephone">(860) 877-8273</a>
+              <a href="https://www.google.com/maps/dir/?api=1&amp;destination=1610+Boston+Post+Rd,+Old+Saybrook,+CT+06475" target="_blank" rel="noopener">Directions</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </details>
     <details class="store-locator-seo__state" id="state-fl">
-      <summary class="store-locator-seo__state-summary"><span>Happie in Florida</span><span class="store-locator-seo__state-count">4 locations &middot; 4 cities</span></summary>
+      <summary class="store-locator-seo__state-summary"><span>Happie in Florida</span><span class="store-locator-seo__state-count">5 locations &middot; 4 cities</span></summary>
       <div class="store-locator-seo__city">
         <h3 class="store-locator-seo__city-name">Buy Happie THC Seltzer &amp; Fungi Fusion in Fort Walton Beach, FL</h3>
         <div class="store-locator-seo__stores">
@@ -115,6 +135,18 @@
       <div class="store-locator-seo__city">
         <h3 class="store-locator-seo__city-name">Buy Happie THC Seltzer &amp; Fungi Fusion in St Petersburg, FL</h3>
         <div class="store-locator-seo__stores">
+          <article class="store-locator-seo__store" itemscope itemtype="https://schema.org/Store">
+            <h4 class="store-locator-seo__store-name" itemprop="name">Herban Flow</h4>
+            <p class="store-locator-seo__store-address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+              <span itemprop="streetAddress">501 Dr MLK Jr St N Suite 103</span><br>
+              <span itemprop="addressLocality">St Petersburg</span>, <span itemprop="addressRegion">FL</span> <span itemprop="postalCode">33701</span>
+            </p>
+            <div class="store-locator-seo__store-meta">
+              <span class="store-locator-seo__store-tag">Wellness/CBD</span>
+              <a href="tel:7274309576" itemprop="telephone">(727) 430-9576</a>
+              <a href="https://www.google.com/maps/dir/?api=1&amp;destination=501+Dr+MLK+Jr+St+N+Suite+103,+St+Petersburg,+FL+33701" target="_blank" rel="noopener">Directions</a>
+            </div>
+          </article>
           <article class="store-locator-seo__store" itemscope itemtype="https://schema.org/Store">
             <h4 class="store-locator-seo__store-name" itemprop="name">Herban Flow - DTSP</h4>
             <p class="store-locator-seo__store-address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
@@ -171,7 +203,7 @@
       </div>
     </details>
     <details class="store-locator-seo__state" id="state-il">
-      <summary class="store-locator-seo__state-summary"><span>Happie in Illinois</span><span class="store-locator-seo__state-count">30 locations &middot; 11 cities</span></summary>
+      <summary class="store-locator-seo__state-summary"><span>Happie in Illinois</span><span class="store-locator-seo__state-count">31 locations &middot; 12 cities</span></summary>
       <div class="store-locator-seo__city">
         <h3 class="store-locator-seo__city-name">Buy Happie THC Seltzer &amp; Fungi Fusion in Canton, IL</h3>
         <div class="store-locator-seo__stores">
@@ -516,6 +548,23 @@
               <span class="store-locator-seo__store-tag">Retail</span>
               <a href="tel:3098392624" itemprop="telephone">(309) 839-2624</a>
               <a href="https://www.google.com/maps/dir/?api=1&amp;destination=3320+N+University+St,+Peoria,+IL+61604" target="_blank" rel="noopener">Directions</a>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="store-locator-seo__city">
+        <h3 class="store-locator-seo__city-name">Buy Happie THC Seltzer &amp; Fungi Fusion in Rockford, IL</h3>
+        <div class="store-locator-seo__stores">
+          <article class="store-locator-seo__store" itemscope itemtype="https://schema.org/Store">
+            <h4 class="store-locator-seo__store-name" itemprop="name">Cork Keg &amp; Spirits</h4>
+            <p class="store-locator-seo__store-address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+              <span itemprop="streetAddress">1603 N Alpine Rd Ste 113</span><br>
+              <span itemprop="addressLocality">Rockford</span>, <span itemprop="addressRegion">IL</span> <span itemprop="postalCode">61107</span>
+            </p>
+            <div class="store-locator-seo__store-meta">
+              <span class="store-locator-seo__store-tag">Liquor Store</span>
+              <a href="tel:8159863854" itemprop="telephone">(815) 986-3854</a>
+              <a href="https://www.google.com/maps/dir/?api=1&amp;destination=1603+N+Alpine+Rd+Ste+113,+Rockford,+IL+61107" target="_blank" rel="noopener">Directions</a>
             </div>
           </article>
         </div>
@@ -1249,7 +1298,7 @@
       </div>
     </details>
     <details class="store-locator-seo__state" id="state-nc">
-      <summary class="store-locator-seo__state-summary"><span>Happie in North Carolina</span><span class="store-locator-seo__state-count">1 location &middot; 1 city</span></summary>
+      <summary class="store-locator-seo__state-summary"><span>Happie in North Carolina</span><span class="store-locator-seo__state-count">2 locations &middot; 2 cities</span></summary>
       <div class="store-locator-seo__city">
         <h3 class="store-locator-seo__city-name">Buy Happie THC Seltzer &amp; Fungi Fusion in Kill Devil Hills, NC</h3>
         <div class="store-locator-seo__stores">
@@ -1264,6 +1313,23 @@
               <a href="tel:2522073243" itemprop="telephone">(252) 207-3243</a>
               <a href="https://hivibeobx.com" target="_blank" rel="noopener" itemprop="url">Website</a>
               <a href="https://www.google.com/maps/dir/?api=1&amp;destination=1209+S+Croatan+Hwy,+Kill+Devil+Hills,+NC+27948" target="_blank" rel="noopener">Directions</a>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="store-locator-seo__city">
+        <h3 class="store-locator-seo__city-name">Buy Happie THC Seltzer &amp; Fungi Fusion in Wilson, NC</h3>
+        <div class="store-locator-seo__stores">
+          <article class="store-locator-seo__store" itemscope itemtype="https://schema.org/Store">
+            <h4 class="store-locator-seo__store-name" itemprop="name">101 Exotic Inc</h4>
+            <p class="store-locator-seo__store-address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+              <span itemprop="streetAddress">3475 Airport Blvd NW Unit J</span><br>
+              <span itemprop="addressLocality">Wilson</span>, <span itemprop="addressRegion">NC</span> <span itemprop="postalCode">27896</span>
+            </p>
+            <div class="store-locator-seo__store-meta">
+              <span class="store-locator-seo__store-tag">Smoke/Vape Shop</span>
+              <a href="tel:2522815051" itemprop="telephone">(252) 281-5051</a>
+              <a href="https://www.google.com/maps/dir/?api=1&amp;destination=3475+Airport+Blvd+NW+Unit+J,+Wilson,+NC+27896" target="_blank" rel="noopener">Directions</a>
             </div>
           </article>
         </div>
@@ -2003,6 +2069,26 @@
         </div>
       </div>
     </details>
+    <details class="store-locator-seo__state" id="state-wa">
+      <summary class="store-locator-seo__state-summary"><span>Happie in Washington</span><span class="store-locator-seo__state-count">1 location &middot; 1 city</span></summary>
+      <div class="store-locator-seo__city">
+        <h3 class="store-locator-seo__city-name">Buy Happie THC Seltzer &amp; Fungi Fusion in Wenatchee, WA</h3>
+        <div class="store-locator-seo__stores">
+          <article class="store-locator-seo__store" itemscope itemtype="https://schema.org/Store">
+            <h4 class="store-locator-seo__store-name" itemprop="name">Wenatchee Natural Foods</h4>
+            <p class="store-locator-seo__store-address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+              <span itemprop="streetAddress">222 N Wenatchee Ave</span><br>
+              <span itemprop="addressLocality">Wenatchee</span>, <span itemprop="addressRegion">WA</span> <span itemprop="postalCode">98801</span>
+            </p>
+            <div class="store-locator-seo__store-meta">
+              <span class="store-locator-seo__store-tag">Grocery/Natural Foods</span>
+              <a href="tel:5096659999" itemprop="telephone">(509) 665-9999</a>
+              <a href="https://www.google.com/maps/dir/?api=1&amp;destination=222+N+Wenatchee+Ave,+Wenatchee,+WA+98801" target="_blank" rel="noopener">Directions</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </details>
     <details class="store-locator-seo__state" id="state-wi">
       <summary class="store-locator-seo__state-summary"><span>Happie in Wisconsin</span><span class="store-locator-seo__state-count">4 locations &middot; 3 cities</span></summary>
       <div class="store-locator-seo__city">
@@ -2074,8 +2160,8 @@
     {
       "@context": "https://schema.org",
       "@type": "ItemList",
-      "name": "Happie Retailers Nationwide (137 locations)",
-      "numberOfItems": 137,
+      "name": "Happie Retailers Nationwide (142 locations)",
+      "numberOfItems": 142,
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -2126,6 +2212,28 @@
           "position": 3,
           "item": {
             "@type": "Store",
+            "name": "Northeast Vapor (Natural Paths - Alternative Solutions)",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "1610 Boston Post Rd",
+              "addressLocality": "Old Saybrook",
+              "addressRegion": "CT",
+              "postalCode": "06475",
+              "addressCountry": "US"
+            },
+            "telephone": "(860) 877-8273",
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 41.2860588,
+              "longitude": -72.4140249
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "Store",
             "name": "Primo's Vapor Smokes",
             "address": {
               "@type": "PostalAddress",
@@ -2146,7 +2254,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 4,
+          "position": 5,
           "item": {
             "@type": "Store",
             "name": "Strain Theory",
@@ -2169,7 +2277,29 @@
         },
         {
           "@type": "ListItem",
-          "position": 5,
+          "position": 6,
+          "item": {
+            "@type": "Store",
+            "name": "Herban Flow",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "501 Dr MLK Jr St N Suite 103",
+              "addressLocality": "St Petersburg",
+              "addressRegion": "FL",
+              "postalCode": "33701",
+              "addressCountry": "US"
+            },
+            "telephone": "(727) 430-9576",
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 27.7777181,
+              "longitude": -82.6463397
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
           "item": {
             "@type": "Store",
             "name": "Herban Flow - DTSP",
@@ -2192,7 +2322,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 6,
+          "position": 8,
           "item": {
             "@type": "Store",
             "name": "The Standard CLCL -- Coffee Shop",
@@ -2215,7 +2345,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 7,
+          "position": 9,
           "item": {
             "@type": "Store",
             "name": "Namaste Indian Street Food",
@@ -2238,7 +2368,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 8,
+          "position": 10,
           "item": {
             "@type": "Store",
             "name": "Canton Discount Tobacco Inc",
@@ -2260,7 +2390,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 9,
+          "position": 11,
           "item": {
             "@type": "Store",
             "name": "Panorama Tobacco & Vape",
@@ -2282,7 +2412,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 10,
+          "position": 12,
           "item": {
             "@type": "Store",
             "name": "Piccadilly Liquors",
@@ -2303,7 +2433,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 11,
+          "position": 13,
           "item": {
             "@type": "Store",
             "name": "Clark Haus Liquor",
@@ -2325,7 +2455,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 12,
+          "position": 14,
           "item": {
             "@type": "Store",
             "name": "Foodsmart",
@@ -2346,7 +2476,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 13,
+          "position": 15,
           "item": {
             "@type": "Store",
             "name": "Fresh Stop Market",
@@ -2367,7 +2497,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 14,
+          "position": 16,
           "item": {
             "@type": "Store",
             "name": "Galleria Liquors",
@@ -2388,7 +2518,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 15,
+          "position": 17,
           "item": {
             "@type": "Store",
             "name": "Hops and Scotch",
@@ -2409,7 +2539,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 16,
+          "position": 18,
           "item": {
             "@type": "Store",
             "name": "Malibu Market",
@@ -2430,7 +2560,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 17,
+          "position": 19,
           "item": {
             "@type": "Store",
             "name": "Pride Market",
@@ -2451,7 +2581,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 18,
+          "position": 20,
           "item": {
             "@type": "Store",
             "name": "Rayan's Liquors",
@@ -2472,7 +2602,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 19,
+          "position": 21,
           "item": {
             "@type": "Store",
             "name": "West Loop Market",
@@ -2493,7 +2623,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 20,
+          "position": 22,
           "item": {
             "@type": "Store",
             "name": "Windy City Market",
@@ -2514,7 +2644,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 21,
+          "position": 23,
           "item": {
             "@type": "Store",
             "name": "Express Smoke Shop",
@@ -2536,7 +2666,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 22,
+          "position": 24,
           "item": {
             "@type": "Store",
             "name": "Bazzar Smoke Shop",
@@ -2559,7 +2689,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 23,
+          "position": 25,
           "item": {
             "@type": "Store",
             "name": "Mobil Food Mart (Galesburg)",
@@ -2581,7 +2711,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 24,
+          "position": 26,
           "item": {
             "@type": "Store",
             "name": "Mr Puff Vapes",
@@ -2603,7 +2733,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 25,
+          "position": 27,
           "item": {
             "@type": "Store",
             "name": "Burger Local",
@@ -2626,7 +2756,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 26,
+          "position": 28,
           "item": {
             "@type": "Store",
             "name": "Havana Smoke & Tobacco Shop",
@@ -2647,7 +2777,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 27,
+          "position": 29,
           "item": {
             "@type": "Store",
             "name": "Havana Smoke Shop",
@@ -2670,7 +2800,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 28,
+          "position": 30,
           "item": {
             "@type": "Store",
             "name": "King Liquor",
@@ -2692,7 +2822,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 29,
+          "position": 31,
           "item": {
             "@type": "Store",
             "name": "Amoco",
@@ -2714,7 +2844,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 30,
+          "position": 32,
           "item": {
             "@type": "Store",
             "name": "Mobil Food Mart",
@@ -2736,7 +2866,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 31,
+          "position": 33,
           "item": {
             "@type": "Store",
             "name": "Mobil Food Mart (Peoria)",
@@ -2757,7 +2887,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 32,
+          "position": 34,
           "item": {
             "@type": "Store",
             "name": "RBM Mart Inc",
@@ -2779,7 +2909,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 33,
+          "position": 35,
           "item": {
             "@type": "Store",
             "name": "Smoke Zone",
@@ -2801,7 +2931,29 @@
         },
         {
           "@type": "ListItem",
-          "position": 34,
+          "position": 36,
+          "item": {
+            "@type": "Store",
+            "name": "Cork Keg & Spirits",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "1603 N Alpine Rd Ste 113",
+              "addressLocality": "Rockford",
+              "addressRegion": "IL",
+              "postalCode": "61107",
+              "addressCountry": "US"
+            },
+            "telephone": "(815) 986-3854",
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 42.28667799999999,
+              "longitude": -89.02800800000001
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 37,
           "item": {
             "@type": "Store",
             "name": "Almadina International Foods",
@@ -2823,7 +2975,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 35,
+          "position": 38,
           "item": {
             "@type": "Store",
             "name": "Almadina International Foods Inc",
@@ -2845,7 +2997,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 36,
+          "position": 39,
           "item": {
             "@type": "Store",
             "name": "Cloud 9 Vape & Tobacco",
@@ -2867,7 +3019,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 37,
+          "position": 40,
           "item": {
             "@type": "Store",
             "name": "Wildflower Mercantile",
@@ -2890,7 +3042,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 38,
+          "position": 41,
           "item": {
             "@type": "Store",
             "name": "Franklin Apothecary",
@@ -2913,7 +3065,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 39,
+          "position": 42,
           "item": {
             "@type": "Store",
             "name": "Bella Sunrise Smokeshop",
@@ -2934,7 +3086,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 40,
+          "position": 43,
           "item": {
             "@type": "Store",
             "name": "Rad Dad Alternative",
@@ -2955,7 +3107,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 41,
+          "position": 44,
           "item": {
             "@type": "Store",
             "name": "Rad Dad Alternative",
@@ -2976,7 +3128,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 42,
+          "position": 45,
           "item": {
             "@type": "Store",
             "name": "Total Wine Baton Rouge 2504",
@@ -2997,7 +3149,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 43,
+          "position": 46,
           "item": {
             "@type": "Store",
             "name": "Legacy Vibes",
@@ -3019,7 +3171,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 44,
+          "position": 47,
           "item": {
             "@type": "Store",
             "name": "Legacy Vibes Vape & Smoke Shop",
@@ -3042,7 +3194,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 45,
+          "position": 48,
           "item": {
             "@type": "Store",
             "name": "LIT Clouds Smoke Shop",
@@ -3064,7 +3216,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 46,
+          "position": 49,
           "item": {
             "@type": "Store",
             "name": "Lit Smoke and Vape",
@@ -3086,7 +3238,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 47,
+          "position": 50,
           "item": {
             "@type": "Store",
             "name": "Acquistapace's",
@@ -3107,7 +3259,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 48,
+          "position": 51,
           "item": {
             "@type": "Store",
             "name": "Green Room",
@@ -3128,7 +3280,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 49,
+          "position": 52,
           "item": {
             "@type": "Store",
             "name": "Layton's Pharmacy",
@@ -3144,7 +3296,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 50,
+          "position": 53,
           "item": {
             "@type": "Store",
             "name": "Turgeau's Restaurant",
@@ -3165,7 +3317,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 51,
+          "position": 54,
           "item": {
             "@type": "Store",
             "name": "Total Wine Lafayette 2502",
@@ -3186,7 +3338,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 52,
+          "position": 55,
           "item": {
             "@type": "Store",
             "name": "Piggly Wiggly",
@@ -3207,7 +3359,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 53,
+          "position": 56,
           "item": {
             "@type": "Store",
             "name": "Total Wine Mandeville 2503",
@@ -3228,7 +3380,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 54,
+          "position": 57,
           "item": {
             "@type": "Store",
             "name": "After Hours ER",
@@ -3249,7 +3401,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 55,
+          "position": 58,
           "item": {
             "@type": "Store",
             "name": "Breaux Mart - Metairie",
@@ -3270,7 +3422,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 56,
+          "position": 59,
           "item": {
             "@type": "Store",
             "name": "Cali Sober Market",
@@ -3291,7 +3443,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 57,
+          "position": 60,
           "item": {
             "@type": "Store",
             "name": "Coliseum Card Company",
@@ -3312,7 +3464,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 58,
+          "position": 61,
           "item": {
             "@type": "Store",
             "name": "Dorignac's",
@@ -3333,7 +3485,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 59,
+          "position": 62,
           "item": {
             "@type": "Store",
             "name": "Theo's Pizza - Metairie",
@@ -3354,7 +3506,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 60,
+          "position": 63,
           "item": {
             "@type": "Store",
             "name": "Total Wine Metairie 2501",
@@ -3375,7 +3527,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 61,
+          "position": 64,
           "item": {
             "@type": "Store",
             "name": "Zuppardos",
@@ -3396,7 +3548,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 62,
+          "position": 65,
           "item": {
             "@type": "Store",
             "name": "NELATONICS",
@@ -3418,7 +3570,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 63,
+          "position": 66,
           "item": {
             "@type": "Store",
             "name": "Bamboulas",
@@ -3439,7 +3591,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 64,
+          "position": 67,
           "item": {
             "@type": "Store",
             "name": "Birdies",
@@ -3461,7 +3613,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 65,
+          "position": 68,
           "item": {
             "@type": "Store",
             "name": "Birdies (S. Claiborne)",
@@ -3482,7 +3634,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 66,
+          "position": 69,
           "item": {
             "@type": "Store",
             "name": "Lost Coyote",
@@ -3503,7 +3655,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 67,
+          "position": 70,
           "item": {
             "@type": "Store",
             "name": "Parlays",
@@ -3524,7 +3676,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 68,
+          "position": 71,
           "item": {
             "@type": "Store",
             "name": "Paulie's Italian Deli",
@@ -3545,7 +3697,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 69,
+          "position": 72,
           "item": {
             "@type": "Store",
             "name": "Prytania Wine & Spirits",
@@ -3566,7 +3718,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 70,
+          "position": 73,
           "item": {
             "@type": "Store",
             "name": "The Filling Station",
@@ -3587,7 +3739,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 71,
+          "position": 74,
           "item": {
             "@type": "Store",
             "name": "Tia Maria's Kitchen",
@@ -3608,7 +3760,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 72,
+          "position": 75,
           "item": {
             "@type": "Store",
             "name": "7-Eleven - Centerline",
@@ -3630,7 +3782,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 73,
+          "position": 76,
           "item": {
             "@type": "Store",
             "name": "7-Eleven - #36097",
@@ -3652,7 +3804,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 74,
+          "position": 77,
           "item": {
             "@type": "Store",
             "name": "7-Eleven - 36661",
@@ -3674,7 +3826,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 75,
+          "position": 78,
           "item": {
             "@type": "Store",
             "name": "7-Eleven (Dequindre Rd)",
@@ -3696,7 +3848,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 76,
+          "position": 79,
           "item": {
             "@type": "Store",
             "name": "7-Eleven (Harper Ave)",
@@ -3718,7 +3870,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 77,
+          "position": 80,
           "item": {
             "@type": "Store",
             "name": "Jawdamans Kratom Outlet",
@@ -3740,7 +3892,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 78,
+          "position": 81,
           "item": {
             "@type": "Store",
             "name": "Karl's Kratom Lounge",
@@ -3762,7 +3914,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 79,
+          "position": 82,
           "item": {
             "@type": "Store",
             "name": "Tiger Mart Vape & Tobacco",
@@ -3784,7 +3936,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 80,
+          "position": 83,
           "item": {
             "@type": "Store",
             "name": "Tiger Mart Vape and Tobacco",
@@ -3805,7 +3957,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 81,
+          "position": 84,
           "item": {
             "@type": "Store",
             "name": "Tweedy's Smoke Shop",
@@ -3827,7 +3979,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 82,
+          "position": 85,
           "item": {
             "@type": "Store",
             "name": "Smoke A-Z",
@@ -3848,7 +4000,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 83,
+          "position": 86,
           "item": {
             "@type": "Store",
             "name": "Smoke A-Z",
@@ -3870,7 +4022,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 84,
+          "position": 87,
           "item": {
             "@type": "Store",
             "name": "Grateful Shed",
@@ -3892,7 +4044,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 85,
+          "position": 88,
           "item": {
             "@type": "Store",
             "name": "Grateful Shed",
@@ -3915,7 +4067,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 86,
+          "position": 89,
           "item": {
             "@type": "Store",
             "name": "Hi-Vibe Holistics",
@@ -3938,7 +4090,29 @@
         },
         {
           "@type": "ListItem",
-          "position": 87,
+          "position": 90,
+          "item": {
+            "@type": "Store",
+            "name": "101 Exotic Inc",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "3475 Airport Blvd NW Unit J",
+              "addressLocality": "Wilson",
+              "addressRegion": "NC",
+              "postalCode": "27896",
+              "addressCountry": "US"
+            },
+            "telephone": "(252) 281-5051",
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 35.765467,
+              "longitude": -77.9486958
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 91,
           "item": {
             "@type": "Store",
             "name": "Green Drip",
@@ -3959,7 +4133,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 88,
+          "position": 92,
           "item": {
             "@type": "Store",
             "name": "Empire Smoke Shop",
@@ -3980,7 +4154,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 89,
+          "position": 93,
           "item": {
             "@type": "Store",
             "name": "Empire Smoke Shop (2)",
@@ -4001,7 +4175,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 90,
+          "position": 94,
           "item": {
             "@type": "Store",
             "name": "Olean's Wellness Store",
@@ -4024,7 +4198,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 91,
+          "position": 95,
           "item": {
             "@type": "Store",
             "name": "Green Drip",
@@ -4046,7 +4220,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 92,
+          "position": 96,
           "item": {
             "@type": "Store",
             "name": "Scott's Fast Market Oakridge",
@@ -4068,7 +4242,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 93,
+          "position": 97,
           "item": {
             "@type": "Store",
             "name": "Scott's Fast Market Oakridge",
@@ -4090,7 +4264,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 94,
+          "position": 98,
           "item": {
             "@type": "Store",
             "name": "Elements Public House",
@@ -4113,7 +4287,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 95,
+          "position": 99,
           "item": {
             "@type": "Store",
             "name": "Vape & Smoke",
@@ -4134,7 +4308,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 96,
+          "position": 100,
           "item": {
             "@type": "Store",
             "name": "Smoke & Cigar",
@@ -4157,7 +4331,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 97,
+          "position": 101,
           "item": {
             "@type": "Store",
             "name": "Smoke & Cigar Vaporizer Shop",
@@ -4178,7 +4352,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 98,
+          "position": 102,
           "item": {
             "@type": "Store",
             "name": "VAPE & CIGAR",
@@ -4199,7 +4373,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 99,
+          "position": 103,
           "item": {
             "@type": "Store",
             "name": "Excitement Smokin",
@@ -4220,7 +4394,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 100,
+          "position": 104,
           "item": {
             "@type": "Store",
             "name": "In & Out Beverage",
@@ -4241,7 +4415,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 101,
+          "position": 105,
           "item": {
             "@type": "Store",
             "name": "Smoke & Skill",
@@ -4262,7 +4436,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 102,
+          "position": 106,
           "item": {
             "@type": "Store",
             "name": "Calhoun Farm & Market",
@@ -4285,7 +4459,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 103,
+          "position": 107,
           "item": {
             "@type": "Store",
             "name": "PA Vape & Cigar",
@@ -4306,7 +4480,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 104,
+          "position": 108,
           "item": {
             "@type": "Store",
             "name": "Elevate Smoke Shop",
@@ -4327,7 +4501,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 105,
+          "position": 109,
           "item": {
             "@type": "Store",
             "name": "Excitement Smokin",
@@ -4348,7 +4522,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 106,
+          "position": 110,
           "item": {
             "@type": "Store",
             "name": "Mr. Smoke",
@@ -4369,7 +4543,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 107,
+          "position": 111,
           "item": {
             "@type": "Store",
             "name": "Excitement Smokin",
@@ -4390,7 +4564,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 108,
+          "position": 112,
           "item": {
             "@type": "Store",
             "name": "Simply Tabacco",
@@ -4412,7 +4586,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 109,
+          "position": 113,
           "item": {
             "@type": "Store",
             "name": "Vape and Smoke",
@@ -4433,7 +4607,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 110,
+          "position": 114,
           "item": {
             "@type": "Store",
             "name": "Excitement Smokin",
@@ -4454,7 +4628,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 111,
+          "position": 115,
           "item": {
             "@type": "Store",
             "name": "Gather 256",
@@ -4475,7 +4649,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 112,
+          "position": 116,
           "item": {
             "@type": "Store",
             "name": "Planet RYO",
@@ -4496,7 +4670,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 113,
+          "position": 117,
           "item": {
             "@type": "Store",
             "name": "Smart Warehouse",
@@ -4518,7 +4692,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 114,
+          "position": 118,
           "item": {
             "@type": "Store",
             "name": "Andys liquor",
@@ -4541,7 +4715,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 115,
+          "position": 119,
           "item": {
             "@type": "Store",
             "name": "Chris Liquor Slamar",
@@ -4563,7 +4737,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 116,
+          "position": 120,
           "item": {
             "@type": "Store",
             "name": "Chriss Liquor",
@@ -4585,7 +4759,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 117,
+          "position": 121,
           "item": {
             "@type": "Store",
             "name": "Clints #8",
@@ -4606,7 +4780,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 118,
+          "position": 122,
           "item": {
             "@type": "Store",
             "name": "Green Haus Wellness",
@@ -4629,7 +4803,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 119,
+          "position": 123,
           "item": {
             "@type": "Store",
             "name": "The Point vape&smoke",
@@ -4650,7 +4824,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 120,
+          "position": 124,
           "item": {
             "@type": "Store",
             "name": "trippiez #4",
@@ -4673,7 +4847,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 121,
+          "position": 125,
           "item": {
             "@type": "Store",
             "name": "uptown liquor 9",
@@ -4696,7 +4870,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 122,
+          "position": 126,
           "item": {
             "@type": "Store",
             "name": "Delta Bros Basdrop",
@@ -4719,7 +4893,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 123,
+          "position": 127,
           "item": {
             "@type": "Store",
             "name": "USA Grocery & Grill",
@@ -4741,7 +4915,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 124,
+          "position": 128,
           "item": {
             "@type": "Store",
             "name": "Good To Go",
@@ -4763,7 +4937,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 125,
+          "position": 129,
           "item": {
             "@type": "Store",
             "name": "DFW Beer & Wine - Corinth",
@@ -4785,7 +4959,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 126,
+          "position": 130,
           "item": {
             "@type": "Store",
             "name": "DFW Beer Wine Smoke - Corinth",
@@ -4807,7 +4981,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 127,
+          "position": 131,
           "item": {
             "@type": "Store",
             "name": "Pogo's Wine & Spirits",
@@ -4830,7 +5004,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 128,
+          "position": 132,
           "item": {
             "@type": "Store",
             "name": "Castle Liquor Kyle",
@@ -4852,7 +5026,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 129,
+          "position": 133,
           "item": {
             "@type": "Store",
             "name": "Geek Liquor",
@@ -4874,7 +5048,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 130,
+          "position": 134,
           "item": {
             "@type": "Store",
             "name": "Delta Bros Manor",
@@ -4897,7 +5071,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 131,
+          "position": 135,
           "item": {
             "@type": "Store",
             "name": "Twisted Liquor",
@@ -4919,7 +5093,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 132,
+          "position": 136,
           "item": {
             "@type": "Store",
             "name": "620 Liquor",
@@ -4941,7 +5115,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 133,
+          "position": 137,
           "item": {
             "@type": "Store",
             "name": "Global Fusion RVA",
@@ -4964,7 +5138,29 @@
         },
         {
           "@type": "ListItem",
-          "position": 134,
+          "position": 138,
+          "item": {
+            "@type": "Store",
+            "name": "Wenatchee Natural Foods",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "222 N Wenatchee Ave",
+              "addressLocality": "Wenatchee",
+              "addressRegion": "WA",
+              "postalCode": "98801",
+              "addressCountry": "US"
+            },
+            "telephone": "(509) 665-9999",
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 47.4276978,
+              "longitude": -120.3144876
+            }
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 139,
           "item": {
             "@type": "Store",
             "name": "FDL Vapor",
@@ -4985,7 +5181,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 135,
+          "position": 140,
           "item": {
             "@type": "Store",
             "name": "Sheboygan Vapor",
@@ -5007,7 +5203,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 136,
+          "position": 141,
           "item": {
             "@type": "Store",
             "name": "Sheboygan Vapor",
@@ -5029,7 +5225,7 @@
         },
         {
           "@type": "ListItem",
-          "position": 137,
+          "position": 142,
           "item": {
             "@type": "Store",
             "name": "West Bend Vapor",
@@ -5174,9 +5370,9 @@
   "tag": "section",
   "settings": [
     { "type": "inline_richtext", "id": "heading", "label": "Heading",
-      "default": "Find Happie at 137+ Retailers Nationwide" },
+      "default": "Find Happie at 142+ Retailers Nationwide" },
     { "type": "textarea", "id": "subheading", "label": "Subheading",
-      "default": "Hemp-derived THC seltzers and Fungi Fusion mushroom drinks at smoke shops, wellness stores, restaurants, liquor stores, and more across 18 states." },
+      "default": "Hemp-derived THC seltzers and Fungi Fusion mushroom drinks at smoke shops, wellness stores, restaurants, liquor stores, and more across 20 states." },
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "background_color", "label": "Background", "default": "#FFF2E4" },
     { "type": "color", "id": "card_color", "label": "Card background", "default": "#FFFFFF" },
@@ -5185,8 +5381,8 @@
     { "type": "color", "id": "heading_color", "label": "Heading text", "default": "#962F80" },
     { "type": "color", "id": "accent_color", "label": "Accent (links, badges)", "default": "#50B2BD" },
     { "type": "header", "content": "Spacing" },
-    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 250, "step": 5, "default": 160, "unit": "px" },
-    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 250, "step": 5, "default": 60, "unit": "px" }
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 150, "step": 5, "default": 60, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 150, "step": 5, "default": 60, "unit": "px" }
   ],
   "presets": [ { "name": "Store Locator SEO List" } ]
 }

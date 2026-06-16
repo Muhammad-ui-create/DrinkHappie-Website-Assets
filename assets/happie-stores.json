@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-06-05",
-  "total_count": 137,
+  "last_updated": "2026-06-16",
+  "total_count": 142,
   "stores": [
     {
       "handle": "alcosta-skate-and-smoke-san-ramon",
@@ -31,6 +31,20 @@
       "lng": "-121.9315635"
     },
     {
+      "handle": "northeast-vapor-natural-paths-alternative-solutions-old-saybrook",
+      "name": "Northeast Vapor (Natural Paths - Alternative Solutions)",
+      "address": "1610 Boston Post Rd",
+      "city": "Old Saybrook",
+      "state": "CT",
+      "state_full": "Connecticut",
+      "zip": "06475",
+      "phone": "(860) 877-8273",
+      "website": "",
+      "category": "Smoke/Vape/CBD",
+      "lat": "41.2860588",
+      "lng": "-72.4140249"
+    },
+    {
       "handle": "primo-s-vapor-smokes-fort-walton-beach",
       "name": "Primo's Vapor Smokes",
       "address": "11 Eglin Pkwy SE Unit 1",
@@ -57,6 +71,20 @@
       "category": "Wellness/CBD",
       "lat": "27.8998903",
       "lng": "-81.5972748"
+    },
+    {
+      "handle": "herban-flow-st-petersburg",
+      "name": "Herban Flow",
+      "address": "501 Dr MLK Jr St N Suite 103",
+      "city": "St Petersburg",
+      "state": "FL",
+      "state_full": "Florida",
+      "zip": "33701",
+      "phone": "(727) 430-9576",
+      "website": "",
+      "category": "Wellness/CBD",
+      "lat": "27.7777181",
+      "lng": "-82.6463397"
     },
     {
       "handle": "herban-flow-dtsp-st-petersburg",
@@ -463,6 +491,20 @@
       "category": "Retail",
       "lat": "40.7285233",
       "lng": "-89.6122406"
+    },
+    {
+      "handle": "cork-keg-spirits-rockford",
+      "name": "Cork Keg & Spirits",
+      "address": "1603 N Alpine Rd Ste 113",
+      "city": "Rockford",
+      "state": "IL",
+      "state_full": "Illinois",
+      "zip": "61107",
+      "phone": "(815) 986-3854",
+      "website": "",
+      "category": "Liquor Store",
+      "lat": "42.28667799999999",
+      "lng": "-89.02800800000001"
     },
     {
       "handle": "almadina-international-foods-springfield",
@@ -1207,6 +1249,20 @@
       "lng": "-75.65430289999999"
     },
     {
+      "handle": "101-exotic-inc-wilson",
+      "name": "101 Exotic Inc",
+      "address": "3475 Airport Blvd NW Unit J",
+      "city": "Wilson",
+      "state": "NC",
+      "state_full": "North Carolina",
+      "zip": "27896",
+      "phone": "(252) 281-5051",
+      "website": "",
+      "category": "Smoke/Vape Shop",
+      "lat": "35.765467",
+      "lng": "-77.9486958"
+    },
+    {
       "handle": "green-drip-chaffee",
       "name": "Green Drip",
       "address": "10945 Olean Rd, Ste 1 & 2",
@@ -1863,6 +1919,20 @@
       "category": "Restaurant/Cafe",
       "lat": "37.5106541",
       "lng": "-77.45370559999999"
+    },
+    {
+      "handle": "wenatchee-natural-foods-wenatchee",
+      "name": "Wenatchee Natural Foods",
+      "address": "222 N Wenatchee Ave",
+      "city": "Wenatchee",
+      "state": "WA",
+      "state_full": "Washington",
+      "zip": "98801",
+      "phone": "(509) 665-9999",
+      "website": "",
+      "category": "Grocery/Natural Foods",
+      "lat": "47.4276978",
+      "lng": "-120.3144876"
     },
     {
       "handle": "fdl-vapor-fond-du-lac",
