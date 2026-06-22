@@ -1,0 +1,40 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "aside",
+  "name": "Overlay",
+  "sections": {
+    "age-check": {
+      "type": "age-check",
+      "disabled": true,
+      "custom_css": [
+        "#shopify-block-AaW9aODZVd2FHUkNXV__3140817623390692025 {display: none !important;}"
+      ],
+      "settings": {
+        "enable": true,
+        "logo_max_width": 100,
+        "title": "Age verification",
+        "text": "Are you 21 or older?",
+        "display_on_card": true,
+        "mode": "buttons",
+        "yes_button_text": "Yes",
+        "no_button_text": "No",
+        "date_format": "mm-dd-yyyy",
+        "minimum_age": 21,
+        "redirect_link": "",
+        "color_scheme": "scheme1",
+        "use_gradient_background": false
+      }
+    }
+  },
+  "order": [
+    "age-check"
+  ]
+}
