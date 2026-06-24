@@ -22,8 +22,8 @@
     "store_locator_seo": {
       "type": "store-locator-seo",
       "settings": {
-        "heading": "Find Happie at 142+ Retailers Nationwide",
-        "subheading": "Hemp-derived THC seltzers and Fungi Fusion mushroom drinks at smoke shops, wellness stores, restaurants, liquor stores, and more across 20 states.",
+        "heading": "Find Happie at 161+ Retailers Nationwide",
+        "subheading": "Hemp-derived THC seltzers and Fungi Fusion mushroom drinks at smoke shops, wellness stores, restaurants, liquor stores, and more across 25 states.",
         "background_color": "#FFF2E4",
         "card_color": "#FFFFFF",
         "border_color": "#E5E1D8",
@@ -47,7 +47,7 @@
       },
       "block_order": ["mappy_store_locator_page_embed_block_6Qp8QH"],
       "settings": {
-        "apply_vertical_spacing": true,
+        "apply_vertical_spacing": false,
         "apply_horizontal_spacing": true,
         "display_on_card": false,
         "content_width_desktop": "lg:w-full",
