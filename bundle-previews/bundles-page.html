@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Happie Bundles — Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#FFF2E4;font-family:'Poppins',system-ui,sans-serif;}
+  .happie-bundles{padding:64px 0 72px;}
+  .happie-bundles__inner{max-width:1180px;margin:0 auto;padding:0 24px;}
+  .happie-bundles__head{text-align:center;max-width:760px;margin:0 auto 40px;}
+  .happie-bundles__eyebrow{display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#50B2BD;background:#fff;padding:7px 16px;border-radius:999px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,.06);}
+  .happie-bundles__title{font-size:clamp(30px,5vw,46px);font-weight:800;color:#962F80;margin:0 0 12px;line-height:1.1;}
+  .happie-bundles__sub{font-size:17px;line-height:1.7;color:#4a4a4a;margin:0;}
+  .happie-bundles__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px;}
+  .happie-bundle-card{display:flex;flex-direction:column;background:#fff;border-radius:22px;overflow:hidden;text-decoration:none;border:1px solid rgba(150,47,128,.08);box-shadow:0 8px 26px rgba(150,47,128,.08);transition:transform .22s ease,box-shadow .22s ease;}
+  .happie-bundle-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(150,47,128,.16);}
+  .happie-bundle-card__media{position:relative;aspect-ratio:4/5;background:linear-gradient(150deg,#FFF2E4 0%,#FBE7F3 100%);overflow:hidden;}
+  .happie-bundle-card__media img{width:100%;height:100%;object-fit:contain;padding:18px;transition:transform .4s ease;}
+  .happie-bundle-card:hover .happie-bundle-card__media img{transform:scale(1.05);}
+  .happie-bundle-card__cans{position:absolute;top:14px;left:14px;z-index:1;font-size:12px;font-weight:700;color:#fff;background:#962F80;padding:6px 12px;border-radius:999px;}
+  .happie-bundle-card__body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1;}
+  .happie-bundle-card__name{font-size:20px;font-weight:800;color:#1a1a1a;margin:0 0 6px;}
+  .happie-bundle-card__tag{font-size:13.5px;line-height:1.55;color:#666;margin:0 0 16px;flex:1;}
+  .happie-bundle-card__priceline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+  .happie-bundle-card__now{font-size:20px;font-weight:800;color:#962F80;}
+  .happie-bundle-card__was{font-size:14px;color:#aaa;text-decoration:line-through;}
+  .happie-bundle-card__save{font-size:12px;font-weight:700;color:#2e8b6f;background:#E7F6EF;padding:4px 10px;border-radius:999px;}
+  .happie-bundle-card__cta{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;background:#50B2BD;color:#fff;font-size:14px;font-weight:700;padding:11px 20px;border-radius:999px;transition:background-color .2s ease,gap .2s ease;}
+  .happie-bundle-card:hover .happie-bundle-card__cta{background:#3f9aa4;gap:11px;}
+  @media(max-width:600px){.happie-bundles__grid{grid-template-columns:1fr;}.happie-bundles__inner{padding:0 16px;}}
+</style></head>
+<body>
+  <section class="happie-bundles"><div class="happie-bundles__inner">
+    <div class="happie-bundles__head">
+      <span class="happie-bundles__eyebrow">Bundle &amp; Save 5%</span>
+      <h1 class="happie-bundles__title">Happie Bundles</h1>
+      <p class="happie-bundles__sub">Curated multi-packs of our best-selling THC seltzers — mix your favorite flavors and save 5% on every bundle.</p>
+    </div>
+    <div class="happie-bundles__grid">
+        <a class="happie-bundle-card" href="bundles/berry-vineyard-duo.html">
+          <div class="happie-bundle-card__media">
+            <span class="happie-bundle-card__cans">24 cans</span>
+            <img src="assets/bundles/berry-vineyard-duo-1.webp" alt="Berry Vineyard Duo bundle" loading="lazy">
+          </div>
+          <div class="happie-bundle-card__body">
+            <h3 class="happie-bundle-card__name">Berry Vineyard Duo</h3>
+            <p class="happie-bundle-card__tag">Orchard cherry and deep grape — a rich, fruit-forward pairing built to share.</p>
+            <div class="happie-bundle-card__priceline">
+              <span class="happie-bundle-card__now">$113.98</span>
+              <span class="happie-bundle-card__was">$119.98</span>
+              <span class="happie-bundle-card__save">Save $6.00</span>
+            </div>
+            <span class="happie-bundle-card__cta">Shop bundle
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </a>
+        <a class="happie-bundle-card" href="bundles/cherry-citrus-kickoff.html">
+          <div class="happie-bundle-card__media">
+            <span class="happie-bundle-card__cans">16 cans</span>
+            <img src="assets/bundles/cherry-citrus-kickoff-1.webp" alt="Cherry Citrus Kickoff bundle" loading="lazy">
+          </div>
+          <div class="happie-bundle-card__body">
+            <h3 class="happie-bundle-card__name">Cherry Citrus Kickoff</h3>
+            <p class="happie-bundle-card__tag">Bright cherry meets zesty grapefruit — the easy starter two-pack for first-timers.</p>
+            <div class="happie-bundle-card__priceline">
+              <span class="happie-bundle-card__now">$62.68</span>
+              <span class="happie-bundle-card__was">$65.98</span>
+              <span class="happie-bundle-card__save">Save $3.30</span>
+            </div>
+            <span class="happie-bundle-card__cta">Shop bundle
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </a>
+        <a class="happie-bundle-card" href="bundles/cherry-lime-chiller.html">
+          <div class="happie-bundle-card__media">
+            <span class="happie-bundle-card__cans">20 cans</span>
+            <img src="assets/bundles/cherry-lime-chiller-1.webp" alt="Cherry Lime Chiller bundle" loading="lazy">
+          </div>
+          <div class="happie-bundle-card__body">
+            <h3 class="happie-bundle-card__name">Cherry Lime Chiller</h3>
+            <p class="happie-bundle-card__tag">Sweet-tart cherry and crisp lime. The everyday cooler for slow afternoons.</p>
+            <div class="happie-bundle-card__priceline">
+              <span class="happie-bundle-card__now">$88.33</span>
+              <span class="happie-bundle-card__was">$92.98</span>
+              <span class="happie-bundle-card__save">Save $4.65</span>
+            </div>
+            <span class="happie-bundle-card__cta">Shop bundle
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </a>
+        <a class="happie-bundle-card" href="bundles/citrus-grove-pack.html">
+          <div class="happie-bundle-card__media">
+            <span class="happie-bundle-card__cans">24 cans</span>
+            <img src="assets/bundles/citrus-grove-pack-1.webp" alt="Citrus Grove Pack bundle" loading="lazy">
+          </div>
+          <div class="happie-bundle-card__body">
+            <h3 class="happie-bundle-card__name">Citrus Grove Pack</h3>
+            <p class="happie-bundle-card__tag">All-citrus, all the time. Grapefruit and lime for the clean-and-crisp crowd.</p>
+            <div class="happie-bundle-card__priceline">
+              <span class="happie-bundle-card__now">$113.98</span>
+              <span class="happie-bundle-card__was">$119.98</span>
+              <span class="happie-bundle-card__save">Save $6.00</span>
+            </div>
+            <span class="happie-bundle-card__cta">Shop bundle
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </a>
+        <a class="happie-bundle-card" href="bundles/orchard-twist.html">
+          <div class="happie-bundle-card__media">
+            <span class="happie-bundle-card__cans">36 cans</span>
+            <img src="assets/bundles/orchard-twist-1.webp" alt="Orchard Twist bundle" loading="lazy">
+          </div>
+          <div class="happie-bundle-card__body">
+            <h3 class="happie-bundle-card__name">Orchard Twist</h3>
+            <p class="happie-bundle-card__tag">Tart grapefruit twisted with mellow grape. A stock-up pack that keeps the fridge full.</p>
+            <div class="happie-bundle-card__priceline">
+              <span class="happie-bundle-card__now">$170.98</span>
+              <span class="happie-bundle-card__was">$179.98</span>
+              <span class="happie-bundle-card__save">Save $9.00</span>
+            </div>
+            <span class="happie-bundle-card__cta">Shop bundle
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </a>
+        <a class="happie-bundle-card" href="bundles/sweet-sour-party-stack.html">
+          <div class="happie-bundle-card__media">
+            <span class="happie-bundle-card__cans">48 cans</span>
+            <img src="assets/bundles/sweet-sour-party-stack-1.webp" alt="Sweet & Sour Party Stack bundle" loading="lazy">
+          </div>
+          <div class="happie-bundle-card__body">
+            <h3 class="happie-bundle-card__name">Sweet & Sour Party Stack</h3>
+            <p class="happie-bundle-card__tag">Grape and lime by the case — the headline pack for parties and long weekends.</p>
+            <div class="happie-bundle-card__priceline">
+              <span class="happie-bundle-card__now">$227.98</span>
+              <span class="happie-bundle-card__was">$239.98</span>
+              <span class="happie-bundle-card__save">Save $12.00</span>
+            </div>
+            <span class="happie-bundle-card__cta">Shop bundle
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </a>
+    </div>
+  </div></section>
+</body></html>

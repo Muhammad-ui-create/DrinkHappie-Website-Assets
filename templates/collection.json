@@ -1,0 +1,99 @@
+{
+  "sections": {
+    "collection_hero": {
+      "type": "collection-hero",
+      "blocks": {
+        "filter_1": {
+          "type": "filter_link",
+          "settings": {
+            "label": "Shop All",
+            "link": "shopify://collections/shop-all"
+          }
+        },
+        "filter_2": {
+          "type": "filter_link",
+          "settings": {
+            "label": "THC Seltzers",
+            "link": "shopify://collections/thc-drinks"
+          }
+        },
+        "filter_3": {
+          "type": "filter_link",
+          "settings": {
+            "label": "Fungi Fusion",
+            "link": "shopify://collections/fungi-fusion"
+          }
+        },
+        "filter_5": {
+          "type": "filter_link",
+          "settings": {
+            "label": "Merch",
+            "link": "shopify://collections/merch"
+          }
+        }
+      },
+      "block_order": [
+        "filter_1",
+        "filter_2",
+        "filter_3",
+        "filter_5"
+      ],
+      "settings": {
+        "show_title": true,
+        "background_image": "shopify://shop_images/Happie_-_Collection_Hero_1.jpg",
+        "background_color": "#fff2e4",
+        "overlay_color": "#000000",
+        "overlay_opacity": 45,
+        "title_color": "#ffffff",
+        "show_filters": true,
+        "filter_bar_background": "rgba(0,0,0,0)",
+        "pill_background_color": "#ffffff",
+        "pill_text_color": "#1a1a1a",
+        "pill_border_color": "#e5e5e5",
+        "pill_hover_background": "#f5f5f5",
+        "pill_hover_border": "#50b2bd",
+        "pill_active_background": "#50b2bd",
+        "pill_active_text": "#ffffff"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "use_happie_cards": true,
+        "no_products": 24,
+        "display_on_card": true,
+        "enable_quick_buy": true,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "enable_filtering": false,
+        "enable_sorting": false,
+        "expand_filters": true,
+        "show_filter_count": true,
+        "enable_color_swatch_filters": false,
+        "color_scheme": "scheme1",
+        "use_gradient_background": false
+      }
+    },
+    "collection_seo_content": {
+      "type": "custom-liquid",
+      "settings": {
+        "title": "",
+        "custom_liquid": "<style>\n  .happie-coll-seo{font-family:'Poppins',system-ui,-apple-system,sans-serif;max-width:1100px;margin:0 auto;padding:8px 24px 16px;color:#2a2a2a;}\n  .happie-coll-seo__intro{max-width:780px;margin:0 auto 8px;text-align:center;}\n  .happie-coll-seo__eyebrow{display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#50B2BD;background:#fff;padding:7px 16px;border-radius:999px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,.06);}\n  .happie-coll-seo h2{font-size:clamp(28px,4vw,40px);font-weight:800;color:#962F80;margin:0 0 14px;line-height:1.12;}\n  .happie-coll-seo__lead{font-size:17px;line-height:1.75;color:#4a4a4a;margin:0 0 8px;}\n  .happie-coll-seo__features{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin:34px 0;}\n  .happie-coll-seo__feature{background:#fff;border-radius:20px;padding:24px 22px;text-align:left;box-shadow:0 6px 22px rgba(150,47,128,.07);border:1px solid rgba(150,47,128,.08);transition:transform .2s ease,box-shadow .2s ease;}\n  .happie-coll-seo__feature:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(150,47,128,.14);}\n  .happie-coll-seo__feature-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#962F80,#50B2BD);margin-bottom:14px;font-size:24px;line-height:1;}\n  .happie-coll-seo__feature h4{font-size:16px;font-weight:700;color:#1a1a1a;margin:0 0 7px;}\n  .happie-coll-seo__feature p{font-size:14px;line-height:1.55;color:#666;margin:0;}\n  .happie-coll-seo__why{background:#fff;border-radius:26px;padding:38px clamp(22px,4vw,52px);margin-top:8px;box-shadow:0 10px 34px rgba(0,0,0,.07);}\n  .happie-coll-seo__why h3{font-size:clamp(22px,3vw,30px);font-weight:800;color:#962F80;text-align:center;margin:0 0 18px;}\n  .happie-coll-seo__why p{font-size:15.5px;line-height:1.8;color:#555;margin:0 auto 14px;max-width:800px;text-align:center;}\n  .happie-coll-seo__badges{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px;}\n  .happie-coll-seo__badge{font-size:13px;font-weight:600;color:#962F80;background:#FFF2E4;border:1px solid rgba(150,47,128,.18);padding:9px 17px;border-radius:999px;}\n  @media(max-width:600px){.happie-coll-seo{padding:8px 16px;}.happie-coll-seo__why{padding:30px 22px;}.happie-coll-seo__feature{padding:20px 18px;}}\n</style>\n<div class=\"happie-coll-seo\">\n  {% if collection.handle == 'thc-drinks' or collection.handle == 'thc' or collection.handle == 'frontpage' %}\n  <div class=\"happie-coll-seo__intro\">\n    <span class=\"happie-coll-seo__eyebrow\">Hemp-Derived Delta-9 THC</span>\n    <h2>{{ collection.title }}</h2>\n    <p class=\"happie-coll-seo__lead\">Happie THC seltzers are premium hemp-derived Delta-9 THC beverages crafted in California. Each can contains nano-emulsified THC for fast-acting effects in 15&ndash;30 minutes &mdash; no waiting hours like traditional edibles.</p>\n  </div>\n  <div class=\"happie-coll-seo__features\">\n    <div class=\"happie-coll-seo__feature\"><div class=\"happie-coll-seo__feature-icon\">⚡</div><h4>Fast-Acting</h4><p>Nano-emulsified THC kicks in within 15&ndash;30 minutes &mdash; not hours.</p></div>\n    <div class=\"happie-coll-seo__feature\"><div class=\"happie-coll-seo__feature-icon\">⚖️</div><h4>Balanced 1:1</h4><p>A perfect 1:1 THC-to-CBD ratio for a smooth, controlled, functional buzz.</p></div>\n    <div class=\"happie-coll-seo__feature\"><div class=\"happie-coll-seo__feature-icon\">🌊</div><h4>Ocean Minerals</h4><p>Infused with Aquamin&reg; ocean-derived minerals for natural hydration.</p></div>\n    <div class=\"happie-coll-seo__feature\"><div class=\"happie-coll-seo__feature-icon\">🍃</div><h4>Just 30 Calories</h4><p>Sweetened with organic agave. Vegan, gluten-free, non-GMO, zero artificial flavors.</p></div>\n  </div>\n  <div class=\"happie-coll-seo__why\">\n    <h3>Why Happie Is the Best THC Seltzer</h3>\n    <p>Looking for the best THC seltzer? Happie leads the category with nano-emulsified absorption, organic agave sweetener, ocean minerals, and a perfect 1:1 THC-to-CBD ratio. Whether you want a cannabis seltzer for social gatherings, a weed drink for relaxation, or a healthy alcohol alternative for mindful drinking &mdash; Happie is the premium choice for hemp-infused beverages.</p>\n    <p>Available in 5mg and 10mg strengths across 7 fruit flavors &mdash; Mango Mimosa, Grateful Grape, Watermelon, Blue Razzberry, Groovy Grapefruit, Cheery Cherry, and Sublime. Perfect for the sober curious movement, party drink alternatives, and anyone seeking a low-calorie cannabis beverage.</p>\n    <div class=\"happie-coll-seo__badges\">\n      <span class=\"happie-coll-seo__badge\">3rd-Party Lab Tested</span>\n      <span class=\"happie-coll-seo__badge\">2018 Farm Bill Compliant</span>\n      <span class=\"happie-coll-seo__badge\">Ships to 40+ States</span>\n      <span class=\"happie-coll-seo__badge\">7 Fruit Flavors</span>\n      <span class=\"happie-coll-seo__badge\">Subscribe &amp; Save 20%</span>\n    </div>\n  </div>\n  {% elsif collection.handle == 'fungi-fusion' or collection.handle == 'fungi' %}\n  <div class=\"happie-coll-seo__intro\">\n    <span class=\"happie-coll-seo__eyebrow\">Functional Mushroom Drinks</span>\n    <h2>{{ collection.title }}</h2>\n    <p class=\"happie-coll-seo__lead\">Fungi Fusion is Happie&rsquo;s line of functional mushroom drinks &mdash; zero THC, zero caffeine, zero sugar &mdash; just powerful adaptogens for focus, energy, and calm, enriched with ocean-derived minerals and sweetened with organic agave nectar.</p>\n  </div>\n  <div class=\"happie-coll-seo__features\">\n    <div class=\"happie-coll-seo__feature\"><div class=\"happie-coll-seo__feature-icon\">🧠</div><h4>Lion&rsquo;s Mane &middot; 900mg</h4><p>Supports cognitive function, memory, and daily focus.</p></div>\n    <div class=\"happie-coll-seo__feature\"><div class=\"happie-coll-seo__feature-icon\">⚡</div><h4>Cordyceps &middot; 700mg</h4><p>Boosts natural energy and stamina &mdash; no caffeine, no crash.</p></div>\n    <div class=\"happie-coll-seo__feature\"><div class=\"happie-coll-seo__feature-icon\">🌙</div><h4>Reishi &middot; 400mg</h4><p>Promotes calm, balance, and everyday immune support.</p></div>\n    <div class=\"happie-coll-seo__feature\"><div class=\"happie-coll-seo__feature-icon\">🌊</div><h4>Ocean Minerals</h4><p>Aquamin&reg; ocean-derived minerals for natural hydration in every can.</p></div>\n  </div>\n  <div class=\"happie-coll-seo__why\">\n    <h3>The Best Functional Mushroom Drink</h3>\n    <p>Unlike mushroom coffee or adaptogenic tea, our sparkling mushroom drink delivers nootropic benefits in a refreshing, fruit-flavored format. Lion&rsquo;s Mane supports focus, Cordyceps boosts natural energy without caffeine, and Reishi promotes calm and immune support.</p>\n    <p>A healthier alternative to energy drinks, coffee, and pre-workout supplements &mdash; made with real fruit flavors and powerful, functional mushrooms.</p>\n    <div class=\"happie-coll-seo__badges\">\n      <span class=\"happie-coll-seo__badge\">Zero THC</span>\n      <span class=\"happie-coll-seo__badge\">Zero Caffeine</span>\n      <span class=\"happie-coll-seo__badge\">Zero Sugar</span>\n      <span class=\"happie-coll-seo__badge\">Vegan &amp; Gluten-Free</span>\n      <span class=\"happie-coll-seo__badge\">Ships Nationwide</span>\n    </div>\n  </div>\n  {% elsif collection.handle == 'social' %}\n  <div class=\"happie-coll-seo__intro\">\n    <span class=\"happie-coll-seo__eyebrow\">The Premium Alcohol Alternative</span>\n    <h2>{{ collection.title }}</h2>\n    <p class=\"happie-coll-seo__lead\">Happie Social Seltzers are the perfect THC drinks for parties, social gatherings, and everyday relaxation &mdash; available in 5mg (mild buzz) and 10mg (stronger effect), with zero hangover and only 30 calories per can.</p>\n  </div>\n  <div class=\"happie-coll-seo__why\">\n    <h3>Your Best Social Tonic</h3>\n    <p>Join the sober curious movement with the best social tonic on the market. A clean, functional buzz for mindful drinkers who want a premium alcohol alternative &mdash; try our variety pack to find your favorite flavor.</p>\n    <div class=\"happie-coll-seo__badges\">\n      <span class=\"happie-coll-seo__badge\">Zero Hangover</span>\n      <span class=\"happie-coll-seo__badge\">5mg &amp; 10mg</span>\n      <span class=\"happie-coll-seo__badge\">Only 30 Calories</span>\n      <span class=\"happie-coll-seo__badge\">Alcohol-Free</span>\n    </div>\n  </div>\n  {% elsif collection.description != blank %}\n  <div class=\"happie-coll-seo__intro\">\n    <h2>{{ collection.title }}</h2>\n    <p class=\"happie-coll-seo__lead\">{{ collection.description }}</p>\n  </div>\n  {% endif %}\n</div>",
+        "full_width": true,
+        "color_scheme": ""
+      }
+    },
+    "wavy_divier_Qhxkg7": {
+      "type": "wavy-divier",
+      "settings": {
+        "image": "shopify://shop_images/divider-top-cream-bottom-dark-purple.svg"
+      }
+    }
+  },
+  "order": [
+    "collection_hero",
+    "product-grid",
+    "collection_seo_content",
+    "wavy_divier_Qhxkg7"
+  ]
+}

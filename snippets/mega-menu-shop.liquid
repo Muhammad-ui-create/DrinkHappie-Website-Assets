@@ -1,0 +1,652 @@
+{%- comment -%}
+  Shop Mega Menu - Custom mega menu for Shop dropdown
+  Features:
+  - Left side: Shop by Type with THC Infused and Fungi Fusion categories
+  - Right side: 3 configurable image cards
+  - Hover trigger on desktop
+  - Accordion style on mobile (handled in sidebar-nav)
+  
+  Note: This snippet is rendered within the header section, so section.settings refers to header settings
+{%- endcomment -%}
+
+{%- liquid
+  # Get menus from header section settings
+  assign thc_menu = section.settings.shop_mega_thc_menu
+  assign fungi_menu = section.settings.shop_mega_fungi_menu
+  
+  # Card 1 settings
+  assign card_1_image = section.settings.shop_mega_card_1_image
+  assign card_1_title = section.settings.shop_mega_card_1_title | default: 'Variety Pack'
+  assign card_1_subtitle = section.settings.shop_mega_card_1_subtitle | default: 'Try all flavors'
+  assign card_1_link = section.settings.shop_mega_card_1_link
+  
+  # Card 2 settings
+  assign card_2_image = section.settings.shop_mega_card_2_image
+  assign card_2_title = section.settings.shop_mega_card_2_title | default: 'Shop Fungi Fusion'
+  assign card_2_subtitle = section.settings.shop_mega_card_2_subtitle | default: 'Zero THC drinks'
+  assign card_2_link = section.settings.shop_mega_card_2_link
+  
+  # Card 3 settings
+  assign card_3_image = section.settings.shop_mega_card_3_image
+  assign card_3_title = section.settings.shop_mega_card_3_title | default: 'THC Infused'
+  assign card_3_subtitle = section.settings.shop_mega_card_3_subtitle | default: 'Cannabis seltzers'
+  assign card_3_link = section.settings.shop_mega_card_3_link
+
+  # Merch CTA settings
+  assign merch_image = section.settings.shop_mega_merch_image
+  assign merch_url = section.settings.shop_mega_merch_url | default: '/collections/merch'
+  assign merch_label = section.settings.shop_mega_merch_label | default: 'New Drop'
+  assign merch_title = section.settings.shop_mega_merch_title | default: 'Happie Merch'
+  assign merch_cta = section.settings.shop_mega_merch_cta | default: 'Shop Merch'
+  assign show_merch = section.settings.shop_mega_show_merch
+  
+  # Accent color for hover states (from header settings)
+  assign accent_color = section.settings.nav_text_hover_color | default: '#4FB1BD'
+  assign text_color = section.settings.nav_text_color | default: '#1A1A1A'
+  assign nav_bg_color = section.settings.nav_background_color | default: '#FFFFFF'
+-%}
+
+<div class="shop-mega-menu" x-data="{ isOpen: false, closeTimeout: null }" 
+     @mouseenter="clearTimeout(closeTimeout); isOpen = true" 
+     @mouseleave="closeTimeout = setTimeout(() => isOpen = false, 100)">
+  {%- comment -%} Trigger Button {%- endcomment -%}
+  <button 
+    class="shop-mega-menu__trigger"
+    :aria-expanded="isOpen"
+    aria-haspopup="true"
+    @click="isOpen = !isOpen"
+    @focus="isOpen = true"
+  >
+    <span>Shop</span>
+    <svg class="shop-mega-menu__chevron" :class="{ 'rotate-180': isOpen }" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 9l6 6 6-6"/>
+    </svg>
+  </button>
+  
+  {%- comment -%} Hover Bridge - invisible element to bridge gap between trigger and dropdown {%- endcomment -%}
+  <div 
+    class="shop-mega-menu__bridge"
+    x-show="isOpen"
+    x-cloak
+  ></div>
+  
+  {%- comment -%} Mega Menu Dropdown {%- endcomment -%}
+  <div 
+    class="shop-mega-menu__dropdown"
+    x-show="isOpen"
+    x-transition:enter="transition ease-out duration-200"
+    x-transition:enter-start="opacity-0 translate-y-2"
+    x-transition:enter-end="opacity-100 translate-y-0"
+    x-transition:leave="transition ease-in duration-150"
+    x-transition:leave-start="opacity-100 translate-y-0"
+    x-transition:leave-end="opacity-0 translate-y-2"
+    x-cloak
+    @mouseenter="clearTimeout(closeTimeout); isOpen = true"
+    @mouseleave="closeTimeout = setTimeout(() => isOpen = false, 100)"
+  >
+    <div class="shop-mega-menu__container">
+      {%- comment -%} Left Side: Shop by Type {%- endcomment -%}
+      <div class="shop-mega-menu__left">
+        <h3 class="shop-mega-menu__section-title">Shop by Type</h3>
+        
+        <div class="shop-mega-menu__categories">
+          {%- comment -%} THC Infused Category {%- endcomment -%}
+          <div class="shop-mega-menu__category">
+            <h4 class="shop-mega-menu__category-title">THC Infused</h4>
+            <ul class="shop-mega-menu__links">
+              {%- if thc_menu != blank and thc_menu.links.size > 0 -%}
+                {%- for link in thc_menu.links -%}
+                  <li>
+                    <a href="{{ link.url }}" class="shop-mega-menu__link">
+                      {{ link.title }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              {%- else -%}
+                <li><span class="shop-mega-menu__link shop-mega-menu__link--placeholder">Configure in theme settings</span></li>
+              {%- endif -%}
+            </ul>
+          </div>
+          
+          {%- comment -%} Fungi Fusion Category {%- endcomment -%}
+          <div class="shop-mega-menu__category">
+            <h4 class="shop-mega-menu__category-title">Fungi Fusion</h4>
+            <ul class="shop-mega-menu__links">
+              {%- if fungi_menu != blank and fungi_menu.links.size > 0 -%}
+                {%- for link in fungi_menu.links -%}
+                  <li>
+                    <a href="{{ link.url }}" class="shop-mega-menu__link">
+                      {{ link.title }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              {%- else -%}
+                <li><span class="shop-mega-menu__link shop-mega-menu__link--placeholder">Configure in theme settings</span></li>
+              {%- endif -%}
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      {%- comment -%} Right Side: Image Cards {%- endcomment -%}
+      <div class="shop-mega-menu__right">
+        <div class="shop-mega-menu__cards">
+          {%- comment -%} Card 1 {%- endcomment -%}
+          <a href="{{ card_1_link | default: '/collections/all' }}" class="shop-mega-menu__card">
+            <div class="shop-mega-menu__card-image">
+              {%- if card_1_image != blank -%}
+                <img
+                  src="{{ card_1_image | image_url: width: 400, height: 400, crop: 'center' }}"
+                  alt="{{ card_1_title | escape }}"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="shop-mega-menu__card-placeholder"></div>
+              {%- endif -%}
+            </div>
+            <div class="shop-mega-menu__card-content">
+              <h5 class="shop-mega-menu__card-title">{{ card_1_title }}</h5>
+              {%- if card_1_subtitle != blank -%}
+                <p class="shop-mega-menu__card-subtitle">{{ card_1_subtitle }}</p>
+              {%- endif -%}
+            </div>
+          </a>
+          
+          {%- comment -%} Card 2 {%- endcomment -%}
+          <a href="{{ card_2_link | default: '/collections/all' }}" class="shop-mega-menu__card">
+            <div class="shop-mega-menu__card-image">
+              {%- if card_2_image != blank -%}
+                <img
+                  src="{{ card_2_image | image_url: width: 400, height: 400, crop: 'center' }}"
+                  alt="{{ card_2_title | escape }}"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="shop-mega-menu__card-placeholder"></div>
+              {%- endif -%}
+            </div>
+            <div class="shop-mega-menu__card-content">
+              <h5 class="shop-mega-menu__card-title">{{ card_2_title }}</h5>
+              {%- if card_2_subtitle != blank -%}
+                <p class="shop-mega-menu__card-subtitle">{{ card_2_subtitle }}</p>
+              {%- endif -%}
+            </div>
+          </a>
+          
+          {%- comment -%} Card 3 {%- endcomment -%}
+          <a href="{{ card_3_link | default: '/collections/all' }}" class="shop-mega-menu__card">
+            <div class="shop-mega-menu__card-image">
+              {%- if card_3_image != blank -%}
+                <img
+                  src="{{ card_3_image | image_url: width: 400, height: 400, crop: 'center' }}"
+                  alt="{{ card_3_title | escape }}"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <div class="shop-mega-menu__card-placeholder"></div>
+              {%- endif -%}
+            </div>
+            <div class="shop-mega-menu__card-content">
+              <h5 class="shop-mega-menu__card-title">{{ card_3_title }}</h5>
+              {%- if card_3_subtitle != blank -%}
+                <p class="shop-mega-menu__card-subtitle">{{ card_3_subtitle }}</p>
+              {%- endif -%}
+            </div>
+          </a>
+        </div>
+
+        {%- if show_merch -%}
+        <a href="{{ merch_url }}" class="shop-mega-menu__merch-banner">
+          <div class="shop-mega-menu__merch-text">
+            <span class="shop-mega-menu__merch-label">{{ merch_label }}</span>
+            <h5 class="shop-mega-menu__merch-title">{{ merch_title }}</h5>
+            <span class="shop-mega-menu__merch-cta">
+              {{ merch_cta }}
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+          <div class="shop-mega-menu__merch-image-wrap">
+            {%- if merch_image != blank -%}
+              <img
+                src="{{ merch_image | image_url: width: 300 }}"
+                alt="{{ merch_title | escape }}"
+                width="150"
+                height="150"
+                loading="lazy"
+                class="shop-mega-menu__merch-img"
+              >
+            {%- else -%}
+              <div class="shop-mega-menu__merch-img-placeholder">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </div>
+            {%- endif -%}
+          </div>
+        </a>
+        {%- endif -%}
+
+        {%- comment -%} Bundles CTA Banner — same card design as merch, brand teal/purple {%- endcomment -%}
+        {%- liquid
+          assign bundles_url = section.settings.shop_mega_bundles_url | default: '/pages/bundles'
+          assign bundles_label = section.settings.shop_mega_bundles_label | default: 'Bundle & Save'
+          assign bundles_title = section.settings.shop_mega_bundles_title | default: 'Happie Bundles'
+          assign bundles_cta = section.settings.shop_mega_bundles_cta | default: 'Shop Bundles'
+          assign bundles_image = section.settings.shop_mega_bundles_image
+        -%}
+        {%- unless section.settings.shop_mega_show_bundles == false -%}
+        <a href="{{ bundles_url }}" class="shop-mega-menu__merch-banner shop-mega-menu__merch-banner--bundles">
+          <div class="shop-mega-menu__merch-text">
+            <span class="shop-mega-menu__merch-label">{{ bundles_label }}</span>
+            <h5 class="shop-mega-menu__merch-title">{{ bundles_title }}</h5>
+            <span class="shop-mega-menu__merch-cta">
+              {{ bundles_cta }}
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+          <div class="shop-mega-menu__merch-image-wrap">
+            {%- if bundles_image != blank -%}
+              <img src="{{ bundles_image | image_url: width: 300 }}" alt="{{ bundles_title | escape }}" width="150" height="150" loading="lazy" class="shop-mega-menu__merch-img">
+            {%- else -%}
+              <img src="{{ 'bundle-cheery-cherry-8pack.webp' | asset_url }}" alt="{{ bundles_title | escape }}" width="150" height="150" loading="lazy" class="shop-mega-menu__merch-img">
+            {%- endif -%}
+          </div>
+        </a>
+        {%- endunless -%}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ========================================
+     SHOP MEGA MENU STYLES
+     ======================================== */
+  
+  .shop-mega-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  
+  /* Trigger Button */
+  .shop-mega-menu__trigger {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: {{ text_color }};
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+  }
+  
+  .shop-mega-menu__trigger:hover,
+  .shop-mega-menu:hover .shop-mega-menu__trigger {
+    color: {{ accent_color }};
+  }
+  
+  .shop-mega-menu__chevron {
+    transition: transform 0.2s ease;
+  }
+  
+  .shop-mega-menu__chevron.rotate-180 {
+    transform: rotate(180deg);
+  }
+  
+  /* Hover Bridge - fills the gap between trigger and dropdown */
+  .shop-mega-menu__bridge {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 72px; /* Height of the pill nav */
+    height: 24px; /* Gap to dropdown */
+    z-index: 99;
+    background: transparent;
+  }
+  
+  /* Dropdown Container */
+  .shop-mega-menu__dropdown {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 96px; /* Below the pill navigation */
+    width: calc(100% - 80px);
+    max-width: 1105px;
+    background: {{ nav_bg_color }};
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    padding: 32px 0;
+  }
+  
+  .shop-mega-menu__container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 48px;
+  }
+  
+  /* Left Side: Shop by Type */
+  .shop-mega-menu__left {
+    padding-right: 32px;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  
+  .shop-mega-menu__section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(0, 0, 0, 0.4);
+    margin: 0 0 20px;
+  }
+  
+  .shop-mega-menu__categories {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  
+  .shop-mega-menu__category-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: {{ text_color }};
+    margin: 0 0 10px;
+  }
+  
+  .shop-mega-menu__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .shop-mega-menu__link {
+    display: block;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.65);
+    text-decoration: none;
+    padding: 4px 0;
+    transition: color 0.2s ease;
+  }
+  
+  .shop-mega-menu__link:hover {
+    color: {{ accent_color }};
+  }
+  
+  .shop-mega-menu__link--placeholder {
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.35);
+    cursor: default;
+  }
+  
+  /* Right Side: Image Cards + Merch Banner */
+  .shop-mega-menu__right {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  
+  .shop-mega-menu__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .shop-mega-menu__card {
+    display: block;
+    text-decoration: none;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #FAFAFA;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .shop-mega-menu__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  .shop-mega-menu__card-image {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #F5F5F5;
+  }
+  
+  .shop-mega-menu__card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  
+  .shop-mega-menu__card:hover .shop-mega-menu__card-image img {
+    transform: scale(1.05);
+  }
+  
+  .shop-mega-menu__card-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #F0F0F0 0%, #E8E8E8 100%);
+  }
+  
+  .shop-mega-menu__card-content {
+    padding: 14px 16px;
+    background: {{ nav_bg_color }};
+  }
+  
+  .shop-mega-menu__card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: {{ text_color }};
+    margin: 0 0 2px;
+  }
+  
+  .shop-mega-menu__card-subtitle {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5);
+    margin: 0;
+    line-height: 1.4;
+  }
+  
+  /* ── Merch CTA Banner ── */
+  .shop-mega-menu__merch-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding: 18px 24px 18px 28px;
+    background: #FFE6CB;
+    border-radius: 16px;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
+    cursor: pointer;
+  }
+
+  .shop-mega-menu__merch-banner::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: 120px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: rgba(243, 112, 36, 0.08);
+    pointer-events: none;
+  }
+
+  .shop-mega-menu__merch-banner:hover {
+    box-shadow: 0 6px 24px rgba(243, 112, 36, 0.18);
+    transform: translateY(-1px);
+  }
+
+  .shop-mega-menu__merch-text {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .shop-mega-menu__merch-label {
+    display: inline-block;
+    background: #FFCB05;
+    color: #1A1A1A;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 50px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .shop-mega-menu__merch-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .shop-mega-menu__merch-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #F37024;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 9px 18px;
+    border-radius: 50px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease;
+  }
+
+  .shop-mega-menu__merch-banner:hover .shop-mega-menu__merch-cta {
+    background: #d95f18;
+  }
+
+  .shop-mega-menu__merch-cta svg {
+    transition: transform 0.2s ease;
+  }
+
+  .shop-mega-menu__merch-banner:hover .shop-mega-menu__merch-cta svg {
+    transform: translateX(3px);
+  }
+
+  .shop-mega-menu__merch-image-wrap {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .shop-mega-menu__merch-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+    transition: transform 0.3s ease;
+  }
+
+  .shop-mega-menu__merch-banner:hover .shop-mega-menu__merch-img {
+    transform: scale(1.08) rotate(-2deg);
+  }
+
+  .shop-mega-menu__merch-img-placeholder {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1A1A1A;
+  }
+
+  /* ── Bundles CTA Banner (sibling of merch, brand teal/purple) ── */
+  .shop-mega-menu__merch-banner--bundles {
+    background: #E4F4F6;
+    margin-top: 12px;
+  }
+  .shop-mega-menu__merch-banner--bundles::before {
+    background: rgba(150, 47, 128, 0.07);
+  }
+  .shop-mega-menu__merch-banner--bundles:hover {
+    box-shadow: 0 6px 24px rgba(80, 178, 189, 0.22);
+  }
+  .shop-mega-menu__merch-banner--bundles .shop-mega-menu__merch-label {
+    background: #50B2BD;
+    color: #fff;
+  }
+  .shop-mega-menu__merch-banner--bundles .shop-mega-menu__merch-cta {
+    background: #962F80;
+  }
+  .shop-mega-menu__merch-banner--bundles:hover .shop-mega-menu__merch-cta {
+    background: #7a2568;
+  }
+
+  /* Hide on mobile - handled by sidebar nav */
+  @media (max-width: 1023px) {
+    .shop-mega-menu {
+      display: none;
+    }
+  }
+  
+  /* Responsive adjustments for smaller desktops */
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    .shop-mega-menu__dropdown {
+      width: calc(100% - 48px);
+      padding: 28px 0;
+    }
+    
+    .shop-mega-menu__container {
+      grid-template-columns: 200px 1fr;
+      gap: 32px;
+      padding: 0 24px;
+    }
+    
+    .shop-mega-menu__left {
+      padding-right: 24px;
+    }
+    
+    .shop-mega-menu__cards {
+      gap: 16px;
+    }
+    
+    .shop-mega-menu__card-content {
+      padding: 12px;
+    }
+    
+    .shop-mega-menu__card-title {
+      font-size: 13px;
+    }
+    
+    .shop-mega-menu__card-subtitle {
+      font-size: 11px;
+    }
+  }
+</style>

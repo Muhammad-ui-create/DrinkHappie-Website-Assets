@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Orchard Twist — THC Seltzer Bundle · Happie®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#1A1426; --ink-2:#3D2F52; --ink-3:#6B5E80;
+    --bone:#FBF7F0; --bone-2:#F2EAD8; --cream:#FBF8F2; --white:#fff;
+    --magenta:#C4248F; --magenta-deep:#9B1872; --magenta-soft:#F9E4F1;
+    --forest:#1D9E75; --forest-deep:#167055; --forest-soft:#E4F4EE;
+    --lime:#C9E867;
+    --border:#E7DEC9; --border-2:#D6CAB0;
+    --shadow-md:0 14px 30px rgba(26,20,38,.10);
+    --font:"Poppins",system-ui,-apple-system,sans-serif;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  * { box-sizing:border-box; }
+  html,body { margin:0; padding:0; }
+  body { font-family:var(--font); color:var(--ink); background:var(--bone); -webkit-font-smoothing:antialiased; }
+  a { color:inherit; text-decoration:none; }
+  button { font-family:inherit; cursor:pointer; }
+  .nav { position:sticky; top:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:16px 48px; background:rgba(251,247,240,.9); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+  .wordmark { display:inline-flex; align-items:center; height:42px; }
+  .wordmark img { height:38px; width:auto; display:block; }
+  .nav__links { display:flex; gap:28px; font-size:14px; font-weight:500; }
+  .nav__links a:hover { color:var(--magenta); }
+  .nav__cart { background:var(--ink); color:var(--cream); border:0; padding:11px 22px; border-radius:999px; font-size:14px; font-weight:600; transition:background .2s var(--ease); }
+  .nav__cart:hover { background:var(--magenta); }
+  .crumbs { padding:20px 48px 0; font-size:13px; color:var(--ink-3); }
+  .crumbs b { color:var(--ink); font-weight:600; }
+  .pdp { display:grid; grid-template-columns:1.05fr 1fr; gap:56px; padding:24px 48px 80px; max-width:1320px; margin:0 auto; align-items:start; }
+  .gallery { position:sticky; top:96px; }
+  .gallery__main { border-radius:32px; overflow:hidden; height:620px; position:relative; display:flex; align-items:center; justify-content:center; }
+  .gallery__main img.hero,
+  .gallery__main img.fill { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; animation:none; filter:none; }
+  @keyframes float { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+  .gallery__badge { position:absolute; top:24px; left:24px; z-index:3; background:rgba(255,255,255,.92); border-radius:999px; padding:8px 16px; font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--magenta-deep); box-shadow:0 4px 12px rgba(26,20,38,.12); }
+  .gallery__save { position:absolute; top:24px; right:24px; z-index:3; background:var(--magenta); color:#fff; border-radius:999px; padding:8px 16px; font-size:12px; font-weight:700; letter-spacing:.04em; box-shadow:var(--shadow-md); }
+  .gallery__thumbs { display:flex; gap:10px; margin-top:14px; }
+  .gallery__thumb { width:96px; height:96px; border-radius:16px; border:2px solid var(--border); background:var(--white); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:border-color .2s; overflow:hidden; padding:6px; }
+  .gallery__thumb img { max-width:100%; max-height:100%; object-fit:contain; }
+  .gallery__thumb.is-active { border-color:var(--magenta); }
+  .buy h1 { font-size:50px; font-weight:800; letter-spacing:-.035em; line-height:1.02; margin:6px 0 4px; }
+  .buy__line { font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--magenta-deep); }
+  .buy__sub { font-size:17px; color:var(--ink-2); line-height:1.55; margin:12px 0 0; max-width:460px; }
+  .buy__rating { display:flex; align-items:center; gap:8px; margin-top:12px; font-size:14px; }
+  .buy__rating .stars { color:var(--magenta); letter-spacing:1px; }
+  .buy__rating a { color:var(--ink-3); text-decoration:underline; font-size:13px; }
+  .opt-label { font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin:26px 0 10px; display:flex; justify-content:space-between; }
+  .opt-label .hint { color:var(--magenta); text-transform:none; letter-spacing:0; font-weight:600; }
+  /* Bundle includes */
+  .includes { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .includes__card { border:2px solid var(--border); background:#fff; border-radius:16px; padding:14px 16px; display:flex; flex-direction:column; gap:6px; position:relative; overflow:hidden; }
+  .includes__swatch { position:absolute; top:0; left:0; width:6px; height:100%; }
+  .includes__flavor { font-size:15px; font-weight:800; letter-spacing:-.01em; padding-left:6px; }
+  .includes__qty { font-size:12.5px; color:var(--ink-2); padding-left:6px; }
+  .includes__plus { text-align:center; align-self:center; font-size:22px; font-weight:700; color:var(--ink-3); }
+  /* Strength */
+  .strength { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .strength__card { border:2px solid var(--border); background:#fff; border-radius:18px; padding:16px; text-align:left; position:relative; transition:all .2s var(--ease); }
+  .strength__card:hover { border-color:var(--border-2); }
+  .strength__card.is-active { border-color:var(--forest); background:var(--forest-soft); }
+  .strength__card .mg { font-size:24px; font-weight:800; letter-spacing:-.02em; }
+  .strength__card .mg span { font-size:13px; }
+  .strength__card .desc { font-size:12px; color:var(--ink-2); margin-top:3px; line-height:1.4; }
+  .strength__pop { position:absolute; top:-9px; left:14px; background:var(--forest); color:#fff; font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:3px 9px; border-radius:999px; }
+  /* Price block */
+  .priceblock { display:flex; align-items:baseline; gap:12px; margin:22px 0 4px; flex-wrap:wrap; }
+  .priceblock__now { font-size:34px; font-weight:800; letter-spacing:-.02em; color:var(--ink); }
+  .priceblock__was { font-size:18px; color:var(--ink-3); text-decoration:line-through; }
+  .priceblock__save { background:var(--magenta-soft); color:var(--magenta-deep); font-size:13px; font-weight:700; padding:4px 12px; border-radius:999px; }
+  .priceblock__per { font-size:12.5px; color:var(--ink-3); margin-top:2px; }
+  /* Plans */
+  .plans { display:flex; flex-direction:column; gap:10px; margin-top:14px; }
+  .plan { display:flex; align-items:center; gap:14px; border:2px solid var(--border); background:#fff; border-radius:16px; padding:15px 18px; cursor:pointer; transition:all .2s var(--ease); }
+  .plan.is-active { border-color:var(--magenta); background:var(--magenta-soft); }
+  .plan__radio { width:20px; height:20px; border-radius:999px; flex-shrink:0; border:2px solid var(--border-2); background:#fff; }
+  .plan.is-active .plan__radio { border:6px solid var(--magenta); }
+  .plan__body { flex:1; }
+  .plan__title { display:flex; align-items:center; gap:8px; font-weight:700; font-size:15px; }
+  .plan__badge { background:var(--magenta); color:#fff; font-size:9.5px; font-weight:700; letter-spacing:.06em; padding:3px 8px; border-radius:999px; }
+  .plan__meta { font-size:12px; color:var(--ink-2); margin-top:2px; }
+  .plan__price { font-weight:800; font-size:18px; text-align:right; }
+  .plan__price s { display:block; font-size:12px; color:var(--ink-3); font-weight:500; }
+  .atc { width:100%; margin-top:20px; background:var(--magenta); color:#fff; border:0; border-radius:999px; padding:19px; font-size:17px; font-weight:700; box-shadow:0 14px 28px rgba(196,36,143,.3); transition:all .25s var(--ease); display:flex; justify-content:center; gap:12px; align-items:baseline; }
+  .atc:hover { background:var(--magenta-deep); transform:translateY(-1px); }
+  .atc:active { transform:scale(.98); }
+  .atc .price { opacity:.9; font-weight:600; }
+  .atc-note { text-align:center; font-size:12px; color:var(--ink-3); margin-top:10px; }
+  .trust { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:22px; }
+  .trust__item { background:#fff; border:1px solid var(--border); border-radius:14px; padding:12px 8px; text-align:center; }
+  .trust__item svg { margin-bottom:5px; }
+  .trust__item .t { font-size:11.5px; font-weight:700; }
+  .trust__item .s { font-size:9.5px; color:var(--ink-3); margin-top:1px; }
+  /* happie difference */
+  .hdiff { background:#5BB6C2; color:#fff; padding:72px 48px; }
+  .hdiff__inner { max-width:1180px; margin:0 auto; }
+  .hdiff__cloud { width:60px; height:auto; display:block; margin:0 auto 14px; }
+  .hdiff__title { text-align:center; font-size:clamp(34px,5vw,52px); font-weight:800; letter-spacing:-.035em; margin:0 0 44px; color:#fff; }
+  .hdiff__grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+  .hdiff__cards { display:flex; flex-direction:column; gap:16px; }
+  .hdiff__card { background:#fff; border-radius:18px; padding:20px 22px; box-shadow:0 8px 24px rgba(0,0,0,.08); }
+  .hdiff__card h3 { margin:0 0 6px; font-size:19px; font-weight:800; letter-spacing:-.02em; color:#1A1426; }
+  .hdiff__card p { margin:0; font-size:14px; line-height:1.55; color:#3D2F52; font-weight:500; }
+  .hdiff__card p b { color:#1A1426; }
+  .hdiff__photo { border-radius:24px; overflow:hidden; box-shadow:0 18px 40px rgba(0,0,0,.18); }
+  .hdiff__photo img { width:100%; height:100%; object-fit:cover; display:block; aspect-ratio:1/1; }
+  /* details */
+  .details { max-width:820px; margin:0 auto; padding:72px 48px 24px; }
+  .details h2 { text-align:center; font-size:clamp(28px,4vw,40px); font-weight:800; letter-spacing:-.03em; margin:0 0 28px; }
+  .acc { display:flex; flex-direction:column; gap:12px; }
+  .acc__item { background:#fff; border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+  .acc__q { width:100%; background:none; border:0; text-align:left; display:flex; justify-content:space-between; align-items:center; padding:18px 22px; font-size:16px; font-weight:700; color:var(--ink); }
+  .acc__q .ic { width:26px; height:26px; border-radius:999px; background:#F7A23B; color:#fff; font-size:18px; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:transform .3s var(--ease); }
+  .acc__item.is-open .acc__q .ic { transform:rotate(45deg); }
+  .acc__body { max-height:0; overflow:hidden; transition:max-height .4s var(--ease); }
+  .acc__item.is-open .acc__body { max-height:600px; }
+  .acc__inner { padding:0 22px 20px; }
+  .acc__row { padding:12px 0; border-top:1px solid var(--bone-2); }
+  .acc__row:first-child { border-top:0; }
+  .acc__row b { display:block; font-size:14px; font-weight:700; color:var(--ink); margin-bottom:2px; }
+  .acc__row span { font-size:13.5px; line-height:1.55; color:var(--ink-2); }
+  .details__coa { text-align:center; margin-top:22px; }
+  .details__coa a { font-size:14px; font-weight:700; color:var(--magenta); text-decoration:underline; }
+  /* Questions */
+  .qfaq { background:#A487B5; padding:72px 48px 88px; }
+  .qfaq__inner { max-width:1120px; margin:0 auto; }
+  .qfaq h2 { text-align:center; color:#fff; font-size:clamp(36px,5vw,58px); font-weight:800; letter-spacing:-.035em; margin:0 0 40px; }
+  .qfaq__list { display:flex; flex-direction:column; gap:14px; }
+  .qfaq__item { background:#fff; border-radius:14px; overflow:hidden; }
+  .qfaq__q { width:100%; background:none; border:0; text-align:left; display:flex; justify-content:space-between; align-items:center; gap:14px; padding:20px 24px; font-size:17px; font-weight:700; color:var(--ink); }
+  .qfaq__q .ic { width:28px; height:28px; border-radius:999px; background:#F7A23B; color:#fff; font-size:19px; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:transform .3s var(--ease); }
+  .qfaq__item.is-open .qfaq__q .ic { transform:rotate(45deg); }
+  .qfaq__a { max-height:0; overflow:hidden; transition:max-height .4s var(--ease); }
+  .qfaq__item.is-open .qfaq__a { max-height:420px; }
+  .qfaq__a p { margin:0; padding:0 24px 22px; font-size:15px; line-height:1.65; color:var(--ink-2); }
+  /* explore */
+  .explore { max-width:1320px; margin:0 auto; padding:0 48px 96px; }
+  .explore h2 { font-size:38px; font-weight:800; letter-spacing:-.03em; margin:0 0 28px; }
+  .explore__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .explore__card { border-radius:24px; padding:0; min-height:300px; position:relative; overflow:hidden; display:flex; flex-direction:column; cursor:pointer; transition:transform .3s var(--ease); text-decoration:none; color:inherit; background:#fff; border:1px solid var(--border); }
+  .explore__card:hover { transform:translateY(-4px); }
+  .explore__img { height:200px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+  .explore__img img { width:100%; height:100%; object-fit:cover; }
+  .explore__txt { padding:16px 18px; }
+  .explore__tag { font-size:9.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--magenta-deep); }
+  .explore__name { font-size:19px; font-weight:800; letter-spacing:-.015em; margin-top:4px; }
+  .explore__price { margin-top:6px; font-size:14px; font-weight:700; }
+  .explore__price s { color:var(--ink-3); font-weight:500; margin-left:6px; }
+  .footer { background:var(--ink); color:var(--cream); padding:48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; }
+  .footer .wm img { height:38px; width:auto; display:block; }
+  .footer .legal { font-size:11.5px; color:rgba(251,247,240,.55); max-width:560px; line-height:1.5; }
+  .toast { position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(110px); background:var(--ink); color:var(--cream); padding:15px 26px; border-radius:999px; font-size:14px; font-weight:600; box-shadow:0 20px 40px rgba(26,20,38,.3); transition:transform .4s var(--ease); z-index:300; display:flex; align-items:center; gap:10px; }
+  .toast.show { transform:translateX(-50%) translateY(0); }
+  .toast .dot { width:8px; height:8px; border-radius:999px; background:var(--lime); }
+  @media (max-width:1080px) {
+    .pdp { grid-template-columns:1fr; padding:24px 24px 56px; }
+    .gallery { position:static; }
+    .gallery__main { height:440px; }
+    .hdiff, .qfaq { padding-left:24px; padding-right:24px; }
+    .details, .explore { padding-left:24px; padding-right:24px; }
+    .hdiff__grid { grid-template-columns:1fr; gap:28px; }
+    .hdiff__photo { order:-1; }
+    .explore__grid { grid-template-columns:1fr; }
+    .buy h1 { font-size:38px; }
+    .nav { padding:16px 20px; }
+    .crumbs { padding:16px 20px 0; }
+    .nav__links { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="wordmark" href="index.html"><img src="https://drinkhappie.com/cdn/shop/files/happie-iso-logo.svg?v=1753443838" alt="Happie"></a>
+  <div class="nav__links">
+    <a href="index.html">THC Seltzer</a>
+    <a href="index.html">Fungi Fusion</a>
+    <a href="#">Bundles</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <button class="nav__cart" id="cartBtn">Cart · <span id="cartCount">0</span></button>
+</nav>
+
+<div class="crumbs"><a href="index.html">Shop</a> / Bundles / <b>Orchard Twist</b></div>
+
+<section class="pdp">
+  <div class="gallery">
+    <div class="gallery__main" id="galleryMain" style="background:linear-gradient(150deg, #FCEBE7 0%, #EDE1EF 100%);">
+      <div class="gallery__badge">Stock-Up Bundle · 36 cans</div>
+      <div class="gallery__save">Save $9.00 · 5% off</div>
+      <img class="hero" id="mainImg" src="../assets/bundles/orchard-twist-1.webp" alt="Orchard Twist bundle">
+    </div>
+    <div class="gallery__thumbs" id="thumbs">
+      <button class="gallery__thumb is-active" data-img="../assets/bundles/orchard-twist-1.webp" data-type="hero"><img src="../assets/bundles/orchard-twist-1.webp" alt="Orchard Twist view 1"></button>
+      <button class="gallery__thumb" data-img="../assets/bundles/orchard-twist-2.webp" data-type="fill"><img src="../assets/bundles/orchard-twist-2.webp" alt="Orchard Twist view 2"></button>
+    </div>
+  </div>
+
+  <div class="buy">
+    <div class="buy__line">THC Seltzer Bundle · Hemp-Derived &Delta;&#8313;</div>
+    <h1>Orchard Twist</h1>
+    <div class="buy__rating">
+      <span class="stars">★★★★★</span><b>4.9</b>
+      <a href="#faq">402 verified reviews</a>
+    </div>
+    <p class="buy__sub">Tart grapefruit twisted with mellow grape. A stock-up pack that keeps the fridge full.</p>
+
+    <div class="opt-label"><span>What&apos;s In This Bundle</span><span class="hint">24-pack + 12-pack · 36 cans</span></div>
+    <div class="includes">
+      <div class="includes__card"><span class="includes__swatch" style="background:#E8654A;"></span><span class="includes__flavor">Groovy Grapefruit</span><span class="includes__qty">1 × 24-pack Groovy Grapefruit</span></div>
+      <div class="includes__card"><span class="includes__swatch" style="background:#9B5DBA;"></span><span class="includes__flavor">Grateful Grape</span><span class="includes__qty">1 × 12-pack Grateful Grape</span></div>
+    </div>
+
+    <div class="opt-label"><span>Strength</span><span class="hint" id="strengthHint">Same price either way</span></div>
+    <div class="strength" id="strength">
+      <button class="strength__card is-active" data-mg="5">
+        <span class="strength__pop">Most Popular</span>
+        <div class="mg">5<span>mg</span> &Delta;&#8313;</div>
+        <div class="desc">A light social lift. Great for first-timers.</div>
+      </button>
+      <button class="strength__card" data-mg="10">
+        <div class="mg">10<span>mg</span> &Delta;&#8313;</div>
+        <div class="desc">A deeper unwind. For seasoned sippers.</div>
+      </button>
+    </div>
+
+    <div class="priceblock">
+      <span class="priceblock__now">$170.98</span>
+      <span class="priceblock__was">$179.98</span>
+      <span class="priceblock__save">You save $9.00 (5%)</span>
+    </div>
+    <div class="priceblock__per">36 cans · $4.75 per can</div>
+
+    <div class="opt-label"><span>Purchase Type</span></div>
+    <div class="plans" id="plans">
+      <div class="plan is-active" data-plan="sub">
+        <span class="plan__radio"></span>
+        <span class="plan__body">
+          <span class="plan__title">Subscribe &amp; Save 20% more <span class="plan__badge">BEST VALUE</span></span>
+          <span class="plan__meta">Delivered monthly · skip or cancel anytime · always free shipping</span>
+        </span>
+        <span class="plan__price" id="subPrice"></span>
+      </div>
+      <div class="plan" data-plan="once">
+        <span class="plan__radio"></span>
+        <span class="plan__body">
+          <span class="plan__title">One-time purchase</span>
+          <span class="plan__meta">The 5% bundle discount, no commitment</span>
+        </span>
+        <span class="plan__price" id="oncePrice">$170.98</span>
+      </div>
+    </div>
+
+    <button class="atc" id="atc">Add Bundle to Cart <span class="price" id="atcPrice"></span></button>
+    <div class="atc-note">21+ only · Ships to 40+ states · 30-day happiness guarantee</div>
+
+    <div class="trust">
+      <div class="trust__item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4248F" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+        <div class="t">Lab Tested</div><div class="s">Every batch</div>
+      </div>
+      <div class="trust__item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4248F" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/></svg>
+        <div class="t">Farm Bill Legal</div><div class="s">Hemp-derived</div>
+      </div>
+      <div class="trust__item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4248F" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="15" height="13" rx="2"/><path d="M16 9h4l3 4v5h-7"/><circle cx="6" cy="18" r="2"/><circle cx="19" cy="18" r="2"/></svg>
+        <div class="t">Bundle &amp; Save</div><div class="s">5% off the case</div>
+      </div>
+      <div class="trust__item">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C4248F" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <div class="t">Guarantee</div><div class="s">Love it or refund</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hdiff">
+  <div class="hdiff__inner">
+    <img class="hdiff__cloud" src="https://drinkhappie.com/cdn/shop/files/happie-cloud.png?v=1755720432&width=240" alt="">
+    <h2 class="hdiff__title">The happie difference</h2>
+    <div class="hdiff__grid">
+      <div class="hdiff__cards">
+        <div class="hdiff__card"><h3>⚡ 5mg THC + 5mg CBD (1:1 Bliss Ratio)</h3><p>Kicks in within 15-20 minutes, not hours. <b>Nano-Emulsified Hemp Extract</b> absorbs faster so you feel it sooner. Control your vibe.</p></div>
+        <div class="hdiff__card"><h3>🧁 No Cane Sugar — Blue Agave Sweetened</h3><p>Sweetened with organic blue agave only. Just 30 calories and 7g natural sugar per can. All flavor, zero crash.</p></div>
+        <div class="hdiff__card"><h3>🌊 Aquamin&reg; Ocean Minerals</h3><p>Calcium and magnesium from pristine ocean waters. Real hydration that supports your body, not just sparkling water.</p></div>
+        <div class="hdiff__card"><h3>🌱 Farm to Can</h3><p>Small-batch Northern California hemp from farms we know by name. Complete seed-to-can traceability you can trust.</p></div>
+      </div>
+      <div class="hdiff__photo"><img src="../assets/bundles/orchard-twist-2.webp" alt="Orchard Twist"></div>
+    </div>
+  </div>
+</section>
+
+<section class="details">
+  <h2>The details.</h2>
+  <div class="acc" id="detailsAcc">
+    <div class="acc__item is-open">
+      <button class="acc__q">📦 What&rsquo;s In This Bundle?<span class="ic">+</span></button>
+      <div class="acc__body"><div class="acc__inner">
+        <div class="acc__row"><b>1 × 24-pack Groovy Grapefruit</b><span>Groovy Grapefruit — one of our most-loved hemp-derived Delta-9 THC seltzers.</span></div>
+        <div class="acc__row"><b>1 × 12-pack Grateful Grape</b><span>Grateful Grape — the perfect counterpart flavor for this pairing.</span></div>
+        <div class="acc__row"><b>36 cans total · $9.00 saved</b><span>Buying the pair together is 5% cheaper than buying each flavor separately.</span></div>
+        <div class="acc__row"><b>Dose your way</b><span>Choose 5mg or 10mg per can at checkout — same price either way. 5mg is a light social lift; 10mg is a deeper unwind.</span></div>
+      </div></div>
+    </div>
+    <div class="acc__item">
+      <button class="acc__q">⚡ How It Works<span class="ic">+</span></button>
+      <div class="acc__body"><div class="acc__inner">
+        <div class="acc__row"><b>Nano-Emulsified = Fast-Acting</b><span>We break hemp extract into tiny particles your body absorbs quickly — effects in 15-30 minutes, not 2 hours like edibles.</span></div>
+        <div class="acc__row"><b>Balanced Blend for Control</b><span>5mg THC + 5mg CBD creates a gentle, functional buzz. Relaxed and social, not couch-locked.</span></div>
+        <div class="acc__row"><b>Two flavors, one mood-board</b><span>Each pairing balances a sweeter flavor against a tart/citrus counterpart — something for every guest.</span></div>
+      </div></div>
+    </div>
+    <div class="acc__item">
+      <button class="acc__q">✅ Lab Tested &amp; Legally Shipped<span class="ic">+</span></button>
+      <div class="acc__body"><div class="acc__inner">
+        <div class="acc__row"><b>Farm Bill Compliant</b><span>Hemp-derived Delta-9 THC within federal legal limits (&lt;0.3% by dry weight). 100% compliant with the 2018 Farm Bill.</span></div>
+        <div class="acc__row"><b>Third-Party Lab Tested</b><span>Each batch tested for potency, purity, and safety. COAs available in the link below.</span></div>
+        <div class="acc__row"><b>Ships to 40+ States · 21+ Only</b><span>Direct to your door in most states. Adult signature + age verification required.</span></div>
+      </div></div>
+    </div>
+  </div>
+  <div class="details__coa"><a href="#">VIEW COA &amp; LAB TESTS</a></div>
+</section>
+
+<section class="qfaq" id="faq">
+  <div class="qfaq__inner">
+    <h2>Questions? We got you</h2>
+    <div class="qfaq__list" id="qfaqList">
+      <div class="qfaq__item is-open">
+        <button class="qfaq__q">How much do I save with a bundle?<span class="ic">+</span></button>
+        <div class="qfaq__a"><p>Every two-flavor bundle is a flat 5% off versus buying each pack separately. For Orchard Twist, that&rsquo;s $9.00 off — $170.98 instead of $179.98 for 36 cans. Subscribe &amp; Save stacks an extra 20% on top.</p></div>
+      </div>
+      <div class="qfaq__item">
+        <button class="qfaq__q">Can I pick 5mg or 10mg?<span class="ic">+</span></button>
+        <div class="qfaq__a"><p>Yes. Choose 5mg or 10mg per can at checkout — the price is identical either way. 5mg is a light, social lift; 10mg is a stronger, deeper unwind. New to THC? Go with 5mg and start with half a can.</p></div>
+      </div>
+      <div class="qfaq__item">
+        <button class="qfaq__q">Will this get me high?<span class="ic">+</span></button>
+        <div class="qfaq__a"><p>It&rsquo;s a controlled, functional buzz — relaxed and social, not couch-locked. 5mg feels like 1-2 glasses of wine, on in 15-30 minutes, gone in 2-4 hours with zero hangover.</p></div>
+      </div>
+      <div class="qfaq__item">
+        <button class="qfaq__q">Is this legal? Can you ship to my state?<span class="ic">+</span></button>
+        <div class="qfaq__a"><p>Yes — hemp-derived Delta-9 THC is federally legal under the 2018 Farm Bill. We ship to 40+ states. We can&rsquo;t ship to AL, AK, HI, ID, MT, VA. Checkout confirms availability for your address.</p></div>
+      </div>
+      <div class="qfaq__item">
+        <button class="qfaq__q">Will I fail a drug test?<span class="ic">+</span></button>
+        <div class="qfaq__a"><p>Possibly. Happie contains real Delta-9 THC — the same compound found in cannabis. If you&rsquo;re drug tested for work or sports, we recommend avoiding THC products entirely.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="explore">
+  <h2>More bundles to stock up on.</h2>
+  <div class="explore__grid">
+    <a class="explore__card" href="cherry-citrus-kickoff.html">
+      <div class="explore__img" style="background:linear-gradient(150deg, #FBEBEF 0%, #FCEBE7 100%);"><img src="../assets/bundles/cherry-citrus-kickoff-1.webp" alt="Cherry Citrus Kickoff" loading="lazy"></div>
+      <div class="explore__txt">
+        <div class="explore__tag">16 cans · save $3.30</div>
+        <div class="explore__name">Cherry Citrus Kickoff</div>
+        <div class="explore__price">$62.68 <s>$65.98</s></div>
+      </div>
+    </a>
+    <a class="explore__card" href="cherry-lime-chiller.html">
+      <div class="explore__img" style="background:linear-gradient(150deg, #FBEBEF 0%, #EEF5DB 100%);"><img src="../assets/bundles/cherry-lime-chiller-1.webp" alt="Cherry Lime Chiller" loading="lazy"></div>
+      <div class="explore__txt">
+        <div class="explore__tag">20 cans · save $4.65</div>
+        <div class="explore__name">Cherry Lime Chiller</div>
+        <div class="explore__price">$88.33 <s>$92.98</s></div>
+      </div>
+    </a>
+    <a class="explore__card" href="berry-vineyard-duo.html">
+      <div class="explore__img" style="background:linear-gradient(150deg, #FBEBEF 0%, #EDE1EF 100%);"><img src="../assets/bundles/berry-vineyard-duo-1.webp" alt="Berry Vineyard Duo" loading="lazy"></div>
+      <div class="explore__txt">
+        <div class="explore__tag">24 cans · save $6.00</div>
+        <div class="explore__name">Berry Vineyard Duo</div>
+        <div class="explore__price">$113.98 <s>$119.98</s></div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wm"><img src="https://drinkhappie.com/cdn/shop/files/happie-site-logo-footer-white.png?v=1756205104" alt="Happie"></div>
+  <div class="legal">© 2026 Happie® Beverages, Inc. Must be 21+. Contains hemp-derived &Delta;&#8313; THC — do not drive or operate machinery. These statements have not been evaluated by the FDA.</div>
+</footer>
+
+<div class="toast" id="toast"><span class="dot"></span><span id="toastMsg"></span></div>
+
+<script>
+  const BUNDLE = { name: "Orchard Twist", price: 170.98, reg: 179.98, save: 9.0 };
+  const state = { mg: 5, plan: 'sub' };
+  const $ = (id) => document.getElementById(id);
+  const fmt = (n) => '$' + n.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+
+  function update() {
+    const sub = BUNDLE.price * 0.8;
+    $('subPrice').innerHTML = fmt(sub) + `<s>${fmt(BUNDLE.price)}</s>`;
+    $('oncePrice').textContent = fmt(BUNDLE.price);
+    const total = state.plan === 'sub' ? sub : BUNDLE.price;
+    $('atcPrice').textContent = fmt(total) + (state.plan === 'sub' ? '/mo' : '');
+  }
+
+  document.querySelectorAll('#strength .strength__card').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#strength .strength__card').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      state.mg = +btn.dataset.mg;
+    });
+  });
+  document.querySelectorAll('.plan').forEach(pl => {
+    pl.addEventListener('click', () => {
+      document.querySelectorAll('.plan').forEach(x => x.classList.remove('is-active'));
+      pl.classList.add('is-active');
+      state.plan = pl.dataset.plan;
+      update();
+    });
+  });
+  $('atc').addEventListener('click', () => {
+    const c = +$('cartCount').textContent + 1;
+    $('cartCount').textContent = c;
+    $('toastMsg').textContent = `Added ${BUNDLE.name} (${state.mg}mg) to cart`;
+    $('toast').classList.add('show');
+    clearTimeout(window.__tt);
+    window.__tt = setTimeout(() => $('toast').classList.remove('show'), 2200);
+  });
+  $('thumbs').addEventListener('click', e => {
+    const th = e.target.closest('.gallery__thumb');
+    if (!th) return;
+    document.querySelectorAll('.gallery__thumb').forEach(x => x.classList.remove('is-active'));
+    th.classList.add('is-active');
+    const img = $('mainImg');
+    img.src = th.dataset.img;
+    img.className = th.dataset.type === 'hero' ? 'hero' : 'fill';
+  });
+  function wireAcc(listSel, itemSel, qSel) {
+    const list = document.querySelector(listSel);
+    if (!list) return;
+    list.addEventListener('click', e => {
+      const q = e.target.closest(qSel);
+      if (!q) return;
+      const item = q.parentElement;
+      const open = item.classList.contains('is-open');
+      list.querySelectorAll(itemSel).forEach(x => { x.classList.remove('is-open'); const ic=x.querySelector('.ic'); if(ic) ic.textContent='+'; });
+      if (!open) { item.classList.add('is-open'); const ic=q.querySelector('.ic'); if(ic) ic.textContent='+'; }
+    });
+  }
+  wireAcc('#detailsAcc', '.acc__item', '.acc__q');
+  wireAcc('#qfaqList', '.qfaq__item', '.qfaq__q');
+  update();
+</script>
+</body>
+</html>
