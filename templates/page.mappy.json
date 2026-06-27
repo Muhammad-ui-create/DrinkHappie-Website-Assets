@@ -30,7 +30,7 @@
         "text_color": "#1A1A1A",
         "heading_color": "#962F80",
         "accent_color": "#50B2BD",
-        "padding_top": 160,
+        "padding_top": 150,
         "padding_bottom": 60
       }
     },
@@ -47,7 +47,7 @@
       },
       "block_order": ["mappy_store_locator_page_embed_block_6Qp8QH"],
       "settings": {
-        "apply_vertical_spacing": false,
+        "apply_vertical_spacing": true,
         "apply_horizontal_spacing": true,
         "display_on_card": false,
         "content_width_desktop": "lg:w-full",

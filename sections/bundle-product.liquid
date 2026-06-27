@@ -1,0 +1,351 @@
+{%- comment -%}
+  Bundle Product PDP — replicates the bundle mockup design, bound to the live product.
+  Gallery, 5mg/10mg variant selector, price, and add-to-cart are dynamic (Shopify product);
+  per-bundle content (tagline, flavor breakdown, can count) is keyed by product.handle below.
+  Assign products to this template via Admin → product → Theme template → "bundle".
+{%- endcomment -%}
+
+{%- liquid
+  assign h = product.handle
+  assign tagline = product.description | strip_html
+  assign badge = 'Bundle'
+  assign per = ''
+  assign grad = 'linear-gradient(150deg,#FBEBEF 0%,#EDE1EF 100%)'
+
+  case h
+    when 'berry-vineyard-duo'
+      assign tagline = 'Orchard cherry and deep grape — a rich, fruit-forward pairing built to share.'
+      assign badge = 'Share Bundle · 24 cans'
+      assign per = '24 cans · $4.75 per can'
+    when 'cherry-citrus-kickoff'
+      assign tagline = 'Bright cherry meets zesty grapefruit — the easy starter two-pack for first-timers.'
+      assign badge = 'Starter Bundle · 16 cans'
+      assign per = '16 cans · $3.92 per can'
+    when 'cherry-lime-chiller'
+      assign tagline = 'Sweet-tart cherry and crisp lime. The everyday cooler for slow afternoons.'
+      assign badge = 'Everyday Bundle · 20 cans'
+      assign per = '20 cans · $4.42 per can'
+    when 'citrus-grove-pack'
+      assign tagline = 'All-citrus, all the time. Grapefruit and lime for the clean-and-crisp crowd.'
+      assign badge = 'Citrus Bundle · 24 cans'
+      assign per = '24 cans · $4.75 per can'
+    when 'orchard-twist'
+      assign tagline = 'Tart grapefruit twisted with mellow grape. A stock-up pack that keeps the fridge full.'
+      assign badge = 'Stock-Up Bundle · 36 cans'
+      assign per = '36 cans · $4.75 per can'
+    when 'sweet-sour-party-stack'
+      assign tagline = 'Grape and lime by the case — the headline pack for parties and long weekends.'
+      assign badge = 'Party Bundle · 48 cans'
+      assign per = '48 cans · $4.75 per can'
+  endcase
+
+  assign cap = product.compare_at_price
+  assign pr = product.price
+  assign save = 0
+  if cap > pr
+    assign save = cap | minus: pr
+  endif
+-%}
+
+{%- capture includes_html -%}
+  {%- case h -%}
+    {%- when 'berry-vineyard-duo' -%}
+      <div class="bpdp__inc"><span class="bpdp__sw" style="background:#E94A78;"></span><span class="bpdp__fl">Cheery Cherry</span><span class="bpdp__q">1 × 12-pack Cheery Cherry</span></div>
+      <div class="bpdp__inc"><span class="bpdp__sw" style="background:#9B5DBA;"></span><span class="bpdp__fl">Grateful Grape</span><span class="bpdp__q">1 × 12-pack Grateful Grape</span></div>
+    {%- when 'cherry-citrus-kickoff' -%}
+      <div class="bpdp__inc"><span class="bpdp__sw" style="background:#E94A78;"></span><span class="bpdp__fl">Cheery Cherry</span><span class="bpdp__q">1 × 8-pack Cheery Cherry</span></div>
+      <div class="bpdp__inc"><span class="bpdp__sw" style="background:#E8654A;"></span><span class="bpdp__fl">Groovy Grapefruit</span><span class="bpdp__q">1 × 8-pack Groovy Grapefruit</span></div>
+    {%- when 'cherry-lime-chiller' -%}
+      <div class="bpdp__inc"><span class="bpdp__sw" style="background:#E94A78;"></span><span class="bpdp__fl">Cheery Cherry</span><span class="bpdp__q">1 × 12-pack Cheery Cherry</span></div>
+      <div class="bpdp__inc"><span class="bpdp__sw" style="background:#7FB540;"></span><span class="bpdp__fl">Sublime</span><span class="bpdp__q">1 × 8-pack Sublime</span></div>
+    {%- when 'citrus-grove-pack' -%}
+      <div class="bpdp__inc"><span class="bpdp__sw" style="background:#E8654A;"></span><span class="bpdp__fl">Groovy Grapefruit</span><span class="bpdp__q">1 × 12-pack Groovy Grapefruit</span></div>
+      <div class="bpdp__inc"><span class="bpdp__sw" style="background:#7FB540;"></span><span class="bpdp__fl">Sublime</span><span class="bpdp__q">1 × 12-pack Sublime</span></div>
+    {%- when 'orchard-twist' -%}
+      <div class="bpdp__inc"><span class="bpdp__sw" style="background:#E8654A;"></span><span class="bpdp__fl">Groovy Grapefruit</span><span class="bpdp__q">1 × 24-pack Groovy Grapefruit</span></div>
+      <div class="bpdp__inc"><span class="bpdp__sw" style="background:#9B5DBA;"></span><span class="bpdp__fl">Grateful Grape</span><span class="bpdp__q">1 × 12-pack Grateful Grape</span></div>
+    {%- when 'sweet-sour-party-stack' -%}
+      <div class="bpdp__inc"><span class="bpdp__sw" style="background:#9B5DBA;"></span><span class="bpdp__fl">Grateful Grape</span><span class="bpdp__q">1 × 24-pack Grateful Grape</span></div>
+      <div class="bpdp__inc"><span class="bpdp__sw" style="background:#7FB540;"></span><span class="bpdp__fl">Sublime</span><span class="bpdp__q">1 × 24-pack Sublime</span></div>
+  {%- endcase -%}
+{%- endcapture -%}
+
+<section class="bpdp">
+  <div class="bpdp__crumbs"><a href="/">Home</a> / <a href="/pages/bundles">Bundles</a> / <b>{{ product.title }}</b></div>
+  <div class="bpdp__grid">
+    {%- comment -%} Gallery {%- endcomment -%}
+    <div class="bpdp__gallery">
+      <div class="bpdp__gmain" style="background:{{ grad }};">
+        <div class="bpdp__gbadge">{{ badge }}</div>
+        {%- if save > 0 -%}<div class="bpdp__gsave">Save {{ save | money }}</div>{%- endif -%}
+        <img id="bpdpMain" src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.title | escape }}">
+      </div>
+      {%- if product.images.size > 1 -%}
+        <div class="bpdp__thumbs">
+          {%- for img in product.images -%}
+            <button type="button" class="bpdp__thumb{% if forloop.first %} is-active{% endif %}" data-img="{{ img | image_url: width: 900 }}">
+              <img src="{{ img | image_url: width: 200 }}" alt="{{ product.title | escape }} view {{ forloop.index }}">
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Buy box {%- endcomment -%}
+    <div class="bpdp__buy">
+      <div class="bpdp__eyebrow">THC Seltzer Bundle · Hemp-Derived Δ⁹</div>
+      <h1 class="bpdp__title">{{ product.title }}</h1>
+      <div class="bpdp__rating"><span class="bpdp__stars">★★★★★</span> <b>4.8</b> <span>· verified reviews</span></div>
+      {%- if tagline != blank -%}<p class="bpdp__sub">{{ tagline }}</p>{%- endif -%}
+
+      <div class="bpdp__label"><span>What's In This Bundle</span><span class="bpdp__hint">{{ badge | split: '· ' | last }}</span></div>
+      <div class="bpdp__includes">{{ includes_html }}</div>
+
+      {%- form 'product', product, class: 'bpdp__form' -%}
+        <input type="hidden" name="quantity" value="1">
+        <div class="bpdp__label"><span>Strength</span><span class="bpdp__hint">Same price either way</span></div>
+        <div class="bpdp__strength">
+          {%- for v in product.variants -%}
+            <input class="bpdp__str-radio" type="radio" name="id" id="bpdp-v-{{ v.id }}" value="{{ v.id }}" {% if v == product.selected_or_first_available_variant %}checked{% endif %}{% unless v.available %} disabled{% endunless %}>
+            <label class="bpdp__str-card {% if forloop.first %}bpdp__str-card--light{% else %}bpdp__str-card--dark{% endif %}" for="bpdp-v-{{ v.id }}">
+              {%- if forloop.first -%}<span class="bpdp__pop">Most Popular</span>{%- endif -%}
+              <span class="bpdp__mg">{{ v.title }}</span>
+              <span class="bpdp__sdesc">{% if forloop.first %}A light social lift. Great for first-timers.{% else %}A deeper unwind. For seasoned sippers.{% endif %}</span>
+            </label>
+          {%- endfor -%}
+        </div>
+
+        <div class="bpdp__price">
+          <span class="bpdp__now">{{ pr | money }}</span>
+          {%- if save > 0 -%}
+            <span class="bpdp__was">{{ cap | money }}</span>
+            <span class="bpdp__savetag">You save {{ save | money }}</span>
+          {%- endif -%}
+        </div>
+        {%- if per != blank -%}<div class="bpdp__per">{{ per }}</div>{%- endif -%}
+
+        <button type="submit" name="add" class="bpdp__atc"{% unless product.available %} disabled{% endunless %}>
+          {%- if product.available -%}Add Bundle to Cart <span class="bpdp__atc-price">{{ pr | money }}</span>{%- else -%}Sold Out{%- endif -%}
+        </button>
+        <div class="bpdp__atc-note">21+ only · Ships to 40+ states · 30-day happiness guarantee</div>
+      {%- endform -%}
+
+      <div class="bpdp__trust">
+        <div class="bpdp__t"><b>Lab Tested</b><span>Every batch</span></div>
+        <div class="bpdp__t"><b>Farm Bill Legal</b><span>Hemp-derived</span></div>
+        <div class="bpdp__t"><b>Bundle &amp; Save</b><span>5% off the case</span></div>
+        <div class="bpdp__t"><b>Guarantee</b><span>Love it or refund</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} The Happie Difference {%- endcomment -%}
+<section class="bpdp-hdiff">
+  <div class="bpdp-hdiff__inner">
+    <h2 class="bpdp-hdiff__title">The happie difference</h2>
+    <div class="bpdp-hdiff__grid">
+      <div class="bpdp-hdiff__cards">
+        <div class="bpdp-hdiff__card"><h3>⚡ Fast-Acting Nano-Emulsified THC</h3><p>Kicks in within 15–30 minutes, not hours. Nano-emulsified hemp extract absorbs faster so you feel it sooner.</p></div>
+        <div class="bpdp-hdiff__card"><h3>🧁 No Cane Sugar — Agave Sweetened</h3><p>Sweetened with organic blue agave only. Just 30 calories per can. All flavor, zero crash.</p></div>
+        <div class="bpdp-hdiff__card"><h3>🌊 Aquamin® Ocean Minerals</h3><p>Calcium and magnesium from pristine ocean waters — real hydration, not just sparkling water.</p></div>
+        <div class="bpdp-hdiff__card"><h3>🌱 Farm to Can</h3><p>Small-batch Northern California hemp from farms we know by name. Full seed-to-can traceability.</p></div>
+      </div>
+      {%- if product.images[1] -%}
+        <div class="bpdp-hdiff__photo"><img src="{{ product.images[1] | image_url: width: 800 }}" alt="{{ product.title | escape }}"></div>
+      {%- else -%}
+        <div class="bpdp-hdiff__photo"><img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title | escape }}"></div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{%- comment -%} Details accordion (native, no JS) {%- endcomment -%}
+<section class="bpdp-details">
+  <h2>The details.</h2>
+  <details class="bpdp-acc" open>
+    <summary>📦 What's in this bundle?<span class="bpdp-acc__ic">+</span></summary>
+    <div class="bpdp-acc__body">{{ includes_html }}<p class="bpdp-acc__note">Choose 5mg or 10mg per can at checkout — same price either way. Buying the pair together is 5% cheaper than buying each flavor separately.</p></div>
+  </details>
+  <details class="bpdp-acc">
+    <summary>⚡ How it works<span class="bpdp-acc__ic">+</span></summary>
+    <div class="bpdp-acc__body"><p>Nano-emulsified hemp extract is broken into tiny particles your body absorbs quickly — effects in 15–30 minutes, not 2 hours like edibles. A balanced blend creates a gentle, functional buzz: relaxed and social, not couch-locked.</p></div>
+  </details>
+  <details class="bpdp-acc">
+    <summary>✅ Lab tested &amp; legally shipped<span class="bpdp-acc__ic">+</span></summary>
+    <div class="bpdp-acc__body"><p>Hemp-derived Delta-9 THC within federal legal limits (&lt;0.3% by dry weight), 100% compliant with the 2018 Farm Bill. Every batch is third-party lab tested for potency, purity and safety. Ships to 40+ states · 21+ only.</p></div>
+  </details>
+  <div class="bpdp-details__coa"><a href="/pages/coas">View COA &amp; lab tests →</a></div>
+</section>
+
+{%- comment -%} Explore other bundles {%- endcomment -%}
+{%- liquid
+  assign ex_handles = 'berry-vineyard-duo,cherry-citrus-kickoff,cherry-lime-chiller,citrus-grove-pack,orchard-twist,sweet-sour-party-stack' | split: ','
+  assign ex_names = 'Berry Vineyard Duo,Cherry Citrus Kickoff,Cherry Lime Chiller,Citrus Grove Pack,Orchard Twist,Sweet & Sour Party Stack' | split: ','
+  assign ex_tags = '24 cans · save $6.00,16 cans · save $3.30,20 cans · save $4.65,24 cans · save $6.00,36 cans · save $9.00,48 cans · save $12.00' | split: ','
+  assign ex_now = '$113.98,$62.68,$88.33,$113.98,$170.98,$227.98' | split: ','
+  assign ex_was = '$119.98,$65.98,$92.98,$119.98,$179.98,$239.98' | split: ','
+-%}
+<section class="bpdp-explore">
+  <h2>More bundles to stock up on.</h2>
+  <div class="bpdp-explore__grid">
+    {%- assign shown = 0 -%}
+    {%- for eh in ex_handles -%}
+      {%- assign i = forloop.index0 -%}
+      {%- if eh != product.handle and shown < 3 -%}
+        {%- assign shown = shown | plus: 1 -%}
+        <a class="bpdp-explore__card" href="/products/{{ eh }}">
+          <div class="bpdp-explore__img"><img src="{{ 'bundle-' | append: eh | append: '.webp' | asset_url }}" alt="{{ ex_names[i] }}" loading="lazy"></div>
+          <div class="bpdp-explore__txt">
+            <div class="bpdp-explore__tag">{{ ex_tags[i] }}</div>
+            <div class="bpdp-explore__name">{{ ex_names[i] }}</div>
+            <div class="bpdp-explore__price">{{ ex_now[i] }} <s>{{ ex_was[i] }}</s></div>
+          </div>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+<style>
+  html, body { background: #FFF2E4; }
+  .bpdp{background:#FFF2E4;font-family:'Poppins',system-ui,sans-serif;color:#1A1426;}
+  .bpdp__crumbs{max-width:1320px;margin:0 auto;padding:18px 48px 0;font-size:13px;color:#6B5E80;}
+  .bpdp__crumbs b{color:#1A1426;}.bpdp__crumbs a{color:#6B5E80;text-decoration:none;}
+  .bpdp__grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;max-width:1320px;margin:0 auto;padding:24px 48px 72px;align-items:start;}
+  .bpdp__gallery{position:sticky;top:96px;}
+  .bpdp__gmain{border-radius:32px;overflow:hidden;height:600px;position:relative;display:flex;align-items:center;justify-content:center;}
+  .bpdp__gmain img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .bpdp__gbadge{position:absolute;top:24px;left:24px;z-index:3;background:rgba(255,255,255,.92);border-radius:999px;padding:8px 16px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9B1872;box-shadow:0 4px 12px rgba(26,20,38,.12);}
+  .bpdp__gsave{position:absolute;top:24px;right:24px;z-index:3;background:#C4248F;color:#fff;border-radius:999px;padding:8px 16px;font-size:12px;font-weight:700;box-shadow:0 14px 30px rgba(26,20,38,.10);}
+  .bpdp__thumbs{display:flex;gap:10px;margin-top:14px;}
+  .bpdp__thumb{width:88px;height:88px;border-radius:16px;border:2px solid #E7DEC9;background:#fff;cursor:pointer;overflow:hidden;padding:6px;}
+  .bpdp__thumb img{width:100%;height:100%;object-fit:contain;}
+  .bpdp__thumb.is-active{border-color:#C4248F;}
+  .bpdp__eyebrow{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#9B1872;}
+  .bpdp__title{font-size:clamp(34px,4.5vw,50px);font-weight:800;letter-spacing:-.035em;line-height:1.02;margin:6px 0 4px;color:#1A1426 !important;}
+  .bpdp__rating{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;color:#6B5E80;}
+  .bpdp__stars{color:#C4248F;letter-spacing:1px;}
+  .bpdp__sub{font-size:17px;color:#3D2F52;line-height:1.55;margin:12px 0 0;max-width:460px;}
+  .bpdp__label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#6B5E80;margin:26px 0 10px;display:flex;justify-content:space-between;}
+  .bpdp__hint{color:#C4248F;text-transform:none;letter-spacing:0;font-weight:600;}
+  .bpdp__includes{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .bpdp__inc{border:2px solid #E7DEC9;background:#fff;border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden;}
+  .bpdp__sw{position:absolute;top:0;left:0;width:6px;height:100%;}
+  .bpdp__fl{font-size:15px;font-weight:800;padding-left:6px;}
+  .bpdp__q{font-size:12.5px;color:#3D2F52;padding-left:6px;}
+  .bpdp__strength{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .bpdp__str-radio{position:absolute;opacity:0;width:0;height:0;pointer-events:none;}
+  .bpdp__str-card{display:block;border:2px solid rgba(255,255,255,.55);border-radius:18px;padding:16px;position:relative;cursor:pointer;transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease;}
+  .bpdp__str-card--light{background:linear-gradient(-45deg,#FBE7F3,#DDF3EF,#EAF6C9,#FFE9D6,#F3E0F0,#DDF3EF);background-size:400% 400%;animation:bpdpFlow 9s ease-in-out infinite;color:#1A1426;}
+  .bpdp__str-card--dark{background:linear-gradient(-45deg,#8E2D78,#2E7D8A,#9B1872,#3D2F52,#C4248F,#5B2A6B);background-size:400% 400%;animation:bpdpFlow 9s ease-in-out infinite;}
+  .bpdp__str-card--dark .bpdp__mg{color:#fff;}
+  .bpdp__str-card--dark .bpdp__sdesc{color:rgba(255,255,255,.92);}
+  .bpdp__str-card:hover{transform:translateY(-2px);}
+  .bpdp__str-radio:checked + .bpdp__str-card{border-color:#1A1426;box-shadow:0 0 0 3px rgba(26,20,38,.2),0 10px 22px rgba(0,0,0,.16);}
+  .bpdp__str-radio:focus-visible + .bpdp__str-card{outline:2px solid #1A1426;outline-offset:2px;}
+  .bpdp__mg{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em;}
+  .bpdp__sdesc{display:block;font-size:12px;color:#3D2F52;margin-top:3px;line-height:1.4;}
+  @keyframes bpdpFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @media (prefers-reduced-motion: reduce){.bpdp__str-card--light,.bpdp__str-card--dark,.bpdp__atc{animation:none;}}
+  .bpdp__pop{position:absolute;top:-9px;left:14px;background:#1D9E75;color:#fff;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:999px;}
+  .bpdp__price{display:flex;align-items:baseline;gap:12px;margin:22px 0 4px;flex-wrap:wrap;}
+  .bpdp__now{font-size:34px;font-weight:800;letter-spacing:-.02em;}
+  .bpdp__was{font-size:18px;color:#6B5E80;text-decoration:line-through;}
+  .bpdp__savetag{background:#F9E4F1;color:#9B1872;font-size:13px;font-weight:700;padding:4px 12px;border-radius:999px;}
+  .bpdp__per{font-size:12.5px;color:#6B5E80;margin-top:2px;}
+  .bpdp__atc{width:100%;margin-top:20px;color:#fff;border:0;border-radius:999px;padding:19px;font-size:17px;font-weight:700;box-shadow:0 14px 28px rgba(155,47,176,.28);transition:filter .2s ease,transform .2s ease,box-shadow .2s ease;display:flex;justify-content:center;gap:12px;align-items:baseline;cursor:pointer;text-shadow:0 1px 3px rgba(0,0,0,.35);background:linear-gradient(-45deg,#EE2B47,#AEE63E,#9B2FB0,#FF6F5E,#EE2B47);background-size:300% 300%;animation:bpdpFlow 8s ease-in-out infinite;}
+  .bpdp__atc:hover{filter:brightness(1.07) saturate(1.05);transform:translateY(-1px);box-shadow:0 18px 34px rgba(155,47,176,.34);}
+  .bpdp__atc[disabled]{background:#B7A9C4;animation:none;box-shadow:none;cursor:not-allowed;transform:none;text-shadow:none;}
+  .bpdp__atc-price{opacity:.9;font-weight:600;}
+  .bpdp__atc-note{text-align:center;font-size:12px;color:#6B5E80;margin-top:10px;}
+  .bpdp__trust{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:22px;}
+  .bpdp__t{background:#fff;border:1px solid #E7DEC9;border-radius:14px;padding:12px 8px;text-align:center;}
+  .bpdp__t b{display:block;font-size:11.5px;}
+  .bpdp__t span{font-size:9.5px;color:#6B5E80;}
+  .bpdp-hdiff{background:#50B2BD;color:#fff;padding:64px 48px;}
+  .bpdp-hdiff__inner{max-width:1180px;margin:0 auto;}
+  .bpdp-hdiff__title{text-align:center;font-size:clamp(30px,5vw,48px);font-weight:800;letter-spacing:-.035em;margin:0 0 40px;}
+  .bpdp-hdiff__grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+  .bpdp-hdiff__cards{display:flex;flex-direction:column;gap:16px;}
+  .bpdp-hdiff__card{background:#fff;border-radius:18px;padding:20px 22px;box-shadow:0 8px 24px rgba(0,0,0,.08);}
+  .bpdp-hdiff__card h3{margin:0 0 6px;font-size:18px;font-weight:800;letter-spacing:-.02em;color:#1A1426;}
+  .bpdp-hdiff__card p{margin:0;font-size:14px;line-height:1.55;color:#3D2F52;font-weight:500;}
+  .bpdp-hdiff__photo{border-radius:24px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.18);}
+  .bpdp-hdiff__photo img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:1/1;}
+  .bpdp-details{max-width:820px;margin:0 auto;padding:64px 48px 24px;}
+  .bpdp-details>h2{text-align:center;font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.03em;margin:0 0 24px;color:#1A1426;}
+  .bpdp-acc{background:#fff;border:1px solid #E7DEC9;border-radius:16px;margin-bottom:12px;overflow:hidden;}
+  .bpdp-acc summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:18px 22px;font-size:16px;font-weight:700;color:#1A1426;}
+  .bpdp-acc summary::-webkit-details-marker{display:none;}
+  .bpdp-acc__ic{width:26px;height:26px;border-radius:999px;background:#F37024;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center;transition:transform .3s;}
+  .bpdp-acc[open] .bpdp-acc__ic{transform:rotate(45deg);}
+  .bpdp-acc__body{padding:0 22px 20px;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .bpdp-acc__body p,.bpdp-acc__note{grid-column:1/-1;font-size:14px;line-height:1.6;color:#3D2F52;margin:6px 0 0;}
+  .bpdp-details__coa{text-align:center;margin-top:18px;}
+  .bpdp-details__coa a{font-size:14px;font-weight:700;color:#C4248F;text-decoration:underline;}
+  .bpdp-explore{max-width:1320px;margin:0 auto;padding:48px 48px 88px;}
+  .bpdp-explore>h2{font-size:clamp(26px,3.5vw,38px);font-weight:800;letter-spacing:-.03em;margin:0 0 24px;color:#1A1426;}
+  .bpdp-explore__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .bpdp-explore__card{border-radius:24px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;background:#fff;border:1px solid #E7DEC9;transition:transform .3s cubic-bezier(.22,1,.36,1);}
+  .bpdp-explore__card:hover{transform:translateY(-4px);}
+  .bpdp-explore__img{height:200px;overflow:hidden;background:linear-gradient(150deg,#FFF2E4,#FBE7F3);}
+  .bpdp-explore__img img{width:100%;height:100%;object-fit:contain;padding:14px;}
+  .bpdp-explore__txt{padding:16px 18px;}
+  .bpdp-explore__tag{font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9B1872;}
+  .bpdp-explore__name{font-size:19px;font-weight:800;letter-spacing:-.015em;margin-top:4px;}
+  .bpdp-explore__price{margin-top:6px;font-size:14px;font-weight:700;}
+  .bpdp-explore__price s{color:#6B5E80;font-weight:500;margin-left:6px;}
+  @media(max-width:1080px){
+    .bpdp__grid{grid-template-columns:1fr;padding:24px 20px 56px;gap:28px;}
+    .bpdp__gallery{position:static;}.bpdp__gmain{height:420px;}
+    .bpdp__crumbs{padding:16px 20px 0;}
+    .bpdp-hdiff{padding:56px 20px;}.bpdp-hdiff__grid{grid-template-columns:1fr;gap:24px;}.bpdp-hdiff__photo{order:-1;}
+    .bpdp-details{padding:48px 20px 16px;}.bpdp-explore{padding:32px 20px 64px;}
+    .bpdp-explore__grid{grid-template-columns:1fr;}
+    .bpdp-acc__body{grid-template-columns:1fr;}
+  }
+</style>
+
+<script>
+  (function(){
+    /* Gallery thumbnail swap */
+    var thumbs=document.querySelectorAll('.bpdp__thumb'),main=document.getElementById('bpdpMain');
+    thumbs.forEach(function(t){t.addEventListener('click',function(){
+      thumbs.forEach(function(x){x.classList.remove('is-active');});
+      t.classList.add('is-active');
+      if(main){main.src=t.getAttribute('data-img');}
+    });});
+
+    /* AJAX add-to-cart that opens the theme's cart drawer (matches main-product) */
+    var form=document.querySelector('.bpdp__form');
+    if(form){
+      form.addEventListener('submit',function(e){
+        e.preventDefault();
+        var btn=form.querySelector('.bpdp__atc'); var orig=btn?btn.innerHTML:'';
+        if(btn){btn.disabled=true;btn.innerHTML='Adding…';}
+        var fd=new FormData(form);
+        var isModal=window.theme&&window.theme.settings&&window.theme.settings.cartType==='modal';
+        if(isModal){fd.append('sections','cart-items,cart-footer,cart-item-count');fd.append('sections_url',window.location.pathname);}
+        fetch('/cart/add.js',{method:'POST',body:fd,headers:{'X-Requested-With':'XMLHttpRequest'}})
+          .then(function(r){return r.json();})
+          .then(function(data){
+            if(btn){btn.disabled=false;btn.innerHTML=orig;}
+            if(data.status){alert(data.description||data.message||'Could not add to cart');return;}
+            document.body.dispatchEvent(new CustomEvent('shapes:cart:afteradditem',{bubbles:true,detail:{response:data}}));
+          })
+          .catch(function(err){if(btn){btn.disabled=false;btn.innerHTML=orig;}console.error('Add to cart error:',err);
+            /* fallback: hard navigate so the add still completes */ form.submit();});
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Bundle Product",
+  "tag": "section",
+  "settings": [],
+  "presets": [{ "name": "Bundle Product" }]
+}
+{% endschema %}

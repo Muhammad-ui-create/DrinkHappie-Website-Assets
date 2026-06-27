@@ -14,7 +14,7 @@
   assign heading = section.settings.heading | default: 'Happie Bundles'
   assign subheading = section.settings.subheading
   assign eyebrow = section.settings.eyebrow | default: 'Bundle & Save 5%'
-  assign link_base = section.settings.bundle_link_base | default: 'https://raw.githack.com/Muhammad-ui-create/Drinkhappie-main/staging/bundle-previews/bundles/'
+  assign link_base = section.settings.bundle_link_base | default: '/products/'
   assign link_suffix = section.settings.bundle_link_suffix
 
   assign b_handle  = 'berry-vineyard-duo,cherry-citrus-kickoff,cherry-lime-chiller,citrus-grove-pack,orchard-twist,sweet-sour-party-stack' | split: ','
@@ -97,12 +97,12 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Happie Bundles" },
     { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Curated multi-packs of our best-selling THC seltzers — mix your favorite flavors and save 5% on every bundle." },
     { "type": "header", "content": "Card links" },
-    { "type": "text", "id": "bundle_link_base", "label": "Bundle link base URL", "info": "Each card links to this base + the bundle handle (+ suffix). Point at the live bundle pages once published.", "default": "https://raw.githack.com/Muhammad-ui-create/Drinkhappie-main/staging/bundle-previews/bundles/" },
-    { "type": "text", "id": "bundle_link_suffix", "label": "Link suffix", "default": ".html" },
+    { "type": "text", "id": "bundle_link_base", "label": "Bundle link base URL", "info": "Each card links to this base + the bundle handle (+ suffix). Point at the live bundle pages once published.", "default": "/products/" },
+    { "type": "text", "id": "bundle_link_suffix", "label": "Link suffix" },
     { "type": "header", "content": "Appearance" },
     { "type": "color", "id": "background_color", "label": "Background", "default": "#FFF2E4" },
-    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 150, "step": 5, "unit": "px", "default": 64 },
-    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 150, "step": 5, "unit": "px", "default": 72 }
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 150, "step": 5, "unit": "px", "default": 65 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 150, "step": 5, "unit": "px", "default": 70 }
   ],
   "presets": [ { "name": "Bundles Grid" } ]
 }

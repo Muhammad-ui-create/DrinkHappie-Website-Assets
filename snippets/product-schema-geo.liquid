@@ -77,7 +77,7 @@
     endif
   endif
   assign schema_has_aggregate = false
-  {%- comment -%} 2026-06-05: raised min reviews from 1 to 5 to suppress fake "5.0 / 1 review" defaults from polluted metafields. Google flags <5-review aggregateRating as low-quality. {%- endcomment -%}
+  # 2026-06-05: raised min reviews from 1 to 5 to suppress fake 5.0/1-review defaults from polluted metafields. Google flags <5-review aggregateRating as low-quality.
   if schema_rating_val != blank and schema_review_count != blank and schema_review_count >= 5
     assign schema_has_aggregate = true
   endif
