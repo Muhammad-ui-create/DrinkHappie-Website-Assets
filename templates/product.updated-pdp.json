@@ -1,0 +1,608 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "header_information_MCXcYm": {
+      "type": "header-information",
+      "blocks": {
+        "item_AjRAV6": {
+          "type": "item",
+          "settings": {
+            "item_text": "✅ Yep! Legal"
+          }
+        },
+        "item_cePehW": {
+          "type": "item",
+          "settings": {
+            "item_text": "🔬 3rd-Party Lab Tested"
+          }
+        },
+        "item_xti9yQ": {
+          "type": "item",
+          "settings": {
+            "item_text": "📦 Ships to 40+ States"
+          }
+        }
+      },
+      "block_order": [
+        "item_AjRAV6",
+        "item_cePehW",
+        "item_xti9yQ"
+      ],
+      "name": "Header Information",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product-updated",
+      "blocks": {
+        "product_images": {
+          "type": "product_images",
+          "settings": {
+            "enable_zoom": true
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "show_rating": true,
+            "rating_text": "4.9/5.0",
+            "show_badge": true,
+            "badge_text": "{{ product.metafields.custom.badge_text.value }}"
+          }
+        },
+        "product_title": {
+          "type": "product_title",
+          "settings": {
+            "subtitle": "Hemp-Powered THC Seltzer"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "description": ""
+          }
+        },
+        "product_details": {
+          "type": "product_details",
+          "settings": {}
+        },
+        "flavor_selector": {
+          "type": "flavor_selector",
+          "settings": {
+            "flavor_product_1": "groovy-grapefruit",
+            "flavor_product_2": "cheery-cherry",
+            "flavor_product_3": "grateful-grape",
+            "flavor_product_4": "sublime"
+          }
+        },
+        "thc_strength_selector_MRJGga": {
+          "type": "thc_strength_selector",
+          "settings": {}
+        },
+        "size_selector": {
+          "type": "size_selector",
+          "settings": {}
+        },
+        "subscription": {
+          "type": "subscription",
+          "disabled": true,
+          "settings": {}
+        },
+        "onetime": {
+          "type": "onetime",
+          "disabled": true,
+          "settings": {}
+        },
+        "appstle_widget": {
+          "type": "appstle_widget",
+          "settings": {}
+        },
+        "add_to_cart": {
+          "type": "add_to_cart",
+          "settings": {}
+        },
+        "shipping_info": {
+          "type": "shipping_info",
+          "settings": {
+            "shipping_text_1": "Ships 1 Business Day",
+            "shipping_text_2": "Free Shipping $50+"
+          }
+        },
+        "long_description": {
+          "type": "long_description",
+          "settings": {
+            "long_description": "{{ product.description }}"
+          }
+        },
+        "accordion": {
+          "type": "accordion",
+          "settings": {
+            "accordion_title_1": "🌿 What's Inside?",
+            "accordion_content_1": "{{ product.metafields.custom.whats_inside | metafield_tag }}",
+            "accordion_title_2": "⚡ How It Works",
+            "accordion_content_2": "<p><strong>Nano-Emulsified = Fast-Acting</strong><br/>We break down hemp extract into tiny particles that your body absorbs quickly. That means effects in 15-30 minutes, not 2 hours like edibles.</p><p><strong>Balanced Blend for Control</strong><br/>5mg THC + 5mg CBD creates a gentle, functional buzz. You're relaxed and social, not couch-locked or paranoid. Think \"two glasses of wine\" vibe, but cleaner.</p><p><strong>Timeline: First Sip to Next Morning</strong></p><ul><li><strong>15-30 min:</strong> Effects start to kick in—stress melts, mood lifts</li><li><strong>45-60 min:</strong> Peak relaxation, perfect for socializing or unwinding</li><li><strong>3-4 hours:</strong> Gentle comedown, no crash</li><li><strong>Next morning:</strong> Wake up refreshed, zero hangover</li></ul><p><strong>Why It Beats Alcohol</strong><br/>No empty calories. No dehydration. No waking up wondering what you said last night. Just good vibes and better mornings.</p>",
+            "accordion_title_3": "✅ Lab Tested & Legally Shipped",
+            "accordion_content_3": "<p><strong>Farm Bill Compliant</strong><br/>Every can contains hemp-derived Delta-9 THC within federal legal limits (&lt;0.3% by dry weight). This isn't a legal gray area—it's 100% compliant with the 2018 Farm Bill.</p><p><strong>Third-Party Lab Tested</strong><br/>Each batch is tested for potency, purity, and safety. COAs (Certificates of Analysis) available in the link below. No surprises, just transparency.</p><p><strong>Ships to 40+ States</strong><br/>We ship directly to your door in most states. If we can't ship to you, we'll let you know at checkout.</p><p><strong>21+ Only</strong><br/>Happie is for adults who want to unwind responsibly. Age verification required at checkout.</p>"
+          }
+        },
+        "coa_button": {
+          "type": "coa_button",
+          "settings": {
+            "button_text": "VIEW COA & Lab Tests",
+            "coa_url": "shopify://pages/coas"
+          }
+        }
+      },
+      "block_order": [
+        "product_images",
+        "rating",
+        "product_title",
+        "price",
+        "description",
+        "product_details",
+        "flavor_selector",
+        "thc_strength_selector_MRJGga",
+        "size_selector",
+        "subscription",
+        "onetime",
+        "appstle_widget",
+        "add_to_cart",
+        "shipping_info",
+        "long_description",
+        "accordion",
+        "coa_button"
+      ],
+      "settings": {
+        "background_color": "#ffe6cb",
+        "padding_top": 12,
+        "padding_bottom": 60
+      }
+    },
+    "text_image_block_bYnbUx": {
+      "type": "text-image-block",
+      "blocks": {
+        "image_content_MiXxQC": {
+          "type": "image_content",
+          "settings": {
+            "content_heading": "⚡ 5mg THC + 5mg CBD (1:1 Bliss Ratio)",
+            "content": "<p>Kicks in within 15-20 minutes, not hours. <strong>Nano-Emulsified Hemp Extract,</strong> absorbs faster so you feel it sooner. Control your vibe.</p>"
+          }
+        },
+        "image_content_tD7U86": {
+          "type": "image_content",
+          "settings": {
+            "content_heading": "🍯 No Cane Sugar - Blue Agave Sweetened",
+            "content": "<p>Sweetened with organic blue agave only. Just 30 calories and 7g natural sugar per can. All flavor, zero crash.</p>"
+          }
+        },
+        "image_content_mb3MWj": {
+          "type": "image_content",
+          "settings": {
+            "content_heading": "🌊 Aquamin S.  Ocean Minerals",
+            "content": "<p>Calcium and magnesium from pristine ocean waters. Real hydration that supports your body, not just sparkling water.</p>"
+          }
+        },
+        "image_content_xrWKpe": {
+          "type": "image_content",
+          "settings": {
+            "content_heading": "🌱 Farm to Can",
+            "content": "<p>Small-batch Northern California hemp from farms we know by name. Complete seed-to-can traceability you can trust.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "image_content_MiXxQC",
+        "image_content_tD7U86",
+        "image_content_mb3MWj",
+        "image_content_xrWKpe"
+      ],
+      "name": "Image Text Block",
+      "settings": {
+        "heading_icon": "shopify://shop_images/happie-cloud.png",
+        "heading": "The happie difference",
+        "image": "shopify://shop_images/5f8260cd-ba14-4ba1-a42f-fe426dc8a7df_1.png",
+        "button_text": "Ready to Drink happie?",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "wave_height": 80,
+        "wave_animation_speed": 8,
+        "show_top_wave": true,
+        "top_wave_style": "wave",
+        "top_wave_color": "#50b2bd",
+        "top_wave_animate": true,
+        "invert_top_wave": true,
+        "show_bottom_wave": false,
+        "bottom_wave_style": "wave",
+        "bottom_wave_color": "#50b2bd",
+        "bottom_wave_animate": false,
+        "invert_bottom_wave": false
+      }
+    },
+    "real_people_TNHp8z": {
+      "type": "real-people",
+      "blocks": {
+        "items_krbTiD": {
+          "type": "items",
+          "settings": {
+            "item_icon": "shopify://shop_images/alcohol-free-icon_e22b181a-e523-4bc7-9636-7c267087fc79.svg",
+            "item_heading": "Alcohol Free"
+          }
+        },
+        "items_fKYWrk": {
+          "type": "items",
+          "settings": {
+            "item_icon": "shopify://shop_images/delta-nine-thc-icon.svg",
+            "item_heading": "Delta 9 THC"
+          }
+        },
+        "items_eHmNyA": {
+          "type": "items",
+          "settings": {
+            "item_icon": "shopify://shop_images/low-cal-icon.svg",
+            "item_heading": "Low Cal"
+          }
+        },
+        "items_jqVNnx": {
+          "type": "items",
+          "settings": {
+            "item_icon": "shopify://shop_images/vegan-icon.svg",
+            "item_heading": "Vegan"
+          }
+        },
+        "items_w7x879": {
+          "type": "items",
+          "settings": {
+            "item_icon": "shopify://shop_images/cbd-ratio-icon.svg",
+            "item_heading": "1:1 CBD Ratio"
+          }
+        }
+      },
+      "block_order": [
+        "items_krbTiD",
+        "items_fKYWrk",
+        "items_eHmNyA",
+        "items_jqVNnx",
+        "items_w7x879"
+      ],
+      "name": "Real People",
+      "settings": {
+        "heading_icon": "shopify://shop_images/happie-cloud.png",
+        "heading": "Everything You Want, Nothing You Don't",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "wave_height": 80,
+        "wave_animation_speed": 8,
+        "show_top_wave": true,
+        "top_wave_style": "wave",
+        "top_wave_color": "#ffffff",
+        "top_wave_animate": true,
+        "invert_top_wave": false,
+        "show_bottom_wave": false,
+        "bottom_wave_style": "wave",
+        "bottom_wave_color": "#ffe6cb",
+        "bottom_wave_animate": true,
+        "invert_bottom_wave": false
+      }
+    },
+    "moast_app_jtWhEE": {
+      "type": "moast-app",
+      "blocks": {
+        "moast_carousel_WUbdTC": {
+          "type": "shopify://apps/moast/blocks/carousel/1ac7547b-5443-446c-868c-7fab4566ee16",
+          "settings": {
+            "dynamic": false,
+            "feed": "default",
+            "feed_usage": "back_up",
+            "header": "",
+            "slide_type": "cards",
+            "product_cards": "none",
+            "autoplay_mode": "all",
+            "autoscroll_duration": 0,
+            "slide_size": "250",
+            "aspect_ratio": "vertical",
+            "border": 0,
+            "border_color": "linear-gradient(to right, #833ab4, #fd1d1d, #fcb045)",
+            "slide_rounding": "20",
+            "slide_spacing": 16,
+            "padding_top": 0,
+            "pagination": "none",
+            "alignment": "center",
+            "click_action": "fullscreen",
+            "float_location": "bottom_right",
+            "float_size": "medium",
+            "show_captions": false,
+            "custom_css": ""
+          }
+        }
+      },
+      "block_order": [
+        "moast_carousel_WUbdTC"
+      ],
+      "name": "Moast App",
+      "settings": {
+        "heading_icon": "shopify://shop_images/happie-cloud.png",
+        "rating_image": "shopify://shop_images/rating.png",
+        "rating_text": "Loved by 1,200+ Happy Drinkers",
+        "heading": "Real people. Real vibes. Real results.",
+        "scroll_speed": 40,
+        "item_width": 250,
+        "item_height": 350,
+        "item_width_mobile": 180,
+        "item_height_mobile": 260,
+        "item_gap": 16,
+        "item_radius": 16,
+        "padding_top": 80,
+        "padding_bottom": 40,
+        "wave_height": 80,
+        "wave_animation_speed": 8,
+        "show_top_wave": true,
+        "top_wave_style": "wave",
+        "top_wave_color": "#50b2bd",
+        "top_wave_animate": true,
+        "invert_top_wave": false,
+        "show_bottom_wave": true,
+        "bottom_wave_style": "wave",
+        "bottom_wave_color": "#ffe6cb",
+        "bottom_wave_animate": true,
+        "invert_bottom_wave": true
+      }
+    },
+    "brand_comparision_ywGiYK": {
+      "type": "brand-comparision",
+      "blocks": {
+        "brand_x9XnYJ": {
+          "type": "brand",
+          "settings": {
+            "information": "Fast-Acting Hemp",
+            "own_brand_have": "yes",
+            "other_brand_have": "no"
+          }
+        },
+        "brand_DRNn8Q": {
+          "type": "brand",
+          "settings": {
+            "information": "Small-Batch Farms",
+            "own_brand_have": "yes",
+            "other_brand_have": "no"
+          }
+        },
+        "brand_c4hnTi": {
+          "type": "brand",
+          "settings": {
+            "information": "Mineral-Infused Formula",
+            "own_brand_have": "yes",
+            "other_brand_have": "no"
+          }
+        },
+        "brand_3LCiqe": {
+          "type": "brand",
+          "settings": {
+            "information": "Alcohol Free",
+            "own_brand_have": "yes",
+            "other_brand_have": "no"
+          }
+        },
+        "brand_MKfHga": {
+          "type": "brand",
+          "settings": {
+            "information": "3rd-Party Lab Tested",
+            "own_brand_have": "yes",
+            "other_brand_have": "no"
+          }
+        },
+        "brand_TTiw4L": {
+          "type": "brand",
+          "settings": {
+            "information": "Nothing Fake",
+            "own_brand_have": "yes",
+            "other_brand_have": "no"
+          }
+        }
+      },
+      "block_order": [
+        "brand_x9XnYJ",
+        "brand_DRNn8Q",
+        "brand_c4hnTi",
+        "brand_3LCiqe",
+        "brand_MKfHga",
+        "brand_TTiw4L"
+      ],
+      "name": "Brand Comparision",
+      "settings": {
+        "section_heading": "Why Happie Hits Different!",
+        "content": "Non-alcoholic, low-calorie, and always third-party tested for purity and safety.",
+        "button_text": "Shop Happie Now",
+        "button_link": "#happie-product-section",
+        "own_brand": "shopify://shop_images/logo_svg.png",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "other_brand_text": "Other Brands",
+        "wave_height": 80,
+        "wave_animation_speed": 8,
+        "show_top_wave": false,
+        "top_wave_style": "wave",
+        "top_wave_color": "#50b2bd",
+        "top_wave_animate": true,
+        "invert_top_wave": false,
+        "show_bottom_wave": false,
+        "bottom_wave_style": "wave",
+        "bottom_wave_color": "#5b414a",
+        "bottom_wave_animate": true,
+        "invert_bottom_wave": false
+      }
+    },
+    "faq_accordion_EBYNyN": {
+      "type": "faq-accordion",
+      "blocks": {
+        "faq_item_bfjiRA": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will this get me high?",
+            "answer": "Yes—but it's a controlled, functional buzz. Think relaxed and social, not couch-locked. With 5mg THC and 5mg CBD per can, you'll feel a mellow lift similar to 1-2 glasses of wine. Effects kick in within 15-30 minutes and last 2-4 hours. Perfect for unwinding without losing your evening.Pro tip: New to THC? Start with half a can and see how you feel after 30 minutes."
+          }
+        },
+        "faq_item_wXKV7b": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is this legal? Can you really ship THC across state lines?",
+            "answer": "Yes. Happie contains hemp-derived Delta-9 THC, which is federally legal under the 2018 Farm Bill (as long as it's under 0.3% THC by dry weight—which ours is). We ship directly to 40+ states.\nWe cannot ship to: AL, AK, HI, ID, MT, VA\nIf your state isn't on the list, you'll see a notification at checkout. All orders require 21+ age verification."
+          }
+        },
+        "faq_item_Q88kxj": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will I fail a drug test?",
+            "answer": "Possibly. Happie contains real Delta-9 THC—the same compound found in cannabis. If you're subject to drug testing for work, sports, or other reasons, we recommend avoiding THC products entirely. Better safe than sorry."
+          }
+        },
+        "faq_item_MEGHBe": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How much should I drink? What's the right dose?",
+            "answer": "First-timers: Start with half a can (2.5mg THC). Wait 30 minutes. If you want more, finish the can.\nRegular cannabis users: One can (5mg THC) is a solid starting point. You can always have a second if you want to level up.\nTolerance varies. Body weight, metabolism, and experience all play a role. You can always drink more—you can't drink less. Start low, go slow, and find your happy place."
+          }
+        },
+        "faq_item_AE6EiT": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Why agave and honey instead of regular sugar?",
+            "answer": "We chose organic agave nectar and organic honey because they're natural, lower-glycemic sweeteners that won't spike your blood sugar like cane sugar does. You get 30 calories and just 5-7g of sugar per can—way less than most sodas, seltzers, or cocktails."
+          }
+        },
+        "faq_item_J3AzqW": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's Aquamin and why do I care about sea minerals?",
+            "answer": "Aquamin® is a mineral complex sourced from red algae in the North Atlantic. It's packed with magnesium and calcium—two minerals your body burns through when you're stressed, active, or (let's be honest) hungover from regular drinks.\nThink of it as built-in insurance for your next morning. Most THC drinks just get you buzzed. Happie gets you buzzed and takes care of you."
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_bfjiRA",
+        "faq_item_wXKV7b",
+        "faq_item_Q88kxj",
+        "faq_item_MEGHBe",
+        "faq_item_AE6EiT",
+        "faq_item_J3AzqW"
+      ],
+      "name": "FAQ Section",
+      "settings": {
+        "heading": "Questions? We got you",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "wave_height": 80,
+        "wave_animation_speed": 8,
+        "show_top_wave": true,
+        "top_wave_style": "wave",
+        "top_wave_color": "#ffe6cb",
+        "top_wave_animate": true,
+        "invert_top_wave": true,
+        "show_bottom_wave": false,
+        "bottom_wave_style": "wave",
+        "bottom_wave_color": "#ffe6cb",
+        "bottom_wave_animate": true,
+        "invert_bottom_wave": false
+      }
+    },
+    "related_products_r8i9PW": {
+      "type": "related-products",
+      "disabled": true,
+      "name": "t:sections.related_products.name",
+      "settings": {
+        "display_on_card": false,
+        "enable_quick_buy": false,
+        "related_products_heading": "Find Your happie",
+        "max_products": "4",
+        "product_tiles_aspect_ratio": "",
+        "image_shape": "",
+        "color_scheme": "",
+        "use_gradient_background": false
+      }
+    },
+    "featured_collection_cf8RAf": {
+      "type": "featured-collection",
+      "disabled": true,
+      "name": "t:sections.featured_collection.name",
+      "settings": {
+        "title": "Find Your happie",
+        "subheading": "",
+        "collection": "thc",
+        "no_products": 8,
+        "show_view_all": true,
+        "enable_quick_buy": true,
+        "display_on_card": false,
+        "layout": "carousel",
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 4,
+        "slideshow_focus": "center",
+        "mobile_slide_width": "three_fifths",
+        "desktop_slide_width": 25,
+        "autoscroll_mode": "1",
+        "product_tiles_aspect_ratio": "",
+        "image_shape": "",
+        "color_scheme": "",
+        "use_gradient_background": false
+      }
+    },
+    "product_feature_collection_73tCTV": {
+      "type": "product-feature-collection",
+      "name": "Product Collection",
+      "settings": {
+        "use_happie_cards": true,
+        "title": "Find Your happie",
+        "subheading": "",
+        "collection": "thc",
+        "no_products": 8,
+        "show_view_all": true,
+        "enable_quick_buy": true,
+        "display_on_card": false,
+        "layout": "carousel",
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 4,
+        "slideshow_focus": "center",
+        "mobile_slide_width": "three_fifths",
+        "desktop_slide_width": 25,
+        "autoscroll_mode": "1",
+        "product_tiles_aspect_ratio": "",
+        "image_shape": "",
+        "color_scheme": "scheme2",
+        "use_gradient_background": false,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "wave_height": 80,
+        "wave_animation_speed": 8,
+        "show_top_wave": false,
+        "top_wave_style": "wave",
+        "top_wave_color": "#ffe6cb",
+        "top_wave_animate": true,
+        "show_bottom_wave": false,
+        "bottom_wave_style": "wave",
+        "bottom_wave_color": "#ffe6cb",
+        "bottom_wave_animate": true
+      }
+    }
+  },
+  "order": [
+    "header_information_MCXcYm",
+    "main",
+    "text_image_block_bYnbUx",
+    "real_people_TNHp8z",
+    "moast_app_jtWhEE",
+    "brand_comparision_ywGiYK",
+    "faq_accordion_EBYNyN",
+    "related_products_r8i9PW",
+    "featured_collection_cf8RAf",
+    "product_feature_collection_73tCTV"
+  ]
+}

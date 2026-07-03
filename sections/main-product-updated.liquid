@@ -1648,7 +1648,7 @@
           {% when 'shipping_info' %}
             <div class="shipping-info" {{ block.shopify_attributes }}>
               <div class="shipping-item">🚚 {{ block.settings.shipping_text_1 | default: 'Ships 1 Business Day' }}</div>
-              <div class="shipping-item">📦 {{ block.settings.shipping_text_2 | default: 'Free Shipping $75+' }}</div>
+              <div class="shipping-item">📦 {{ block.settings.shipping_text_2 | default: 'Free Shipping $50+' }}</div>
             </div>
 
             <!-- Long Description Block -->
@@ -2622,7 +2622,7 @@
           "type": "text",
           "id": "shipping_text_2",
           "label": "Shipping Text 2",
-          "default": "Free Shipping $75+"
+          "default": "Free Shipping $50+"
         }
       ]
     },
