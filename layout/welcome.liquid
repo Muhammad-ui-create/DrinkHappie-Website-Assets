@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" style="height:100%">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="referrer" content="origin-when-cross-origin">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+  <title>{{ page_title }}</title>
+  {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+  {{ content_for_header }}
+  <style>
+    html,body{margin:0;padding:0;min-height:100%;background:#ECE8DD;}
+    body::before,body::after{display:none !important;}
+  </style>
+</head>
+<body class="template-welcome">
+  {{ content_for_layout }}
+</body>
+</html>

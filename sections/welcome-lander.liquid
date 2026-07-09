@@ -1,0 +1,106 @@
+{%- comment -%}
+  Welcome / age-gate pre-lander (built for Meta traffic).
+  Full-screen splash: hero photo + happie wordmark + 21+ gate.
+  "Enter Site" routes to the collection set in settings. Meant to run under
+  the minimal `welcome` layout (no theme header/footer). Image defaults to the
+  bundled asset; override it in the theme editor via the image picker.
+{%- endcomment -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Satisfy&display=swap" rel="stylesheet">
+
+<section class="wl">
+  <main class="wl-card" role="dialog" aria-label="Age verification">
+    <div class="wl-media">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'eager', class: 'wl-img', alt: section.settings.image.alt | default: 'Happie sparkling seltzers' }}
+      {%- else -%}
+        <img class="wl-img" src="{{ 'happie-lander.jpg' | asset_url }}" alt="Happie sparkling seltzers — Cheery Cherry, Sublime, Grateful Grape, Groovy Grapefruit" width="1200" height="1789">
+      {%- endif -%}
+    </div>
+    <div class="wl-panel">
+      <div class="wl-logo">{{ section.settings.wordmark | default: 'happie' }}<sup>&reg;</sup></div>
+      {%- if section.settings.tagline != blank -%}<p class="wl-tagline">{{ section.settings.tagline }}</p>{%- endif -%}
+      <p class="wl-ask">{{ section.settings.ask | default: 'Are you 21 or older?' }}</p>
+      <a class="wl-enter" href="{{ section.settings.button_url | default: '/collections/all' }}">{{ section.settings.button_label | default: 'Enter Site' }}</a>
+      {%- if section.settings.terms_text != blank -%}
+        <p class="wl-terms">{{ section.settings.terms_text }} <a href="{{ section.settings.terms_url | default: '/policies/terms-of-service' }}">Terms of Service</a>.</p>
+      {%- endif -%}
+      {%- if section.settings.under_url != blank -%}
+        <p class="wl-under"><a href="{{ section.settings.under_url }}">I&rsquo;m under 21</a></p>
+      {%- endif -%}
+      <div class="wl-rule"></div>
+      <div class="wl-badges">
+        <span class="wl-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#5FA83C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c6 0 7-5 7-5s5 4 5 9a3 3 0 0 1-5 3z"/><path d="M11 20c0-4 2-7 5-9"/></svg>{{ section.settings.badge_1 | default: 'Plant-Powered' }}</span>
+        <span class="wl-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#962F80" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>{{ section.settings.badge_2 | default: 'Lab Tested' }}</span>
+      </div>
+    </div>
+  </main>
+</section>
+
+<style>
+  .wl{--cream:#ECE8DD;--cream-2:#E3DECF;--card:#FFFFFF;--purple:#962F80;--purple-deep:#7C2568;
+    --teal:#50B2BD;--ink:#2B2A2E;--muted:#8C877D;--hair:#EAE5D8;
+    min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:28px;
+    background:radial-gradient(120% 90% at 50% 0%,#F3EFE6 0%,var(--cream) 46%,var(--cream-2) 100%);
+    font-family:'Poppins','Segoe UI',system-ui,-apple-system,sans-serif;color:var(--ink);box-sizing:border-box;}
+  .wl *{box-sizing:border-box;}
+  .wl-card{width:min(920px,100%);display:grid;grid-template-columns:0.9fr 1.1fr;background:var(--card);
+    border-radius:26px;overflow:hidden;box-shadow:0 30px 70px -28px rgba(94,28,79,.32),0 4px 14px rgba(0,0,0,.05);
+    opacity:0;transform:translateY(14px) scale(.99);animation:wl-rise .7s cubic-bezier(.2,.7,.2,1) .05s forwards;}
+  @keyframes wl-rise{to{opacity:1;transform:none;}}
+  .wl-media{position:relative;min-height:340px;background:linear-gradient(160deg,#F6EEF3,#EFE7DE);}
+  .wl-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%;}
+  .wl-panel{padding:44px 46px 38px;display:flex;flex-direction:column;align-items:center;text-align:center;}
+  .wl-logo{font-weight:800;font-size:clamp(46px,7vw,68px);line-height:.9;letter-spacing:-.03em;color:var(--purple);margin:6px 0 0;}
+  .wl-logo sup{font-size:.26em;top:-1.35em;font-weight:700;margin-left:.04em;}
+  .wl-tagline{font-family:'Satisfy',cursive;font-weight:400;font-size:clamp(26px,3.4vw,33px);color:var(--purple);margin:14px 0 0;opacity:.95;}
+  .wl-ask{font-weight:700;font-size:clamp(17px,2vw,19px);color:var(--ink);margin:26px 0 0;}
+  .wl-enter{margin:20px 0 0;width:100%;max-width:340px;display:inline-flex;align-items:center;justify-content:center;
+    padding:17px 28px;border-radius:999px;font-weight:700;font-size:16px;letter-spacing:.12em;text-transform:uppercase;
+    color:#fff;text-decoration:none;border:0;cursor:pointer;background:linear-gradient(180deg,var(--purple) 0%,var(--purple-deep) 100%);
+    box-shadow:0 12px 26px -10px rgba(124,37,104,.7);transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;}
+  .wl-enter:hover{transform:translateY(-2px);box-shadow:0 18px 34px -12px rgba(124,37,104,.8);filter:saturate(1.06);}
+  .wl-enter:active{transform:translateY(0);}
+  .wl-enter:focus-visible{outline:3px solid var(--teal);outline-offset:3px;}
+  .wl-terms{font-size:12.5px;line-height:1.55;color:var(--muted);margin:16px 0 0;max-width:330px;}
+  .wl-terms a{color:var(--muted);text-decoration:underline;text-underline-offset:2px;}
+  .wl-under{margin:12px 0 0;font-size:12px;}
+  .wl-under a{color:#B9B2A4;text-decoration:none;}
+  .wl-under a:hover{color:var(--muted);text-decoration:underline;}
+  .wl-rule{height:1px;width:100%;max-width:330px;background:var(--hair);margin:24px 0 0;}
+  .wl-badges{display:flex;gap:26px;margin:18px 0 0;flex-wrap:wrap;justify-content:center;}
+  .wl-badge{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:#6B6B6B;}
+  .wl-badge svg{width:16px;height:16px;flex:none;}
+  @media (max-width:720px){
+    .wl-card{grid-template-columns:1fr;max-width:440px;}
+    .wl-media{min-height:230px;}
+    .wl-img{object-position:center 60%;}
+    .wl-panel{padding:34px 26px 30px;}
+  }
+  @media (prefers-reduced-motion:reduce){.wl-card{animation:none;opacity:1;transform:none;}}
+</style>
+
+{% schema %}
+{
+  "name": "Welcome Lander",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Hero image", "info": "Defaults to the bundled 4-can photo if empty." },
+    { "type": "text", "id": "wordmark", "label": "Wordmark", "default": "happie" },
+    { "type": "text", "id": "tagline", "label": "Script tagline", "default": "Feel-Good in Every Sip" },
+    { "type": "text", "id": "ask", "label": "Age question", "default": "Are you 21 or older?" },
+    { "type": "header", "content": "Enter button" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Enter Site" },
+    { "type": "url", "id": "button_url", "label": "Enter destination", "info": "Where 'Enter Site' goes. Set to your collection page." },
+    { "type": "header", "content": "Legal" },
+    { "type": "text", "id": "terms_text", "label": "Terms line", "default": "By entering, you confirm you are 21+ and agree to our" },
+    { "type": "url", "id": "terms_url", "label": "Terms link" },
+    { "type": "url", "id": "under_url", "label": "Under-21 exit link", "info": "Where 'I'm under 21' sends visitors. Leave blank to hide." },
+    { "type": "header", "content": "Badges" },
+    { "type": "text", "id": "badge_1", "label": "Badge 1", "default": "Plant-Powered" },
+    { "type": "text", "id": "badge_2", "label": "Badge 2", "default": "Lab Tested" }
+  ],
+  "presets": [{ "name": "Welcome Lander" }]
+}
+{% endschema %}
