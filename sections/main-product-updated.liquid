@@ -3,6 +3,19 @@
   Mobile: Carousel | Desktop: Lightbox
 {% endcomment %}
 
+{%- comment -%} Variety Pack: hide the Appstle subscription "Purchase Options" widget; keep it one-time only. {%- endcomment -%}
+{%- if product.handle == 'happie-social-4-pack' -%}
+<style>
+  #appstle_subscription_widget0,[id^="appstle_subscription_widget"],.appstle_sub_widget,.appstle-widget-placeholder,#appstle-subscription-widget{display:none !important;}
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded',function(){
+    var force=function(){document.querySelectorAll('input[name="selling_plan"]').forEach(function(p){if(p.value===''&&!p.checked){p.checked=true;p.dispatchEvent(new Event('change',{bubbles:true}));}});};
+    force(); setTimeout(force,900);
+  });
+</script>
+{%- endif -%}
+
 <style>
   /* COLOR PALETTE */
   :root {
