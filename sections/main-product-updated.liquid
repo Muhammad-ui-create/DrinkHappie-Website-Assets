@@ -2366,8 +2366,8 @@
     // Subscribe & Save shortcut button
     const subscribeSaveBtn = document.getElementById('subscribe-save-btn');
     if (subscribeSaveBtn) {
-      subscribeSaveBtn.addEventListener('click', function() {
-        const planId = subscribeSaveBtn.dataset.planId;
+      subscribeSaveBtn.addEventListener('click', async function() {
+        let planId = subscribeSaveBtn.dataset.planId;
         const discount = subscribeSaveBtn.dataset.discount;
         const subscribeText = document.getElementById('subscribe-save-text');
         const variantId = document.getElementById('variant-id');
@@ -2376,6 +2376,15 @@
 
         subscribeSaveBtn.disabled = true;
         if (subscribeText) subscribeText.textContent = 'ADDING...';
+
+        // Resolve the CURRENT valid subscription plan for this variant at click time.
+        // Guards against stale/mismatched plan IDs if the subscription app or plan changes.
+        try {
+          const _pj = await (await fetch(window.location.pathname + '.js')).json();
+          const _pv = _pj.variants.find(function(x){ return String(x.id) === String(variantId.value); });
+          const _pa = _pv && _pv.selling_plan_allocations && _pv.selling_plan_allocations[0];
+          if (_pa && _pa.selling_plan_id) planId = String(_pa.selling_plan_id);
+        } catch (e) {}
 
         const formData = new FormData();
         formData.append('id', variantId.value);
