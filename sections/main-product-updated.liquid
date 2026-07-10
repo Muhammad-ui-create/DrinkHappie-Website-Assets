@@ -1289,14 +1289,25 @@
         {% case block.type %}
           {% when 'product_images' %}
             <div {{ block.shopify_attributes }}>
+              <!-- LCP: preload the hero image at the width the viewport will actually use -->
+              <link rel="preload" as="image"
+                href="{{ product.featured_image | image_url: width: 800 }}"
+                imagesrcset="{{ product.featured_image | image_url: width: 480 }} 480w, {{ product.featured_image | image_url: width: 800 }} 800w, {{ product.featured_image | image_url: width: 1200 }} 1200w"
+                imagesizes="(max-width: 768px) 100vw, 600px"
+                fetchpriority="high">
+
               <!-- Desktop: Main Image -->
               <div class="main-product-image desktop-image-view">
                 <img
                   id="main-image"
                   src="{{ product.featured_image | image_url: width: 1200 }}"
+                  srcset="{{ product.featured_image | image_url: width: 480 }} 480w, {{ product.featured_image | image_url: width: 800 }} 800w, {{ product.featured_image | image_url: width: 1200 }} 1200w"
+                  sizes="(max-width: 768px) 100vw, 600px"
                   alt="{{ product.title }}"
-                  width=""
-                  height=""
+                  width="{{ product.featured_image.width | default: 1200 }}"
+                  height="{{ product.featured_image.height | default: 1200 }}"
+                  loading="eager"
+                  fetchpriority="high"
                 >
               </div>
 
@@ -1306,7 +1317,13 @@
                   <div class="carousel-track" id="carousel-track">
                     {% for image in product.images %}
                       <div class="carousel-slide">
-                        <img src="{{ image | image_url: width: 1200 }}" alt="{{ product.title }}" width="" height="" class="zoom-icon" data-image-index="{{ forloop.index0 }}">
+                        <img src="{{ image | image_url: width: 800 }}"
+                          srcset="{{ image | image_url: width: 480 }} 480w, {{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1200 }} 1200w"
+                          sizes="100vw"
+                          alt="{{ product.title }}"
+                          width="{{ image.width | default: 1200 }}" height="{{ image.height | default: 1200 }}"
+                          class="zoom-icon" data-image-index="{{ forloop.index0 }}"
+                          {% if forloop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy" fetchpriority="low"{% endif %}>
                       </div>
                     {% endfor %}
                   </div>
@@ -1328,7 +1345,7 @@
               <div class="thumbnail-grid">
                 {% for image in product.images %}
                   <div class="thumbnail-item {% if forloop.first %}active{% endif %}" data-image-url="{{ image | image_url: width: 1200 }}" data-thumbnail-index="{{ forloop.index0 }}">
-                    <img src="{{ image | image_url: width: 600 }}" alt="{{ product.title }}" width="" height="" class="zoom-icon" data-image-index="{{ forloop.index0 }}" aria-label="View full size image">
+                    <img src="{{ image | image_url: width: 300 }}" alt="{{ product.title }}" width="{{ image.width | default: 1200 }}" height="{{ image.height | default: 1200 }}" class="zoom-icon" data-image-index="{{ forloop.index0 }}" aria-label="View full size image" loading="lazy">
                   </div>
                 {% endfor %}
               </div>
@@ -1411,6 +1428,7 @@
                         alt="{{ flavor_1.title }}"
                         width=""
                         height=""
+                        loading="lazy"
                       >
                     </a>
                   {% endif %}
@@ -1428,6 +1446,7 @@
                         alt="{{ flavor_2.title }}"
                         width=""
                         height=""
+                        loading="lazy"
                       >
                     </a>
                   {% endif %}
@@ -1445,6 +1464,7 @@
                         alt="{{ flavor_3.title }}"
                         width=""
                         height=""
+                        loading="lazy"
                       >
                     </a>
                   {% endif %}
@@ -1462,6 +1482,7 @@
                         alt="{{ flavor_4.title }}"
                         width=""
                         height=""
+                        loading="lazy"
                       >
                     </a>
                   {% endif %}
