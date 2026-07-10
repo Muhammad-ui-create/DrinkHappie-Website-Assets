@@ -1648,17 +1648,39 @@
           {% when 'shipping_info' %}
             <div class="shipping-info" {{ block.shopify_attributes }}>
               <div class="shipping-item">🚚 {{ block.settings.shipping_text_1 | default: 'Ships 1 Business Day' }}</div>
-              <div class="shipping-item">📦 {{ block.settings.shipping_text_2 | default: 'Free Shipping $50+' }}</div>
+              <div class="shipping-item">📦 {{ block.settings.shipping_text_2 | default: 'Free Shipping $50+' | replace: '$75+', '$50+' | replace: '$75', '$50' }}</div>
             </div>
 
             <!-- Long Description Block -->
           {% when 'long_description' %}
             <div class="long-description" {{ block.shopify_attributes }}>
-              {% if block.settings.long_description != blank %}
-                {{ block.settings.long_description }}
-              {% else %}
-                {{ product.content }}
-              {% endif %}
+              {%- comment -%} SEO-optimized THC line descriptions (staging review, per Pete). Handle-based override wins FIRST, ahead of the long_description block setting (which is set to "{{ product.description }}"). Non-THC products fall through to the block setting / admin content. {%- endcomment -%}
+              {%- assign _dh = product.handle | downcase -%}
+              {%- if _dh contains 'groovy-grapefruit' -%}
+                  <p><strong>Happie Groovy Grapefruit is a hemp-derived Delta-9 THC seltzer &mdash; tart, zesty grapefruit with a clean, sparkling finish.</strong></p>
+                  <p>Available in 5mg and 10mg, it delivers a smooth, social buzz with zero alcohol, zero hangover, and low calories. Farm Bill&ndash;compliant hemp-derived Delta-9 THC (under 0.3% by dry weight). Onset in 15&ndash;30 minutes; effects last 2&ndash;4 hours &mdash; ideal for brunch, poolside, or swapping your evening cocktail.</p>
+                  <p><strong>Format:</strong> 12 oz (355 mL) can &middot; 5mg or 10mg THC &middot; Low calorie &middot; Caffeine-free &middot; Vegan &middot; Gluten-free</p>
+                  <p><strong>Ingredients:</strong> Carbonated Water, Organic Light Agave Nectar, Citric Acid, Grapefruit Extract, Nano Emulsified Hemp Extract, Marine Derived Magnesium Citrate, Marine Derived Calcium Citrate Malate, Potassium Sorbate, Benzoic Acid</p>
+                {%- elsif _dh contains 'cheery-cherry' -%}
+                  <p><strong>Happie Cheery Cherry is a hemp-derived Delta-9 THC seltzer &mdash; sweet, ripe cherry that&rsquo;s bright and endlessly juicy.</strong></p>
+                  <p>Sip it in 5mg or 10mg for a smooth, social buzz &mdash; no alcohol, no hangover, and low calories. Farm Bill&ndash;compliant hemp-derived Delta-9 THC (under 0.3% by dry weight). Feel it in 15&ndash;30 minutes, with a relaxed 2&ndash;4 hour glow. The crowd-pleaser for game nights, celebrations, and easy evenings.</p>
+                  <p><strong>Format:</strong> 12 oz (355 mL) can &middot; 5mg or 10mg THC &middot; Low calorie &middot; Caffeine-free &middot; Vegan &middot; Gluten-free</p>
+                  <p><strong>Ingredients:</strong> Carbonated Water, Organic Light Agave Nectar, Citric Acid, Natural Cherry Extract, Nano Emulsified Hemp Extract, Marine Derived Magnesium Citrate, Marine Derived Calcium Citrate Malate, Potassium Sorbate, Benzoic Acid</p>
+                {%- elsif _dh contains 'grateful-grape' -%}
+                  <p><strong>Happie Grateful Grape is a hemp-derived Delta-9 THC seltzer &mdash; bold, jammy purple grape with a nostalgic twist.</strong></p>
+                  <p>Choose 5mg or 10mg for a smooth, social buzz without the alcohol, the hangover, or the extra calories. Farm Bill&ndash;compliant hemp-derived Delta-9 THC (under 0.3% by dry weight). Kicks in within 15&ndash;30 minutes and eases off over 2&ndash;4 hours &mdash; made for laid-back nights and good company.</p>
+                  <p><strong>Format:</strong> 12 oz (355 mL) can &middot; 5mg or 10mg THC &middot; Low calorie &middot; Caffeine-free &middot; Vegan &middot; Gluten-free</p>
+                  <p><strong>Ingredients:</strong> Carbonated Water, Organic Light Agave Nectar, Citric Acid, Natural Grape Flavor, Nano Emulsified Hemp Extract, Marine Derived Magnesium Citrate, Marine Derived Calcium Citrate Malate, Potassium Sorbate, Benzoic Acid</p>
+                {%- elsif _dh contains 'sublime' -%}
+                  <p><strong>Happie Sublime is a hemp-derived Delta-9 THC seltzer &mdash; crisp, zesty lime, clean and impossibly refreshing.</strong></p>
+                  <p>Available in 5mg and 10mg, it&rsquo;s a smooth, social buzz with zero alcohol, zero hangover, and low calories. Farm Bill&ndash;compliant hemp-derived Delta-9 THC (under 0.3% by dry weight). Onset in 15&ndash;30 minutes, lasting 2&ndash;4 hours &mdash; the fresh, zero-proof answer to a lime margarita or taco-night cerveza.</p>
+                  <p><strong>Format:</strong> 12 oz (355 mL) can &middot; 5mg or 10mg THC &middot; Low calorie &middot; Caffeine-free &middot; Vegan &middot; Gluten-free</p>
+                  <p><strong>Ingredients:</strong> Carbonated Water, Organic Light Agave Nectar, Citric Acid, Lime Extract, Nano Emulsified Hemp Extract, Marine Derived Magnesium Citrate, Marine Derived Calcium Citrate Malate, Potassium Sorbate, Benzoic Acid</p>
+                {%- elsif block.settings.long_description != blank -%}
+                  {{ block.settings.long_description }}
+                {%- else -%}
+                  {{ product.content }}
+                {%- endif -%}
             </div>
 
             <!-- COA Button Block -->

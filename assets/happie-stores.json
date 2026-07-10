@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-06-25",
-  "total_count": 161,
+  "last_updated": "2026-07-01",
+  "total_count": 166,
   "stores": [
     {
       "handle": "alcosta-skate-and-smoke-san-ramon",
@@ -770,6 +770,32 @@
       "lng": "-90.15984949999999"
     },
     {
+      "handle": "acquistapace-s-mandeville",
+      "name": "Acquistapace's",
+      "address": "631 N Causeway Blvd",
+      "city": "Mandeville",
+      "state": "LA",
+      "state_full": "Louisiana",
+      "zip": "70448",
+      "website": "",
+      "category": "Retail",
+      "lat": "",
+      "lng": ""
+    },
+    {
+      "handle": "gulf-coast-spirits-mandeville",
+      "name": "Gulf Coast Spirits",
+      "address": "1740 Florida St",
+      "city": "Mandeville",
+      "state": "LA",
+      "state_full": "Louisiana",
+      "zip": "70448",
+      "website": "",
+      "category": "Retail",
+      "lat": "",
+      "lng": ""
+    },
+    {
       "handle": "total-wine-mandeville-2503-mandeville",
       "name": "Total Wine Mandeville 2503",
       "address": "1882 N. Causeway",
@@ -913,6 +939,19 @@
       "lng": "-90.0577857"
     },
     {
+      "handle": "baroness-on-baronne-new-orleans",
+      "name": "Baroness on Baronne",
+      "address": "339 Baronne St",
+      "city": "New Orleans",
+      "state": "LA",
+      "state_full": "Louisiana",
+      "zip": "70112",
+      "website": "",
+      "category": "Hospitality",
+      "lat": "",
+      "lng": ""
+    },
+    {
       "handle": "birdies-s-claiborne-new-orleans",
       "name": "Birdies (S. Claiborne)",
       "address": "6229 S Claiborne Ave",
@@ -976,6 +1015,32 @@
       "category": "Retail",
       "lat": "29.9260941",
       "lng": "-90.1169472"
+    },
+    {
+      "handle": "stein-s-deli-new-orleans",
+      "name": "Stein's Deli",
+      "address": "2207 Magazine Street",
+      "city": "New Orleans",
+      "state": "LA",
+      "state_full": "Louisiana",
+      "zip": "70130",
+      "website": "",
+      "category": "Hospitality",
+      "lat": "",
+      "lng": ""
+    },
+    {
+      "handle": "swirl-wine-bar-market-new-orleans",
+      "name": "Swirl Wine Bar & Market",
+      "address": "3143 Ponce de Leon St",
+      "city": "New Orleans",
+      "state": "LA",
+      "state_full": "Louisiana",
+      "zip": "70119",
+      "website": "",
+      "category": "Hospitality",
+      "lat": "",
+      "lng": ""
     },
     {
       "handle": "the-filling-station-new-orleans",

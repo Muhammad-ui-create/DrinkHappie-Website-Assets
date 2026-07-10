@@ -40,11 +40,12 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
+    {%- assign clean_page_title = page_title | replace: ' | Happie®', '' | replace: ' | Happie', '' | replace: ' – Happie®', '' | replace: ' - Happie®', '' | strip -%}
     <title>
   {%- if template.name == 'index' %}
     Happie® | Best THC Seltzers & Mushroom Drinks | Buy Online
   {%- elsif template.name == 'product' %}
-    {{ page_title }} | Hemp-Derived THC Drink | Happie®
+    {{ clean_page_title }} | Happie®
   {%- elsif template.name == 'collection' %}
     {%- if collection.handle == 'thc-drinks' or collection.handle == 'thc' or collection.handle == 'frontpage' %}
       Buy THC Seltzers Online | Delta-9 Hemp Drinks 5mg & 10mg | Happie®
@@ -92,7 +93,7 @@
   {%- elsif template.name == '404' %}
     Page Not Found | Happie®
   {%- else %}
-    {{ page_title }} | Happie®
+    {{ clean_page_title }} | Happie®
   {%- endif %}
 </title>
 
@@ -116,9 +117,9 @@
   {%- elsif collection.handle == 'social' %}
     <meta name="description" content="Happie Social THC Seltzers — 5mg and 10mg hemp-derived Delta-9 THC drinks perfect for parties, social gatherings & relaxation. The best alcohol alternative. Zero hangover, low calorie, vegan.">
   {%- elsif collection.description != blank %}
-    <meta name="description" content="{{ collection.description | strip_html | truncate: 155 }}">
+    <meta name="description" content="{{ collection.description | strip_html | strip_html | truncatewords: 25, '' }}">
   {%- else %}
-    <meta name="description" content="{{ page_description | default: shop.description | truncate: 155 }}">
+    <meta name="description" content="{{ page_description | default: shop.description | strip_html | truncatewords: 25, '' }}">
   {%- endif %}
 {%- elsif template.name == 'page' %}
   {%- if page.handle == 'faq' %}
@@ -128,14 +129,14 @@
   {%- elsif page.handle == 'wholesale' %}
     <meta name="description" content="Wholesale Happie THC seltzers and mushroom drinks for retailers, bars, restaurants & dispensaries. Premium hemp-derived beverages with competitive margins. Apply today.">
   {%- elsif page_description != blank %}
-    <meta name="description" content="{{ page_description | truncate: 155 }}">
+    <meta name="description" content="{{ page_description | strip_html | truncatewords: 25, '' }}">
   {%- else %}
-    <meta name="description" content="{{ shop.description | truncate: 155 }}">
+    <meta name="description" content="{{ shop.description | strip_html | truncatewords: 25, '' }}">
   {%- endif %}
 {%- elsif page_description != blank %}
-  <meta name="description" content="{{ page_description | truncate: 155 }}">
+  <meta name="description" content="{{ page_description | strip_html | truncatewords: 25, '' }}">
 {%- else %}
-  <meta name="description" content="{{ shop.description | truncate: 155 }}">
+  <meta name="description" content="{{ shop.description | strip_html | truncatewords: 25, '' }}">
 {%- endif %}
 
     {%- render 'meta-tags' -%}

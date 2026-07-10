@@ -4,7 +4,7 @@
   custom.serving_size, custom.calories, custom.active_ingredient, custom.active_amount
   Optional: custom.carbs, custom.protein, custom.fat, custom.caffeine_free (boolean)
 
-  aggregateRating: uses Shopify standard reviews.* metafields (rating object) and Judge.me judgeme.* fallbacks
+  aggregateRating: uses ONLY Shopify standard reviews.* metafields (Option B), gated to >=5 reviews. Judge.me rich snippets must be OFF in its settings (it syncs to reviews.*).
   so THC vs mushroom lines both pick up ratings when the app writes either namespace. No fabricated ratings.
 {%- endcomment -%}
 {%- liquid
@@ -63,19 +63,9 @@
   if rev_count_raw != blank
     assign schema_review_count = rev_count_raw | plus: 0
   endif
-  if schema_rating_val == blank or schema_review_count == blank or schema_review_count < 1
-    assign jm_r = product.metafields.judgeme.all_reviews_rating.value | default: product.metafields.judgeme.all_reviews_rating
-    assign jm_c = product.metafields.judgeme.all_reviews_count.value | default: product.metafields.judgeme.all_reviews_count
-    if jm_c != blank
-      assign jm_c_num = jm_c | plus: 0
-    else
-      assign jm_c_num = 0
-    endif
-    if jm_r != blank and jm_c_num > 0
-      assign schema_rating_val = jm_r
-      assign schema_review_count = jm_c_num
-    endif
-  endif
+  # Option B (2026-06-27 SEO): theme owns the rating and reads ONLY the standard reviews.* metafields
+  # (Judge.me syncs to these when its "Shopify Product Review metafields" integration is ON). Judge.me's
+  # own rich-snippet schema must be turned OFF in its settings to avoid duplicate/conflicting Product schema.
   assign schema_has_aggregate = false
   # 2026-06-05: raised min reviews from 1 to 5 to suppress fake 5.0/1-review defaults from polluted metafields. Google flags <5-review aggregateRating as low-quality.
   if schema_rating_val != blank and schema_review_count != blank and schema_review_count >= 5
@@ -169,6 +159,10 @@
       "url": {{ shop.url | append: product.url | append: '?variant=' | append: variant.id | json }},
       "priceCurrency": {{ shop.currency | json }},
       "price": "{{ variant.price | money_without_currency | remove: ',' }}",
+      "priceValidUntil": "{{ 'now' | date: '%Y' }}-12-31",
+      {%- if variant.barcode != blank %}
+      "gtin12": {{ variant.barcode | json }},
+      {%- endif %}
       "availability": "https://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
       "seller": {
         "@type": "Organization",
@@ -216,6 +210,10 @@
     "url": {{ shop.url | append: product.url | json }},
     "priceCurrency": {{ shop.currency | json }},
     "price": "{{ v.price | money_without_currency | remove: ',' }}",
+    "priceValidUntil": "{{ 'now' | date: '%Y' }}-12-31",
+    {%- if v.barcode != blank %}
+    "gtin12": {{ v.barcode | json }},
+    {%- endif %}
     "availability": "https://schema.org/{% if v.available %}InStock{% else %}OutOfStock{% endif %}",
     "seller": {
       "@type": "Organization",
