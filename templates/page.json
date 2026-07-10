@@ -1,0 +1,233 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "faq_accordion": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "padding_top": 40,
+        "padding_bottom": 80
+      },
+      "blocks": {
+        "faq_1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is Delta-9 THC and is it legal?",
+            "answer": "Delta-9 THC is the primary psychoactive compound found in cannabis. Our beverages contain hemp-derived Delta-9 THC at or below 0.3% by dry weight, making them federally legal under the 2018 Farm Bill. However, state laws vary — please check your local regulations before ordering."
+          }
+        },
+        "faq_2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How long does it take to feel the effects?",
+            "answer": "Most people feel the effects within 15–45 minutes. Because our THC is dissolved in liquid, it absorbs faster than traditional edibles. Start low and go slow — wait at least one hour before consuming more."
+          }
+        },
+        "faq_3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the difference between 5mg and 10mg THC?",
+            "answer": "Our 5mg drinks are designed for a mild, social buzz — great for first-timers or those seeking light relaxation. The 10mg option delivers a stronger, more noticeable effect best suited for experienced consumers. We always recommend starting with 5mg."
+          }
+        },
+        "faq_4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are the ingredients in Fungi Fusion?",
+            "answer": "Fungi Fusion is a caffeine-free functional beverage made with Lion’s Mane (900mg), Cordyceps (700mg), and Reishi (400mg) mushroom extracts plus ocean minerals for natural hydration. It contains no artificial sweeteners, is vegan, and has zero sugar."
+          }
+        },
+        "faq_5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What does Lion’s Mane do?",
+            "answer": "Lion’s Mane is an adaptogenic mushroom traditionally used to support cognitive function, focus, and mental clarity. Each Fungi Fusion contains 900mg of Lion’s Mane extract."
+          }
+        },
+        "faq_6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are THC drinks a good alternative to alcohol?",
+            "answer": "Many of our customers enjoy Happie THC beverages as a zero-alcohol, low-calorie alternative to beer, wine, and cocktails. They offer a relaxing social experience without the hangover or empty calories."
+          }
+        },
+        "faq_7": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you ship to all 50 states?",
+            "answer": "We ship Fungi Fusion nationwide. Delta-9 THC beverages ship to most states where hemp-derived THC is legal. Some states have restrictions — our checkout will let you know if we cannot ship to your address."
+          }
+        },
+        "faq_8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are your products lab tested?",
+            "answer": "Yes. Every batch is third-party lab tested for potency, purity, and safety. Certificates of Analysis (COAs) are available on each product page."
+          }
+        },
+        "faq_9": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is Fungi Fusion safe for daily use?",
+            "answer": "Fungi Fusion is made with functional mushroom extracts that have a long history of daily use in traditional wellness practices. As with any supplement, consult your healthcare provider if you have specific medical concerns."
+          }
+        },
+        "faq_10": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "We offer a 30-day money-back guarantee. If you’re not satisfied, contact us at hello@drinkhappie.com and we’ll make it right."
+          }
+        },
+        "faq_11": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How should I store Happie drinks?",
+            "answer": "Store in a cool, dry place away from direct sunlight. Refrigerate after opening for the best taste. No special storage requirements — they’re shelf-stable just like any other canned beverage."
+          }
+        },
+        "faq_12": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I mix THC drinks with alcohol?",
+            "answer": "We do not recommend mixing THC beverages with alcohol. Combining the two can amplify effects unpredictably. Enjoy Happie on its own for the best experience."
+          }
+        },
+        "faq_13": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where can I buy THC drinks in the USA?",
+            "answer": "You can buy Happie THC seltzers online at drinkhappie.com with direct shipping to 40+ states. We also have a growing network of retail locations — visit our Store Locator page to find Happie near you. Online orders ship within 1 business day and include free shipping on orders over $75."
+          }
+        },
+        "faq_14": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What states ship THC seltzers?",
+            "answer": "Happie ships hemp-derived THC seltzers to 40+ states across the US. We currently cannot ship to Alabama, Alaska, Hawaii, Idaho, Montana, and Virginia due to state-level restrictions on hemp-derived THC products. All other states are eligible for delivery. Our checkout will confirm shipping availability to your address before you place your order."
+          }
+        },
+        "faq_15": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does Happie compare to Brez, Cann, and Wynk?",
+            "answer": "Happie stands apart from brands like Brez, Cann, Wynk, and Cycling Frog in several key ways. Unlike most competitors, Happie uses nano-emulsified THC for faster onset (15–30 min vs. 1–2 hours), is sweetened with organic agave instead of cane sugar, and includes ocean-derived minerals (Aquamin®) for added hydration. At just 30 calories per can with a balanced 1:1 THC-to-CBD ratio, Happie delivers a cleaner buzz. Plus we offer a full functional mushroom line (Fungi Fusion) — a dedicated, separate range most THC seltzer brands don't offer."
+          }
+        },
+        "faq_16": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the best THC seltzer for beginners?",
+            "answer": "If you're new to THC drinks, Happie's 5mg Social Seltzers are the perfect starting point. With a balanced 1:1 ratio of 5mg THC and 5mg CBD, they deliver a mild, functional buzz without overwhelming effects. The CBD helps smooth out the experience for a gentle, relaxing high. Start with one can and wait 45–60 minutes before having more. Our Mango Mimosa and Watermelon flavors are the most popular choices for first-time THC drinkers."
+          }
+        },
+        "faq_17": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are THC seltzers better than edibles?",
+            "answer": "THC seltzers like Happie offer several advantages over traditional edibles. Because the THC is nano-emulsified and dissolved in liquid, it absorbs faster through the stomach lining — most people feel effects in 15–30 minutes compared to 1–2 hours for edibles. The effects are also more predictable and shorter-lasting (2–4 hours vs. 4–8 hours), making them easier to dose. Plus, THC seltzers are low-calorie (30 cal), vegan, and don't contain the sugar and fat found in gummies and chocolates."
+          }
+        },
+        "faq_18": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I subscribe to get THC seltzers delivered monthly?",
+            "answer": "Yes! Happie offers a Subscribe & Save program where you get 20% off every delivery. Choose your favorite flavors and pack size, select your delivery frequency (every 2, 4, or 8 weeks), and never run out. You can pause, skip, or cancel anytime — no commitment required. Subscribers also get early access to new flavors and exclusive promotions."
+          }
+        },
+        "faq_19": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are the health benefits of functional mushroom drinks?",
+            "answer": "Functional mushroom drinks like Fungi Fusion contain adaptogenic mushrooms that have been used in traditional medicine for centuries. Lion's Mane supports cognitive function, memory, and focus. Cordyceps boosts natural energy and athletic performance without caffeine. Reishi promotes relaxation, stress relief, and immune support. Together, they create a balanced nootropic beverage that helps you perform better during the day and unwind at night — all without THC, caffeine, or sugar."
+          }
+        },
+        "faq_20": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is Happie a good alcohol alternative for parties?",
+            "answer": "Absolutely. Happie THC seltzers are one of the most popular alcohol alternatives for social gatherings. They deliver a relaxing, euphoric buzz similar to a cocktail but without the calories, hangover, or next-day regret. At only 30 calories per can with no artificial ingredients, they're perfect for health-conscious adults who want to enjoy social occasions. Many customers in the sober curious and mindful drinking movements have switched from beer and wine to Happie."
+          }
+        },
+        "faq_21": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What makes nano-emulsified THC different?",
+            "answer": "Nano-emulsification breaks THC molecules into tiny particles (under 100 nanometers) that are water-soluble and absorb quickly into your bloodstream. This technology means Happie THC seltzers hit in 15–30 minutes instead of the 1–2 hours typical of traditional edibles. The effects are also more consistent can-to-can, so you always know what to expect. This is the same technology used by leading cannabis beverage brands, but Happie pairs it with a balanced 1:1 THC-to-CBD ratio for the smoothest experience."
+          }
+        },
+        "faq_22": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Are Happie drinks vegan and gluten-free?",
+            "answer": "Yes! All Happie THC seltzers and Fungi Fusion mushroom drinks are 100% vegan, gluten-free, and made with non-GMO ingredients. We use organic agave nectar instead of cane sugar, real fruit flavors (no artificial flavoring), and plant-based functional ingredients. They're also dairy-free, soy-free, and contain no artificial colors or preservatives."
+          }
+        },
+        "faq_23": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Will THC seltzers show up on a drug test?",
+            "answer": "Yes, THC seltzers contain Delta-9 THC and can cause a positive result on a drug test. Even though our products are hemp-derived and federally legal under the 2018 Farm Bill, standard drug tests cannot distinguish between hemp-derived and marijuana-derived THC. If you are subject to drug testing, we recommend our THC-free Fungi Fusion mushroom drinks instead."
+          }
+        },
+        "faq_24": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What flavors of THC seltzer does Happie offer?",
+            "answer": "Happie offers 7 award-winning THC seltzer flavors: Mango Mimosa (tropical mango with citrus sparkle), Grateful Grape (juicy Concord grape), Watermelon (crisp summer watermelon), Blue Razzberry (sweet-tart berry), Groovy Grapefruit (tangy pink grapefruit), Cheery Cherry (bold dark cherry), and Sublime (refreshing citrus-lime). All flavors are made with real fruit flavors — no artificial essences."
+          }
+        },
+        "faq_25": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How many calories are in a THC seltzer?",
+            "answer": "Each Happie THC seltzer contains approximately 30 calories per 12 oz can. That's significantly fewer calories than beer (150+), wine (120+), or mixed cocktails (200+). We use organic agave nectar as our only sweetener — no cane sugar, no high-fructose corn syrup, and no artificial sweeteners. This makes Happie one of the lowest-calorie THC drinks on the market."
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9",
+        "faq_10",
+        "faq_11",
+        "faq_12",
+        "faq_13",
+        "faq_14",
+        "faq_15",
+        "faq_16",
+        "faq_17",
+        "faq_18",
+        "faq_19",
+        "faq_20",
+        "faq_21",
+        "faq_22",
+        "faq_23",
+        "faq_24",
+        "faq_25"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "faq_accordion"
+  ]
+}
