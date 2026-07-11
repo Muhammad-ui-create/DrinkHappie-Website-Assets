@@ -1,0 +1,119 @@
+{%- comment -%}
+  SEO keyword-enriched content for product pages.
+  Branded "at a glance" card: feature chips + semantic keyword paragraph.
+  Conditionally shows THC vs. mushroom product keywords.
+  Added 2026-05-25; redesigned 2026-07-11. Fungi copy avoids "THC" and any
+  no-sugar claim per brand copy rules (9g sugar -> "low calorie" only).
+{%- endcomment -%}
+
+{%- liquid
+  assign is_fungi = false
+  assign pt_lc = product.title | downcase
+  if pt_lc contains 'fungi' or pt_lc contains 'mushroom'
+    assign is_fungi = true
+  endif
+  for tag in product.tags
+    assign tag_lc = tag | downcase
+    if tag_lc contains 'fungi' or tag_lc contains 'mushroom'
+      assign is_fungi = true
+    endif
+  endfor
+-%}
+
+<div class="hb-glance">
+  <div class="hb-glance__card">
+    <span class="hb-glance__eyebrow">{% if is_fungi %}Functional Mushroom Drink{% else %}Hemp-Derived THC Seltzer{% endif %}</span>
+    <h2 class="hb-glance__title">{{ product.title }} at a glance</h2>
+
+    <ul class="hb-glance__chips" role="list">
+      {%- if is_fungi -%}
+        <li>🍄 Lion&rsquo;s Mane · Cordyceps · Reishi</li>
+        <li>🧠 Focus &amp; clarity</li>
+        <li>⚡ Clean energy, zero caffeine</li>
+        <li>🧘 Calm &amp; balance</li>
+        <li>🌊 Ocean minerals</li>
+        <li>🌱 Vegan · Gluten-free · Non-GMO</li>
+        <li>🔬 Lab tested</li>
+        <li>📦 Ships nationwide</li>
+      {%- else -%}
+        <li>⚡ Fast-acting: 15&ndash;30 min</li>
+        <li>⚖️ Balanced 1:1 THC:CBD</li>
+        <li>🔥 Only 30 calories</li>
+        <li>🌵 Organic agave, real fruit</li>
+        <li>🌊 Ocean minerals</li>
+        <li>🚫 Zero alcohol, zero hangover</li>
+        <li>✅ 2018 Farm Bill compliant</li>
+        <li>🔬 Lab tested</li>
+      {%- endif -%}
+    </ul>
+
+    {%- if is_fungi -%}
+      <p class="hb-glance__copy">
+        <strong>{{ product.title }}</strong> is a premium functional mushroom drink by Happie&reg; featuring
+        Lion&rsquo;s Mane, Cordyceps, and Reishi adaptogenic mushroom extracts. This nootropic beverage supports
+        focus, natural energy, and calm &mdash; with zero caffeine and no crash. A smarter, low-calorie alternative to
+        coffee and energy drinks. Vegan, gluten-free, non-GMO, with ocean-derived minerals for natural
+        hydration. Ships nationwide.
+      </p>
+    {%- else -%}
+      <p class="hb-glance__copy">
+        <strong>{{ product.title }}</strong> is a premium hemp-derived Delta-9 THC seltzer by Happie&reg;.
+        Nano-emulsified for fast-acting effects in 15&ndash;30 minutes with a balanced 1:1 THC-to-CBD ratio.
+        Only 30 calories per can &mdash; the best low-calorie THC drink available. Sweetened with organic agave
+        nectar, infused with ocean minerals, and made with real fruit flavor. Zero alcohol, zero hangover.
+        Vegan, gluten-free, lab tested. 2018 Farm Bill compliant.
+      </p>
+    {%- endif -%}
+
+    <div class="hb-glance__perks">
+      <span class="hb-glance__perk">📦 Free shipping $50+</span>
+      <span class="hb-glance__perk hb-glance__perk--accent">💜 Subscribe &amp; save 20%</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hb-glance{padding:10px 20px 46px;}
+  .hb-glance__card{
+    max-width:820px;margin:0 auto;background:#fff;border-radius:22px;
+    padding:36px 34px 32px;text-align:center;position:relative;
+    border:1px solid rgba(150,47,128,.10);
+    box-shadow:0 14px 40px -18px rgba(150,47,128,.18);
+  }
+  .hb-glance__card::before{
+    content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:64px;height:5px;border-radius:0 0 6px 6px;
+    background:linear-gradient(90deg,#962F80,#50B2BD);
+  }
+  .hb-glance__eyebrow{
+    display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;color:#50B2BD;margin-bottom:8px;
+  }
+  .hb-glance__title{
+    font-size:clamp(20px,3vw,26px);font-weight:800;color:#962F80;
+    margin:0 0 20px;line-height:1.2;
+  }
+  .hb-glance__chips{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+    list-style:none;margin:0 0 22px;padding:0;
+  }
+  .hb-glance__chips li{
+    font-size:13px;font-weight:600;color:#4a4a4a;background:#FFF6EC;
+    border:1px solid #F0E2D0;padding:7px 14px;border-radius:999px;white-space:nowrap;
+  }
+  .hb-glance__copy{
+    max-width:640px;margin:0 auto 20px;font-size:14px;line-height:1.8;color:#767066;
+  }
+  .hb-glance__copy strong{color:#4a4a4a;}
+  .hb-glance__perks{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+  .hb-glance__perk{
+    font-size:13px;font-weight:700;color:#2e8b6f;background:#E7F6EF;
+    padding:8px 16px;border-radius:999px;
+  }
+  .hb-glance__perk--accent{color:#962F80;background:#F7EAF3;}
+  @media (max-width:600px){
+    .hb-glance{padding:6px 14px 36px;}
+    .hb-glance__card{padding:28px 18px 26px;}
+    .hb-glance__chips li{font-size:12px;padding:6px 11px;}
+  }
+</style>
