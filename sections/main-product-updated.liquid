@@ -191,6 +191,17 @@
       display: none; /* Chrome/Safari/Opera */
     }
 
+    /* CSS-driven view switching (matches the JS breakpoint at 990px).
+       Without this, the product image only appears after all deferred JS
+       runs — which pushed mobile LCP to ~20s on slow connections. */
+    @media (max-width: 990px) {
+      .desktop-image-view { display: none; }
+      .mobile-carousel-view { display: block; }
+    }
+    @media (min-width: 991px) {
+      .mobile-carousel-view { display: none; }
+    }
+
     .carousel-track {
       display: flex;
       transition: none; /* Remove transition for native scroll */
@@ -1311,8 +1322,8 @@
                 >
               </div>
 
-              <!-- Mobile: Carousel -->
-              <div class="main-product-image mobile-carousel-view" style="display: none;">
+              <!-- Mobile: Carousel (visibility is CSS-driven so the first slide paints before JS runs; JS still inits dots/swipe) -->
+              <div class="main-product-image mobile-carousel-view">
                 <div class="carousel-container">
                   <div class="carousel-track" id="carousel-track">
                     {% for image in product.images %}
