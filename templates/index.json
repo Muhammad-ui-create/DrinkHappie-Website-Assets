@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "hero_split_main": {
@@ -387,7 +378,7 @@
         "top_wave_style": "wave",
         "top_wave_color": "#f5e6d3",
         "top_wave_animate": true,
-        "show_bottom_wave": true,
+        "show_bottom_wave": false,
         "bottom_wave_style": "wave",
         "bottom_wave_color": "#ffcb08",
         "bottom_wave_animate": true
@@ -453,7 +444,7 @@
         "icon_bg_color": "#7b3f9e14",
         "curve_height": 70,
         "curve_animation_speed": 8,
-        "show_top_curve": false,
+        "show_top_curve": true,
         "top_curve_style": "wave",
         "top_curve_color": "#ffcb08",
         "top_curve_animate": true,
