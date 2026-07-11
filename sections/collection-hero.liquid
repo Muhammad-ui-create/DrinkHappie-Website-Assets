@@ -188,7 +188,7 @@
 >
   {%- if section.settings.background_image != blank -%}
     <div class="collection-hero__background">
-      {{ section.settings.background_image | image_url: width: 2000 | image_tag: loading: 'eager', class: 'collection-hero__bg-img', alt: section.settings.background_image.alt | default: collection.title | default: shop.name }}
+      {{ section.settings.background_image | image_url: width: 2000 | image_tag: loading: 'eager', fetchpriority: 'high', widths: '828, 1200, 1600, 2000', sizes: '100vw', class: 'collection-hero__bg-img', alt: section.settings.background_image.alt | default: collection.title | default: shop.name }}
     </div>
     {%- if section.settings.overlay_opacity > 0 -%}
       <div class="collection-hero__overlay" style="background-color: {{ section.settings.overlay_color }}; opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>

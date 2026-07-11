@@ -1,0 +1,913 @@
+{%- liquid
+  assign eyebrow = section.settings.eyebrow
+  assign title = section.settings.title
+  assign title_highlight = section.settings.title_highlight
+  assign richtext = section.settings.richtext
+  assign cta_1_text = section.settings.cta_1_text
+  assign cta_1_url = section.settings.cta_1_url
+  assign cta_2_text = section.settings.cta_2_text
+  assign cta_2_url = section.settings.cta_2_url
+  assign show_social_proof = section.settings.show_social_proof
+  assign social_proof_text = section.settings.social_proof_text
+  assign hero_image = section.settings.hero_image
+  assign show_hero_image = section.settings.show_hero_image
+  assign enable_video_background = section.settings.enable_video_background
+  assign background_video = section.settings.background_video
+  assign video_fallback_image = section.settings.video_fallback_image
+  assign mobile_fallback_image = section.settings.mobile_fallback_image
+  assign disable_video_on_mobile = section.settings.disable_video_on_mobile
+  assign overlay_opacity = section.settings.overlay_opacity
+-%}
+
+<section
+  id="hero-split-{{ section.id }}"
+  class="hero-split{% if enable_video_background %} hero-split--has-video{% endif %}"
+  data-color-scheme="{{ section.settings.color_scheme }}"
+>
+  <!-- Video Background -->
+  {%- if enable_video_background -%}
+    {%- liquid
+      if mobile_fallback_image != blank
+        assign mobile_image = mobile_fallback_image
+      elsif video_fallback_image != blank
+        assign mobile_image = video_fallback_image
+      endif
+    -%}
+    <div class="hero-split__video-wrapper{% if disable_video_on_mobile %} hero-split__video-wrapper--hide-mobile{% endif %}" data-video-lazy="true">
+      {%- if video_fallback_image != blank -%}
+        <link rel="preload" as="image"
+          href="{{ video_fallback_image | image_url: width: 1200 }}"
+          imagesrcset="{{ video_fallback_image | image_url: width: 828 }} 828w, {{ video_fallback_image | image_url: width: 1200 }} 1200w, {{ video_fallback_image | image_url: width: 1920 }} 1920w"
+          imagesizes="100vw"
+          fetchpriority="high">
+        <img
+          src="{{ video_fallback_image | image_url: width: 1920 }}"
+          srcset="{{ video_fallback_image | image_url: width: 828 }} 828w, {{ video_fallback_image | image_url: width: 1200 }} 1200w, {{ video_fallback_image | image_url: width: 1920 }} 1920w"
+          sizes="100vw"
+          alt="{{ section.settings.heading | default: shop.name | escape }}"
+          class="hero-split__fallback-image"
+          loading="eager"
+          fetchpriority="high"
+          width="{{ video_fallback_image.width | default: 1920 }}"
+          height="{{ video_fallback_image.height | default: 1080 }}"
+        >
+      {%- endif -%}
+      {%- if background_video != blank -%}
+        <video 
+          class="hero-split__video" 
+          autoplay 
+          loop 
+          muted 
+          playsinline
+          preload="none"
+          data-src="{{ background_video.sources[0].url }}"
+          poster="{{ video_fallback_image | image_url: width: 1920 | default: '' }}"
+        >
+          {%- for source in background_video.sources -%}
+            <source data-src="{{ source.url }}" type="{{ source.mime_type }}">
+          {%- endfor -%}
+        </video>
+      {%- endif -%}
+      <div class="hero-split__overlay" style="background: {{ section.settings.overlay_color }}; opacity: {{ overlay_opacity | divided_by: 100.0 }};"></div>
+    </div>
+    {%- if disable_video_on_mobile and mobile_image != blank -%}
+      <div class="hero-split__mobile-fallback">
+        <img
+          src="{{ mobile_image | image_url: width: 1200 }}"
+          srcset="{{ mobile_image | image_url: width: 600 }} 600w, {{ mobile_image | image_url: width: 900 }} 900w, {{ mobile_image | image_url: width: 1200 }} 1200w"
+          sizes="100vw"
+          alt="{{ section.settings.heading | default: shop.name | escape }}"
+          class="hero-split__fallback-image"
+          loading="eager"
+        >
+        <div class="hero-split__overlay" style="background: {{ section.settings.overlay_color }}; opacity: {{ overlay_opacity | divided_by: 100.0 }};"></div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+
+  <script>
+    (function() {
+      // Lazy load video when on good connection
+      function loadVideo() {
+        const wrapper = document.querySelector('#hero-split-{{ section.id }} [data-video-lazy]');
+        if (!wrapper) return;
+        
+        const video = wrapper.querySelector('video');
+        if (!video) return;
+
+        // Check connection type if available
+        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        const isSlowConnection = connection && (connection.saveData || connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g');
+        
+        // Don't load video on slow connections or if save data is enabled
+        if (isSlowConnection) {
+          console.log('Slow connection detected, keeping fallback image');
+          return;
+        }
+
+        // Load video sources
+        const sources = video.querySelectorAll('source[data-src]');
+        sources.forEach(source => {
+          source.src = source.dataset.src;
+        });
+
+        // Load video
+        if (video.dataset.src) {
+          video.src = video.dataset.src;
+        }
+        
+        video.load();
+      }
+
+      // Load video after page load
+      if (document.readyState === 'complete') {
+        setTimeout(loadVideo, 100);
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(loadVideo, 100);
+        });
+      }
+    })();
+  </script>
+
+  <div class="hero-split__container{% unless show_hero_image %} hero-split__container--no-image{% endunless %}">
+    <!-- Left Content Column -->
+    <div class="hero-split__content">
+      {%- if eyebrow != blank -%}
+        <div class="hero-split__eyebrow">
+          <svg class="hero-split__eyebrow-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+            <circle cx="9" cy="9" r="1" fill="currentColor"/>
+            <circle cx="15" cy="9" r="1" fill="currentColor"/>
+          </svg>
+          {{ eyebrow }}
+        </div>
+      {%- endif -%}
+
+      <h1 class="hero-split__title">
+        {{ title }}
+        {%- if title_highlight != blank -%}
+          <em class="hero-split__title-highlight">{{ title_highlight }}</em>
+        {%- endif -%}
+      </h1>
+
+      {%- if richtext != blank -%}
+        <p class="hero-split__text">{{ richtext }}</p>
+      {%- endif -%}
+
+      <div class="hero-split__ctas">
+        {%- if cta_1_text != blank and cta_1_url != blank -%}
+          <a href="{{ cta_1_url }}" class="hero-split__btn hero-split__btn--primary">
+            {{ cta_1_text }}
+          </a>
+        {%- endif -%}
+        {%- if cta_2_text != blank and cta_2_url != blank -%}
+          <a href="{{ cta_2_url }}" class="hero-split__btn hero-split__btn--secondary">
+            {{ cta_2_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if show_social_proof -%}
+        <div class="hero-split__social-proof">
+          <div class="hero-split__stars">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path fill="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+          <span class="hero-split__proof-text">{{ social_proof_text }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Right Image Column -->
+    {%- if show_hero_image -%}
+      <div class="hero-split__image-wrapper">
+        {%- if hero_image != blank -%}
+          <img
+            src="{{ hero_image | image_url: width: 1200 }}"
+            srcset="{{ hero_image | image_url: width: 480 }} 480w, {{ hero_image | image_url: width: 800 }} 800w, {{ hero_image | image_url: width: 1200 }} 1200w"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            alt="{{ hero_image.alt | escape }}"
+            width="{{ hero_image.width }}"
+            height="{{ hero_image.height }}"
+            loading="eager"
+            fetchpriority="high"
+            class="hero-split__image"
+          >
+        {%- else -%}
+          <div class="hero-split__image-placeholder">
+            <span>Hero Image</span>
+            <span class="hero-split__placeholder-sub">Upload your cans image</span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Bottom Wave Divider - Points OUTWARD (down into section below) -->
+  {%- if section.settings.show_wave_divider -%}
+    <div class="hero-split__wave{% if section.settings.wave_animate %} hero-split__wave--animated{% endif %}" style="position: absolute; bottom: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(100%);">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.wave_color }}">
+          {%- if section.settings.wave_animate -%}
+            <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+          {%- endif -%}
+        </path>
+      </svg>
+    </div>
+  {%- endif -%}
+</section>
+
+<style>
+  #hero-split-{{ section.id }} {
+    --hero-bg: {{ section.settings.background_color }};
+    --hero-text: {{ section.settings.text_color }};
+    --hero-subtext: {{ section.settings.subtext_color }};
+    --hero-highlight: {{ section.settings.highlight_color }};
+    --hero-eyebrow-bg: {{ section.settings.eyebrow_bg_color }};
+    --hero-eyebrow-text: {{ section.settings.eyebrow_text_color }};
+    --hero-btn-primary-bg: {{ section.settings.cta_1_bg_color }};
+    --hero-btn-primary-text: {{ section.settings.cta_1_text_color }};
+    --hero-btn-secondary-bg: {{ section.settings.cta_2_bg_color }};
+    --hero-btn-secondary-text: {{ section.settings.cta_2_text_color }};
+    --hero-stars-color: {{ section.settings.stars_color }};
+    --hero-social-proof-text: {{ section.settings.social_proof_text_color }};
+  }
+
+  #hero-split-{{ section.id }}.hero-split {
+    background: var(--hero-bg);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 0 100px;
+  }
+
+  /* Video Background */
+  #hero-split-{{ section.id }} .hero-split__video-wrapper,
+  #hero-split-{{ section.id }} .hero-split__mobile-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__fallback-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  #hero-split-{{ section.id }}.hero-split--has-video .hero-split__container {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Mobile fallback - hidden by default, shown on mobile when video is disabled */
+  #hero-split-{{ section.id }} .hero-split__mobile-fallback {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    #hero-split-{{ section.id }} .hero-split__video-wrapper--hide-mobile {
+      display: none;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__mobile-fallback {
+      display: block;
+    }
+  }
+
+  /* Keep text left-aligned when no hero image - just remove the image column */
+  #hero-split-{{ section.id }} .hero-split__container--no-image {
+    grid-template-columns: 1fr;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__container--no-image .hero-split__content {
+    max-width: 560px;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__content {
+    max-width: 560px;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--hero-eyebrow-bg);
+    color: var(--hero-eyebrow-text);
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__eyebrow-icon {
+    flex-shrink: 0;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__title {
+    font-size: clamp(36px, 4.5vw, 56px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+    color: var(--hero-text);
+  }
+
+  #hero-split-{{ section.id }} .hero-split__title-highlight {
+    font-style: italic;
+    color: var(--hero-highlight);
+    display: block;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__text {
+    font-size: 17px;
+    color: var(--hero-subtext);
+    margin-bottom: 32px;
+    max-width: 440px;
+    line-height: 1.7;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__ctas {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__btn--primary {
+    background: var(--hero-btn-primary-bg);
+    color: var(--hero-btn-primary-text);
+  }
+
+  #hero-split-{{ section.id }} .hero-split__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(247, 205, 70, 0.4);
+    filter: brightness(0.95);
+  }
+
+  #hero-split-{{ section.id }} .hero-split__btn--secondary {
+    background: var(--hero-btn-secondary-bg);
+    color: var(--hero-btn-secondary-text);
+  }
+
+  #hero-split-{{ section.id }} .hero-split__btn--secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(79, 177, 189, 0.4);
+    filter: brightness(0.95);
+  }
+
+  #hero-split-{{ section.id }} .hero-split__social-proof {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__stars {
+    display: flex;
+    gap: 2px;
+    color: var(--hero-stars-color);
+  }
+
+  #hero-split-{{ section.id }} .hero-split__proof-text {
+    font-size: 14px;
+    color: var(--hero-social-proof-text);
+  }
+
+  #hero-split-{{ section.id }} .hero-split__proof-text strong {
+    font-weight: 600;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__image {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__image-placeholder {
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 3px dashed rgba(0, 0, 0, 0.15);
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: rgba(0, 0, 0, 0.4);
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__placeholder-sub {
+    font-size: 14px;
+    font-weight: 400;
+    opacity: 0.7;
+  }
+
+  #hero-split-{{ section.id }} .hero-split__wave {
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    #hero-split-{{ section.id }} .hero-split__wave {
+      height: {{ section.settings.wave_height | times: 65 | divided_by: 100 }}px !important;
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    #hero-split-{{ section.id }} .hero-split__container {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__content {
+      max-width: 100%;
+      order: 2;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__image-wrapper {
+      order: 1;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__title-highlight {
+      display: inline;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #hero-split-{{ section.id }}.hero-split {
+      padding: 120px 16px 100px;
+      min-height: 70vh;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__container {
+      padding: 0 !important;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__content {
+      text-align: left;
+      max-width: 100%;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__eyebrow {
+      margin-bottom: 16px;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__ctas {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__btn {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__social-proof {
+      justify-content: flex-start;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__wave svg {
+      height: 50px;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__image-placeholder {
+      max-width: 320px;
+      aspect-ratio: 1;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #hero-split-{{ section.id }}.hero-split {
+      padding: 110px 16px 80px;
+      min-height: 77vh;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__container {
+      gap: 32px;
+      padding: 0 !important;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__content {
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__eyebrow {
+      font-size: 11px;
+      padding: 6px 14px;
+      margin-bottom: 12px;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__title {
+      font-size: clamp(32px, 8vw, 42px);
+      margin-bottom: 16px;
+    }
+    
+    #hero-split-{{ section.id }} .hero-split__btn {
+      max-width: 100%;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__text {
+      margin-bottom: 24px;
+    }
+
+    #hero-split-{{ section.id }} .hero-split__image-placeholder {
+      max-width: 280px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero Split",
+  "tag": "section",
+  "class": "hero-split-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "California Crafted"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Plant Powered Happiness in Every"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "label": "Title Highlight (italic)",
+      "default": "Sip"
+    },
+    {
+      "type": "textarea",
+      "id": "richtext",
+      "label": "Description",
+      "default": "Flavor-forward beverages infused with functional mushrooms & hemp-derived cannabinoids — made for the good-vibe seekers."
+    },
+    {
+      "type": "header",
+      "content": "Primary CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_1_text",
+      "label": "Button Text",
+      "default": "Shop THC Seltzers"
+    },
+    {
+      "type": "url",
+      "id": "cta_1_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Secondary CTA"
+    },
+    {
+      "type": "text",
+      "id": "cta_2_text",
+      "label": "Button Text",
+      "default": "Shop Fungi Fusion"
+    },
+    {
+      "type": "url",
+      "id": "cta_2_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Social Proof"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_proof",
+      "label": "Show Social Proof",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "social_proof_text",
+      "label": "Social Proof Text",
+      "default": "<strong>2,400+</strong> Happy Customers"
+    },
+    {
+      "type": "header",
+      "content": "Hero Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero_image",
+      "label": "Show Hero Image",
+      "default": true,
+      "info": "Toggle off to hide the right-side image (useful for video background mode)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image",
+      "info": "Upload your cans/product image for the right side"
+    },
+    {
+      "type": "header",
+      "content": "Background Video"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_background",
+      "label": "Enable Video Background",
+      "default": false,
+      "info": "Display a full-width video behind the hero content"
+    },
+    {
+      "type": "video",
+      "id": "background_video",
+      "label": "Background Video",
+      "info": "Upload a video file for the background"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_fallback_image",
+      "label": "Fallback / Placeholder Image (Desktop)",
+      "info": "Shows while video loads or if video fails to load"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_fallback_image",
+      "label": "Mobile Fallback Image",
+      "info": "Separate image optimized for mobile. If not set, uses desktop fallback image"
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_video_on_mobile",
+      "label": "Disable Video on Mobile",
+      "default": true,
+      "info": "Show fallback image instead of video on mobile (better performance on cellular)"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Video Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Darkness",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 30,
+      "unit": "%",
+      "info": "Adjust the darkness of the overlay for text contrast"
+    },
+    {
+      "type": "header",
+      "content": "Wave Divider"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wave_divider",
+      "label": "Show Wave Divider",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "wave_height",
+      "label": "Wave Height",
+      "min": 40,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "wave_color",
+      "label": "Wave Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "wave_animate",
+      "label": "Animate Wave",
+      "default": true,
+      "info": "Adds a flowing ripple wave animation"
+    },
+    {
+      "type": "range",
+      "id": "wave_animation_speed",
+      "label": "Animation Speed",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "default": 8,
+      "unit": "s",
+      "info": "Duration of one wave cycle"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Background"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section Background Color",
+      "default": "#FFE6CB"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Text"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading (H1) Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Heading Highlight (Italic) Color",
+      "default": "#4FB1BD"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Description Text Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Badge/Eyebrow"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_bg_color",
+      "label": "Badge Background",
+      "default": "rgba(79, 177, 189, 0.15)"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_text_color",
+      "label": "Badge Text Color",
+      "default": "#3A9BA6"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Primary CTA Button"
+    },
+    {
+      "type": "color",
+      "id": "cta_1_bg_color",
+      "label": "Primary Button Background",
+      "default": "#F7CD46"
+    },
+    {
+      "type": "color",
+      "id": "cta_1_text_color",
+      "label": "Primary Button Text",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Secondary CTA Button"
+    },
+    {
+      "type": "color",
+      "id": "cta_2_bg_color",
+      "label": "Secondary Button Background",
+      "default": "#4FB1BD"
+    },
+    {
+      "type": "color",
+      "id": "cta_2_text_color",
+      "label": "Secondary Button Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Colors - Social Proof/Reviews"
+    },
+    {
+      "type": "color",
+      "id": "stars_color",
+      "label": "Review Stars Color",
+      "default": "#F7CD46"
+    },
+    {
+      "type": "color",
+      "id": "social_proof_text_color",
+      "label": "Review Text Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "header",
+      "content": "Color Scheme"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme1",
+      "label": "Color Scheme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Split",
+      "settings": {
+        "eyebrow": "California Crafted",
+        "title": "Plant Powered Happiness in Every",
+        "title_highlight": "Sip",
+        "richtext": "Flavor-forward beverages infused with functional mushrooms & hemp-derived cannabinoids — made for the good-vibe seekers.",
+        "cta_1_text": "Shop THC Seltzers",
+        "cta_2_text": "Shop Fungi Fusion",
+        "show_social_proof": true,
+        "social_proof_text": "<strong>2,400+</strong> Happy Customers",
+        "show_wave_divider": true
+      }
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  }
+}
+{% endschema %}
