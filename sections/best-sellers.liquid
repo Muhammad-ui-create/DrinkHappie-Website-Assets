@@ -1,0 +1,1467 @@
+{%- comment -%} Best Sellers Section - Updated Feb 2026 {%- endcomment -%}
+{%- liquid
+  assign section_title = section.settings.title
+  assign section_subtitle = section.settings.subtitle
+  assign collection_1 = section.settings.collection_1
+  assign collection_1_label = section.settings.collection_1_label
+  assign collection_2 = section.settings.collection_2
+  assign collection_2_label = section.settings.collection_2_label
+  assign products_to_show = section.settings.products_to_show
+  assign products_to_show_2 = section.settings.products_to_show_2 | default: products_to_show
+  assign collection_2_layout = section.settings.collection_2_layout | default: 'carousel'
+  assign show_shop_all = section.settings.show_shop_all
+  assign shop_all_text = section.settings.shop_all_text
+  assign shop_all_url = section.settings.shop_all_url
+-%}
+
+<section
+  id="best-sellers-{{ section.id }}"
+  class="best-sellers"
+  x-data="{ activeTab: 'collection1' }"
+>
+  <!-- Top Wave Divider - Points OUTWARD (up into section above) -->
+  {%- if section.settings.show_top_curve -%}
+    <div class="best-sellers__curve best-sellers__curve--top{% if section.settings.top_curve_animate %} best-sellers__curve--animated{% endif %}" style="position: absolute; top: 0; left: 0; width: 100%; height: {{ section.settings.curve_height }}px; z-index: 5; overflow: visible; transform: translateY(-100%);">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        {%- case section.settings.top_curve_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_curve_color }}">
+              {%- if section.settings.top_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'wave-smooth' -%}
+            <path d="M0,120 L0,120 Q720,0 1440,60 L1440,120 Z" fill="{{ section.settings.top_curve_color }}">
+              {%- if section.settings.top_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q720,0 1440,60 L1440,120 Z;M0,120 L0,120 Q720,40 1440,80 L1440,120 Z;M0,120 L0,120 Q720,60 1440,40 L1440,120 Z;M0,120 L0,120 Q720,20 1440,70 L1440,120 Z;M0,120 L0,120 Q720,0 1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'arc' -%}
+            <path d="M0,120 L0,120 Q720,0 1440,120 L1440,120 Z" fill="{{ section.settings.top_curve_color }}">
+              {%- if section.settings.top_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q720,0 1440,120 L1440,120 Z;M0,120 L0,120 Q720,30 1440,120 L1440,120 Z;M0,120 L0,120 Q720,50 1440,120 L1440,120 Z;M0,120 L0,120 Q720,20 1440,120 L1440,120 Z;M0,120 L0,120 Q720,0 1440,120 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'slope-left' -%}
+            <path d="M0,120 L0,0 L1440,120 L1440,120 Z" fill="{{ section.settings.top_curve_color }}"/>
+          {%- when 'slope-right' -%}
+            <path d="M0,120 L0,120 L1440,0 L1440,120 Z" fill="{{ section.settings.top_curve_color }}"/>
+          {%- else -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_curve_color }}">
+              {%- if section.settings.top_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
+
+  <div class="best-sellers__container">
+    <!-- Header -->
+    <div class="best-sellers__header">
+      <h2 class="best-sellers__title">{{ section_title }}</h2>
+      
+      {%- if section_subtitle != blank -%}
+        <p class="best-sellers__subtitle">{{ section_subtitle }}</p>
+      {%- endif -%}
+      
+      <!-- Tab Switcher -->
+      {%- if collection_2 != blank -%}
+        <div class="best-sellers__tabs">
+          <button 
+            class="best-sellers__tab"
+            :class="{ 'best-sellers__tab--active': activeTab === 'collection1' }"
+            @click="activeTab = 'collection1'"
+          >
+            {{ collection_1_label | default: collection_1.title | default: 'THC Seltzers' }}
+          </button>
+          <button 
+            class="best-sellers__tab"
+            :class="{ 'best-sellers__tab--active': activeTab === 'collection2' }"
+            @click="activeTab = 'collection2'"
+          >
+            {{ collection_2_label | default: collection_2.title | default: 'Fungi Fusion' }}
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Products Grid/Carousel - Collection 1 -->
+    <div 
+      class="best-sellers__products-wrapper"
+      x-show="activeTab === 'collection1'"
+      x-transition:enter="transition ease-out duration-200"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+    >
+      <!-- Desktop Grid -->
+      <div class="best-sellers__grid best-sellers__grid--desktop">
+        {%- if collection_1 != blank -%}
+          {%- for product in collection_1.products limit: products_to_show -%}
+            {% render 'best-sellers-product-card', product: product, index: forloop.index, section: section %}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..4) -%}
+            <div class="best-sellers__card best-sellers__card--placeholder">
+              <div class="best-sellers__card-link">
+                <div class="best-sellers__card-image">
+                  <div class="best-sellers__placeholder-image">
+                    <span>Product {{ i }}</span>
+                  </div>
+                </div>
+                <div class="best-sellers__card-content">
+                  <h3 class="best-sellers__product-title">Product Name</h3>
+                  <p class="best-sellers__product-desc">Product description here</p>
+                  <div class="best-sellers__price-row">
+                    <span class="best-sellers__price">$18.99</span>
+                  </div>
+                </div>
+              </div>
+              <div class="best-sellers__card-actions">
+                <span class="best-sellers__shop-now-btn">SHOP NOW</span>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      
+      <!-- Carousel (Desktop & Mobile) -->
+      <div class="best-sellers__carousel" x-data="{ 
+        currentSlide: 0, 
+        totalSlides: {{ collection_1.products.size | default: 5 | at_most: products_to_show }}, 
+        touchStartX: 0, 
+        touchStartY: 0, 
+        isSwiping: false,
+        isMobile: window.innerWidth < 768,
+        isTablet: window.innerWidth >= 768 && window.innerWidth < 1024,
+        get slideWidth() { 
+          if (this.isMobile) return 80;
+          if (this.isTablet) return 30;
+          return 20;
+        },
+        get visibleSlides() {
+          if (this.isMobile) return 1;
+          if (this.isTablet) return 3;
+          return 4;
+        },
+        get maxSlide() { return Math.max(0, this.totalSlides - this.visibleSlides); },
+        nextSlide() {
+          if (this.currentSlide >= this.maxSlide) {
+            this.currentSlide = 0;
+          } else {
+            this.currentSlide++;
+          }
+        }
+      }" x-init="window.addEventListener('resize', () => { isMobile = window.innerWidth < 768; isTablet = window.innerWidth >= 768 && window.innerWidth < 1024; })">
+        
+        <!-- Navigation Arrow (Right only - only show if more products than visible) -->
+        <button 
+          class="best-sellers__carousel-nav best-sellers__carousel-nav--next"
+          @click="nextSlide()"
+          aria-label="Next products"
+          x-show="maxSlide > 0"
+          x-transition
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18l6-6-6-6"/>
+          </svg>
+        </button>
+        
+        <div class="best-sellers__carousel-track" 
+             :style="'transform: translateX(-' + (currentSlide * slideWidth) + '%)'"
+             @touchstart="touchStartX = $event.touches[0].clientX; touchStartY = $event.touches[0].clientY; isSwiping = false"
+             @touchmove="
+               const diffX = Math.abs($event.touches[0].clientX - touchStartX);
+               const diffY = Math.abs($event.touches[0].clientY - touchStartY);
+               if (diffX > diffY && diffX > 10) { isSwiping = true; $event.preventDefault(); }
+             "
+             @touchend="
+               if (!isSwiping) return;
+               const diff = touchStartX - $event.changedTouches[0].clientX;
+               if (diff > 40) {
+                 currentSlide = currentSlide >= maxSlide ? 0 : currentSlide + 1;
+               } else if (diff < -40) {
+                 currentSlide = currentSlide <= 0 ? maxSlide : currentSlide - 1;
+               }
+             "
+        >
+          {%- if collection_1 != blank -%}
+            {%- for product in collection_1.products limit: products_to_show -%}
+              <div class="best-sellers__carousel-slide">
+                {% render 'best-sellers-product-card', product: product, index: forloop.index, section: section %}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..4) -%}
+              <div class="best-sellers__carousel-slide">
+                <div class="best-sellers__card best-sellers__card--placeholder">
+                  <div class="best-sellers__card-link">
+                    <div class="best-sellers__card-image">
+                      <div class="best-sellers__placeholder-image">
+                        <span>Product {{ i }}</span>
+                      </div>
+                    </div>
+                    <div class="best-sellers__card-content">
+                      <h3 class="best-sellers__product-title">Product Name</h3>
+                      <p class="best-sellers__product-desc">Product description here</p>
+                      <div class="best-sellers__price-row">
+                        <span class="best-sellers__price">$18.99</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="best-sellers__card-actions">
+                    <span class="best-sellers__shop-now-btn">SHOP NOW</span>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+        
+        <!-- Carousel Dots -->
+        <div class="best-sellers__carousel-dots">
+          <template x-for="(dot, index) in (maxSlide + 1)" :key="index">
+            <button 
+              class="best-sellers__carousel-dot"
+              :class="{ 'best-sellers__carousel-dot--active': currentSlide === index }"
+              @click="currentSlide = index"
+              :aria-label="'Go to slide ' + (index + 1)"
+            ></button>
+          </template>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Grid/Carousel - Collection 2 -->
+    {%- if collection_2 != blank -%}
+      <div 
+        class="best-sellers__products-wrapper{% if collection_2_layout == 'centered-grid' %} best-sellers__products-wrapper--centered{% endif %}"
+        x-show="activeTab === 'collection2'"
+        x-cloak
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+      >
+        {%- if collection_2_layout == 'centered-grid' -%}
+          <!-- Centered Grid Layout (no carousel) -->
+          <div class="best-sellers__grid best-sellers__grid--centered" data-products="{{ products_to_show_2 }}">
+            {%- for product in collection_2.products limit: products_to_show_2 -%}
+              <div class="best-sellers__grid-item">
+                {% render 'best-sellers-product-card', product: product, index: forloop.index, section: section %}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <!-- Carousel Layout -->
+          <div class="best-sellers__carousel" x-data="{ 
+            currentSlide: 0, 
+            totalSlides: {{ collection_2.products.size | default: 5 | at_most: products_to_show_2 }}, 
+            touchStartX: 0, 
+            touchStartY: 0, 
+            isSwiping: false,
+            isMobile: window.innerWidth < 768,
+            isTablet: window.innerWidth >= 768 && window.innerWidth < 1024,
+            get slideWidth() { 
+              if (this.isMobile) return 80;
+              if (this.isTablet) return 30;
+              return 20;
+            },
+            get visibleSlides() {
+              if (this.isMobile) return 1;
+              if (this.isTablet) return 3;
+              return 4;
+            },
+            get maxSlide() { return Math.max(0, this.totalSlides - this.visibleSlides); },
+            nextSlide() {
+              if (this.currentSlide >= this.maxSlide) {
+                this.currentSlide = 0;
+              } else {
+                this.currentSlide++;
+              }
+            }
+          }" x-init="window.addEventListener('resize', () => { isMobile = window.innerWidth < 768; isTablet = window.innerWidth >= 768 && window.innerWidth < 1024; })">
+            
+            <!-- Navigation Arrow (Right only - infinite loop) -->
+            <button 
+              class="best-sellers__carousel-nav best-sellers__carousel-nav--next"
+              @click="nextSlide()"
+              aria-label="Next products"
+              x-show="maxSlide > 0"
+              x-transition
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </button>
+            
+            <div class="best-sellers__carousel-track"
+                 :style="'transform: translateX(-' + (currentSlide * slideWidth) + '%)'"
+                 @touchstart="touchStartX = $event.touches[0].clientX; touchStartY = $event.touches[0].clientY; isSwiping = false"
+                 @touchmove="
+                   const diffX = Math.abs($event.touches[0].clientX - touchStartX);
+                   const diffY = Math.abs($event.touches[0].clientY - touchStartY);
+                   if (diffX > diffY && diffX > 10) { isSwiping = true; $event.preventDefault(); }
+                 "
+                 @touchend="
+                   if (!isSwiping) return;
+                   const diff = touchStartX - $event.changedTouches[0].clientX;
+                   if (diff > 40) {
+                     currentSlide = currentSlide >= maxSlide ? 0 : currentSlide + 1;
+                   } else if (diff < -40) {
+                     currentSlide = currentSlide <= 0 ? maxSlide : currentSlide - 1;
+                   }
+                 "
+            >
+              {%- for product in collection_2.products limit: products_to_show_2 -%}
+                <div class="best-sellers__carousel-slide">
+                  {% render 'best-sellers-product-card', product: product, index: forloop.index, section: section %}
+                </div>
+              {%- endfor -%}
+            </div>
+            
+            <!-- Carousel Dots -->
+            <div class="best-sellers__carousel-dots">
+              <template x-for="(dot, index) in (maxSlide + 1)" :key="index">
+                <button 
+                  class="best-sellers__carousel-dot"
+                  :class="{ 'best-sellers__carousel-dot--active': currentSlide === index }"
+                  @click="currentSlide = index"
+                  :aria-label="'Go to slide ' + (index + 1)"
+                ></button>
+              </template>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <!-- Shop All CTA -->
+    {%- if show_shop_all -%}
+      <div class="best-sellers__shop-all">
+        <a 
+          href="{{ shop_all_url | default: collection_1.url }}" 
+          class="best-sellers__shop-all-btn"
+          x-bind:href="activeTab === 'collection1' ? '{{ collection_1.url | default: shop_all_url }}' : '{{ collection_2.url | default: shop_all_url }}'"
+        >
+          {{ shop_all_text | default: 'Shop All' }}
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Bottom Wave Divider - Points OUTWARD (down into section below) -->
+  {%- if section.settings.show_bottom_curve -%}
+    <div class="best-sellers__curve best-sellers__curve--bottom{% if section.settings.bottom_curve_animate %} best-sellers__curve--animated{% endif %}" style="position: absolute; bottom: 0; left: 0; width: 100%; height: {{ section.settings.curve_height }}px; z-index: 5; overflow: visible; transform: translateY(100%);">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        {%- case section.settings.bottom_curve_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}">
+              {%- if section.settings.bottom_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'wave-smooth' -%}
+            <path d="M0,0 L0,0 Q720,120 1440,60 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}">
+              {%- if section.settings.bottom_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q720,120 1440,60 L1440,0 Z;M0,0 L0,0 Q720,80 1440,40 L1440,0 Z;M0,0 L0,0 Q720,60 1440,80 L1440,0 Z;M0,0 L0,0 Q720,100 1440,50 L1440,0 Z;M0,0 L0,0 Q720,120 1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'arc' -%}
+            <path d="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}">
+              {%- if section.settings.bottom_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z;M0,0 L0,0 Q720,90 1440,0 L1440,0 Z;M0,0 L0,0 Q720,70 1440,0 L1440,0 Z;M0,0 L0,0 Q720,100 1440,0 L1440,0 Z;M0,0 L0,0 Q720,120 1440,0 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'slope-left' -%}
+            <path d="M0,0 L0,120 L1440,0 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}"/>
+          {%- when 'slope-right' -%}
+            <path d="M0,0 L0,0 L1440,120 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}"/>
+          {%- else -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_curve_color }}">
+              {%- if section.settings.bottom_curve_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.curve_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
+</section>
+
+<style>
+  #best-sellers-{{ section.id }} {
+    --bs-bg: {{ section.settings.background_color }};
+    --bs-title-color: {{ section.settings.title_color }};
+    --bs-subtitle-color: {{ section.settings.subtitle_color }};
+    --bs-card-bg: {{ section.settings.card_bg_color }};
+    --bs-text-color: {{ section.settings.text_color }};
+    --bs-price-color: {{ section.settings.price_color }};
+    --bs-btn-bg: {{ section.settings.button_bg_color }};
+    --bs-btn-text: {{ section.settings.button_text_color }};
+    --bs-tab-active-bg: {{ section.settings.tab_active_bg }};
+    --bs-tab-active-text: {{ section.settings.tab_active_text }};
+    --bs-tab-inactive-bg: {{ section.settings.tab_inactive_bg }};
+    --bs-tab-inactive-text: {{ section.settings.tab_inactive_text }};
+    --bs-badge-bg: {{ section.settings.badge_bg_color }};
+    --bs-badge-text: {{ section.settings.badge_text_color }};
+    --bs-accent-color: {{ section.settings.accent_color }};
+  }
+
+  #best-sellers-{{ section.id }}.best-sellers {
+    background: var(--bs-bg);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    position: relative;
+  }
+
+  @media (max-width: 768px) {
+    #best-sellers-{{ section.id }}.best-sellers {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+  }
+
+  /* Curve Dividers */
+  #best-sellers-{{ section.id }} .best-sellers__curve {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    line-height: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__curve svg {
+    display: block;
+    width: 100%;
+    height: {{ section.settings.curve_height }}px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__curve--top {
+    top: 0;
+    transform: translateY(-99%);
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__curve--bottom {
+    bottom: 0;
+    transform: translateY(99%);
+  }
+
+  @media (max-width: 768px) {
+    #best-sellers-{{ section.id }} .best-sellers__curve svg {
+      height: {{ section.settings.curve_height | times: 65 | divided_by: 100 }}px;
+    }
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 60px 0 24px;
+  }
+
+  /* Header */
+  #best-sellers-{{ section.id }} .best-sellers__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__title {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 800;
+    color: var(--bs-title-color);
+    margin: 0 0 12px;
+    letter-spacing: -0.5px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__subtitle {
+    font-size: 17px;
+    color: var(--bs-subtitle-color);
+    max-width: 500px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+  }
+
+  /* Tabs */
+  #best-sellers-{{ section.id }} .best-sellers__tabs {
+    display: inline-flex;
+    background: var(--bs-tab-inactive-bg);
+    border-radius: 999px;
+    padding: 5px;
+    gap: 4px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__tab {
+    padding: 14px 32px;
+    border: none;
+    background: transparent;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--bs-tab-inactive-text);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__tab--active {
+    background: var(--bs-tab-active-bg);
+    color: var(--bs-tab-active-text);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__tab:hover:not(.best-sellers__tab--active) {
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--bs-text-color);
+  }
+
+  /* Products Wrapper */
+  #best-sellers-{{ section.id }} .best-sellers__products-wrapper {
+    margin-bottom: 48px;
+  }
+
+  /* Desktop Grid - Hidden, using carousel instead */
+  #best-sellers-{{ section.id }} .best-sellers__grid--desktop {
+    display: none;
+  }
+
+  /* Centered Grid Layout for Collection 2 */
+  #best-sellers-{{ section.id }} .best-sellers__grid--centered {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__grid--centered .best-sellers__grid-item {
+    flex: 0 1 320px;
+    max-width: 320px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__grid--centered[data-products="3"] .best-sellers__grid-item {
+    flex: 0 1 calc(33.333% - 16px);
+    max-width: 340px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__grid--centered[data-products="2"] .best-sellers__grid-item {
+    flex: 0 1 calc(40% - 12px);
+    max-width: 400px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__grid--centered[data-products="4"] .best-sellers__grid-item {
+    flex: 0 1 calc(25% - 18px);
+    max-width: 280px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__grid--centered .best-sellers__card {
+    height: 100%;
+  }
+
+  /* Tablet adjustments for centered grid */
+  @media (max-width: 1024px) {
+    #best-sellers-{{ section.id }} .best-sellers__grid--centered {
+      gap: 16px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__grid--centered .best-sellers__grid-item {
+      flex: 0 1 calc(33.333% - 12px);
+      max-width: none;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__grid--centered[data-products="2"] .best-sellers__grid-item {
+      flex: 0 1 calc(50% - 8px);
+      max-width: none;
+    }
+  }
+
+  /* Mobile adjustments for centered grid */
+  @media (max-width: 768px) {
+    #best-sellers-{{ section.id }} .best-sellers__grid--centered {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: visible;
+      gap: 16px;
+      padding: 0 16px 16px;
+      margin: 0;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__grid--centered::-webkit-scrollbar {
+      display: none;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__grid--centered .best-sellers__grid-item {
+      flex: 0 0 75%;
+      max-width: 280px;
+      scroll-snap-align: center;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__grid--centered[data-products="2"] .best-sellers__grid-item,
+    #best-sellers-{{ section.id }} .best-sellers__grid--centered[data-products="3"] .best-sellers__grid-item,
+    #best-sellers-{{ section.id }} .best-sellers__grid--centered[data-products="4"] .best-sellers__grid-item {
+      flex: 0 0 75%;
+      max-width: 280px;
+    }
+  }
+  
+  /* Desktop Carousel - Show 4 products with 5th peeking */
+  #best-sellers-{{ section.id }} .best-sellers__carousel {
+    display: block;
+    position: relative;
+    overflow: visible;
+    padding-top: 20px;
+    margin-top: -20px;
+  }
+  
+  /* Clip only horizontally, allow vertical overflow for hover */
+  #best-sellers-{{ section.id }} .best-sellers__products-wrapper {
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+  
+  #best-sellers-{{ section.id }} .best-sellers__carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  
+  /* Each slide takes 20% so 4 fit (80%) with 5th peeking (20% visible) */
+  #best-sellers-{{ section.id }} .best-sellers__carousel-slide {
+    flex: 0 0 20%;
+    min-width: 20%;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+  
+  #best-sellers-{{ section.id }} .best-sellers__carousel-slide .best-sellers__card {
+    height: 100%;
+  }
+  
+  /* Carousel Navigation Arrow - Single right arrow */
+  #best-sellers-{{ section.id }} .best-sellers__carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-100%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.25s ease;
+    color: #1A1A1A;
+  }
+  
+  #best-sellers-{{ section.id }} .best-sellers__carousel-nav:hover {
+    background: var(--bs-accent-color);
+    color: #FFFFFF;
+    border-color: var(--bs-accent-color);
+  }
+  
+  #best-sellers-{{ section.id }} .best-sellers__carousel-nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  
+  /* Hide left arrow */
+  #best-sellers-{{ section.id }} .best-sellers__carousel-nav--prev {
+    display: none;
+  }
+  
+  #best-sellers-{{ section.id }} .best-sellers__carousel-nav--next {
+    right: -24px;
+  }
+  
+  #best-sellers-{{ section.id }} .best-sellers__carousel-nav svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* Carousel Dots - Pill style for active */
+  #best-sellers-{{ section.id }} .best-sellers__carousel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 32px;
+  }
+  
+  #best-sellers-{{ section.id }} .best-sellers__carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+  
+  #best-sellers-{{ section.id }} .best-sellers__carousel-dot--active {
+    background: var(--bs-accent-color);
+    width: 24px;
+  }
+  
+  #best-sellers-{{ section.id }} .best-sellers__carousel-dot:hover:not(.best-sellers__carousel-dot--active) {
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  /* Product Card - Premium large style */
+  #best-sellers-{{ section.id }} .best-sellers__card {
+    background: var(--bs-card-bg);
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    height: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__card-link {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__card-image {
+    position: relative;
+    aspect-ratio: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bs-card-bg);
+    overflow: hidden;
+    border-radius: 24px 24px 0 0;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease, transform 0.5s ease;
+  }
+  
+  /* Image hover swap effect */
+  #best-sellers-{{ section.id }} .best-sellers__product-image--primary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  
+  #best-sellers-{{ section.id }} .best-sellers__product-image--secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 2;
+  }
+  
+  #best-sellers-{{ section.id }} .best-sellers__card--has-hover-image:hover .best-sellers__product-image--primary {
+    opacity: 0;
+  }
+  
+  #best-sellers-{{ section.id }} .best-sellers__card--has-hover-image:hover .best-sellers__product-image--secondary {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__card:hover .best-sellers__product-image--primary:not(.best-sellers__card--has-hover-image .best-sellers__product-image--primary) {
+    transform: scale(1.05);
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 8px 14px;
+    background: var(--bs-accent-color);
+    color: #FFFFFF;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__badge--soldout {
+    background: #1A1A1A;
+    color: #FFFFFF;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__placeholder-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F5F5F0;
+    border-radius: 12px;
+    color: #999;
+    font-weight: 500;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__card-content {
+    padding: 24px 24px 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__product-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--bs-text-color);
+    margin: 0 0 8px;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__product-tagline {
+    font-size: 14px;
+    color: var(--bs-subtitle-color);
+    margin: 0 0 16px;
+    line-height: 1.5;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__price-row {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  
+  #best-sellers-{{ section.id }} .best-sellers__price-label {
+    font-size: 12px;
+    color: var(--bs-subtitle-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--bs-price-color);
+  }
+
+  /* Shop Now Button - Teal filled style */
+  #best-sellers-{{ section.id }} .best-sellers__card-actions {
+    padding: 20px 24px 24px;
+    margin-top: auto;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__shop-now-btn {
+    display: block;
+    width: 100%;
+    padding: 16px 28px;
+    background: var(--bs-accent-color);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__shop-now-btn:hover {
+    background: var(--bs-accent-color);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 166, 169, 0.4);
+    filter: brightness(1.1);
+  }
+
+  /* Shop All CTA */
+  #best-sellers-{{ section.id }} .best-sellers__shop-all {
+    text-align: center;
+    padding-top: 16px;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__shop-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    background: transparent;
+    color: var(--bs-btn-bg);
+    border: 2px solid var(--bs-btn-bg);
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__shop-all-btn:hover {
+    background: var(--bs-btn-bg);
+    color: var(--bs-btn-text);
+    transform: translateY(-2px);
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__shop-all-btn svg {
+    transition: transform 0.2s ease;
+  }
+
+  #best-sellers-{{ section.id }} .best-sellers__shop-all-btn:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Tablet - 3 products visible with 4th peeking */
+  @media (max-width: 1024px) {
+    #best-sellers-{{ section.id }} .best-sellers__carousel-slide {
+      flex: 0 0 30%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #best-sellers-{{ section.id }} .best-sellers__header {
+      margin-bottom: 32px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__tabs {
+      width: 100%;
+      max-width: 340px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__tab {
+      flex: 1;
+      padding: 12px 18px;
+      font-size: 14px;
+    }
+
+    /* Hide desktop grid, show carousel on mobile */
+    #best-sellers-{{ section.id }} .best-sellers__grid--desktop {
+      display: none;
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel-track {
+      display: flex;
+      transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+      padding-left: 20px; /* aligns card edge with section text padding */
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel-slide {
+      flex: 0 0 78%;
+      padding-right: 14px;
+      box-sizing: border-box;
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel-slide .best-sellers__card {
+      height: 100%;
+    }
+    
+    /* Carousel Dots */
+    #best-sellers-{{ section.id }} .best-sellers__carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 24px;
+      padding-bottom: 8px;
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel-dot--active {
+      background: var(--bs-accent-color);
+      transform: scale(1.2);
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__carousel-dot:hover:not(.best-sellers__carousel-dot--active) {
+      background: rgba(0, 0, 0, 0.4);
+    }
+    
+    /* Hide navigation arrows on mobile */
+    #best-sellers-{{ section.id }} .best-sellers__carousel-nav {
+      display: none;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__card {
+      border-radius: 16px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__card-image {
+      padding: 0;
+      aspect-ratio: 1;
+      border-radius: 16px 16px 0 0;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__card-content {
+      padding: 16px 16px 0;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__product-title {
+      font-size: 17px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__product-tagline {
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+    
+    #best-sellers-{{ section.id }} .best-sellers__price-label {
+      font-size: 11px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__price {
+      font-size: 18px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__card-actions {
+      padding: 12px 16px 16px;
+    }
+
+    #best-sellers-{{ section.id }} .best-sellers__shop-now-btn {
+      padding: 12px 16px;
+      font-size: 11px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #best-sellers-{{ section.id }} .best-sellers__carousel-slide {
+      flex: 0 0 80%;
+    }
+  }
+
+  /* Alpine cloak */
+  [x-cloak] {
+    display: none !important;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Best Sellers",
+  "tag": "section",
+  "class": "best-sellers-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (Desktop)",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (Desktop)",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding Top (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding Bottom (Mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Best Sellers"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Our most-loved flavors, chosen by the Happie community."
+    },
+    {
+      "type": "header",
+      "content": "Collections"
+    },
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Collection 1 (Tab 1)"
+    },
+    {
+      "type": "text",
+      "id": "collection_1_label",
+      "label": "Tab 1 Label",
+      "default": "THC Seltzers"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Collection 2 (Tab 2)",
+      "info": "Leave empty to hide tabs"
+    },
+    {
+      "type": "text",
+      "id": "collection_2_label",
+      "label": "Tab 2 Label",
+      "default": "Fungi Fusion"
+    },
+    {
+      "type": "select",
+      "id": "collection_2_layout",
+      "label": "Tab 2 Layout",
+      "options": [
+        { "value": "carousel", "label": "Carousel (slider)" },
+        { "value": "centered-grid", "label": "Centered Grid (full width)" }
+      ],
+      "default": "centered-grid",
+      "info": "Centered Grid displays products evenly across the section without sliding"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show_2",
+      "label": "Tab 2 Products to Show",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3,
+      "info": "Number of products in Collection 2 tab"
+    },
+    {
+      "type": "header",
+      "content": "Tab 1 (Collection 1) Settings"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Tab 1 Products to Show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 5,
+      "info": "Shows 4 products with the 5th peeking on desktop"
+    },
+    {
+      "type": "header",
+      "content": "Shop All Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shop_all",
+      "label": "Show Shop All Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shop_all_text",
+      "label": "Button Text",
+      "default": "Shop All"
+    },
+    {
+      "type": "url",
+      "id": "shop_all_url",
+      "label": "Button Link",
+      "info": "Defaults to active collection URL if not set"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFBF5"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Card Text Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "header",
+      "content": "Toggle Tabs"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_bg",
+      "label": "Active Tab Background",
+      "default": "#00A6A9"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_text",
+      "label": "Active Tab Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "tab_inactive_bg",
+      "label": "Inactive Tab Container",
+      "default": "#E8E8E0"
+    },
+    {
+      "type": "color",
+      "id": "tab_inactive_text",
+      "label": "Inactive Tab Text",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (Shop Now Button)",
+      "default": "#00A6A9",
+      "info": "Teal accent color for Shop Now buttons"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Shop All Button Background",
+      "default": "#6B725C"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Shop All Button Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Badge Background",
+      "default": "#F7CD46"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge Text",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "header",
+      "content": "Curve Dividers"
+    },
+    {
+      "type": "range",
+      "id": "curve_height",
+      "label": "Curve Height",
+      "min": 30,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "curve_animation_speed",
+      "label": "Animation Speed",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "default": 8,
+      "unit": "s",
+      "info": "Duration of one wave cycle (slower = more subtle)"
+    },
+    {
+      "type": "header",
+      "content": "Top Curve"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_curve",
+      "label": "Show Top Curve",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "top_curve_style",
+      "label": "Top Curve Style",
+      "options": [
+        { "value": "wave", "label": "Wave" },
+        { "value": "wave-smooth", "label": "Wave (Smooth)" },
+        { "value": "arc", "label": "Arc" },
+        { "value": "slope-left", "label": "Slope (Left to Right)" },
+        { "value": "slope-right", "label": "Slope (Right to Left)" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "top_curve_color",
+      "label": "Top Curve Color",
+      "default": "#FFFFFF",
+      "info": "Should match the section above"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_curve_animate",
+      "label": "Animate Top Curve",
+      "default": true,
+      "info": "Adds a flowing ripple wave animation"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Curve"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_curve",
+      "label": "Show Bottom Curve",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "bottom_curve_style",
+      "label": "Bottom Curve Style",
+      "options": [
+        { "value": "wave", "label": "Wave" },
+        { "value": "wave-smooth", "label": "Wave (Smooth)" },
+        { "value": "arc", "label": "Arc" },
+        { "value": "slope-left", "label": "Slope (Left to Right)" },
+        { "value": "slope-right", "label": "Slope (Right to Left)" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "bottom_curve_color",
+      "label": "Bottom Curve Color",
+      "default": "#FFFFFF",
+      "info": "Should match the section below"
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_curve_animate",
+      "label": "Animate Bottom Curve",
+      "default": true,
+      "info": "Adds a flowing ripple wave animation"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_badge",
+      "name": "Product Badge",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge Text",
+          "default": "Best Seller"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Best Sellers",
+      "settings": {
+        "title": "Best Sellers",
+        "subtitle": "Our most-loved flavors, chosen by the Happie community.",
+        "collection_1_label": "THC Seltzers",
+        "collection_2_label": "Fungi Fusion",
+        "show_shop_all": true,
+        "shop_all_text": "Shop All"
+      }
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer", "aside"]
+  }
+}
+{% endschema %}

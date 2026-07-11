@@ -21,7 +21,7 @@
         "cta_2_text": "Shop Fungi Fusion",
         "cta_2_url": "shopify:\/\/collections\/fungi-fusion",
         "show_social_proof": true,
-        "social_proof_text": "2,400+ Happie Customers",
+        "social_proof_text": "Sold in 165+ Stores Nationwide",
         "show_hero_image": false,
         "hero_image": "shopify:\/\/shop_images\/Happie_Drinks_Hero_1.png",
         "enable_video_background": true,
@@ -332,7 +332,7 @@
       "settings": {
         "heading_icon": "shopify:\/\/shop_images\/happie-cloud.png",
         "rating_image": "shopify:\/\/shop_images\/rating.png",
-        "rating_text": "Loved by 1,200+ Happy Drinkers",
+        "rating_text": "⭐ 4.7 Average Customer Rating",
         "heading": "Real people. Real vibes. Real results.",
         "scroll_speed": 40,
         "item_width": 250,
@@ -1308,7 +1308,7 @@
       "settings": {
         "title": "What Amazon Customers Are Saying",
         "subtitle": "Real reviews from verified Amazon purchases of Fungi Fusion",
-        "rating_text": "4.7 out of 5 | 1200+ Reviews",
+        "rating_text": "Rated 4.7 out of 5 on Amazon",
         "card_width": 320,
         "card_width_mobile": 270,
         "color_scheme": "scheme-4b2ebea0-b230-45ef-a163-d2110d2f932e",
