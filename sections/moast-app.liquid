@@ -332,16 +332,46 @@
           cloneMap.push([slide, clone]);
         });
 
+        /* Prime every video for inline autoplay: attributes must be present
+           (not just properties) for mobile autoplay policy, and preload=none
+           with no poster renders a blank white box until tapped. */
+        function primeVideo(v) {
+          if (v.dataset.hbPrimed) return;
+          v.dataset.hbPrimed = '1';
+          v.setAttribute('muted', ''); v.muted = true;
+          v.setAttribute('playsinline', ''); v.playsInline = true;
+          v.setAttribute('loop', '');
+          v.setAttribute('autoplay', '');
+          if (v.preload === 'none' || !v.preload) v.preload = 'metadata';
+          hbIO.observe(v);
+        }
+        /* Load + play as each video nears/enters the viewport (marquee moves
+           them through, so every slide eventually triggers). */
+        var hbIO = new IntersectionObserver(function(entries) {
+          entries.forEach(function(en) {
+            var v = en.target;
+            if (!en.isIntersecting) return;
+            if (v.currentSrc || v.getAttribute('src')) {
+              if (v.preload !== 'auto') { v.preload = 'auto'; try { v.load(); } catch (e) {} }
+              v.muted = true;
+              v.play().catch(function(){});
+            }
+          });
+        }, { root: null, rootMargin: '30% 60%', threshold: 0.01 });
+
+        shadow.querySelectorAll('video').forEach(primeVideo);
+
         /* Repair loop: as Moast hydrates stragglers, mirror their sources
-           into the clones and keep everything playing. */
+           into the clones, prime new videos, and keep everything playing. */
         var repairs = 0;
         var repairTimer = setInterval(function() {
           repairs++;
           cloneMap.forEach(function(pair) { syncVideo(pair[0], pair[1]); });
           shadow.querySelectorAll('video').forEach(function(v) {
+            primeVideo(v);
             if (v.paused && (v.currentSrc || v.getAttribute('src'))) { v.muted = true; v.play().catch(function(){}); }
           });
-          if (repairs >= 30) clearInterval(repairTimer);
+          if (repairs >= 45) clearInterval(repairTimer);
         }, 1000);
 
         /* Inject animation CSS into shadow DOM */

@@ -272,6 +272,15 @@
       font-size: 16px !important;
     }
   }
+
+  /* Compact footer: keep the drawer's bottom block small so cart items get the space */
+  [data-cart-footer] .border-t-section { padding-top: 8px !important; }
+  [data-cart-footer] dl { font-size: 15px !important; }
+  [data-cart-footer] p.text-right { margin-top: 2px !important; font-size: 11.5px !important; }
+  [data-cart-footer] input[name="checkout"] { height: 50px !important; font-size: 16px !important; }
+  @media (max-width: 768px) {
+    [data-cart-footer] input[name="checkout"] { height: 48px !important; font-size: 15px !important; }
+  }
 </style>
 
 <data-island
