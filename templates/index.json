@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "hero_split_main": {
@@ -17,17 +8,17 @@
         "title_highlight": "",
         "richtext": "Premium THC seltzers & functional mushroom drinks — nano-emulsified, fast-acting, zero alcohol. The best hemp-derived Delta-9 beverages, crafted in California for the good-vibe seekers.",
         "cta_1_text": "Shop THC Seltzers",
-        "cta_1_url": "shopify:\/\/collections\/thc-drinks",
+        "cta_1_url": "shopify://collections/thc-drinks",
         "cta_2_text": "Shop Fungi Fusion",
-        "cta_2_url": "shopify:\/\/collections\/fungi-fusion",
+        "cta_2_url": "shopify://collections/fungi-fusion",
         "show_social_proof": true,
         "social_proof_text": "Sold in 165+ Stores Nationwide",
         "show_hero_image": false,
-        "hero_image": "shopify:\/\/shop_images\/Happie_Drinks_Hero_1.png",
+        "hero_image": "shopify://shop_images/Happie_Drinks_Hero_1.png",
         "enable_video_background": true,
-        "background_video": "shopify:\/\/files\/videos\/hf_20260217_070026_ce7bd2be-7813-4244-9609-c42d8e21ec80 (1).mp4",
-        "video_fallback_image": "shopify:\/\/shop_images\/Happie_-_Desktop_Hero.jpg",
-        "mobile_fallback_image": "shopify:\/\/shop_images\/Happie_-_Mobile.jpg",
+        "background_video": "shopify://files/videos/hf_20260217_070026_ce7bd2be-7813-4244-9609-c42d8e21ec80 (1).mp4",
+        "video_fallback_image": "shopify://shop_images/Happie_-_Desktop_Hero.jpg",
+        "mobile_fallback_image": "shopify://shop_images/Happie_-_Mobile.jpg",
         "disable_video_on_mobile": false,
         "overlay_color": "#000000",
         "overlay_opacity": 35,
@@ -105,22 +96,22 @@
         "padding_bottom": 55,
         "padding_top_mobile": 60,
         "padding_bottom_mobile": 60,
-        "header_icon": "shopify:\/\/shop_images\/happie-cloud.png",
+        "header_icon": "shopify://shop_images/happie-cloud.png",
         "icon_size": 104,
         "title": "Choose Your Vibe",
         "subtitle": "Two product lines, one mission — plant-powered happiness for every moment. Premium THC seltzers and adaptogenic mushroom drinks.",
         "card_1_badge": "MOST POPULAR",
-        "card_1_image": "shopify:\/\/shop_images\/Happie_Thc_collection.jpg",
+        "card_1_image": "shopify://shop_images/Happie_Thc_collection.jpg",
         "card_1_title": "THC Infused Seltzers",
         "card_1_subtitle": "5mg THC + 5mg CBD or 10mg THC + 5mg CBD",
         "card_1_cta_text": "Shop THC Seltzers",
-        "card_1_cta_url": "shopify:\/\/collections\/thc-drinks",
+        "card_1_cta_url": "shopify://collections/thc-drinks",
         "card_2_badge": "ZERO THC",
-        "card_2_image": "shopify:\/\/shop_images\/Fungie_Fusion_Collections.jpg",
+        "card_2_image": "shopify://shop_images/Fungie_Fusion_Collections.jpg",
         "card_2_title": "Fungi Fusion",
         "card_2_subtitle": "Functional mushrooms + adaptogens",
         "card_2_cta_text": "Shop Fungi Fusion",
-        "card_2_cta_url": "shopify:\/\/collections\/fungi-fusion",
+        "card_2_cta_url": "shopify://collections/fungi-fusion",
         "trust_1_text": "Lab tested for purity",
         "trust_2_text": "Free shipping on orders $50+",
         "trust_3_text": "30-day guarantee — love it or return it",
@@ -151,10 +142,10 @@
       "disabled": true,
       "name": "t:sections.video_with_text_overlay.name",
       "settings": {
-        "image": "shopify:\/\/shop_images\/hero-logo.svg",
+        "image": "shopify://shop_images/hero-logo.svg",
         "overlay_color": "#000000",
         "overlay_opacity": 30,
-        "video": "shopify:\/\/files\/videos\/Mushroom No Text-00.00.00.000-00.00.09.161.mov",
+        "video": "shopify://files/videos/Mushroom No Text-00.00.00.000-00.00.09.161.mov",
         "crop": "full-screen",
         "crop_desktop": "full-screen",
         "display_on_card": false,
@@ -172,7 +163,7 @@
         "richtext_font_size_value": 20,
         "richtext_font_size_unit": "px",
         "richtext_font_weight": "500",
-        "cta_url": "shopify:\/\/pages\/shop",
+        "cta_url": "shopify://pages/shop",
         "cta_text": "Shop Now",
         "color_scheme": "scheme1",
         "use_gradient_background": true,
@@ -188,10 +179,10 @@
       "disabled": true,
       "name": "t:sections.video_with_text_overlay.name",
       "settings": {
-        "image": "shopify:\/\/shop_images\/logo-horizontal.svg",
+        "image": "shopify://shop_images/logo-horizontal.svg",
         "overlay_color": "#000000",
         "overlay_opacity": 0,
-        "video": "shopify:\/\/files\/videos\/[HAP] Cloud Toon Shader 2.2.mp4",
+        "video": "shopify://files/videos/[HAP] Cloud Toon Shader 2.2.mp4",
         "crop": "widescreen",
         "crop_desktop": "widescreen",
         "display_on_card": false,
@@ -209,7 +200,7 @@
         "richtext_font_size_value": 16,
         "richtext_font_size_unit": "px",
         "richtext_font_weight": "400",
-        "cta_url": "\/about",
+        "cta_url": "/about",
         "cta_text": "Learn More",
         "color_scheme": "",
         "use_gradient_background": false,
@@ -227,8 +218,8 @@
         ".object-wrapper img {top: -320px; height: 130;}"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/about-background.svg",
-        "logo": "shopify:\/\/shop_images\/happie-iso-logo.svg",
+        "image": "shopify://shop_images/about-background.svg",
+        "logo": "shopify://shop_images/happie-iso-logo.svg",
         "display_on_card": false,
         "display_content_below_image_on_mobile": false,
         "style": "inset",
@@ -241,7 +232,7 @@
         "heading_size": "heading-standard",
         "richtext": "At Happie, we're on a mission to bring plant medicine to the people — accessible, functional, and undeniably delicious. Born in California and built for balance, our beverages blend bold flavor with feel-good ingredients that support your body, mind, and mood.",
         "richtext_color": "#000000",
-        "cta_url": "shopify:\/\/pages\/about-us",
+        "cta_url": "shopify://pages/about-us",
         "cta_text": "Learn More",
         "color_scheme": "scheme1",
         "use_gradient_background": false
@@ -298,7 +289,7 @@
       "type": "moast-app",
       "blocks": {
         "moast_carousel_N9Bgbi": {
-          "type": "shopify:\/\/apps\/moast\/blocks\/carousel\/1ac7547b-5443-446c-868c-7fab4566ee16",
+          "type": "shopify://apps/moast/blocks/carousel/1ac7547b-5443-446c-868c-7fab4566ee16",
           "settings": {
             "dynamic": false,
             "feed": "default",
@@ -330,8 +321,8 @@
       ],
       "name": "Moast App",
       "settings": {
-        "heading_icon": "shopify:\/\/shop_images\/happie-cloud.png",
-        "rating_image": "shopify:\/\/shop_images\/rating.png",
+        "heading_icon": "shopify://shop_images/happie-cloud.png",
+        "rating_image": "shopify://shop_images/rating.png",
         "rating_text": "⭐ 4.7 Average Customer Rating",
         "heading": "Real people. Real vibes. Real results.",
         "scroll_speed": 40,
@@ -365,7 +356,7 @@
         "heading": "Find Your Flavor",
         "description": "Not sure which THC seltzer to try first? Our variety pack lets you sample all our most popular hemp-derived THC flavors and find your perfect vibe. The best way to discover why Happie is the top-rated THC drink brand.",
         "button_text": "Shop Variety Pack",
-        "image": "shopify:\/\/shop_images\/DrinkHappieVarietyPack-min.jpg",
+        "image": "shopify://shop_images/DrinkHappieVarietyPack-min.jpg",
         "heading_size": 42,
         "text_size": 16,
         "price_size": 48,
@@ -442,7 +433,7 @@
         "padding_top_mobile": 60,
         "padding_bottom_mobile": 60,
         "title": "Clean Ingredients — What Makes Happie the Best THC Seltzer",
-        "main_image": "shopify:\/\/shop_images\/Grapefruitfarmedacanimage-min.jpg",
+        "main_image": "shopify://shop_images/Grapefruitfarmedacanimage-min.jpg",
         "background_color": "#ffcb08",
         "card_bg_color": "#fff8dc",
         "title_color": "#7b3f9e",
@@ -467,8 +458,8 @@
       "type": "featured-collection",
       "disabled": true,
       "custom_css": [
-        "\/* Hide product description in Featured Collection cards *\/.product-description {display: none !important;}",
-        " \/* Optional: tighten spacing where the description used to be *\/.section-featured-collection .card__information,.section-featured-collection .card__content {gap: 0.25rem;}",
+        "/* Hide product description in Featured Collection cards */.product-description {display: none !important;}",
+        " /* Optional: tighten spacing where the description used to be */.section-featured-collection .card__information,.section-featured-collection .card__content {gap: 0.25rem;}",
         "h2 {padding-bottom: -0px;}",
         ".rte.mx-auto.mt-5.max-w-md.text-center {margin-top: 10px !important;}"
       ],
@@ -508,7 +499,7 @@
         "@media screen and (max-width: 600px) {.py-section-vertical-spacing {padding-bottom: 0px; padding-top:50px }"
       ],
       "settings": {
-        "logo": "shopify:\/\/shop_images\/logo-black.svg",
+        "logo": "shopify://shop_images/logo-black.svg",
         "rich_text": "Only The Best",
         "mobile_text_scale": 1,
         "desktop_text_scale": 4,
@@ -528,7 +519,7 @@
           "type": "icon",
           "settings": {
             "icon": "cruelty_free",
-            "custom_image": "shopify:\/\/shop_images\/alcohol-free-icon_e22b181a-e523-4bc7-9636-7c267087fc79.svg",
+            "custom_image": "shopify://shop_images/alcohol-free-icon_e22b181a-e523-4bc7-9636-7c267087fc79.svg",
             "text": "Alcohol Free"
           }
         },
@@ -536,7 +527,7 @@
           "type": "icon",
           "settings": {
             "icon": "alcohol_free",
-            "custom_image": "shopify:\/\/shop_images\/delta-nine-thc-icon.svg",
+            "custom_image": "shopify://shop_images/delta-nine-thc-icon.svg",
             "text": "Delta 9 THC"
           }
         },
@@ -544,7 +535,7 @@
           "type": "icon",
           "settings": {
             "icon": "paraben_free",
-            "custom_image": "shopify:\/\/shop_images\/low-cal-icon.svg",
+            "custom_image": "shopify://shop_images/low-cal-icon.svg",
             "text": "Low Cal"
           }
         },
@@ -552,7 +543,7 @@
           "type": "icon",
           "settings": {
             "icon": "vegan",
-            "custom_image": "shopify:\/\/shop_images\/vegan-icon.svg",
+            "custom_image": "shopify://shop_images/vegan-icon.svg",
             "text": "Vegan"
           }
         },
@@ -560,7 +551,7 @@
           "type": "icon",
           "settings": {
             "icon": "organic",
-            "custom_image": "shopify:\/\/shop_images\/cbd-ratio-icon.svg",
+            "custom_image": "shopify://shop_images/cbd-ratio-icon.svg",
             "text": "1:1 CBD Ratio"
           }
         }
@@ -676,7 +667,7 @@
         "highlighted_column_color": "accent-1",
         "show_scroll_left_to_right_on_mobile": true,
         "column_1_title": "Aura",
-        "column_1_image": "shopify:\/\/shop_images\/logo-horizontal.svg",
+        "column_1_image": "shopify://shop_images/logo-horizontal.svg",
         "column_2_title": "Big corporate brands",
         "enable_column_3": false,
         "column_3_title": "Column 3",
@@ -752,7 +743,7 @@
           "settings": {
             "title": "Ready To TasteWhat All the Hype is About",
             "text": "",
-            "cta_link": "shopify:\/\/collections\/all",
+            "cta_link": "shopify://collections/all",
             "cta_text": "Shop Now",
             "override_section_color_scheme": true,
             "color_scheme": ""
@@ -777,8 +768,8 @@
         "display_on_card": false,
         "slideshow_on_mobile": true,
         "slideshow_focus": "center",
-        "image": "shopify:\/\/shop_images\/happie_lime_singleCan_1.png",
-        "logo": "shopify:\/\/shop_images\/logo-horizontal.svg",
+        "image": "shopify://shop_images/happie_lime_singleCan_1.png",
+        "logo": "shopify://shop_images/logo-horizontal.svg",
         "max_width": 870,
         "crop": "",
         "image_shape": "default",
@@ -795,7 +786,7 @@
       "name": "t:sections.custom_liquid.name",
       "settings": {
         "title": "",
-        "custom_liquid": "<div class=\"custom-video-top-curves\">\n  {% render 'divider-top-white-bottom-transparent' %}\n<\/div>\n<video width=\"600\" height=\"100%\" autoplay loop muted playsinline>\n    <source src=\"https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/b208cb0edd114179a9b449a9bef36d9b.mp4\" \n        type='video\/mp4; codecs=\"hvc1\"'>\n    <source \n        src=\"https:\/\/cdn.shopify.com\/videos\/c\/o\/v\/f0ccdb0c1d15497d8117f2a99d0fdc41.webm\" \n        type=\"video\/webm\">\n<\/video>\n<div class=\"custom-video-bottom-curves\">\n  {% render 'divider-top-white-bottom-transparent' %}\n<\/div>",
+        "custom_liquid": "<div class=\"custom-video-top-curves\">\n  {% render 'divider-top-white-bottom-transparent' %}\n</div>\n<video width=\"600\" height=\"100%\" autoplay loop muted playsinline>\n    <source src=\"https://cdn.shopify.com/videos/c/o/v/b208cb0edd114179a9b449a9bef36d9b.mp4\" \n        type='video/mp4; codecs=\"hvc1\"'>\n    <source \n        src=\"https://cdn.shopify.com/videos/c/o/v/f0ccdb0c1d15497d8117f2a99d0fdc41.webm\" \n        type=\"video/webm\">\n</video>\n<div class=\"custom-video-bottom-curves\">\n  {% render 'divider-top-white-bottom-transparent' %}\n</div>",
         "full_width": true,
         "color_scheme": ""
       }
@@ -815,10 +806,10 @@
           "type": "column",
           "settings": {
             "show_image": true,
-            "image": "shopify:\/\/shop_images\/happie-beverages-can-isolated-mango-mimosa-crop-500px.png",
+            "image": "shopify://shop_images/happie-beverages-can-isolated-mango-mimosa-crop-500px.png",
             "title": "Mango Mimosa",
-            "text": "<p>Tropical sunshine with a bubbly twist—sweet mango and bright citrus sparkle in every sip.<\/p>",
-            "cta_link": "shopify:\/\/products\/mango-mimosa",
+            "text": "<p>Tropical sunshine with a bubbly twist—sweet mango and bright citrus sparkle in every sip.</p>",
+            "cta_link": "shopify://products/mango-mimosa",
             "cta_text": "Shop Now",
             "override_section_color_scheme": true,
             "color_scheme": "scheme1"
@@ -828,10 +819,10 @@
           "type": "column",
           "settings": {
             "show_image": true,
-            "image": "shopify:\/\/shop_images\/happie-beverages-can-isolated-blue-raspberry-crop-500px.png",
+            "image": "shopify://shop_images/happie-beverages-can-isolated-blue-raspberry-crop-500px.png",
             "title": "Blue Razzberry",
-            "text": "<p>A bold, tangy twist with juicy berry bliss—sweet-tart nostalgia meets a refreshing edge.<\/p>",
-            "cta_link": "shopify:\/\/products\/blue-razzberry",
+            "text": "<p>A bold, tangy twist with juicy berry bliss—sweet-tart nostalgia meets a refreshing edge.</p>",
+            "cta_link": "shopify://products/blue-razzberry",
             "cta_text": "Shop Now",
             "override_section_color_scheme": true,
             "color_scheme": "same_as_section"
@@ -841,10 +832,10 @@
           "type": "column",
           "settings": {
             "show_image": true,
-            "image": "shopify:\/\/shop_images\/watermelon_4f96f388-f36b-4b61-872f-38530d161cd8.png",
+            "image": "shopify://shop_images/watermelon_4f96f388-f36b-4b61-872f-38530d161cd8.png",
             "title": "Watermelon",
-            "text": "<p>Juicy, crisp, and summer-sweet for instant good vibes—like sunshine in a sip.<\/p>",
-            "cta_link": "shopify:\/\/products\/watermelon",
+            "text": "<p>Juicy, crisp, and summer-sweet for instant good vibes—like sunshine in a sip.</p>",
+            "cta_link": "shopify://products/watermelon",
             "cta_text": "Shop Now",
             "override_section_color_scheme": true,
             "color_scheme": "same_as_section"
@@ -865,16 +856,16 @@
       "settings": {
         "display_on_card": true,
         "slideshow_on_mobile": false,
-        "logo": "shopify:\/\/shop_images\/logo-black.svg",
+        "logo": "shopify://shop_images/logo-black.svg",
         "title": "Happie Fungi Fusion. Functional Beverages",
-        "description": "<p>These aren't your average wellness drinks. Each Happie Mushroom Beverage blends juicy, nostalgic flavor with powerful functional mushrooms and ocean-derived magnesium — for daily focus, calm, and energy without the crash. No THC. No caffeine. Just functional fun.<br\/><\/p>",
+        "description": "<p>These aren't your average wellness drinks. Each Happie Mushroom Beverage blends juicy, nostalgic flavor with powerful functional mushrooms and ocean-derived magnesium — for daily focus, calm, and energy without the crash. No THC. No caffeine. Just functional fun.<br/></p>",
         "crop": "",
         "image_shape": "default_pill",
         "show_index_on_blocks": false,
         "index_shape": "scalloped_circle_2",
         "color_scheme": "scheme6",
         "use_gradient_background": false,
-        "background_video": "shopify:\/\/files\/videos\/drink-happie-homepage-fungi-fusion-animation-1920x1080-3.mp4"
+        "background_video": "shopify://files/videos/drink-happie-homepage-fungi-fusion-animation-1920x1080-3.mp4"
       }
     },
     "video_with_text_overlay_hRNKJB": {
@@ -884,10 +875,10 @@
       ],
       "name": "t:sections.video_with_text_overlay.name",
       "settings": {
-        "image": "shopify:\/\/shop_images\/hero-logo.svg",
+        "image": "shopify://shop_images/hero-logo.svg",
         "overlay_color": "#000000",
         "overlay_opacity": 50,
-        "video": "shopify:\/\/files\/videos\/Create_a_photorealistic_202506192018.mp4",
+        "video": "shopify://files/videos/Create_a_photorealistic_202506192018.mp4",
         "crop": "vertical",
         "crop_desktop": "four-three",
         "display_on_card": false,
@@ -905,7 +896,7 @@
         "richtext_font_size_value": 20,
         "richtext_font_size_unit": "px",
         "richtext_font_weight": "500",
-        "cta_url": "shopify:\/\/collections\/shop-all",
+        "cta_url": "shopify://collections/shop-all",
         "cta_text": "Shop Now",
         "color_scheme": "scheme1",
         "use_gradient_background": true,
@@ -948,15 +939,15 @@
       ],
       "disabled": true,
       "custom_css": [
-        "\/* Hide product description in Featured Collection cards *\/.product-description {display: none !important;}",
-        " \/* Optional: tighten spacing where the description used to be *\/.section-featured-collection .card__information,.section-featured-collection .card__content {gap: 0.25rem;}",
+        "/* Hide product description in Featured Collection cards */.product-description {display: none !important;}",
+        " /* Optional: tighten spacing where the description used to be */.section-featured-collection .card__information,.section-featured-collection .card__content {gap: 0.25rem;}",
         "h2 {padding-bottom: 30px;}",
         ".section-mixed-shape-product-grid .product-tile__container h3 {min-height: auto !important;}",
         "h3 {padding-top: 25px;}"
       ],
       "name": "t:sections.mixed_shape_product_grid.name",
       "settings": {
-        "logo": "shopify:\/\/shop_images\/logo-black.svg",
+        "logo": "shopify://shop_images/logo-black.svg",
         "title": "Share the Wealth With 6-Packs",
         "subheading": "These aren't your average wellness drinks. Each Happie Mushroom Beverage blends juicy, nostalgic flavor with powerful functional mushrooms and ocean-derived magnesium — for daily focus, calm, and energy without the crash. No THC. No caffeine. Just functional fun.",
         "info_above_image": true,
@@ -973,7 +964,7 @@
       "settings": {
         "display_on_card": true,
         "posts_per_row_desktop": 3,
-        "logo": "shopify:\/\/shop_images\/happie-iso-logo.svg",
+        "logo": "shopify://shop_images/happie-iso-logo.svg",
         "title": "blog",
         "blog": "news",
         "post_limit": 6,
@@ -1004,7 +995,7 @@
         "title": "",
         "custom_liquid": "{% render 'seo-homepage-content' %}",
         "full_width": true,
-        "color_scheme": ""
+        "color_scheme": "scheme-134c56c6-04d1-4111-b029-accec175db7f"
       }
     },
     "scrolling-text-with-icons": {
@@ -1066,7 +1057,7 @@
         "show_border": true,
         "color_scheme": "scheme-134c56c6-04d1-4111-b029-accec175db7f",
         "use_gradient_background": false,
-        "show_top_curve": true,
+        "show_top_curve": false,
         "curve_height": 64,
         "top_curve_color": "#fffbf5",
         "top_curve_animate": true,
@@ -1300,10 +1291,26 @@
         }
       },
       "block_order": [
-        "ar_01", "ar_07", "ar_13", "ar_02", "ar_09", "ar_14",
-        "ar_04", "ar_10", "ar_15", "ar_03", "ar_08", "ar_17",
-        "ar_05", "ar_11", "ar_18", "ar_06", "ar_12", "ar_16",
-        "ar_19", "ar_20"
+        "ar_01",
+        "ar_07",
+        "ar_13",
+        "ar_02",
+        "ar_09",
+        "ar_14",
+        "ar_04",
+        "ar_10",
+        "ar_15",
+        "ar_03",
+        "ar_08",
+        "ar_17",
+        "ar_05",
+        "ar_11",
+        "ar_18",
+        "ar_06",
+        "ar_12",
+        "ar_16",
+        "ar_19",
+        "ar_20"
       ],
       "settings": {
         "title": "What Amazon Customers Are Saying",
