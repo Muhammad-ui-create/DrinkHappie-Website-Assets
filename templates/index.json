@@ -378,7 +378,7 @@
         "top_wave_style": "wave",
         "top_wave_color": "#f5e6d3",
         "top_wave_animate": true,
-        "show_bottom_wave": false,
+        "show_bottom_wave": true,
         "bottom_wave_style": "wave",
         "bottom_wave_color": "#ffcb08",
         "bottom_wave_animate": true
