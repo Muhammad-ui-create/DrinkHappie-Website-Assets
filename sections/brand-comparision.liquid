@@ -1,0 +1,805 @@
+<<<<<<< HEAD
+<style>
+  #shopify-section-{{ section.id }},
+  .shopify-section:has(#brand-comparison-{{ section.id }}) {
+    overflow: visible !important;
+    position: relative;
+  }
+  #brand-comparison-{{ section.id }}.brand-comparison-section,
+  .why-happie-sec#brand-comparison-{{ section.id }},
+  section.why-happie-sec.brand-comparison-section {
+    position: relative;
+    overflow: visible !important;
+    /* Override the default .why-happie-sec padding since we control padding via inline styles */
+    padding: 0 !important;
+  }
+</style>
+<section id="brand-comparison-{{ section.id }}" class="brand-comparison-section" style="position: relative; overflow: visible;">
+  <!-- Top Wave Divider -->
+  {%- if section.settings.show_top_wave -%}
+    <div class="brand-comparison__wave brand-comparison__wave--top" style="position: absolute; top: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(-100%){% if section.settings.invert_top_wave %} scaleY(-1){% endif %};">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        {%- case section.settings.top_wave_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'double-ripple' -%}
+            <path d="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,40 720,70 T1440,35 L1440,120 Z;M0,120 L0,120 Q360,10 720,40 T1440,70 L1440,120 Z;M0,120 L0,120 Q360,50 720,30 T1440,55 L1440,120 Z;M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+            <path d="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z" fill="{{ section.settings.top_wave_color }}" opacity="0.6">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z;M0,120 L0,120 Q540,45 1080,50 T1440,25 L1440,120 Z;M0,120 L0,120 Q540,20 1080,25 T1440,45 L1440,120 Z;M0,120 L0,120 Q540,40 1080,30 T1440,35 L1440,120 Z;M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- else -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
+
+  <!-- Old wave image removed - use new wave controls below -->
+  <div class="cstm-container" style="position: relative; z-index: 10; padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="cstm-row">
+    <div class="cstm-col-4">
+      <div class="why-happie-left-text">
+        {% if section.settings.section_heading != blank %}
+          <h2>{{ section.settings.section_heading }}</h2>
+        {% endif %}
+        {% if section.settings.content != blank %}
+          <p>{{ section.settings.content }}</p>
+        {% endif %}
+        {% if section.settings.button_text != blank %}
+          <a href="{{ section.settings.button_link }}" class="cstm-btn blue-btn">{{ section.settings.button_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="cstm-col-8">
+      <div class="right-table-box">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>
+                {% if section.settings.own_brand != blank %}
+                  {{ section.settings.own_brand | image_url: width: 400 | image_tag: alt: 'icon', loading: 'lazy' }}
+                {% endif %}
+              </th>
+              <th>
+                {% if section.settings.other_brand_text != blank %}
+                  {{ section.settings.other_brand_text }}
+                {% endif %}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for block in section.blocks %}
+              <tr>
+                <td>
+                  {% if block.settings.information != blank %}{{ block.settings.information }}{% endif %}
+                </td>
+                <td>
+                  {% if block.settings.own_brand_have == 'yes' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+                      <path d="M17.8558 31.7576C24.4295 31.7576 29.7586 26.4286 29.7586 19.8549C29.7586 13.2812 24.4295 7.95215 17.8558 7.95215C11.2822 7.95215 5.95312 13.2812 5.95312 19.8549C5.95312 26.4286 11.2822 31.7576 17.8558 31.7576Z" fill="#FFF2E4"/>
+                      <path d="M14.1329 19.8546L16.9508 22.6726C16.9927 22.7143 17.0494 22.7378 17.1086 22.7378C17.1677 22.7378 17.2244 22.7143 17.2663 22.6726L23.0599 16.8789" stroke="#962F80" stroke-width="1.33906"/>
+                    </svg>
+                  {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                      <g clip-path="url(#clip0_56_786)">
+                        <path d="M16.0026 28.6663C21.8936 28.6663 26.6693 23.8907 26.6693 17.9997C26.6693 12.1086 21.8936 7.33301 16.0026 7.33301C10.1116 7.33301 5.33594 12.1086 5.33594 17.9997C5.33594 23.8907 10.1116 28.6663 16.0026 28.6663Z" fill="#FFF2E4"/>
+                        <path d="M8.92654 11.3956C5.10132 15.2208 5.10132 21.4227 8.92654 25.248C12.7518 29.0732 18.9537 29.0732 22.7789 25.248C26.6041 21.4227 26.6041 15.2208 22.7789 11.3956C18.9537 7.57038 12.7518 7.57038 8.92654 11.3956Z" stroke="#1A1A1A" stroke-width="1.46667"/>
+                        <mask id="mask0_56_786" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="8" y="11" width="16" height="15">
+                          <path d="M15.8528 25.612L23.1436 18.3213L15.8528 11.0306L8.56213 18.3213L15.8528 25.612Z" fill="white"/>
+                        </mask>
+                        <g mask="url(#mask0_56_786)">
+                          <path d="M13.1149 21.967L15.8524 19.2295L18.59 21.967C18.7104 22.0874 18.8737 22.1551 19.0439 22.1551C19.2141 22.1551 19.3774 22.0874 19.4979 21.967C19.6182 21.8467 19.6858 21.6833 19.6858 21.5131C19.6858 21.3429 19.6182 21.1796 19.4979 21.0592L16.7603 18.3217L19.4979 15.5841C19.6182 15.4638 19.6858 15.3004 19.6858 15.1302C19.6858 14.96 19.6182 14.7967 19.4979 14.6763C19.3774 14.5559 19.2141 14.4883 19.0439 14.4883C18.8737 14.4883 18.7104 14.5559 18.59 14.6763L15.8524 17.4138L13.1149 14.6763C12.9945 14.5559 12.8312 14.4883 12.661 14.4883C12.4908 14.4883 12.3274 14.5559 12.2071 14.6763C12.0867 14.7967 12.019 14.96 12.019 15.1302C12.019 15.3004 12.0867 15.4638 12.2071 15.5841L14.9447 18.3217L12.2071 21.0592C12.0867 21.1796 12.019 21.3429 12.019 21.5131C12.019 21.6833 12.0867 21.8467 12.2071 21.967C12.3274 22.0874 12.4908 22.1551 12.661 22.1551C12.8312 22.1551 12.9945 22.0874 13.1149 21.967Z" fill="#1A1A1A"/>
+                        </g>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_56_786">
+                          <rect width="32" height="32" fill="white"/>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if block.settings.other_brand_have == 'yes' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+                      <path d="M17.8558 31.7576C24.4295 31.7576 29.7586 26.4286 29.7586 19.8549C29.7586 13.2812 24.4295 7.95215 17.8558 7.95215C11.2822 7.95215 5.95312 13.2812 5.95312 19.8549C5.95312 26.4286 11.2822 31.7576 17.8558 31.7576Z" fill="#FFF2E4"/>
+                      <path d="M14.1329 19.8546L16.9508 22.6726C16.9927 22.7143 17.0494 22.7378 17.1086 22.7378C17.1677 22.7378 17.2244 22.7143 17.2663 22.6726L23.0599 16.8789" stroke="#962F80" stroke-width="1.33906"/>
+                    </svg>
+                  {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                      <g clip-path="url(#clip0_56_786)">
+                        <path d="M16.0026 28.6663C21.8936 28.6663 26.6693 23.8907 26.6693 17.9997C26.6693 12.1086 21.8936 7.33301 16.0026 7.33301C10.1116 7.33301 5.33594 12.1086 5.33594 17.9997C5.33594 23.8907 10.1116 28.6663 16.0026 28.6663Z" fill="#FFF2E4"/>
+                        <path d="M8.92654 11.3956C5.10132 15.2208 5.10132 21.4227 8.92654 25.248C12.7518 29.0732 18.9537 29.0732 22.7789 25.248C26.6041 21.4227 26.6041 15.2208 22.7789 11.3956C18.9537 7.57038 12.7518 7.57038 8.92654 11.3956Z" stroke="#1A1A1A" stroke-width="1.46667"/>
+                        <mask id="mask0_56_786" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="8" y="11" width="16" height="15">
+                          <path d="M15.8528 25.612L23.1436 18.3213L15.8528 11.0306L8.56213 18.3213L15.8528 25.612Z" fill="white"/>
+                        </mask>
+                        <g mask="url(#mask0_56_786)">
+                          <path d="M13.1149 21.967L15.8524 19.2295L18.59 21.967C18.7104 22.0874 18.8737 22.1551 19.0439 22.1551C19.2141 22.1551 19.3774 22.0874 19.4979 21.967C19.6182 21.8467 19.6858 21.6833 19.6858 21.5131C19.6858 21.3429 19.6182 21.1796 19.4979 21.0592L16.7603 18.3217L19.4979 15.5841C19.6182 15.4638 19.6858 15.3004 19.6858 15.1302C19.6858 14.96 19.6182 14.7967 19.4979 14.6763C19.3774 14.5559 19.2141 14.4883 19.0439 14.4883C18.8737 14.4883 18.7104 14.5559 18.59 14.6763L15.8524 17.4138L13.1149 14.6763C12.9945 14.5559 12.8312 14.4883 12.661 14.4883C12.4908 14.4883 12.3274 14.5559 12.2071 14.6763C12.0867 14.7967 12.019 14.96 12.019 15.1302C12.019 15.3004 12.0867 15.4638 12.2071 15.5841L14.9447 18.3217L12.2071 21.0592C12.0867 21.1796 12.019 21.3429 12.019 21.5131C12.019 21.6833 12.0867 21.8467 12.2071 21.967C12.3274 22.0874 12.4908 22.1551 12.661 22.1551C12.8312 22.1551 12.9945 22.0874 13.1149 21.967Z" fill="#1A1A1A"/>
+                        </g>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_56_786">
+                          <rect width="32" height="32" fill="white"/>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Wave Divider -->
+  {%- if section.settings.show_bottom_wave -%}
+    <div class="brand-comparison__wave brand-comparison__wave--bottom" style="position: absolute; bottom: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(100%){% if section.settings.invert_bottom_wave %} scaleY(-1){% endif %};">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        {%- case section.settings.bottom_wave_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'double-ripple' -%}
+            <path d="M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,80 720,50 T1440,85 L1440,0 Z;M0,0 L0,0 Q360,110 720,80 T1440,50 L1440,0 Z;M0,0 L0,0 Q360,70 720,90 T1440,65 L1440,0 Z;M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+            <path d="M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}" opacity="0.6">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z;M0,0 L0,0 Q540,75 1080,70 T1440,95 L1440,0 Z;M0,0 L0,0 Q540,100 1080,95 T1440,80 L1440,0 Z;M0,0 L0,0 Q540,80 1080,90 T1440,85 L1440,0 Z;M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- else -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Brand Comparision",
+  "tag": "section",
+  "class": "why-happie-sec",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "own_brand",
+      "label": "Brand Image"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 80
+    },
+    {
+      "type": "text",
+      "id": "other_brand_text",
+      "label": "Other Brand Text"
+    },
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "range",
+      "id": "wave_height",
+      "label": "Wave Height",
+      "min": 30,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "wave_animation_speed",
+      "label": "Animation Speed",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "default": 8,
+      "unit": "s",
+      "info": "Duration of one wave cycle"
+    },
+    {
+      "type": "header",
+      "content": "Top Wave"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_wave",
+      "label": "Show Top Wave",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "top_wave_style",
+      "label": "Top Wave Style",
+      "options": [
+        { "value": "wave", "label": "Wave One" },
+        { "value": "double-ripple", "label": "Double Ripple" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "top_wave_color",
+      "label": "Top Wave Color",
+      "default": "#FFE6CB",
+      "info": "Should match the section above"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_wave_animate",
+      "label": "Animate Top Wave",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "invert_top_wave",
+      "label": "Invert Top Wave",
+      "default": false,
+      "info": "Flip the wave vertically"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Wave"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_wave",
+      "label": "Show Bottom Wave",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "bottom_wave_style",
+      "label": "Bottom Wave Style",
+      "options": [
+        { "value": "wave", "label": "Wave One" },
+        { "value": "double-ripple", "label": "Double Ripple" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "bottom_wave_color",
+      "label": "Bottom Wave Color",
+      "default": "#FFE6CB",
+      "info": "Should match the section below"
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_wave_animate",
+      "label": "Animate Bottom Wave",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "invert_bottom_wave",
+      "label": "Invert Bottom Wave",
+      "default": false,
+      "info": "Flip the wave vertically"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "text",
+          "id": "information",
+          "label": "Brand Information"
+        },
+        {
+          "type": "select",
+          "id": "own_brand_have",
+          "label": "Own brand have?",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Yes"
+            },
+            {
+              "value": "no",
+              "label": "No"
+            }
+          ],
+          "default": "yes"
+        },
+        {
+          "type": "select",
+          "id": "other_brand_have",
+          "label": "Other brand have?",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Yes"
+            },
+            {
+              "value": "no",
+              "label": "No"
+            }
+          ],
+          "default": "no"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Comparision"
+    }
+  ]
+}
+{% endschema %}
+=======
+<style>
+  #shopify-section-{{ section.id }},
+  .shopify-section:has(#brand-comparison-{{ section.id }}) {
+    overflow: visible !important;
+    position: relative;
+  }
+  #brand-comparison-{{ section.id }}.brand-comparison-section,
+  .why-happie-sec#brand-comparison-{{ section.id }},
+  section.why-happie-sec.brand-comparison-section {
+    position: relative;
+    overflow: visible !important;
+    /* Override the default .why-happie-sec padding since we control padding via inline styles */
+    padding: 0 !important;
+  }
+</style>
+<section id="brand-comparison-{{ section.id }}" class="brand-comparison-section" style="position: relative; overflow: visible;">
+  <!-- Top Wave Divider -->
+  {%- if section.settings.show_top_wave -%}
+    <div class="brand-comparison__wave brand-comparison__wave--top" style="position: absolute; top: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(-100%){% if section.settings.invert_top_wave %} scaleY(-1){% endif %};">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        {%- case section.settings.top_wave_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'double-ripple' -%}
+            <path d="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,40 720,70 T1440,35 L1440,120 Z;M0,120 L0,120 Q360,10 720,40 T1440,70 L1440,120 Z;M0,120 L0,120 Q360,50 720,30 T1440,55 L1440,120 Z;M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+            <path d="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z" fill="{{ section.settings.top_wave_color }}" opacity="0.6">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z;M0,120 L0,120 Q540,45 1080,50 T1440,25 L1440,120 Z;M0,120 L0,120 Q540,20 1080,25 T1440,45 L1440,120 Z;M0,120 L0,120 Q540,40 1080,30 T1440,35 L1440,120 Z;M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- else -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
+
+  <!-- Old wave image removed - use new wave controls below -->
+  <div class="cstm-container" style="position: relative; z-index: 10; padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="cstm-row">
+    <div class="cstm-col-4">
+      <div class="why-happie-left-text">
+        {% if section.settings.section_heading != blank %}
+          <h2>{{ section.settings.section_heading }}</h2>
+        {% endif %}
+        {% if section.settings.content != blank %}
+          <p>{{ section.settings.content }}</p>
+        {% endif %}
+        {% if section.settings.button_text != blank %}
+          <a href="{{ section.settings.button_link }}" class="cstm-btn blue-btn">{{ section.settings.button_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="cstm-col-8">
+      <div class="right-table-box">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>
+                {% if section.settings.own_brand != blank %}
+                  {{ section.settings.own_brand | image_url: width: 400 | image_tag: alt: 'icon', loading: 'lazy' }}
+                {% endif %}
+              </th>
+              <th>
+                {% if section.settings.other_brand_text != blank %}
+                  {{ section.settings.other_brand_text }}
+                {% endif %}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for block in section.blocks %}
+              <tr>
+                <td>
+                  {% if block.settings.information != blank %}{{ block.settings.information }}{% endif %}
+                </td>
+                <td>
+                  {% if block.settings.own_brand_have == 'yes' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+                      <path d="M17.8558 31.7576C24.4295 31.7576 29.7586 26.4286 29.7586 19.8549C29.7586 13.2812 24.4295 7.95215 17.8558 7.95215C11.2822 7.95215 5.95312 13.2812 5.95312 19.8549C5.95312 26.4286 11.2822 31.7576 17.8558 31.7576Z" fill="#FFF2E4"/>
+                      <path d="M14.1329 19.8546L16.9508 22.6726C16.9927 22.7143 17.0494 22.7378 17.1086 22.7378C17.1677 22.7378 17.2244 22.7143 17.2663 22.6726L23.0599 16.8789" stroke="#962F80" stroke-width="1.33906"/>
+                    </svg>
+                  {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                      <g clip-path="url(#clip0_56_786)">
+                        <path d="M16.0026 28.6663C21.8936 28.6663 26.6693 23.8907 26.6693 17.9997C26.6693 12.1086 21.8936 7.33301 16.0026 7.33301C10.1116 7.33301 5.33594 12.1086 5.33594 17.9997C5.33594 23.8907 10.1116 28.6663 16.0026 28.6663Z" fill="#FFF2E4"/>
+                        <path d="M8.92654 11.3956C5.10132 15.2208 5.10132 21.4227 8.92654 25.248C12.7518 29.0732 18.9537 29.0732 22.7789 25.248C26.6041 21.4227 26.6041 15.2208 22.7789 11.3956C18.9537 7.57038 12.7518 7.57038 8.92654 11.3956Z" stroke="#1A1A1A" stroke-width="1.46667"/>
+                        <mask id="mask0_56_786" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="8" y="11" width="16" height="15">
+                          <path d="M15.8528 25.612L23.1436 18.3213L15.8528 11.0306L8.56213 18.3213L15.8528 25.612Z" fill="white"/>
+                        </mask>
+                        <g mask="url(#mask0_56_786)">
+                          <path d="M13.1149 21.967L15.8524 19.2295L18.59 21.967C18.7104 22.0874 18.8737 22.1551 19.0439 22.1551C19.2141 22.1551 19.3774 22.0874 19.4979 21.967C19.6182 21.8467 19.6858 21.6833 19.6858 21.5131C19.6858 21.3429 19.6182 21.1796 19.4979 21.0592L16.7603 18.3217L19.4979 15.5841C19.6182 15.4638 19.6858 15.3004 19.6858 15.1302C19.6858 14.96 19.6182 14.7967 19.4979 14.6763C19.3774 14.5559 19.2141 14.4883 19.0439 14.4883C18.8737 14.4883 18.7104 14.5559 18.59 14.6763L15.8524 17.4138L13.1149 14.6763C12.9945 14.5559 12.8312 14.4883 12.661 14.4883C12.4908 14.4883 12.3274 14.5559 12.2071 14.6763C12.0867 14.7967 12.019 14.96 12.019 15.1302C12.019 15.3004 12.0867 15.4638 12.2071 15.5841L14.9447 18.3217L12.2071 21.0592C12.0867 21.1796 12.019 21.3429 12.019 21.5131C12.019 21.6833 12.0867 21.8467 12.2071 21.967C12.3274 22.0874 12.4908 22.1551 12.661 22.1551C12.8312 22.1551 12.9945 22.0874 13.1149 21.967Z" fill="#1A1A1A"/>
+                        </g>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_56_786">
+                          <rect width="32" height="32" fill="white"/>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if block.settings.other_brand_have == 'yes' %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
+                      <path d="M17.8558 31.7576C24.4295 31.7576 29.7586 26.4286 29.7586 19.8549C29.7586 13.2812 24.4295 7.95215 17.8558 7.95215C11.2822 7.95215 5.95312 13.2812 5.95312 19.8549C5.95312 26.4286 11.2822 31.7576 17.8558 31.7576Z" fill="#FFF2E4"/>
+                      <path d="M14.1329 19.8546L16.9508 22.6726C16.9927 22.7143 17.0494 22.7378 17.1086 22.7378C17.1677 22.7378 17.2244 22.7143 17.2663 22.6726L23.0599 16.8789" stroke="#962F80" stroke-width="1.33906"/>
+                    </svg>
+                  {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                      <g clip-path="url(#clip0_56_786)">
+                        <path d="M16.0026 28.6663C21.8936 28.6663 26.6693 23.8907 26.6693 17.9997C26.6693 12.1086 21.8936 7.33301 16.0026 7.33301C10.1116 7.33301 5.33594 12.1086 5.33594 17.9997C5.33594 23.8907 10.1116 28.6663 16.0026 28.6663Z" fill="#FFF2E4"/>
+                        <path d="M8.92654 11.3956C5.10132 15.2208 5.10132 21.4227 8.92654 25.248C12.7518 29.0732 18.9537 29.0732 22.7789 25.248C26.6041 21.4227 26.6041 15.2208 22.7789 11.3956C18.9537 7.57038 12.7518 7.57038 8.92654 11.3956Z" stroke="#1A1A1A" stroke-width="1.46667"/>
+                        <mask id="mask0_56_786" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="8" y="11" width="16" height="15">
+                          <path d="M15.8528 25.612L23.1436 18.3213L15.8528 11.0306L8.56213 18.3213L15.8528 25.612Z" fill="white"/>
+                        </mask>
+                        <g mask="url(#mask0_56_786)">
+                          <path d="M13.1149 21.967L15.8524 19.2295L18.59 21.967C18.7104 22.0874 18.8737 22.1551 19.0439 22.1551C19.2141 22.1551 19.3774 22.0874 19.4979 21.967C19.6182 21.8467 19.6858 21.6833 19.6858 21.5131C19.6858 21.3429 19.6182 21.1796 19.4979 21.0592L16.7603 18.3217L19.4979 15.5841C19.6182 15.4638 19.6858 15.3004 19.6858 15.1302C19.6858 14.96 19.6182 14.7967 19.4979 14.6763C19.3774 14.5559 19.2141 14.4883 19.0439 14.4883C18.8737 14.4883 18.7104 14.5559 18.59 14.6763L15.8524 17.4138L13.1149 14.6763C12.9945 14.5559 12.8312 14.4883 12.661 14.4883C12.4908 14.4883 12.3274 14.5559 12.2071 14.6763C12.0867 14.7967 12.019 14.96 12.019 15.1302C12.019 15.3004 12.0867 15.4638 12.2071 15.5841L14.9447 18.3217L12.2071 21.0592C12.0867 21.1796 12.019 21.3429 12.019 21.5131C12.019 21.6833 12.0867 21.8467 12.2071 21.967C12.3274 22.0874 12.4908 22.1551 12.661 22.1551C12.8312 22.1551 12.9945 22.0874 13.1149 21.967Z" fill="#1A1A1A"/>
+                        </g>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_56_786">
+                          <rect width="32" height="32" fill="white"/>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Wave Divider -->
+  {%- if section.settings.show_bottom_wave -%}
+    <div class="brand-comparison__wave brand-comparison__wave--bottom" style="position: absolute; bottom: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(100%){% if section.settings.invert_bottom_wave %} scaleY(-1){% endif %};">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        {%- case section.settings.bottom_wave_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'double-ripple' -%}
+            <path d="M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,80 720,50 T1440,85 L1440,0 Z;M0,0 L0,0 Q360,110 720,80 T1440,50 L1440,0 Z;M0,0 L0,0 Q360,70 720,90 T1440,65 L1440,0 Z;M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+            <path d="M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}" opacity="0.6">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z;M0,0 L0,0 Q540,75 1080,70 T1440,95 L1440,0 Z;M0,0 L0,0 Q540,100 1080,95 T1440,80 L1440,0 Z;M0,0 L0,0 Q540,80 1080,90 T1440,85 L1440,0 Z;M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- else -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Brand Comparision",
+  "tag": "section",
+  "class": "why-happie-sec",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "own_brand",
+      "label": "Brand Image"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 80
+    },
+    {
+      "type": "text",
+      "id": "other_brand_text",
+      "label": "Other Brand Text"
+    },
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "range",
+      "id": "wave_height",
+      "label": "Wave Height",
+      "min": 30,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "wave_animation_speed",
+      "label": "Animation Speed",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "default": 8,
+      "unit": "s",
+      "info": "Duration of one wave cycle"
+    },
+    {
+      "type": "header",
+      "content": "Top Wave"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_wave",
+      "label": "Show Top Wave",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "top_wave_style",
+      "label": "Top Wave Style",
+      "options": [
+        { "value": "wave", "label": "Wave One" },
+        { "value": "double-ripple", "label": "Double Ripple" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "top_wave_color",
+      "label": "Top Wave Color",
+      "default": "#FFE6CB",
+      "info": "Should match the section above"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_wave_animate",
+      "label": "Animate Top Wave",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "invert_top_wave",
+      "label": "Invert Top Wave",
+      "default": false,
+      "info": "Flip the wave vertically"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Wave"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_wave",
+      "label": "Show Bottom Wave",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "bottom_wave_style",
+      "label": "Bottom Wave Style",
+      "options": [
+        { "value": "wave", "label": "Wave One" },
+        { "value": "double-ripple", "label": "Double Ripple" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "bottom_wave_color",
+      "label": "Bottom Wave Color",
+      "default": "#FFE6CB",
+      "info": "Should match the section below"
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_wave_animate",
+      "label": "Animate Bottom Wave",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "invert_bottom_wave",
+      "label": "Invert Bottom Wave",
+      "default": false,
+      "info": "Flip the wave vertically"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "text",
+          "id": "information",
+          "label": "Brand Information"
+        },
+        {
+          "type": "select",
+          "id": "own_brand_have",
+          "label": "Own brand have?",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Yes"
+            },
+            {
+              "value": "no",
+              "label": "No"
+            }
+          ],
+          "default": "yes"
+        },
+        {
+          "type": "select",
+          "id": "other_brand_have",
+          "label": "Other brand have?",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Yes"
+            },
+            {
+              "value": "no",
+              "label": "No"
+            }
+          ],
+          "default": "no"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Comparision"
+    }
+  ]
+}
+{% endschema %}
+>>>>>>> 0fae04d (PDP sections: fix oversized eager images (923 KiB Lighthouse flag))

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <style>
   #shopify-section-{{ section.id }},
   .shopify-section:has(#moast-app-{{ section.id }}) {
@@ -108,12 +109,12 @@
   <div class="cstm-container-fluid" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; position: relative; z-index: 10;">
     <div class="common-heading-wrap text-center">
       {% if section.settings.heading_icon != blank %}
-        {{ section.settings.heading_icon | image_url: width: 3000 | image_tag: alt: 'icon' }}
+        {{ section.settings.heading_icon | image_url: width: 400 | image_tag: alt: 'icon', loading: 'lazy' }}
       {% endif %}
       <p class="text-white">
         {% if section.settings.rating_image != blank %}
           <span class="start-icon">
-            {{ section.settings.rating_image | image_url: width: 3000 | image_tag: alt: 'icon' }}
+            {{ section.settings.rating_image | image_url: width: 400 | image_tag: alt: 'icon', loading: 'lazy' }}
           </span>
         {% endif %}
         {% if section.settings.rating_text != blank %}{{ section.settings.rating_text }}{% endif %}
@@ -594,3 +595,601 @@
   ]
 }
 {% endschema %}
+=======
+<style>
+  #shopify-section-{{ section.id }},
+  .shopify-section:has(#moast-app-{{ section.id }}) {
+    overflow: visible !important;
+    position: relative;
+  }
+  #moast-app-{{ section.id }}.moast-app-section,
+  .app-sec#moast-app-{{ section.id }},
+  section.app-sec.moast-app-section {
+    position: relative;
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  /* Marquee styles */
+  .ugc-marquee-{{ section.id }} {
+    overflow: hidden;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%);
+  }
+
+  .ugc-marquee-track-{{ section.id }} {
+    display: flex;
+    gap: {{ section.settings.item_gap }}px;
+    width: max-content;
+    animation: ugc-scroll-{{ section.id }} {{ section.settings.scroll_speed }}s linear infinite;
+  }
+
+  .ugc-marquee-{{ section.id }}:hover .ugc-marquee-track-{{ section.id }} {
+    animation-play-state: paused;
+  }
+
+  @keyframes ugc-scroll-{{ section.id }} {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .ugc-marquee-item-{{ section.id }} {
+    flex-shrink: 0;
+    width: {{ section.settings.item_width_mobile }}px;
+    height: {{ section.settings.item_height_mobile }}px;
+    border-radius: {{ section.settings.item_radius }}px;
+    overflow: hidden;
+    position: relative;
+    background: rgba(0,0,0,0.05);
+  }
+
+  .ugc-marquee-item-{{ section.id }} img,
+  .ugc-marquee-item-{{ section.id }} video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (min-width: 750px) {
+    .ugc-marquee-item-{{ section.id }} {
+      width: {{ section.settings.item_width }}px;
+      height: {{ section.settings.item_height }}px;
+    }
+  }
+</style>
+
+{%- liquid
+  assign media_blocks = section.blocks | where: 'type', 'media_item'
+  assign media_count = media_blocks.size
+-%}
+
+<section id="moast-app-{{ section.id }}" class="moast-app-section" style="position: relative; overflow: visible;">
+  <!-- Top Wave Divider -->
+  {%- if section.settings.show_top_wave -%}
+    <div class="moast-app__wave moast-app__wave--top" style="position: absolute; top: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(-100%){% if section.settings.invert_top_wave %} scaleY(-1){% endif %};">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        {%- case section.settings.top_wave_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'double-ripple' -%}
+            <path d="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,40 720,70 T1440,35 L1440,120 Z;M0,120 L0,120 Q360,10 720,40 T1440,70 L1440,120 Z;M0,120 L0,120 Q360,50 720,30 T1440,55 L1440,120 Z;M0,120 L0,120 Q360,20 720,50 T1440,50 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+            <path d="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z" fill="{{ section.settings.top_wave_color }}" opacity="0.6">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z;M0,120 L0,120 Q540,45 1080,50 T1440,25 L1440,120 Z;M0,120 L0,120 Q540,20 1080,25 T1440,45 L1440,120 Z;M0,120 L0,120 Q540,40 1080,30 T1440,35 L1440,120 Z;M0,120 L0,120 Q540,30 1080,35 T1440,30 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+          {%- else -%}
+            <path d="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z" fill="{{ section.settings.top_wave_color }}">
+              {%- if section.settings.top_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z;M0,120 L0,120 Q360,30 720,80 T1440,40 L1440,120 Z;M0,120 L0,120 Q360,90 720,20 T1440,90 L1440,120 Z;M0,120 L0,120 Q360,10 720,70 T1440,50 L1440,120 Z;M0,120 L0,120 Q360,0 720,60 T1440,60 L1440,120 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
+
+  <div class="cstm-container-fluid" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; position: relative; z-index: 10;">
+    <div class="common-heading-wrap text-center">
+      {% if section.settings.heading_icon != blank %}
+        {{ section.settings.heading_icon | image_url: width: 400 | image_tag: alt: 'icon', loading: 'lazy' }}
+      {% endif %}
+      <p class="text-white">
+        {% if section.settings.rating_image != blank %}
+          <span class="start-icon">
+            {{ section.settings.rating_image | image_url: width: 400 | image_tag: alt: 'icon', loading: 'lazy' }}
+          </span>
+        {% endif %}
+        {% if section.settings.rating_text != blank %}{{ section.settings.rating_text }}{% endif %}
+      </p>
+      {% if section.settings.heading != blank %}
+        <h2 class="text-white">{{ section.settings.heading }}</h2>
+      {% endif %}
+    </div>
+
+    {%- comment -%} Custom UGC Marquee Reel {%- endcomment -%}
+    {%- if media_count > 0 -%}
+      <div class="ugc-marquee-{{ section.id }}" style="margin-top: 30px;">
+        <div class="ugc-marquee-track-{{ section.id }}">
+          {%- comment -%} First set of items {%- endcomment -%}
+          {%- for block in media_blocks -%}
+            <div class="ugc-marquee-item-{{ section.id }}" {{ block.shopify_attributes }}>
+              {%- if block.settings.video != blank -%}
+                {{
+                  block.settings.video
+                  | video_tag:
+                    autoplay: true,
+                    muted: true,
+                    loop: true,
+                    playsinline: true,
+                    controls: false,
+                    image_size: '600x'
+                }}
+              {%- elsif block.settings.image != blank -%}
+                {%- assign img_alt = block.settings.image.alt | default: 'Happie UGC' | escape -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 600
+                  | image_tag:
+                    alt: img_alt,
+                    loading: 'lazy',
+                    widths: '200, 300, 400, 600',
+                    sizes: '(min-width: 750px) 250px, 180px'
+                }}
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+          {%- comment -%} Duplicate set for seamless infinite loop {%- endcomment -%}
+          {%- for block in media_blocks -%}
+            <div class="ugc-marquee-item-{{ section.id }}" aria-hidden="true">
+              {%- if block.settings.video != blank -%}
+                {{
+                  block.settings.video
+                  | video_tag:
+                    autoplay: true,
+                    muted: true,
+                    loop: true,
+                    playsinline: true,
+                    controls: false,
+                    image_size: '600x'
+                }}
+              {%- elsif block.settings.image != blank -%}
+                {%- assign img_alt = block.settings.image.alt | default: 'Happie UGC' | escape -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 600
+                  | image_tag:
+                    alt: img_alt,
+                    loading: 'lazy',
+                    widths: '200, 300, 400, 600',
+                    sizes: '(min-width: 750px) 250px, 180px'
+                }}
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Moast App blocks (legacy, kept for compatibility) {%- endcomment -%}
+    {%- assign app_blocks = section.blocks | where: 'type', '@app' -%}
+    {%- if app_blocks.size > 0 -%}
+      <div class="app-reel-main">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when '@app' %}
+              {% render block %}
+          {% endcase %}
+        {% endfor %}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- Bottom Wave Divider -->
+  {%- if section.settings.show_bottom_wave -%}
+    <div class="moast-app__wave moast-app__wave--bottom" style="position: absolute; bottom: 0; left: 0; width: 100%; height: {{ section.settings.wave_height }}px; z-index: 5; overflow: visible; transform: translateY(100%){% if section.settings.invert_bottom_wave %} scaleY(-1){% endif %};">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%; display: block;">
+        {%- case section.settings.bottom_wave_style -%}
+          {%- when 'wave' -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- when 'double-ripple' -%}
+            <path d="M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,80 720,50 T1440,85 L1440,0 Z;M0,0 L0,0 Q360,110 720,80 T1440,50 L1440,0 Z;M0,0 L0,0 Q360,70 720,90 T1440,65 L1440,0 Z;M0,0 L0,0 Q360,100 720,70 T1440,70 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+            <path d="M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}" opacity="0.6">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed | times: 1.2 }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z;M0,0 L0,0 Q540,75 1080,70 T1440,95 L1440,0 Z;M0,0 L0,0 Q540,100 1080,95 T1440,80 L1440,0 Z;M0,0 L0,0 Q540,80 1080,90 T1440,85 L1440,0 Z;M0,0 L0,0 Q540,90 1080,85 T1440,90 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+          {%- else -%}
+            <path d="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z" fill="{{ section.settings.bottom_wave_color }}">
+              {%- if section.settings.bottom_wave_animate -%}
+                <animate attributeName="d" dur="{{ section.settings.wave_animation_speed }}s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1; 0.4 0 0.6 1" values="M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z;M0,0 L0,0 Q360,90 720,80 T1440,40 L1440,0 Z;M0,0 L0,0 Q360,30 720,100 T1440,90 L1440,0 Z;M0,0 L0,0 Q360,110 720,50 T1440,70 L1440,0 Z;M0,0 L0,0 Q360,120 720,60 T1440,60 L1440,0 Z"/>
+              {%- endif -%}
+            </path>
+        {%- endcase -%}
+      </svg>
+    </div>
+  {%- endif -%}
+
+  <!-- Auto-scroll Moast carousel -->
+  <script>
+    (function() {
+      var attempts = 0;
+      var maxAttempts = 40;
+      var alreadyApplied = false;
+
+      function initMoastAutoScroll() {
+        if (alreadyApplied) return;
+        attempts++;
+        if (attempts > maxAttempts) return;
+
+        var moastEl = document.querySelector('#moast-app-{{ section.id }} moast-carousel');
+        if (!moastEl || !moastEl.shadowRoot) {
+          setTimeout(initMoastAutoScroll, 500);
+          return;
+        }
+
+        var shadow = moastEl.shadowRoot;
+        var slidesContainer = shadow.querySelector('.slides');
+        if (!slidesContainer || slidesContainer.children.length === 0) {
+          setTimeout(initMoastAutoScroll, 500);
+          return;
+        }
+
+        /* Wait until slides have actual dimensions */
+        var firstSlide = slidesContainer.children[0];
+        if (!firstSlide || firstSlide.offsetHeight === 0) {
+          setTimeout(initMoastAutoScroll, 500);
+          return;
+        }
+
+        alreadyApplied = true;
+
+        var carousel = shadow.querySelector('.carousel');
+        if (!carousel) return;
+
+        /* Lock the carousel height before applying overflow hidden */
+        var slideHeight = firstSlide.offsetHeight;
+        carousel.style.height = slideHeight + 'px';
+        carousel.style.overflow = 'hidden';
+        carousel.style.webkitMaskImage = 'linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%)';
+        carousel.style.maskImage = 'linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%)';
+
+        /* Clone all slides for seamless loop */
+        var origSlides = Array.from(slidesContainer.children);
+        origSlides.forEach(function(slide) {
+          var clone = slide.cloneNode(true);
+          clone.setAttribute('aria-hidden', 'true');
+          var videos = clone.querySelectorAll('video');
+          videos.forEach(function(v) {
+            v.setAttribute('autoplay', '');
+            v.setAttribute('muted', '');
+            v.setAttribute('loop', '');
+            v.setAttribute('playsinline', '');
+            v.muted = true;
+            v.play().catch(function(){});
+          });
+          slidesContainer.appendChild(clone);
+        });
+
+        /* Inject animation CSS into shadow DOM */
+        var styleEl = document.createElement('style');
+        var speed = {{ section.settings.scroll_speed }};
+        styleEl.textContent = '' +
+          '.slides {' +
+          '  animation: moast-marquee ' + speed + 's linear infinite !important;' +
+          '  width: max-content !important;' +
+          '  flex-wrap: nowrap !important;' +
+          '}' +
+          '.slide {' +
+          '  flex-shrink: 0 !important;' +
+          '}' +
+          '.carousel:hover .slides {' +
+          '  animation-play-state: paused !important;' +
+          '}' +
+          '@keyframes moast-marquee {' +
+          '  0% { transform: translateX(0); }' +
+          '  100% { transform: translateX(-50%); }' +
+          '}';
+        shadow.appendChild(styleEl);
+
+        /* Autoplay all videos */
+        shadow.querySelectorAll('video').forEach(function(v) {
+          v.muted = true;
+          v.play().catch(function(){});
+        });
+      }
+
+      if (document.readyState === 'complete') {
+        setTimeout(initMoastAutoScroll, 2000);
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(initMoastAutoScroll, 2000);
+        });
+      }
+    })();
+  </script>
+</section>
+{% schema %}
+{
+  "name": "Moast App",
+  "tag": "section",
+  "class": "app-sec",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "heading_icon",
+      "label": "Heading Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "rating_image",
+      "label": "Rating Image"
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating Text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Marquee Reel"
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "label": "Scroll Speed",
+      "min": 10,
+      "max": 120,
+      "step": 5,
+      "default": 40,
+      "unit": "s",
+      "info": "Duration of one full loop (lower = faster)"
+    },
+    {
+      "type": "range",
+      "id": "item_width",
+      "label": "Item Width (Desktop)",
+      "min": 150,
+      "max": 400,
+      "step": 10,
+      "default": 250,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "item_height",
+      "label": "Item Height (Desktop)",
+      "min": 200,
+      "max": 600,
+      "step": 10,
+      "default": 350,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "item_width_mobile",
+      "label": "Item Width (Mobile)",
+      "min": 120,
+      "max": 300,
+      "step": 10,
+      "default": 180,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "item_height_mobile",
+      "label": "Item Height (Mobile)",
+      "min": 150,
+      "max": 450,
+      "step": 10,
+      "default": 260,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "item_gap",
+      "label": "Gap Between Items",
+      "min": 4,
+      "max": 40,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "item_radius",
+      "label": "Corner Radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Wave Dividers"
+    },
+    {
+      "type": "range",
+      "id": "wave_height",
+      "label": "Wave Height",
+      "min": 30,
+      "max": 150,
+      "step": 10,
+      "default": 80,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "wave_animation_speed",
+      "label": "Animation Speed",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "default": 8,
+      "unit": "s",
+      "info": "Duration of one wave cycle"
+    },
+    {
+      "type": "header",
+      "content": "Top Wave"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_wave",
+      "label": "Show Top Wave",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "top_wave_style",
+      "label": "Top Wave Style",
+      "options": [
+        { "value": "wave", "label": "Wave One" },
+        { "value": "double-ripple", "label": "Double Ripple" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "top_wave_color",
+      "label": "Top Wave Color",
+      "default": "#FFE6CB",
+      "info": "Should match the section above"
+    },
+    {
+      "type": "checkbox",
+      "id": "top_wave_animate",
+      "label": "Animate Top Wave",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "invert_top_wave",
+      "label": "Invert Top Wave",
+      "default": false,
+      "info": "Flip the wave vertically"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Wave"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_wave",
+      "label": "Show Bottom Wave",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "bottom_wave_style",
+      "label": "Bottom Wave Style",
+      "options": [
+        { "value": "wave", "label": "Wave One" },
+        { "value": "double-ripple", "label": "Double Ripple" }
+      ],
+      "default": "wave"
+    },
+    {
+      "type": "color",
+      "id": "bottom_wave_color",
+      "label": "Bottom Wave Color",
+      "default": "#FFE6CB",
+      "info": "Should match the section below"
+    },
+    {
+      "type": "checkbox",
+      "id": "bottom_wave_animate",
+      "label": "Animate Bottom Wave",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "invert_bottom_wave",
+      "label": "Invert Bottom Wave",
+      "default": false,
+      "info": "Flip the wave vertically"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "media_item",
+      "name": "Image / Video",
+      "limit": 30,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Upload a video (takes priority over image). Auto-plays muted."
+        }
+      ]
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Moast App"
+    }
+  ]
+}
+{% endschema %}
+>>>>>>> 0fae04d (PDP sections: fix oversized eager images (923 KiB Lighthouse flag))
