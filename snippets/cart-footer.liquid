@@ -159,8 +159,11 @@
       {%- endif -%}
 
       <div class="hb-cart-payments" aria-label="Accepted payment methods">
-        {%- for type in shop.enabled_payment_types -%}
-          {{ type | payment_type_svg_tag: class: 'hb-cart-payment-icon' }}
+        {%- assign hb_pay_allow = 'visa,master,american_express,paypal,apple_pay,shopify_pay,google_pay' | split: ',' -%}
+        {%- for allowed in hb_pay_allow -%}
+          {%- if shop.enabled_payment_types contains allowed -%}
+            {{ allowed | payment_type_svg_tag: class: 'hb-cart-payment-icon' }}
+          {%- endif -%}
         {%- endfor -%}
       </div>
       <style>
@@ -177,8 +180,9 @@
         .hb-cart-upsell__add{flex:none;background:#962F80;color:#fff;border:0;border-radius:999px;font-weight:700;font-size:13px;padding:9px 18px;cursor:pointer;}
         .hb-cart-upsell__add:hover{background:#7C2568;}
         .hb-cart-upsell__add:disabled{opacity:.6;cursor:default;}
-        .hb-cart-payments{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:14px;}
-        .hb-cart-payment-icon{height:24px;width:auto;border-radius:4px;}
+        .hb-cart-payments{display:flex;flex-wrap:nowrap;gap:5px;align-items:center;justify-content:center;margin-top:14px;opacity:.9;}
+        .hb-cart-payment-icon{height:20px;width:auto;border-radius:3px;flex:none;}
+        @media (max-width:380px){.hb-cart-payment-icon{height:17px;}}
       </style>
 
       <div

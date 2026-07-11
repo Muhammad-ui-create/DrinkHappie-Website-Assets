@@ -910,12 +910,15 @@
     flex-wrap: wrap;
     gap: 7px;
     align-items: center;
-    margin: -26px 0 34px;
+    margin: 0 0 34px;   /* normal flow — never overlaps stacked shipping lines */
   }
   .pdp-payment-icon {
-    height: 26px;
+    height: 24px;
     width: auto;
     border-radius: 4px;
+  }
+  @media (min-width: 769px) {
+    .pdp-payment-icons { margin-top: -22px; } /* tuck under the single-row shipping line on desktop only */
   }
 
   /* LONG DESCRIPTION */
@@ -1741,8 +1744,11 @@
               <div class="shipping-item">📦 {{ block.settings.shipping_text_2 | default: 'Free Shipping $50+' | replace: '$75+', '$50+' | replace: '$75', '$50' }}</div>
             </div>
             <div class="pdp-payment-icons" aria-label="Accepted payment methods">
-              {%- for type in shop.enabled_payment_types -%}
-                {{ type | payment_type_svg_tag: class: 'pdp-payment-icon' }}
+              {%- assign pdp_pay_allow = 'visa,master,american_express,paypal,apple_pay,shopify_pay,google_pay' | split: ',' -%}
+              {%- for allowed in pdp_pay_allow -%}
+                {%- if shop.enabled_payment_types contains allowed -%}
+                  {{ allowed | payment_type_svg_tag: class: 'pdp-payment-icon' }}
+                {%- endif -%}
               {%- endfor -%}
             </div>
 
