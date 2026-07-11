@@ -887,6 +887,33 @@
     line-height: 1.6;
   }
 
+  /* REAL REVIEW RATING (auto-activates at >=5 reviews) */
+  .rating-real {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+  .rating-real:hover .rating-text { text-decoration: underline; }
+  .rating-stars-outer {
+    position: relative;
+    display: inline-block;
+    font-size: 20px;
+    line-height: 1;
+    color: #E3DCCB;           /* empty stars */
+    letter-spacing: 2px;
+  }
+  .rating-stars-fill {
+    position: absolute;
+    top: 0; left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #F5A623;           /* filled stars, clipped to rating % */
+    letter-spacing: 2px;
+  }
+
   /* LOW STOCK BADGE */
   .low-stock-badge {
     display: inline-flex;
@@ -1419,11 +1446,42 @@
                 Low stock &mdash; only <strong>&nbsp;{{ _ls_qty }}&nbsp;</strong> packs left. Order soon
               </div>
             {% endif %}
+            {%- liquid
+              # Real review data (Shopify reviews.* metafields, written by Judge.me).
+              # Auto-upgrades this block once >=5 reviews exist; falls back to the
+              # block-setting display until then. Same threshold as product schema.
+              assign rr_val = nil
+              assign rr_cnt = 0
+              assign rr_obj = product.metafields.reviews.rating.value
+              if rr_obj != blank
+                if rr_obj.rating != blank
+                  assign rr_val = rr_obj.rating
+                else
+                  assign rr_val = rr_obj
+                endif
+              endif
+              assign rr_cnt_raw = product.metafields.reviews.rating_count.value | default: product.metafields.reviews.rating_count
+              if rr_cnt_raw != blank
+                assign rr_cnt = rr_cnt_raw | plus: 0
+              endif
+              assign rr_live = false
+              if rr_val != blank and rr_cnt >= 5
+                assign rr_live = true
+                assign rr_fill = rr_val | times: 20.0 | at_most: 100
+              endif
+            -%}
             <div {{ block.shopify_attributes }} class="raeting-box">
               <div class="product-rating">
                 {% if block.settings.show_rating %}
-                  <div class="rating-stars">★★★★★</div>
-                  <span class="rating-text">{{ block.settings.rating_text | default: '4.9/5.0' }}</span>
+                  {% if rr_live %}
+                    <a href="#judgeme_product_reviews" class="rating-real" data-scroll-to-reviews aria-label="Read {{ rr_cnt }} customer reviews">
+                      <span class="rating-stars-outer" aria-hidden="true">★★★★★<span class="rating-stars-fill" style="width: {{ rr_fill }}%;">★★★★★</span></span>
+                      <span class="rating-text">{{ rr_val | round: 1 }}/5 &middot; {{ rr_cnt }} reviews</span>
+                    </a>
+                  {% else %}
+                    <div class="rating-stars">★★★★★</div>
+                    <span class="rating-text">{{ block.settings.rating_text | default: '4.9/5.0' }}</span>
+                  {% endif %}
                 {% endif %}
               </div>
               {% if block.settings.show_badge %}
@@ -2537,6 +2595,17 @@
 
     // Handle window resize
     window.addEventListener('resize', toggleImageView);
+
+    // Rating click -> smooth-scroll to the Judge.me review widget
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('[data-scroll-to-reviews]');
+      if (!link) return;
+      var target = document.getElementById('judgeme_product_reviews') || document.querySelector('.jdgm-rev-widg');
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   })();
 </script>
 
