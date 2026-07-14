@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
@@ -520,6 +521,7 @@ box-shadow: inset 0 0 0 var(--input-border-width) rgb(245 245 245);
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "Customer Service",
+    "telephone": "+1-463-218-9646",
     "email": {{ shop.email | json }}
   },
   "areaServed": "US",
@@ -750,3 +752,758 @@ box-shadow: inset 0 0 0 var(--input-border-width) rgb(245 245 245);
     {% section 'happie-chatbot' %}
   </body>
 </html>
+=======
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <script async src="https://cdn.userway.org/widget.js" data-account="Qd6zudTeks"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="">
+
+    {%- comment -%} GEO 2026-05-08: canonical strips ?variant= on product pages and overrides duplicate collection paths to /collections/thc-drinks. Replaces single line `<link rel="canonical" href="{{ canonical_url }}">`. {%- endcomment -%}
+    {%- if template.name == 'product' -%}
+      <link rel="canonical" href="{{ shop.url }}{{ product.url }}">
+    {%- elsif template contains 'collection' and collection.handle != blank -%}
+      {%- assign happie_duplicate_collections = 'frontpage,shop-all,thc' | split: ',' -%}
+      {%- if happie_duplicate_collections contains collection.handle -%}
+        <link rel="canonical" href="{{ shop.url }}/collections/thc-drinks">
+      {%- else -%}
+        <link rel="canonical" href="{{ canonical_url }}">
+      {%- endif -%}
+    {%- else -%}
+      <link rel="canonical" href="{{ canonical_url }}">
+    {%- endif -%}
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+    {%- liquid
+      assign main_font = settings.type_main_font
+      assign main_font_bold = main_font | font_modify: 'weight', 'bold'
+      assign heading_font = settings.type_heading_font
+    -%}
+
+    {%- if settings.favicon != blank -%}
+      <link
+        rel="icon"
+        type="image/png"
+        href="{{ settings.favicon | image_url: width: '32x32' }}"
+      >
+    {%- endif -%}
+
+    {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
+      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    {%- endunless -%}
+
+    {%- assign clean_page_title = page_title | replace: ' | Happie®', '' | replace: ' | Happie', '' | replace: ' – Happie®', '' | replace: ' - Happie®', '' | strip -%}
+    <title>
+  {%- if template.name == 'index' %}
+    Happie® | Best THC Seltzers & Mushroom Drinks | Buy Online
+  {%- elsif template.name == 'product' %}
+    {{ clean_page_title }} | Happie®
+  {%- elsif template.name == 'collection' %}
+    {%- if collection.handle == 'thc-drinks' or collection.handle == 'thc' or collection.handle == 'frontpage' %}
+      Buy THC Seltzers Online | Delta-9 Hemp Drinks 5mg & 10mg | Happie®
+    {%- elsif collection.handle == 'fungi' or collection.handle == 'fungi-fusion' %}
+      Fungi Fusion Mushroom Drinks | Lion's Mane, Cordyceps & Reishi | Happie®
+    {%- elsif collection.handle == 'social' %}
+      THC Social Seltzers | Best Alcohol Alternative | 5mg & 10mg | Happie®
+    {%- elsif collection.handle == 'merch' %}
+      Happie® Merch | Official Gear
+    {%- else %}
+      {{ collection.title }} | Happie®
+    {%- endif %}
+  {%- elsif template.name == 'article' %}
+    {{ article.title }} | THC & Mushroom Drink Blog | Happie®
+  {%- elsif template.name == 'blog' %}
+    {%- if current_page > 1 %}
+      {{ blog.title }} — Page {{ current_page }} | Happie® Blog
+    {%- else %}
+      THC Seltzer & Functional Mushroom Drink Blog | Happie®
+    {%- endif %}
+  {%- elsif template.name == 'page' %}
+    {%- if page.handle == 'faq' %}
+      FAQ — THC Drinks, Hemp Seltzers & Mushroom Beverages | Happie®
+    {%- elsif page.handle == 'wholesale' %}
+      Wholesale THC Seltzers & Mushroom Drinks for Retailers | Happie®
+    {%- elsif page.handle == 'about-us' or page.handle == 'about-us-updated' %}
+      About Happie® | California-Crafted THC & Mushroom Beverages
+    {%- elsif page.handle == 'contact' %}
+      Contact Us | Happie® THC Seltzers
+    {%- elsif page.handle == 'subscribe-and-save' %}
+      Subscribe & Save 20% on THC Seltzers | Happie®
+    {%- elsif page.handle == 'coas' %}
+      Lab Test Results (COAs) | Third-Party Tested | Happie®
+    {%- elsif page.handle == 'shop' %}
+      Shop All THC Drinks & Mushroom Beverages Online | Happie®
+    {%- elsif page.handle == 'store-locator' or page.handle == 'mappy' %}
+      Find THC Seltzers Near Me | Store Locator | Happie®
+    {%- else %}
+      {{ page.title }} | Happie®
+    {%- endif %}
+  {%- elsif template.name == 'search' %}
+    Search{%- if search.terms %}: {{ search.terms }}{%- endif %} | Happie®
+  {%- elsif template.name == 'cart' %}
+    Your Cart | Happie®
+  {%- elsif template.name == '404' %}
+    Page Not Found | Happie®
+  {%- else %}
+    {{ clean_page_title }} | Happie®
+  {%- endif %}
+</title>
+
+    {%- comment -%} GEO 2026-05-08: noindex duplicate collection paths (frontpage was already in place; extended to shop-all + thc per SEO audit) {%- endcomment -%}
+    {%- if template contains 'collection' and collection.handle != blank -%}
+      {%- assign happie_duplicate_collections = 'frontpage,shop-all,thc' | split: ',' -%}
+      {%- if happie_duplicate_collections contains collection.handle -%}
+        <meta name="robots" content="noindex, follow">
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if template.name == 'index' %}
+  <meta name="description" content="Feel Good About Feeling Good. Happie® premium THC seltzers & functional mushroom drinks — fast-acting, low-cal, alcohol-free, third-party lab-tested. Ships to 40+ states.">
+{%- elsif template.name == 'product' %}
+  <meta name="description" content="{{ product.title }} by Happie® — {{ product.description | strip_html | truncate: 80 }} Premium hemp-derived THC drink, nano-emulsified for fast onset. Low calorie, vegan, gluten-free. Shop online with free shipping.">
+{%- elsif template.name == 'collection' %}
+  {%- if collection.handle == 'thc-drinks' or collection.handle == 'thc' or collection.handle == 'frontpage' %}
+    <meta name="description" content="Buy the best Delta-9 THC seltzers online. Happie hemp-derived THC drinks in 5mg & 10mg — 7 fruit flavors, nano-emulsified fast-acting formula. Zero alcohol, zero hangover, 30 calories. Free shipping on $50+.">
+  {%- elsif collection.handle == 'fungi' or collection.handle == 'fungi-fusion' %}
+    <meta name="description" content="Fungi Fusion functional mushroom drinks — Lion's Mane 900mg, Cordyceps 700mg & Reishi 400mg per can. Zero THC, zero caffeine, low calorie. Best mushroom beverage for focus, energy & calm. Ocean minerals for hydration. Ships nationwide.">
+  {%- elsif collection.handle == 'social' %}
+    <meta name="description" content="Happie Social THC Seltzers — 5mg and 10mg hemp-derived Delta-9 THC drinks perfect for parties, social gatherings & relaxation. The best alcohol alternative. Zero hangover, low calorie, vegan.">
+  {%- elsif collection.description != blank %}
+    <meta name="description" content="{{ collection.description | strip_html | strip_html | truncatewords: 25, '' }}">
+  {%- else %}
+    <meta name="description" content="{{ page_description | default: shop.description | strip_html | truncatewords: 25, '' }}">
+  {%- endif %}
+{%- elsif template.name == 'page' %}
+  {%- if page.handle == 'faq' %}
+    <meta name="description" content="Happie FAQ — everything about hemp-derived THC drinks, Delta-9 seltzers, functional mushroom beverages, dosing, shipping states & legality.">
+  {%- elsif page.handle == 'about-us' or page.handle == 'about-us-updated' %}
+    <meta name="description" content="About Happie® — California-crafted functional beverages by founder Pete Olander. Premium THC seltzers and Fungi Fusion mushroom drinks. Plant-powered happiness since 2019.">
+  {%- elsif page.handle == 'wholesale' %}
+    <meta name="description" content="Wholesale Happie THC seltzers and mushroom drinks for retailers, bars, restaurants & dispensaries. Premium hemp-derived beverages with competitive margins. Apply today.">
+  {%- elsif page_description != blank %}
+    <meta name="description" content="{{ page_description | strip_html | truncatewords: 25, '' }}">
+  {%- else %}
+    <meta name="description" content="{{ shop.description | strip_html | truncatewords: 25, '' }}">
+  {%- endif %}
+{%- elsif page_description != blank %}
+  <meta name="description" content="{{ page_description | strip_html | truncatewords: 25, '' }}">
+{%- else %}
+  <meta name="description" content="{{ shop.description | strip_html | truncatewords: 25, '' }}">
+{%- endif %}
+
+    {%- render 'meta-tags' -%}
+
+    {% comment %}
+      This script tag contains options for es-modules-shim, which is loaded
+      automatically by Shopify.
+    {% endcomment %}
+    <script type="esms-options">
+      {
+        "noLoadEventRetriggers": true
+      }
+    </script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "vendor": "{{ 'vendor.bundle.min.js' | asset_url }}",
+          "data-island": "{{ 'data-island.bundle.js' | asset_url }}",
+          "product": "{{ 'island-product.bundle.js' | asset_url }}",
+          "product-model": "{{ 'island-product-model.bundle.js' | asset_url }}"
+        }
+      }
+    </script>
+<!-- Preconnect: critical third-party origins -->
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link rel="preconnect" href="https://static.klaviyo.com" crossorigin>
+<link rel="preconnect" href="https://cdn.userway.org" crossorigin>
+<link rel="dns-prefetch" href="https://static-tracking.klaviyo.com">
+<link rel="dns-prefetch" href="https://cdnwidget.judge.me">
+<link rel="dns-prefetch" href="https://connect.facebook.net">
+<link rel="dns-prefetch" href="https://subscription-admin.appstle.com">
+
+    {{ content_for_header }}
+
+    {%- comment -%} Google Search Console verification — placed AFTER content_for_header so it is the last google-site-verification tag (overrides the stale Shopify Preferences tag) {%- endcomment -%}
+    <meta name="google-site-verification" content="h4ZefG7VZe4O66YZ24NCDFtNbG8KL3aETAqdvoKdsI8" />
+
+    {{ 'base.bundle.css' | asset_url | stylesheet_tag: preload: true }}
+
+    {% render 'js-bridge' %}
+
+    <script>
+      document.documentElement.className =
+        document.documentElement.className.replace('no-js', 'js');
+    </script>
+
+    <script>
+      function debounce(fn, wait) {
+        let t;
+        return (...args) => {
+          clearTimeout(t);
+          t = setTimeout(() => fn.apply(this, args), wait);
+        };
+      }
+    </script>
+
+    <script src="{{ 'jquery-3.7.1.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'slick.min.js' | asset_url }}" defer></script>
+    <script src="{{ 'utils.js' | asset_url }}" defer></script>
+    <script src="{{ 'custom.js' | asset_url }}" defer></script>
+
+
+    {% if request.design_mode %}
+      <script src="{{ 'shapes-animations.js' | asset_url }}" defer></script>
+      <script
+        src="{{ 'theme-editor-support.js' | asset_url }}"
+        type="module"
+      ></script>
+    {% endif %}
+
+    {% if template contains 'customers' %}
+      {% comment %}theme-check-disable ParserBlockingScript{% endcomment %}
+      {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+      {{ 'customer_area.js' | shopify_asset_url | script_tag }}
+      {% comment %}theme-check-enable ParserBlockingScript{% endcomment %}
+    {% endif %}
+
+    <script>
+      window.themeEventsDebugMode = false;
+    </script>
+    <script src="{{ 'theme-events.js' | asset_url }}" async defer></script>
+
+    <style>
+      :root {
+        --max-site-width: 1820px;
+      }
+    </style>
+
+    {% style %}
+      {{ main_font | font_face: font_display: 'swap' }}
+      {{ heading_font | font_face: font_display: 'swap' }}
+
+      {%- liquid
+        assign main_font_bolder = main_font | font_modify: 'weight', 'bolder'
+        assign main_font_italic = main_font | font_modify: 'style', 'italic'
+        assign main_font_bold_italic = main_font_bold | font_modify: 'style', 'italic'
+
+        if main_font_bold
+          echo main_font_bold | font_face: font_display: 'swap'
+        endif
+        if main_font_italic
+          echo main_font_italic | font_face: font_display: 'swap'
+        endif
+        if main_font_bold_italic
+          echo main_font_bold_italic | font_face: font_display: 'swap'
+        endif
+        if main_font_bolder
+          echo main_font_bolder | font_face: font_display: 'swap'
+        endif
+      -%}
+
+      {% if settings.heading_uppercase -%}
+        {%- capture heading_capitalize -%}uppercase{%- endcapture -%}
+      {% else -%}
+        {%- capture heading_capitalize -%}none{%- endcapture -%}
+      {% endif -%}
+      {%- capture heading_letterspacing -%}{{ settings.heading_letterspacing | divided_by: 1000.0 }}{% unless settings.heading_letterspacing == 0 -%}em{% endunless -%}{%- endcapture -%}
+
+      :root {
+        --heading-font-stack: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+        --heading-font-weight: {{ heading_font.weight }};
+        --heading-font-style: {{ heading_font.style }};
+        --heading-letterspacing: {{ heading_letterspacing }};
+        --heading-capitalize: {{ heading_capitalize }};
+        --main-font-stack: {{ main_font.family }}, {{ main_font.fallback_families }};
+        --main-font-weight: {{ main_font.weight }};
+        --main-font-style: {{ main_font.style }};
+      }
+    {% endstyle %}
+
+    {%- liquid
+      render 'css-bridge'
+      render 'critical-css'
+    -%}
+
+    <style id="manual-critical-css">
+      [x-cloak] {
+        display: none;
+      }
+
+      data-island {
+        display: block;
+      }
+
+      [data-parallax-container] {
+        will-change: opacity;
+        opacity: 0;
+        transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+      .no-js [data-parallax-container],
+      [data-parallax-container].animated {
+        opacity: 1;
+      }
+
+      @media (prefers-reduced-motion) {
+        [data-parallax-container] {
+          opacity: 1;
+        }
+      }
+    </style>
+
+    {% # theme-check-disable AssetPreload %}
+    {% unless heading_font.system? %}
+      <link
+        rel="preload"
+        as="font"
+        href="{{ heading_font | font_url }}"
+        type="font/woff2"
+        crossorigin
+      >
+    {% endunless %}
+    {% unless main_font.system? %}
+      <link
+        rel="preload"
+        as="font"
+        href="{{ main_font | font_url }}"
+        type="font/woff2"
+        crossorigin
+      >
+    {% endunless %}
+    {{ 'slick.css' | asset_url | stylesheet_tag }}
+    {{ 'slick-theme.css' | asset_url | stylesheet_tag }}
+
+    {% # theme-check-enable AssetPreload %}
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
+    {{ 'style.css' | asset_url | stylesheet_tag }}
+  {% include 'pagefly-app-header' %}
+
+
+
+
+  {% comment %} Netterm Button CSS {% endcomment %}
+<style>
+
+.net_address_fields .new_back_link {
+display: flex !important;
+}
+.net_address_fields input[type=text], input[type=email], input[type=tel], input[type=password], .input, select {
+box-shadow: inset 0 0 0 var(--input-border-width) rgb(245 245 245);
+}
+</style>
+
+  {% comment %} Netterm Button CSS end {% endcomment %}
+
+
+{%- comment -%} ===== GEO: META ROBOTS + BREADCRUMB SCHEMA ===== {%- endcomment -%}
+{%- unless template.name == 'cart' or template.name == 'account' -%}
+  <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+{%- endunless -%}
+{%- comment -%} BreadcrumbList Schema — auto-generates from URL path {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ shop.url }}"
+    }
+    {%- if template.name == 'product' -%}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ product.collections.first.title | default: "Products" | json }},
+      "item": "{{ shop.url }}{{ product.collections.first.url | default: '/collections/all' }}"
+    }
+    ,{
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ product.title | json }},
+      "item": "{{ shop.url }}{{ product.url }}"
+    }
+    {%- elsif template.name == 'collection' -%}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ collection.title | json }},
+      "item": "{{ shop.url }}{{ collection.url }}"
+    }
+    {%- elsif template.name == 'article' -%}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ blog.title | json }},
+      "item": "{{ shop.url }}{{ blog.url }}"
+    }
+    ,{
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ article.title | json }},
+      "item": "{{ shop.url }}{{ article.url }}"
+    }
+    {%- elsif template.name == 'blog' -%}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ blog.title | json }},
+      "item": "{{ shop.url }}{{ blog.url }}"
+    }
+    {%- elsif template.name == 'page' -%}
+    ,{
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ page.title | json }},
+      "item": "{{ shop.url }}{{ page.url }}"
+    }
+    {%- endif -%}
+  ]
+}
+</script>
+
+
+{%- comment -%} GEO: Organization schema fires on ALL pages for AI search visibility; WebSite+SearchAction stays homepage-only {%- endcomment -%}
+{%- liquid
+  assign geo_org_logo_media = nil
+  if shop.brand.metafields.settings.logo != blank
+    assign geo_org_logo_media = shop.brand.metafields.settings.logo.value
+  elsif shop.brand != blank and shop.brand.logo != blank
+    assign geo_org_logo_media = shop.brand.logo
+  endif
+  assign geo_org_logo_url = nil
+  assign geo_org_logo_w = 600
+  assign geo_org_logo_h = 200
+  if geo_org_logo_media != blank
+    assign geo_org_logo_url = geo_org_logo_media | image_url: width: 600
+    if geo_org_logo_url != blank
+      unless geo_org_logo_url contains 'http'
+        assign geo_org_logo_url = geo_org_logo_url | prepend: 'https:'
+      endunless
+    endif
+    assign geo_org_logo_w = geo_org_logo_media.width | default: 600
+    assign geo_org_logo_h = geo_org_logo_media.height | default: 200
+    if geo_org_logo_media.width != blank and geo_org_logo_media.height != blank and geo_org_logo_media.width > 600
+      assign geo_org_logo_h = geo_org_logo_media.height | times: 600 | divided_by: geo_org_logo_media.width
+      assign geo_org_logo_w = 600
+    endif
+  else
+    assign geo_org_logo_url = 'happie-logo.png' | file_url
+    if geo_org_logo_url != blank
+      unless geo_org_logo_url contains 'http'
+        assign geo_org_logo_url = geo_org_logo_url | prepend: 'https:'
+      endunless
+    endif
+  endif
+-%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Happie",
+  "alternateName": ["Drink Happie", "Happie Beverages"],
+  "url": {{ shop.url | json }},
+  "description": "Happie is a Northern California functional beverage brand making hemp-derived Delta-9 THC seltzers and Fungi Fusion adaptogenic mushroom drinks — premium plant-powered alternatives to alcohol, formulated with nano-emulsified cannabinoids and clinical-dose Lion's Mane, Cordyceps, and Reishi.",
+  {%- if geo_org_logo_url != blank -%}
+  "logo": {
+    "@type": "ImageObject",
+    "url": {{ geo_org_logo_url | json }},
+    "width": {{ geo_org_logo_w }},
+    "height": {{ geo_org_logo_h }}
+  },
+  {%- endif -%}
+  "foundingDate": "2019",
+  "founder": {
+    "@type": "Person",
+    "name": "Pete Olander",
+    "jobTitle": "Founder & CEO",
+    "url": {{ shop.url | append: '/pages/about-us' | json }},
+    "sameAs": [
+      "https://www.linkedin.com/in/peteolander/",
+      "https://drinkhappie.substack.com"
+    ]
+  },
+  {%- comment -%} 2026-06-05: aligned Org sameAs handles to active social accounts (now matches updated footer setting using drinkhappie IG handle). Source-of-truth: settings_data.json social_*_link. {%- endcomment -%}
+  "sameAs": [
+    "https://www.instagram.com/drinkhappie/",
+    "https://www.instagram.com/happiefusion/",
+    "https://www.facebook.com/happiecbdseltzer/",
+    "https://www.tiktok.com/@happievibes1",
+    "https://x.com/drinkhappie",
+    "https://www.linkedin.com/company/livehappie/"
+  ],
+  "knowsAbout": [
+    "Functional Mushroom Beverages",
+    "Hemp-Derived THC Beverages",
+    "Lion's Mane Extract",
+    "Cordyceps Extract",
+    "Reishi Extract",
+    "Delta-9 THC",
+    "Alcohol Alternatives",
+    "Functional Hydration",
+    "THC Seltzer",
+    "THC Drinks",
+    "Cannabis Beverages",
+    "THC Infused Drinks",
+    "Hemp Seltzer",
+    "Weed Drinks",
+    "Nano-Emulsified THC",
+    "CBD Drinks",
+    "THC Sparkling Water",
+    "Adaptogenic Beverages",
+    "Nootropic Drinks",
+    "Sober Curious Beverages",
+    "Mindful Drinking",
+    "Plant-Based Wellness",
+    "2018 Farm Bill Compliant Products",
+    "Mushroom Coffee Alternative",
+    "Zero-Proof Cocktails",
+    "Functional Soda",
+    "Low-Calorie THC Drinks",
+    "Vegan THC Beverages",
+    "Gluten-Free Cannabis Drinks",
+    "Social Tonic",
+    "Microdose THC Drinks",
+    "Relaxation Beverages",
+    "Focus Drinks",
+    "Energy Drinks Without Caffeine"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Customer Service",
+    "telephone": "+1-463-218-9646",
+    "email": {{ shop.email | json }}
+  },
+  "areaServed": "US",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "US"
+  }
+}
+</script>
+{%- if template.name == 'index' -%}
+{%- assign geo_search_target = shop.url | append: routes.search_url | append: '?q={search_term_string}' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ shop.name | json }},
+  "url": {{ shop.url | json }},
+  "publisher": {
+    "@type": "Organization",
+    "name": "Happie",
+    "url": {{ shop.url | json }}
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": {{ geo_search_target | json }}
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+{%- endif -%}
+
+{%- comment -%} GEO: FAQPage schema on FAQ page for Google rich results {%- endcomment -%}
+{%- if template.name == 'page' and page.handle == 'faq' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the best THC seltzer brand?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Happie is one of the best THC seltzer brands available online. Happie uses nano-emulsified THC for faster onset (15–30 min), organic agave nectar sweetener, ocean-derived minerals, and a balanced 1:1 THC-to-CBD ratio. Available in 7 fruit flavors with just 30 calories per can."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes Happie different from other THC seltzers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Happie stands apart with nano-emulsified THC for faster absorption, organic agave sweetener instead of cane sugar, ocean-derived minerals for hydration, and both a THC seltzer line and a functional mushroom drink line. At 30 calories per can with a 1:1 THC-to-CBD ratio, Happie delivers a cleaner, smoother experience."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are THC drinks a good alcohol alternative?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, THC seltzers like Happie are an excellent alcohol alternative. They deliver a relaxing buzz without the hangover, empty calories, or health risks of alcohol. At only 30 calories per can, they're perfect for sober curious adults, mindful drinkers, and social gatherings. Many people are switching from beer, wine, and cocktails to THC seltzers as a healthier way to unwind."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Delta-9 THC and is it legal?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Delta-9 THC is the primary psychoactive compound in cannabis. Hemp-derived Delta-9 THC products containing less than 0.3% THC by dry weight are federally legal under the 2018 Farm Bill. Happie THC seltzers are Farm Bill compliant and ship to 40+ states. State laws vary, so check your local regulations before ordering."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where can I buy THC seltzers online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can buy THC seltzers online at drinkhappie.com with fast shipping to 40+ states. Happie offers free shipping on orders over $50 and a Subscribe & Save program with 20% off every delivery. Orders typically ship within 1 business day."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the health benefits of mushroom drinks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Functional mushroom drinks like Happie Fungi Fusion contain Lion's Mane for cognitive function and focus, Cordyceps for natural energy and athletic performance, and Reishi for relaxation and immune support. They're a caffeine-free, sugar-free alternative to coffee and energy drinks with zero THC."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many calories are in a THC seltzer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Happie THC seltzers contain approximately 30 calories per 12 oz can, sweetened with organic agave nectar. That's significantly fewer calories than beer (150+), wine (120+), or cocktails (200+), making them one of the lowest-calorie THC drinks available."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the best THC seltzer for beginners?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Happie 5mg Social Seltzers are ideal for beginners. The balanced 1:1 ratio of 5mg THC and 5mg CBD delivers a mild, functional buzz. The nano-emulsified formula provides consistent effects in 15–30 minutes. Start with one can and wait before consuming more."
+      }
+    }
+  ]
+}
+</script>
+{%- endif -%}
+
+{%- comment -%} GEO: Person schema on About page (handle: about, about-us, our-story) {%- endcomment -%}
+{%- if template.name == 'page' -%}
+{%- if page.handle == 'about' or page.handle == 'about-us' or page.handle == 'our-story' or page.handle == 'about-us-updated' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Pete Olander",
+  "url": {{ shop.url | append: page.url | json }},
+  "jobTitle": "Founder & CEO",
+  "description": "Founder and CEO of Happie Beverages, a functional beverage company producing Delta-9 THC drinks and Fungi Fusion mushroom wellness beverages. Former financial services professional (J.P. Morgan, First Western Trust Bank) and sports nutrition product lead (Nutrition53). Personally involved in every formulation, sourcing, and distribution decision since 2019.",
+  "alumniOf": [
+    { "@type": "Organization", "name": "J.P. Morgan" },
+    { "@type": "Organization", "name": "First Western Trust Bank" },
+    { "@type": "Organization", "name": "Nutrition53" }
+  ],
+  "workLocation": {
+    "@type": "Place",
+    "address": { "@type": "PostalAddress", "addressCountry": "US" }
+  },
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Happie",
+    "url": {{ shop.url | json }},
+    "foundingDate": "2019"
+  },
+  "knowsAbout": [
+    "Functional Mushroom Beverages",
+    "Adaptogenic Herbs",
+    "Hemp-Derived THC Beverages",
+    "Delta-9 THC Products",
+    "Beverage Formulation",
+    "Functional Ingredients",
+    "CPG Distribution",
+    "Cannabis Retail",
+    "Dietary Supplements",
+    "Alcohol Alternatives",
+    "Brand Building",
+    "Product Positioning"
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/in/peteolander/",
+    "https://drinkhappie.substack.com",
+    {{ shop.url | json }}
+  ]
+}
+</script>
+{%- endif -%}
+{%- endif -%}
+
+{%- comment -%} Happie custom fix: dark RTE link color on article pages (overrides css-bridge default) {%- endcomment -%}
+{% render 'happie-article-link-fix' %}
+
+</head>
+
+  {%- liquid
+    assign body_classes = ''
+    if template == 'product.updated-pdp'
+      assign body_classes = 'updated-pdp '
+    endif
+    assign body_classes = body_classes | append: 'template-' | append: template.name
+    if template.suffix != blank
+      assign body_classes = body_classes | append: ' template-' | append: template.name | append: '-' | append: template.suffix | handle
+    endif
+  -%}
+  <body data-color-scheme="scheme1" class="{{ body_classes | strip }}">
+    {%- if settings.show_on_sale_badge -%}
+      {%- render 'static-sticker-defs', shape: settings.on_sale_badge_shape, id: 'on-sale' -%}
+    {%- endif -%}
+    {%- if settings.show_sold_out_badge -%}
+      {%- render 'static-sticker-defs', shape: settings.sold_out_badge_shape, id: 'sold-out' -%}
+    {%- endif -%}
+    {%- render 'static-sticker-defs', shape: settings.metafield_badge_shape, id: 'metafield-badge' -%}
+
+    <a class="skip-link" href="#MainContent">
+      {{- 'general.accessibility.skip_to_content' | t -}}
+    </a>
+    {%- sections 'header-group' -%}
+    {% render 'header-group-support' %}
+    <main id="MainContent" class="overflow-hidden">
+      {{ content_for_layout }}
+    </main>
+
+    {%- sections 'footer-group' -%}
+    {%- sections 'overlay-group' -%}
+
+    <div
+      id="screenreader-announce"
+      class="sr-only"
+      aria-live="polite"
+      role="status"
+    ></div>
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">
+        {{ 'general.accessibility.refresh_page' | t }}
+      </li>
+      <li id="a11y-selection-message">
+        {{ 'general.accessibility.selection_help' | t }}
+      </li>
+    </ul>
+
+    {% comment %} Modal containers {% endcomment %}
+    {% liquid
+      render 'left-drawer'
+      render 'right-drawer'
+      render 'modal'
+      render 'popup'
+    %}
+
+    {%- if settings.cart_type == 'modal' -%}
+      {% render 'drawer-cart' %}
+    {%- endif -%}
+
+    <script src="{{ 'global.bundle.js' | asset_url }}" type="module"></script>
+
+    {%- comment -%} Happie AI Chatbot — appears on every page {%- endcomment -%}
+    {% section 'happie-chatbot' %}
+  </body>
+</html>
+>>>>>>> 3611fec (Update customer service phone to (463) 218-9646 site-wide)
