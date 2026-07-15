@@ -254,7 +254,8 @@
         </h1>
         {%- if page.content != blank -%}
           <data-island x-data="RTE" class="rte">
-            {{ page.content }}
+            {%- comment -%} Auto-link the customer service phone number in admin-authored page content {%- endcomment -%}
+            {{ page.content | replace: '(463) 218-9646', '<a href="tel:+14632189646">(463) 218-9646</a>' }}
           </data-island>
         {%- elsif section.settings.intro_richtext != blank -%}
           <div class="rte">
